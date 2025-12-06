@@ -3,10 +3,9 @@
 //////////////////////////////
 
 const ENDPOINTS = {
-  tigers: "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard",
-  lions: "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
-  michigan: "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80",
-  msu: "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80"
+  tigers:  "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard",
+  lions:   "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
+  cfb:     "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80"
 };
 
 //////////////////////////////
@@ -14,148 +13,196 @@ const ENDPOINTS = {
 //////////////////////////////
 
 const TEAM_CONFIG = {
-  tigers:   { abbr: "DET",  prefix: "tigers" },
-  lions:    { abbr: "DET",  prefix: "lions" },
-  michigan: { abbr: "MICH", prefix: "michigan" },
-  msu:      { abbr: "MSU",  prefix: "msu" }
+  tigers:   { abbr: "DET",  prefix: "tigers",   source: "tigers" },
+  lions:    { abbr: "DET",  prefix: "lions",    source: "lions"  },
+  michigan: { abbr: "MICH", prefix: "michigan", source: "cfb"    },
+  msu:      { abbr: "MSU",  prefix: "msu",      source: "cfb"    }
 };
 
 //////////////////////////////
-//  DOM Helpers             //
+//  DOM Helper Functions    //
 //////////////////////////////
 
 function setCardLoading(prefix) {
-  document.getElementById(`${prefix}-game`).textContent = "Loading...";
-  const pill = document.getElementById(`${prefix}-status-pill`);
-  pill.textContent = "...";
-  pill.className = "status-pill";
-  document.getElementById(`${prefix}-status-text`).textContent = "";
+  const gameEl  = document.getElementById(`${prefix}-game`);
+  const pillEl  = document.getElementById(`${prefix}-status-pill`);
+  const textEl  = document.getElementById(`${prefix}-status-text`);
+
+  if (!gameEl || !pillEl || !textEl) return;
+
+  gameEl.textContent = "Loading...";
+  gameEl.classList.remove("error-text");
+  pillEl.textContent = "...";
+  pillEl.className   = "status-pill";
+  textEl.textContent = "";
 }
 
 function setCardError(prefix) {
-  const game = document.getElementById(`${prefix}-game`);
-  game.textContent = "Error loading scores";
-  game.classList.add("error-text");
-  const pill = document.getElementById(`${prefix}-status-pill`);
-  pill.textContent = "Error";
-  pill.className = "status-pill";
-  document.getElementById(`${prefix}-status-text`).textContent = "";
+  const gameEl  = document.getElementById(`${prefix}-game`);
+  const pillEl  = document.getElementById(`${prefix}-status-pill`);
+  const textEl  = document.getElementById(`${prefix}-status-text`);
+
+  if (!gameEl || !pillEl || !textEl) return;
+
+  gameEl.textContent = "Error loading scores";
+  gameEl.classList.add("error-text");
+  pillEl.textContent = "Error";
+  pillEl.className   = "status-pill";
+  textEl.textContent = "";
 }
 
 function setCardNoGame(prefix) {
-  document.getElementById(`${prefix}-game`).textContent = "No game today";
-  const pill = document.getElementById(`${prefix}-status-pill`);
-  pill.textContent = "Idle";
-  pill.className = "status-pill";
-  document.getElementById(`${prefix}-status-text`).textContent = "";
+  const gameEl  = document.getElementById(`${prefix}-game`);
+  const pillEl  = document.getElementById(`${prefix}-status-pill`);
+  const textEl  = document.getElementById(`${prefix}-status-text`);
+
+  if (!gameEl || !pillEl || !textEl) return;
+
+  gameEl.textContent = "No game today";
+  gameEl.classList.remove("error-text");
+  pillEl.textContent = "Idle";
+  pillEl.className   = "status-pill";
+  textEl.textContent = "";
 }
 
 //////////////////////////////
-//  ESPN Parsing            //
+//  ESPN Parsing Helpers    //
 //////////////////////////////
 
+// Find first event where any competitor has the given abbreviation
 function findTeamGame(events, abbr) {
   if (!Array.isArray(events)) return null;
 
   for (const event of events) {
-    const comp = event.competitions?.[0];
-    if (!comp) continue;
+    const comp = event.competitions && event.competitions[0];
+    if (!comp || !Array.isArray(comp.competitors)) continue;
 
-    const competitors = comp.competitors || [];
-    const found = competitors.find(
-      (c) => c.team?.abbreviation === abbr
-    );
-
-    if (found) return { event, competition: comp };
+    const competitors = comp.competitors;
+    const hit = competitors.find(c => c.team && c.team.abbreviation === abbr);
+    if (hit) return { event, competition: comp };
   }
 
   return null;
 }
 
-function buildGameLine(comp) {
-  const competitors = comp.competitors || [];
+// Build "AWAY 3 @ HOME 2"
+function buildGameLine(competition) {
+  const competitors = competition.competitors || [];
+
   const home = competitors.find(c => c.homeAway === "home") || competitors[0];
   const away = competitors.find(c => c.homeAway === "away") || competitors[1];
 
-  return `${away.team.abbreviation} ${away.score ?? "-"} @ ${home.team.abbreviation} ${home.score ?? "-"}`;
+  const homeAbbr = home?.team?.abbreviation || "HOME";
+  const awayAbbr = away?.team?.abbreviation || "AWAY";
+
+  const homeScore = (home && home.score != null) ? home.score : "-";
+  const awayScore = (away && away.score != null) ? away.score : "-";
+
+  return `${awayAbbr} ${awayScore} @ ${homeAbbr} ${homeScore}`;
 }
 
+// Build pill text + class + detail from ESPN status
 function buildStatus(event) {
-  const s = event.status || {};
-  const t = s.type || {};
-  const state = t.state || "pre";
+  const status = event.status || {};
+  const type   = status.type || {};
+  const state  = type.state || "pre";   // "pre" | "in" | "post"
 
-  let pill = "Scheduled";
+  let pill      = "Scheduled";
   let pillClass = "status-pill scheduled";
-  let text = t.shortDetail || t.detail || "";
+  let text      = type.shortDetail || type.detail || type.description || "";
 
   if (state === "in") {
-    pill = "Live";
+    pill      = "Live";
     pillClass = "status-pill live";
   } else if (state === "post") {
-    pill = "Final";
+    pill      = "Final";
     pillClass = "status-pill final";
   }
 
   return { pill, pillClass, text };
 }
 
-//////////////////////////////
-//  Update Cards            //
-//////////////////////////////
-
-function updateTeamCard(prefix, abbr, data) {
+// Update a single team card from a scoreboard dataset
+function updateTeamCard(prefix, abbr, scoreboardData) {
   try {
-    const game = findTeamGame(data.events || [], abbr);
-    if (!game) return setCardNoGame(prefix);
+    const events = scoreboardData && scoreboardData.events ? scoreboardData.events : [];
+    const hit = findTeamGame(events, abbr);
 
-    const line = buildGameLine(game.competition);
-    const st = buildStatus(game.event);
+    if (!hit) {
+      setCardNoGame(prefix);
+      return;
+    }
 
-    document.getElementById(`${prefix}-game`).textContent = line;
-    const pill = document.getElementById(`${prefix}-status-pill`);
-    pill.textContent = st.pill;
-    pill.className = st.pillClass;
-    document.getElementById(`${prefix}-status-text`).textContent = st.text;
+    const gameLine  = buildGameLine(hit.competition);
+    const statusInf = buildStatus(hit.event);
 
-  } catch (e) {
+    const gameEl = document.getElementById(`${prefix}-game`);
+    const pillEl = document.getElementById(`${prefix}-status-pill`);
+    const textEl = document.getElementById(`${prefix}-status-text`);
+
+    if (!gameEl || !pillEl || !textEl) return;
+
+    gameEl.textContent = gameLine;
+    gameEl.classList.remove("error-text");
+    pillEl.textContent = statusInf.pill;
+    pillEl.className   = statusInf.pillClass;
+    textEl.textContent = statusInf.text;
+
+  } catch (err) {
+    console.error(`Error updating card for ${prefix}:`, err);
     setCardError(prefix);
   }
 }
 
 //////////////////////////////
-//  Refresh Logic           //
+//  Fetch + Refresh Logic   //
 //////////////////////////////
 
 async function fetchScoreboard(url) {
-  const r = await fetch(url, { cache: "no-store" });
-  if (!r.ok) throw new Error(r.status);
-  return r.json();
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
 }
 
-async function refresh() {
-  Object.values(TEAM_CONFIG).forEach(t => setCardLoading(t.prefix));
+async function refreshScores() {
+  // Set all cards to loading state
+  Object.values(TEAM_CONFIG).forEach(team => setCardLoading(team.prefix));
 
   try {
-    const [mlb, nfl, cfb1, cfb2] = await Promise.all([
+    const [mlbData, nflData, cfbData] = await Promise.all([
       fetchScoreboard(ENDPOINTS.tigers),
       fetchScoreboard(ENDPOINTS.lions),
-      fetchScoreboard(ENDPOINTS.michigan),
-      fetchScoreboard(ENDPOINTS.msu)
+      fetchScoreboard(ENDPOINTS.cfb)
     ]);
 
-    updateTeamCard("tigers", "DET", mlb);
-    updateTeamCard("lions", "DET", nfl);
-    updateTeamCard("michigan", "MICH", cfb1);
-    updateTeamCard("msu", "MSU", cfb2);
+    // Tigers & Lions
+    updateTeamCard("tigers",   "DET",  mlbData);
+    updateTeamCard("lions",    "DET",  nflData);
 
-    document.getElementById("updated-time").textContent =
-      "Last updated: " + new Date().toLocaleTimeString();
+    // Michigan & MSU (same CFB scoreboard)
+    updateTeamCard("michigan", "MICH", cfbData);
+    updateTeamCard("msu",      "MSU",  cfbData);
 
-  } catch (e) {
-    Object.values(TEAM_CONFIG).forEach(t => setCardError(t.prefix));
+    const updatedEl = document.getElementById("updated-time");
+    if (updatedEl) {
+      const now = new Date();
+      updatedEl.textContent = "Last updated: " +
+        now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    }
+
+  } catch (err) {
+    console.error("Error refreshing scores:", err);
+    Object.values(TEAM_CONFIG).forEach(team => setCardError(team.prefix));
+
+    const updatedEl = document.getElementById("updated-time");
+    if (updatedEl) {
+      updatedEl.textContent = "Last updated: error contacting ESPN";
+    }
   }
 }
 
-refresh();
-setInterval(refresh, 60000);
+// Initial load
+refreshScores();
+
+// Refresh every 60 seconds
+setInterval(refreshScores, 60 * 1000);
