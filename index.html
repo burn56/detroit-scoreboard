@@ -5,43 +5,54 @@
   <title>Scoreboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- Handwritten-ish + clean font -->
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Cabin:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --card-bg: #151822;
-      --text-main: #f5f5f5;
-      --text-muted: #a0a4b8;
+      --text-main: #222;
+      --text-muted: #6d6f80;
       --error: #ff453a;
     }
 
     * { box-sizing: border-box; }
 
     /***************************************
-        GLOBAL OVERRIDES FOR DAKBOARD
+        GLOBAL LAYOUT (TRANSPARENT, NO SCROLL)
     ***************************************/
     html, body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden !important;   /* 🔥 Prevent scrollbars */
-      background: transparent !important; /* 🔥 True transparency */
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden !important;
+      background: transparent !important;
+      font-family: "Cabin", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--text-main);
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    /***************************************
-        LAYOUT
-    ***************************************/
     .wrapper {
       max-width: 1400px;
       width: 100%;
-      padding: 0; /* cleaner for Dakboard */
+      padding: 0;
       background: transparent;
     }
 
+    h1 {
+      text-align: center;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+      font-family: "Patrick Hand", "Cabin", system-ui, sans-serif;
+    }
+
+    /***************************************
+        SCOREBOARD ROW (HORIZONTAL)
+    ***************************************/
     .scoreboard {
       display: flex;
       flex-direction: row;
@@ -49,10 +60,10 @@
       gap: 1.5rem;
       flex-wrap: nowrap;
       transform-origin: top center;
-      overflow: hidden !important; /* 🔥 Prevent inner scrollbars */
+      overflow: hidden !important;
     }
 
-    /* Auto-scale the row on smaller screens */
+    /* Auto-scale row for smaller screens/frames */
     @media (max-width: 1200px) { .scoreboard { transform: scale(0.95); } }
     @media (max-width: 1000px) { .scoreboard { transform: scale(0.85); } }
     @media (max-width: 900px)  { .scoreboard { transform: scale(0.78); } }
@@ -63,25 +74,75 @@
     @media (max-width: 460px)  { .scoreboard { transform: scale(0.40); } }
 
     /***************************************
-        TEAM CARDS
+        STICKY NOTE CARDS
     ***************************************/
     .team-card {
-      background: rgba(9, 11, 20, 0.88);
-      border-radius: 1.25rem;
-      padding: 1.25rem 1.5rem;
+      position: relative;
       width: 240px;
+      padding: 1.5rem 1.2rem;
+      border-radius: 12px;
+
+      /* default sticky color (will be overridden per-team) */
+      background: #fff7b3;
+
+      /* subtle paper texture */
+      background-image:
+        radial-gradient(rgba(255,255,255,0.25) 1px, transparent 0),
+        radial-gradient(rgba(255,255,255,0.18) 1px, transparent 0);
+      background-size: 4px 4px, 6px 6px;
+
+      /* slight tilt */
+      transform: rotate(-1.5deg);
+
+      /* sticky shadow */
+      box-shadow:
+        0 8px 14px rgba(0,0,0,0.30),
+        0 0 0 1px rgba(0,0,0,0.04);
+
       display: flex;
       flex-direction: column;
       align-items: center;
-      backdrop-filter: blur(4px);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
+    .team-card:hover {
+      transform: rotate(0deg) scale(1.03);
+      box-shadow:
+        0 10px 18px rgba(0,0,0,0.35),
+        0 0 0 1px rgba(0,0,0,0.08);
+    }
+
+    /* “Tape” at the top of each sticky */
+    .team-card::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(3deg);
+      width: 74px;
+      height: 22px;
+      background: rgba(255,255,255,0.55);
+      border-radius: 3px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    }
+
+    /* Per-team sticky colors for that mom-of-3 board vibe */
+    #tigers-card   { background: #fff7b3; } /* soft yellow */
+    #giants-card   { background: #ffe2e2; } /* soft pink */
+    #lions-card    { background: #e0f2ff; } /* light blue */
+    #michigan-card { background: #eaffe1; } /* light green */
+    #msu-card      { background: #e2ffe9; } /* another green tone */
+    #champ-card    { background: #fff0d4; } /* warm cream */
+
+    /***************************************
+        LOGO + TEXT STYLING
+    ***************************************/
     .team-logo {
       width: 80px;
       height: 80px;
       border-radius: 50%;
       overflow: hidden;
-      border: 2px solid rgba(255, 255, 255, 0.16);
+      border: 2px solid rgba(0, 0, 0, 0.16);
       background: #000;
       margin-bottom: 0.4rem;
     }
@@ -100,7 +161,8 @@
     }
 
     .team-name {
-      font-size: 1.05rem;
+      font-family: "Patrick Hand", "Cabin", system-ui, sans-serif;
+      font-size: 1.1rem;
       font-weight: 700;
       text-align: center;
       margin-bottom: 0.15rem;
@@ -111,7 +173,7 @@
       font-size: 0.95rem;
       padding: 0.25rem 0.5rem;
       border-radius: 0.4rem;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(0, 0, 0, 0.04);
       width: 100%;
       text-align: center;
       min-height: 1.4em;
@@ -133,12 +195,13 @@
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      background: rgba(255,255,255,0.65);
     }
 
-    .status-pill.live   { color: #ff6b6b; border-color: rgba(255, 68, 68, 0.9); }
-    .status-pill.final  { color: #4dd077; border-color: rgba(77, 208, 119, 0.9); }
-    .status-pill.scheduled { color: #87cefa; border-color: rgba(135, 206, 250, 0.9); }
+    .status-pill.live   { color: #d7263d; border-color: rgba(215, 38, 61, 0.9); }
+    .status-pill.final  { color: #148f3f; border-color: rgba(20, 143, 63, 0.9); }
+    .status-pill.scheduled { color: #006bb3; border-color: rgba(0, 107, 179, 0.8); }
 
     .error-text { color: var(--error); }
   </style>
@@ -146,21 +209,13 @@
 
 <body>
   <div class="wrapper">
-
-    <h1 style="
-      text-align:center;
-      margin-bottom: 1.2rem;
-      font-weight: 700;
-      font-size: 1.5rem;
-      letter-spacing: 0.04em;
-    ">
-      Scoreboard
-    </h1>
+    <h1>Scoreboard</h1>
 
     <div class="scoreboard">
-      <!-- Cards unchanged -->
+
+      <!-- Detroit Tigers -->
       <div class="team-card" id="tigers-card">
-        <div class="team-logo"><img src="logos/tigers.png"></div>
+        <div class="team-logo"><img src="logos/tigers.png" alt="Detroit Tigers logo"></div>
         <div class="team-league">MLB</div>
         <div class="team-name">Detroit Tigers</div>
         <div class="game-line" id="tigers-game">Loading...</div>
@@ -170,8 +225,9 @@
         </div>
       </div>
 
+      <!-- SF Giants -->
       <div class="team-card" id="giants-card">
-        <div class="team-logo"><img src="logos/sfgiants.png"></div>
+        <div class="team-logo"><img src="logos/sfgiants.png" alt="San Francisco Giants logo"></div>
         <div class="team-league">MLB</div>
         <div class="team-name">San Francisco Giants</div>
         <div class="game-line" id="giants-game">Loading...</div>
@@ -181,8 +237,9 @@
         </div>
       </div>
 
+      <!-- Detroit Lions -->
       <div class="team-card" id="lions-card">
-        <div class="team-logo"><img src="logos/lions.png"></div>
+        <div class="team-logo"><img src="logos/lions.png" alt="Detroit Lions logo"></div>
         <div class="team-league">NFL</div>
         <div class="team-name">Detroit Lions</div>
         <div class="game-line" id="lions-game">Loading...</div>
@@ -192,8 +249,9 @@
         </div>
       </div>
 
+      <!-- Michigan Wolverines -->
       <div class="team-card" id="michigan-card">
-        <div class="team-logo"><img src="logos/michigan.png"></div>
+        <div class="team-logo"><img src="logos/michigan.png" alt="Michigan Wolverines logo"></div>
         <div class="team-league">NCAA</div>
         <div class="team-name">Michigan Wolverines</div>
         <div class="game-line" id="michigan-game">Loading...</div>
@@ -203,8 +261,9 @@
         </div>
       </div>
 
+      <!-- Michigan State Spartans -->
       <div class="team-card" id="msu-card">
-        <div class="team-logo"><img src="logos/msu.png"></div>
+        <div class="team-logo"><img src="logos/msu.png" alt="Michigan State Spartans logo"></div>
         <div class="team-league">NCAA</div>
         <div class="team-name">Michigan State Spartans</div>
         <div class="game-line" id="msu-game">Loading...</div>
@@ -214,8 +273,9 @@
         </div>
       </div>
 
+      <!-- Championship Game -->
       <div class="team-card" id="champ-card">
-        <div class="team-logo"><img id="champ-logo" src="logos/worldseries.png"></div>
+        <div class="team-logo"><img id="champ-logo" src="logos/worldseries.png" alt="Championship logo"></div>
         <div class="team-league" id="champ-league">Championship</div>
         <div class="team-name" id="champ-name">Championship Game</div>
         <div class="game-line" id="champ-game">Loading...</div>
@@ -228,6 +288,7 @@
     </div>
   </div>
 
-  <script src="scores.js?v=6" defer></script>
+  <!-- bump version to break Dakboard/GH cache if needed -->
+  <script src="scores.js?v=7" defer></script>
 </body>
 </html>
