@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- Force reload 2-->
+  <!-- Force reload -->
 <head>
   <meta charset="UTF-8" />
   <title>Scoreboard</title>
@@ -17,13 +17,17 @@
 
     * { box-sizing: border-box; }
 
+    html {
+      background: transparent !important;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at top, #1d2738 0, #050608 55%);
+      background: transparent !important;
       color: var(--text-main);
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -163,7 +167,7 @@
 
       <!-- Detroit Tigers -->
       <div class="team-card" id="tigers-card">
-        <div class="team-logo"><img src="logos/tigers.png"></div>
+        <div class="team-logo"><img src="logos/tigers.png" alt="Detroit Tigers"></div>
         <div class="team-league">MLB</div>
         <div class="team-name">Detroit Tigers</div>
         <div class="game-line" id="tigers-game">Loading...</div>
@@ -175,7 +179,7 @@
 
       <!-- SF Giants -->
       <div class="team-card" id="giants-card">
-        <div class="team-logo"><img src="logos/sfgiants.png"></div>
+        <div class="team-logo"><img src="logos/sfgiants.png" alt="San Francisco Giants"></div>
         <div class="team-league">MLB</div>
         <div class="team-name">San Francisco Giants</div>
         <div class="game-line" id="giants-game">Loading...</div>
@@ -187,7 +191,7 @@
 
       <!-- Detroit Lions -->
       <div class="team-card" id="lions-card">
-        <div class="team-logo"><img src="logos/lions.png"></div>
+        <div class="team-logo"><img src="logos/lions.png" alt="Detroit Lions"></div>
         <div class="team-league">NFL</div>
         <div class="team-name">Detroit Lions</div>
         <div class="game-line" id="lions-game">Loading...</div>
@@ -199,7 +203,7 @@
 
       <!-- Michigan Wolverines -->
       <div class="team-card" id="michigan-card">
-        <div class="team-logo"><img src="logos/michigan.png"></div>
+        <div class="team-logo"><img src="logos/michigan.png" alt="Michigan Wolverines"></div>
         <div class="team-league">NCAA</div>
         <div class="team-name">Michigan Wolverines</div>
         <div class="game-line" id="michigan-game">Loading...</div>
@@ -211,7 +215,7 @@
 
       <!-- Michigan State Spartans -->
       <div class="team-card" id="msu-card">
-        <div class="team-logo"><img src="logos/msu.png"></div>
+        <div class="team-logo"><img src="logos/msu.png" alt="Michigan State Spartans"></div>
         <div class="team-league">NCAA</div>
         <div class="team-name">Michigan State Spartans</div>
         <div class="game-line" id="msu-game">Loading...</div>
@@ -223,13 +227,16 @@
 
       <!-- Championship Game -->
       <div class="team-card" id="champ-card">
-        <div class="team-logo"><img src="logos/worldseries.png"></div>
+        <div class="team-logo">
+          <!-- Default logo; JS will swap to superbowl/worldseries/etc -->
+          <img src="logos/worldseries.png" alt="Championship Game">
+        </div>
         <div class="team-league" id="champ-league">Championship</div>
         <div class="team-name" id="champ-name">Championship Game</div>
         <div class="game-line" id="champ-game">Loading...</div>
         <div class="status-row">
-         <span class="status-pill" id="champ-status-pill">...</span>
-         <span class="status-text" id="champ-status-text"></span>
+          <span class="status-pill" id="champ-status-pill">...</span>
+          <span class="status-text" id="champ-status-text"></span>
         </div>
       </div>
 
@@ -237,6 +244,7 @@
 
   </div>
 
-  <script src="scores.js?v=5" defer></script>
+  <!-- bump query string if you want to force cache refresh -->
+  <script src="scores.js?v=6" defer></script>
 </body>
 </html>
