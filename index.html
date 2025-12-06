@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- Force reload 2-->
 <head>
   <meta charset="UTF-8" />
   <title>Scoreboard</title>
@@ -8,7 +7,6 @@
 
   <style>
     :root {
-      --bg: #050608;
       --card-bg: #151822;
       --text-main: #f5f5f5;
       --text-muted: #a0a4b8;
@@ -17,30 +15,33 @@
 
     * { box-sizing: border-box; }
 
-    html {
-      background: transparent !important;
-    }
-
-    body {
+    /***************************************
+        GLOBAL OVERRIDES FOR DAKBOARD
+    ***************************************/
+    html, body {
       margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent !important;
-      color: var(--text-main);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    .wrapper {
-      padding: 1.5rem;
-      max-width: 1400px;
+      padding: 0;
       width: 100%;
+      height: 100%;
+      overflow: hidden !important;   /* 🔥 Prevent scrollbars */
+      background: transparent !important; /* 🔥 True transparency */
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     /***************************************
-      HORIZONTAL LAYOUT – NO WRAP
+        LAYOUT
     ***************************************/
+    .wrapper {
+      max-width: 1400px;
+      width: 100%;
+      padding: 0; /* cleaner for Dakboard */
+      background: transparent;
+    }
+
     .scoreboard {
       display: flex;
       flex-direction: row;
@@ -48,6 +49,7 @@
       gap: 1.5rem;
       flex-wrap: nowrap;
       transform-origin: top center;
+      overflow: hidden !important; /* 🔥 Prevent inner scrollbars */
     }
 
     /* Auto-scale the row on smaller screens */
@@ -60,26 +62,18 @@
     @media (max-width: 520px)  { .scoreboard { transform: scale(0.45); } }
     @media (max-width: 460px)  { .scoreboard { transform: scale(0.40); } }
 
-    .scoreboard::-webkit-scrollbar { display: none; }
-    .scoreboard {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-
     /***************************************
-                 TEAM CARDS
+        TEAM CARDS
     ***************************************/
     .team-card {
-      background: rgba(9, 11, 20, 0.9);
+      background: rgba(9, 11, 20, 0.88);
       border-radius: 1.25rem;
       padding: 1.25rem 1.5rem;
       width: 240px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      box-shadow:
-        0 14px 35px rgba(0, 0, 0, 0.6),
-        0 0 0 1px rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(4px);
     }
 
     .team-logo {
@@ -155,7 +149,7 @@
 
     <h1 style="
       text-align:center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
       font-weight: 700;
       font-size: 1.5rem;
       letter-spacing: 0.04em;
@@ -164,10 +158,9 @@
     </h1>
 
     <div class="scoreboard">
-
-      <!-- Detroit Tigers -->
+      <!-- Cards unchanged -->
       <div class="team-card" id="tigers-card">
-        <div class="team-logo"><img src="logos/tigers.png" alt="Detroit Tigers"></div>
+        <div class="team-logo"><img src="logos/tigers.png"></div>
         <div class="team-league">MLB</div>
         <div class="team-name">Detroit Tigers</div>
         <div class="game-line" id="tigers-game">Loading...</div>
@@ -177,9 +170,8 @@
         </div>
       </div>
 
-      <!-- SF Giants -->
       <div class="team-card" id="giants-card">
-        <div class="team-logo"><img src="logos/sfgiants.png" alt="San Francisco Giants"></div>
+        <div class="team-logo"><img src="logos/sfgiants.png"></div>
         <div class="team-league">MLB</div>
         <div class="team-name">San Francisco Giants</div>
         <div class="game-line" id="giants-game">Loading...</div>
@@ -189,9 +181,8 @@
         </div>
       </div>
 
-      <!-- Detroit Lions -->
       <div class="team-card" id="lions-card">
-        <div class="team-logo"><img src="logos/lions.png" alt="Detroit Lions"></div>
+        <div class="team-logo"><img src="logos/lions.png"></div>
         <div class="team-league">NFL</div>
         <div class="team-name">Detroit Lions</div>
         <div class="game-line" id="lions-game">Loading...</div>
@@ -201,9 +192,8 @@
         </div>
       </div>
 
-      <!-- Michigan Wolverines -->
       <div class="team-card" id="michigan-card">
-        <div class="team-logo"><img src="logos/michigan.png" alt="Michigan Wolverines"></div>
+        <div class="team-logo"><img src="logos/michigan.png"></div>
         <div class="team-league">NCAA</div>
         <div class="team-name">Michigan Wolverines</div>
         <div class="game-line" id="michigan-game">Loading...</div>
@@ -213,9 +203,8 @@
         </div>
       </div>
 
-      <!-- Michigan State Spartans -->
       <div class="team-card" id="msu-card">
-        <div class="team-logo"><img src="logos/msu.png" alt="Michigan State Spartans"></div>
+        <div class="team-logo"><img src="logos/msu.png"></div>
         <div class="team-league">NCAA</div>
         <div class="team-name">Michigan State Spartans</div>
         <div class="game-line" id="msu-game">Loading...</div>
@@ -225,12 +214,8 @@
         </div>
       </div>
 
-      <!-- Championship Game -->
       <div class="team-card" id="champ-card">
-        <div class="team-logo">
-          <!-- Default logo; JS will swap to superbowl/worldseries/etc -->
-          <img src="logos/worldseries.png" alt="Championship Game">
-        </div>
+        <div class="team-logo"><img id="champ-logo" src="logos/worldseries.png"></div>
         <div class="team-league" id="champ-league">Championship</div>
         <div class="team-name" id="champ-name">Championship Game</div>
         <div class="game-line" id="champ-game">Loading...</div>
@@ -241,10 +226,8 @@
       </div>
 
     </div>
-
   </div>
 
-  <!-- bump query string if you want to force cache refresh -->
   <script src="scores.js?v=6" defer></script>
 </body>
 </html>
