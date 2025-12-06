@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <-- Force reload -->
 <head>
   <meta charset="UTF-8" />
-  <title>Detroit Scoreboard</title>
+  <title>Scoreboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
@@ -34,15 +33,6 @@
       width: 100%;
     }
 
-    .title {
-      text-align: center;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
     /***************************************
       HORIZONTAL LAYOUT – NO WRAP, NO SCROLL
     ***************************************/
@@ -56,29 +46,15 @@
     }
 
     /* Auto-scale the row on smaller screens */
-    @media (max-width: 1200px) {
-      .scoreboard { transform: scale(0.95); }
-    }
-    @media (max-width: 1000px) {
-      .scoreboard { transform: scale(0.85); }
-    }
-    @media (max-width: 850px) {
-      .scoreboard { transform: scale(0.75); }
-    }
-    @media (max-width: 750px) {
-      .scoreboard { transform: scale(0.65); }
-    }
-    @media (max-width: 650px) {
-      .scoreboard { transform: scale(0.55); }
-    }
-    @media (max-width: 550px) {
-      .scoreboard { transform: scale(0.48); }
-    }
-    @media (max-width: 480px) {
-      .scoreboard { transform: scale(0.42); }
-    }
+    @media (max-width: 1200px) { .scoreboard { transform: scale(0.95); } }
+    @media (max-width: 1000px) { .scoreboard { transform: scale(0.85); } }
+    @media (max-width: 850px)  { .scoreboard { transform: scale(0.75); } }
+    @media (max-width: 750px)  { .scoreboard { transform: scale(0.65); } }
+    @media (max-width: 650px)  { .scoreboard { transform: scale(0.55); } }
+    @media (max-width: 550px)  { .scoreboard { transform: scale(0.48); } }
+    @media (max-width: 480px)  { .scoreboard { transform: scale(0.42); } }
 
-    /* Remove scroll bar cleanly */
+    /* Remove scroll bar visually */
     .scoreboard::-webkit-scrollbar { display: none; }
     .scoreboard {
       -ms-overflow-style: none;
@@ -166,19 +142,21 @@
     .status-pill.scheduled { color: #87cefa; border-color: rgba(135, 206, 250, 0.9); }
 
     .error-text { color: var(--error); }
-
-    .updated {
-      margin-top: 1rem;
-      text-align: center;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
   </style>
 </head>
 
 <body>
   <div class="wrapper">
-    <div class="title">Detroit Sports Board — Live / Today</div>
+
+    <h1 style="
+      text-align:center;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+    ">
+      Scoreboard
+    </h1>
 
     <div class="scoreboard">
 
@@ -232,7 +210,6 @@
 
     </div>
 
-    <div class="updated" id="updated-time">&nbsp;</div>
   </div>
 
   <script src="scores.js"></script>
