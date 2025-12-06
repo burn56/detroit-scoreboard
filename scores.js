@@ -339,11 +339,11 @@ function updateChampionshipCard(mlbData, nflData) {
   if (champ.type === "nfl") {
     leagueEl.textContent = "NFL";
     nameEl.textContent   = "Super Bowl";
-    logoImg.src          = "logos/superbowl.svg";
+    logoImg.src          = "logos/superbowl.png";
   } else {
     leagueEl.textContent = "MLB";
     nameEl.textContent   = "World Series";
-    logoImg.src          = "logos/worldseries.svg";
+    logoImg.src          = "logos/worldseries.png";
   }
 
   const line = buildGameLine(champ.competition);
