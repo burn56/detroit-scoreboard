@@ -3,9 +3,9 @@
 //////////////////////////////
 
 const ENDPOINTS = {
-  tigers:  "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard",
-  lions:   "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
-  cfb:     "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80"
+  tigers: "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard",
+  lions:  "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
+  cfb:    "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80"
 };
 
 //////////////////////////////
@@ -20,48 +20,48 @@ const TEAM_CONFIG = {
 };
 
 //////////////////////////////
-//  DOM Helper Functions    //
+//  DOM Helpers             //
 //////////////////////////////
 
 function setCardLoading(prefix) {
-  const gameEl  = document.getElementById(`${prefix}-game`);
-  const pillEl  = document.getElementById(`${prefix}-status-pill`);
-  const textEl  = document.getElementById(`${prefix}-status-text`);
+  const gameEl = document.getElementById(`${prefix}-game`);
+  const pillEl = document.getElementById(`${prefix}-status-pill`);
+  const textEl = document.getElementById(`${prefix}-status-text`);
 
   if (!gameEl || !pillEl || !textEl) return;
 
   gameEl.textContent = "Loading...";
   gameEl.classList.remove("error-text");
   pillEl.textContent = "...";
-  pillEl.className   = "status-pill";
+  pillEl.className = "status-pill";
   textEl.textContent = "";
 }
 
 function setCardError(prefix) {
-  const gameEl  = document.getElementById(`${prefix}-game`);
-  const pillEl  = document.getElementById(`${prefix}-status-pill`);
-  const textEl  = document.getElementById(`${prefix}-status-text`);
+  const gameEl = document.getElementById(`${prefix}-game`);
+  const pillEl = document.getElementById(`${prefix}-status-pill`);
+  const textEl = document.getElementById(`${prefix}-status-text`);
 
   if (!gameEl || !pillEl || !textEl) return;
 
   gameEl.textContent = "Error loading scores";
   gameEl.classList.add("error-text");
   pillEl.textContent = "Error";
-  pillEl.className   = "status-pill";
+  pillEl.className = "status-pill";
   textEl.textContent = "";
 }
 
 function setCardNoGame(prefix) {
-  const gameEl  = document.getElementById(`${prefix}-game`);
-  const pillEl  = document.getElementById(`${prefix}-status-pill`);
-  const textEl  = document.getElementById(`${prefix}-status-text`);
+  const gameEl = document.getElementById(`${prefix}-game`);
+  const pillEl = document.getElementById(`${prefix}-status-pill`);
+  const textEl = document.getElementById(`${prefix}-status-text`);
 
   if (!gameEl || !pillEl || !textEl) return;
 
   gameEl.textContent = "No game today";
   gameEl.classList.remove("error-text");
   pillEl.textContent = "Idle";
-  pillEl.className   = "status-pill";
+  pillEl.className = "status-pill";
   textEl.textContent = "";
 }
 
@@ -69,7 +69,6 @@ function setCardNoGame(prefix) {
 //  ESPN Parsing Helpers    //
 //////////////////////////////
 
-// Find first event where any competitor has the given abbreviation
 function findTeamGame(events, abbr) {
   if (!Array.isArray(events)) return null;
 
@@ -85,7 +84,6 @@ function findTeamGame(events, abbr) {
   return null;
 }
 
-// Build "AWAY 3 @ HOME 2"
 function buildGameLine(competition) {
   const competitors = competition.competitors || [];
 
@@ -101,7 +99,6 @@ function buildGameLine(competition) {
   return `${awayAbbr} ${awayScore} @ ${homeAbbr} ${homeScore}`;
 }
 
-// Build pill text + class + detail from ESPN status
 function buildStatus(event) {
   const status = event.status || {};
   const type   = status.type || {};
@@ -122,10 +119,9 @@ function buildStatus(event) {
   return { pill, pillClass, text };
 }
 
-// Update a single team card from a scoreboard dataset
 function updateTeamCard(prefix, abbr, scoreboardData) {
   try {
-    const events = scoreboardData && scoreboardData.events ? scoreboardData.events : [];
+    const events = (scoreboardData && scoreboardData.events) || [];
     const hit = findTeamGame(events, abbr);
 
     if (!hit) {
@@ -133,8 +129,8 @@ function updateTeamCard(prefix, abbr, scoreboardData) {
       return;
     }
 
-    const gameLine  = buildGameLine(hit.competition);
-    const statusInf = buildStatus(hit.event);
+    const line = buildGameLine(hit.competition);
+    const st   = buildStatus(hit.event);
 
     const gameEl = document.getElementById(`${prefix}-game`);
     const pillEl = document.getElementById(`${prefix}-status-pill`);
@@ -142,11 +138,11 @@ function updateTeamCard(prefix, abbr, scoreboardData) {
 
     if (!gameEl || !pillEl || !textEl) return;
 
-    gameEl.textContent = gameLine;
+    gameEl.textContent = line;
     gameEl.classList.remove("error-text");
-    pillEl.textContent = statusInf.pill;
-    pillEl.className   = statusInf.pillClass;
-    textEl.textContent = statusInf.text;
+    pillEl.textContent = st.pill;
+    pillEl.className   = st.pillClass;
+    textEl.textContent = st.text;
 
   } catch (err) {
     console.error(`Error updating card for ${prefix}:`, err);
@@ -165,7 +161,6 @@ async function fetchScoreboard(url) {
 }
 
 async function refreshScores() {
-  // Set all cards to loading state
   Object.values(TEAM_CONFIG).forEach(team => setCardLoading(team.prefix));
 
   try {
@@ -175,29 +170,14 @@ async function refreshScores() {
       fetchScoreboard(ENDPOINTS.cfb)
     ]);
 
-    // Tigers & Lions
     updateTeamCard("tigers",   "DET",  mlbData);
     updateTeamCard("lions",    "DET",  nflData);
-
-    // Michigan & MSU (same CFB scoreboard)
     updateTeamCard("michigan", "MICH", cfbData);
     updateTeamCard("msu",      "MSU",  cfbData);
-
-    const updatedEl = document.getElementById("updated-time");
-    if (updatedEl) {
-      const now = new Date();
-      updatedEl.textContent = "Last updated: " +
-        now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-    }
 
   } catch (err) {
     console.error("Error refreshing scores:", err);
     Object.values(TEAM_CONFIG).forEach(team => setCardError(team.prefix));
-
-    const updatedEl = document.getElementById("updated-time");
-    if (updatedEl) {
-      updatedEl.textContent = "Last updated: error contacting ESPN";
-    }
   }
 }
 
