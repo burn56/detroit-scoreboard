@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  <-- force reload -->
 <head>
   <meta charset="UTF-8" />
   <title>Scoreboard</title>
@@ -35,27 +34,27 @@
     }
 
     /***************************************
-      HORIZONTAL LAYOUT – NO WRAP, NO SCROLL
+      HORIZONTAL LAYOUT – NO WRAP
     ***************************************/
     .scoreboard {
       display: flex;
       flex-direction: row;
       justify-content: center;
       gap: 1.5rem;
-      flex-wrap: nowrap;     /* no wrapping */
+      flex-wrap: nowrap;
       transform-origin: top center;
     }
 
     /* Auto-scale the row on smaller screens */
     @media (max-width: 1200px) { .scoreboard { transform: scale(0.95); } }
     @media (max-width: 1000px) { .scoreboard { transform: scale(0.85); } }
-    @media (max-width: 850px)  { .scoreboard { transform: scale(0.75); } }
-    @media (max-width: 750px)  { .scoreboard { transform: scale(0.65); } }
-    @media (max-width: 650px)  { .scoreboard { transform: scale(0.55); } }
-    @media (max-width: 550px)  { .scoreboard { transform: scale(0.48); } }
-    @media (max-width: 480px)  { .scoreboard { transform: scale(0.42); } }
+    @media (max-width: 900px)  { .scoreboard { transform: scale(0.78); } }
+    @media (max-width: 800px)  { .scoreboard { transform: scale(0.70); } }
+    @media (max-width: 700px)  { .scoreboard { transform: scale(0.60); } }
+    @media (max-width: 600px)  { .scoreboard { transform: scale(0.52); } }
+    @media (max-width: 520px)  { .scoreboard { transform: scale(0.45); } }
+    @media (max-width: 460px)  { .scoreboard { transform: scale(0.40); } }
 
-    /* Remove scroll bar visually */
     .scoreboard::-webkit-scrollbar { display: none; }
     .scoreboard {
       -ms-overflow-style: none;
@@ -161,7 +160,7 @@
 
     <div class="scoreboard">
 
-      <!-- Tigers -->
+      <!-- Detroit Tigers -->
       <div class="team-card" id="tigers-card">
         <div class="team-logo"><img src="logos/tigers.png"></div>
         <div class="team-league">MLB</div>
@@ -173,7 +172,19 @@
         </div>
       </div>
 
-      <!-- Lions -->
+      <!-- SF Giants -->
+      <div class="team-card" id="giants-card">
+        <div class="team-logo"><img src="logos/sfgiants.png"></div>
+        <div class="team-league">MLB</div>
+        <div class="team-name">San Francisco Giants</div>
+        <div class="game-line" id="giants-game">Loading...</div>
+        <div class="status-row">
+          <span class="status-pill" id="giants-status-pill">...</span>
+          <span class="status-text" id="giants-status-text"></span>
+        </div>
+      </div>
+
+      <!-- Detroit Lions -->
       <div class="team-card" id="lions-card">
         <div class="team-logo"><img src="logos/lions.png"></div>
         <div class="team-league">NFL</div>
@@ -185,7 +196,7 @@
         </div>
       </div>
 
-      <!-- Michigan -->
+      <!-- Michigan Wolverines -->
       <div class="team-card" id="michigan-card">
         <div class="team-logo"><img src="logos/michigan.png"></div>
         <div class="team-league">NCAA</div>
@@ -197,7 +208,7 @@
         </div>
       </div>
 
-      <!-- MSU -->
+      <!-- Michigan State Spartans -->
       <div class="team-card" id="msu-card">
         <div class="team-logo"><img src="logos/msu.png"></div>
         <div class="team-league">NCAA</div>
