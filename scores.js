@@ -24,12 +24,24 @@ const TEAM_CONFIG = {
 //  DOM Helpers             //
 //////////////////////////////
 
+function showCard(prefix) {
+  const card = document.getElementById(`${prefix}-card`);
+  if (card) card.style.display = "flex";
+}
+
+function hideCard(prefix) {
+  const card = document.getElementById(`${prefix}-card`);
+  if (card) card.style.display = "none";
+}
+
 function setCardLoading(prefix) {
   const gameEl = document.getElementById(`${prefix}-game`);
   const pillEl = document.getElementById(`${prefix}-status-pill`);
   const textEl = document.getElementById(`${prefix}-status-text`);
 
   if (!gameEl || !pillEl || !textEl) return;
+
+  showCard(prefix);
 
   gameEl.textContent = "Loading...";
   gameEl.classList.remove("error-text");
@@ -45,6 +57,8 @@ function setCardError(prefix) {
 
   if (!gameEl || !pillEl || !textEl) return;
 
+  showCard(prefix);
+
   gameEl.textContent = "Error loading scores";
   gameEl.classList.add("error-text");
   pillEl.textContent = "Error";
@@ -53,17 +67,8 @@ function setCardError(prefix) {
 }
 
 function setCardNoGame(prefix) {
-  const gameEl = document.getElementById(`${prefix}-game`);
-  const pillEl = document.getElementById(`${prefix}-status-pill`);
-  const textEl = document.getElementById(`${prefix}-status-text`);
-
-  if (!gameEl || !pillEl || !textEl) return;
-
-  gameEl.textContent = "No game today";
-  gameEl.classList.remove("error-text");
-  pillEl.textContent = "Idle";
-  pillEl.className = "status-pill";
-  textEl.textContent = "";
+  // Instead of showing "No game today", just hide the card
+  hideCard(prefix);
 }
 
 //////////////////////////////
@@ -227,9 +232,13 @@ function updateTeamCard(prefix, abbr, scoreboardData, isFootball, isBaseball) {
     const hit = findTeamGame(events, abbr);
 
     if (!hit) {
+      // No event for this team on today's scoreboard → hide
       setCardNoGame(prefix);
       return;
     }
+
+    // We have a game → ensure card is visible
+    showCard(prefix);
 
     const line = buildGameLine(hit.competition);
     const st   = buildStatus(hit.event);
