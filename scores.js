@@ -1,21 +1,49 @@
 //////////////////////////////
 //  ESPN Scoreboard URLs   //
 //////////////////////////////
-
+//
+// These are league-wide scoreboards; we ONLY pull out your 3 teams.
+//
 const ENDPOINTS = {
+  // Detroit Tigers (MLB)
   tigers: "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard",
+
+  // Detroit Lions (NFL)
   lions: "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
-  msu: "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard"
+
+  // Michigan State Spartans (NCAAF, FBS)
+  // groups=80 = FBS; safe to omit if you want the default full board.
+  msu: "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80"
 };
 
 //////////////////////////////
-//  DOM Helper Functions    //
+//  Team Config (ONLY these)//
+//////////////////////////////
+
+const TEAM_CONFIG = {
+  tigers: {
+    abbr: "DET",          // Detroit Tigers on MLB board
+    prefix: "tigers"
+  },
+  lions: {
+    abbr: "DET",          // Detroit Lions on NFL board
+    prefix: "lions"
+  },
+  msu: {
+    abbr: "MSU",          // Michigan State Spartans on CFB board
+    prefix: "msu"
+  }
+};
+
+//////////////////////////////
+//  DOM Helpers             //
 //////////////////////////////
 
 function setCardLoading(teamPrefix) {
   document.getElementById(`${teamPrefix}-game`).textContent = "Loading...";
-  document.getElementById(`${teamPrefix}-status-pill`).textContent = "...";
-  document.getElementById(`${teamPrefix}-status-pill`).className = "status-pill";
+  const pill = document.getElementById(`${teamPrefix}-status-pill`);
+  pill.textContent = "...";
+  pill.className = "status-pill";
   document.getElementById(`${teamPrefix}-status-text`).textContent = "";
 }
 
@@ -48,8 +76,8 @@ function setCardNoGame(teamPrefix) {
 //////////////////////////////
 
 /**
- * Find the first event in the ESPN scoreboard that matches the given team abbrev.
- * (e.g. "DET", "MSU")
+ * Find the first event where ANY competitor has the given team abbreviation.
+ * We only call this with the 3 team abbrs you care about.
  */
 function findTeamGame(events, teamAbbr) {
   if (!Array.isArray(events)) return null;
@@ -71,7 +99,7 @@ function findTeamGame(events, teamAbbr) {
 }
 
 /**
- * Build a simple line like "DET 4 @ CHC 2" from an event.
+ * Build "AWAY 3 @ HOME 2" from competition object.
  */
 function buildGameLine(competition) {
   const competitors = competition.competitors || [];
@@ -89,7 +117,7 @@ function buildGameLine(competition) {
 }
 
 /**
- * Decide pill text + status text + class based on ESPN "status".
+ * Decide pill text + status text + class from ESPN status.
  */
 function buildStatus(event) {
   const status = event.status || {};
@@ -97,7 +125,6 @@ function buildStatus(event) {
   const state = type.state || "pre"; // "pre", "in", "post"
   const shortDetail = type.shortDetail || type.detail || type.description || "";
   const clock = status.displayClock || "";
-  const period = status.period;
 
   let pill = "";
   let pillClass = "status-pill";
@@ -106,14 +133,12 @@ function buildStatus(event) {
   if (state === "in") {
     pill = "Live";
     pillClass += " live";
-    // example: "Final/OT", "3rd 10:21", or we just display shortDetail
-    text = shortDetail || (clock ? `${clock}` : "In progress");
+    text = shortDetail || (clock ? clock : "In progress");
   } else if (state === "post") {
     pill = "Final";
     pillClass += " final";
     text = shortDetail || "Game finished";
   } else {
-    // "pre" or anything else
     pill = "Scheduled";
     pillClass += " scheduled";
     text = shortDetail || "Upcoming";
@@ -123,7 +148,7 @@ function buildStatus(event) {
 }
 
 /**
- * Update a given team card with data for a scoreboard + team abbreviation.
+ * Update a card for one of your teams only.
  */
 function updateTeamCard(teamPrefix, teamAbbr, scoreboardData) {
   try {
@@ -137,14 +162,14 @@ function updateTeamCard(teamPrefix, teamAbbr, scoreboardData) {
 
     const { event, competition } = match;
 
-    const gameLine = buildGameLine(competition);
+    const line = buildGameLine(competition);
     const statusInfo = buildStatus(event);
 
     const gameEl = document.getElementById(`${teamPrefix}-game`);
     const pillEl = document.getElementById(`${teamPrefix}-status-pill`);
     const textEl = document.getElementById(`${teamPrefix}-status-text`);
 
-    gameEl.textContent = gameLine;
+    gameEl.textContent = line;
     gameEl.classList.remove("error-text");
     pillEl.textContent = statusInfo.pill;
     pillEl.className = statusInfo.pillClass;
@@ -160,22 +185,16 @@ function updateTeamCard(teamPrefix, teamAbbr, scoreboardData) {
 //////////////////////////////
 
 async function fetchScoreboard(url) {
-  const response = await fetch(url, {
-    cache: "no-store"
-  });
-
+  const response = await fetch(url, { cache: "no-store" });
   if (!response.ok) {
     throw new Error(`HTTP ${response.status}`);
   }
-
   return response.json();
 }
 
 async function refreshScores() {
-  // set loading text
-  setCardLoading("tigers");
-  setCardLoading("lions");
-  setCardLoading("msu");
+  // Show loading for just your three cards
+  Object.values(TEAM_CONFIG).forEach(cfg => setCardLoading(cfg.prefix));
 
   try {
     const [mlbData, nflData, cfbData] = await Promise.all([
@@ -184,14 +203,9 @@ async function refreshScores() {
       fetchScoreboard(ENDPOINTS.msu)
     ]);
 
-    // Tigers = DET in MLB
-    updateTeamCard("tigers", "DET", mlbData);
-
-    // Lions = DET in NFL
-    updateTeamCard("lions", "DET", nflData);
-
-    // Michigan State = MSU in college football
-    updateTeamCard("msu", "MSU", cfbData);
+    updateTeamCard(TEAM_CONFIG.tigers.prefix, TEAM_CONFIG.tigers.abbr, mlbData);
+    updateTeamCard(TEAM_CONFIG.lions.prefix,  TEAM_CONFIG.lions.abbr,  nflData);
+    updateTeamCard(TEAM_CONFIG.msu.prefix,    TEAM_CONFIG.msu.abbr,    cfbData);
 
     const updatedEl = document.getElementById("updated-time");
     const now = new Date();
@@ -201,9 +215,9 @@ async function refreshScores() {
     })}`;
   } catch (err) {
     console.error("Error refreshing scores:", err);
-    setCardError("tigers");
-    setCardError("lions");
-    setCardError("msu");
+
+    Object.values(TEAM_CONFIG).forEach(cfg => setCardError(cfg.prefix));
+
     const updatedEl = document.getElementById("updated-time");
     updatedEl.textContent = "Last updated: error contacting ESPN";
   }
@@ -212,5 +226,5 @@ async function refreshScores() {
 // Initial load
 refreshScores();
 
-// Optional: auto-refresh every 60 seconds
+// Auto-refresh every 60 seconds
 setInterval(refreshScores, 60 * 1000);
