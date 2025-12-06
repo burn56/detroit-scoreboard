@@ -13,11 +13,11 @@ const ENDPOINTS = {
 //////////////////////////////
 
 const TEAM_CONFIG = {
-  tigers:   { abbr: "DET", prefix: "tigers",  source: "mlb",   isFootball: false },
-  giants:   { abbr: "SF",  prefix: "giants",  source: "mlb",   isFootball: false },
-  lions:    { abbr: "DET", prefix: "lions",   source: "lions", isFootball: true  },
-  michigan: { abbr: "MICH",prefix: "michigan",source: "cfb",   isFootball: true  },
-  msu:      { abbr: "MSU", prefix: "msu",     source: "cfb",   isFootball: true  }
+  tigers:   { abbr: "DET",  prefix: "tigers",  source: "mlb",   isFootball: false, isBaseball: true  },
+  giants:   { abbr: "SF",   prefix: "giants",  source: "mlb",   isFootball: false, isBaseball: true  },
+  lions:    { abbr: "DET",  prefix: "lions",   source: "lions", isFootball: true,  isBaseball: false },
+  michigan: { abbr: "MICH", prefix: "michigan",source: "cfb",   isFootball: true,  isBaseball: false },
+  msu:      { abbr: "MSU",  prefix: "msu",     source: "cfb",   isFootball: true,  isBaseball: false }
 };
 
 //////////////////////////////
@@ -151,6 +151,56 @@ function buildSituation(competition, event) {
   return pieces.join(" • ");
 }
 
+// Build inning / count / bases string for baseball
+function buildBaseballSituation(competition, event) {
+  const situation = competition.situation;
+  if (!situation) return "";
+
+  const status = event.status || {};
+  const type   = status.type || {};
+  if (type.state !== "in") return "";
+
+  const inning = situation.inning;
+  let halfLabel = situation.inningHalf || "";
+  if (!halfLabel && typeof situation.isTopInning === "boolean") {
+    halfLabel = situation.isTopInning ? "Top" : "Bot";
+  }
+
+  const balls   = situation.balls;
+  const strikes = situation.strikes;
+  const outs    = situation.outs;
+
+  const onFirst  = situation.onFirst;
+  const onSecond = situation.onSecond;
+  const onThird  = situation.onThird;
+
+  const pieces = [];
+
+  if (inning != null) {
+    const half = halfLabel || "";
+    pieces.push(`${half} ${inning}`.trim());
+  }
+
+  if (balls != null && strikes != null) {
+    pieces.push(`B:${balls} S:${strikes}`);
+  }
+
+  if (outs != null) {
+    pieces.push(`O:${outs}`);
+  }
+
+  // Bases: 1--, -2-, --3, 123, etc.
+  const basesArr = [
+    onFirst  ? "1" : "-",
+    onSecond ? "2" : "-",
+    onThird  ? "3" : "-"
+  ];
+  const basesStr = basesArr.join("");
+  pieces.push(`Bases:${basesStr}`);
+
+  return pieces.join(" • ");
+}
+
 function buildStatus(event) {
   const status = event.status || {};
   const type   = status.type || {};
@@ -171,7 +221,7 @@ function buildStatus(event) {
   return { pill, pillClass, text, state };
 }
 
-function updateTeamCard(prefix, abbr, scoreboardData, isFootball) {
+function updateTeamCard(prefix, abbr, scoreboardData, isFootball, isBaseball) {
   try {
     const events = (scoreboardData && scoreboardData.events) || [];
     const hit = findTeamGame(events, abbr);
@@ -195,10 +245,16 @@ function updateTeamCard(prefix, abbr, scoreboardData, isFootball) {
     pillEl.textContent = st.pill;
     pillEl.className   = st.pillClass;
 
-    // For football, when live, try to show down/distance/possession
+    // Football: down/distance/possession when live
     if (isFootball && st.state === "in") {
       const situText = buildSituation(hit.competition, hit.event);
       textEl.textContent = situText || st.text;
+
+    // Baseball: inning / count / bases when live
+    } else if (isBaseball && st.state === "in") {
+      const bSitu = buildBaseballSituation(hit.competition, hit.event);
+      textEl.textContent = bSitu || st.text;
+
     } else {
       textEl.textContent = st.text;
     }
@@ -229,11 +285,11 @@ async function refreshScores() {
       fetchScoreboard(ENDPOINTS.cfb)
     ]);
 
-    updateTeamCard("tigers",   "DET",  mlbData, false);
-    updateTeamCard("giants",   "SF",   mlbData, false);
-    updateTeamCard("lions",    "DET",  nflData, true);
-    updateTeamCard("michigan", "MICH", cfbData, true);
-    updateTeamCard("msu",      "MSU",  cfbData, true);
+    updateTeamCard("tigers",   "DET",  mlbData, false, true);
+    updateTeamCard("giants",   "SF",   mlbData, false, true);
+    updateTeamCard("lions",    "DET",  nflData, true,  false);
+    updateTeamCard("michigan", "MICH", cfbData, true,  false);
+    updateTeamCard("msu",      "MSU",  cfbData, true,  false);
 
   } catch (err) {
     console.error("Error refreshing scores:", err);
