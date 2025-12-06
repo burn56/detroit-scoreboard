@@ -26,12 +26,16 @@ const TEAM_CONFIG = {
 
 function showCard(prefix) {
   const card = document.getElementById(`${prefix}-card`);
-  if (card) card.style.display = "flex";
+  if (card) {
+    card.style.display = "flex";
+  }
 }
 
 function hideCard(prefix) {
   const card = document.getElementById(`${prefix}-card`);
-  if (card) card.style.display = "none";
+  if (card) {
+    card.style.display = "none";
+  }
 }
 
 function setCardLoading(prefix) {
@@ -66,8 +70,8 @@ function setCardError(prefix) {
   textEl.textContent = "";
 }
 
+// For "no game", we now HIDE the card instead of showing text
 function setCardNoGame(prefix) {
-  // Instead of showing "No game today", just hide the card
   hideCard(prefix);
 }
 
@@ -96,8 +100,8 @@ function buildGameLine(competition) {
   const home = competitors.find(c => c.homeAway === "home") || competitors[0];
   const away = competitors.find(c => c.homeAway === "away") || competitors[1];
 
-  const homeAbbr = home?.team?.abbreviation || "HOME";
-  const awayAbbr = away?.team?.abbreviation || "AWAY";
+  const homeAbbr = home && home.team && home.team.abbreviation ? home.team.abbreviation : "HOME";
+  const awayAbbr = away && away.team && away.team.abbreviation ? away.team.abbreviation : "AWAY";
 
   const homeScore = (home && home.score != null) ? home.score : "-";
   const awayScore = (away && away.score != null) ? away.score : "-";
@@ -106,7 +110,7 @@ function buildGameLine(competition) {
 }
 
 // Build down/distance/possession string for football
-function buildSituation(competition, event) {
+function buildFootballSituation(competition, event) {
   const situation = competition.situation;
   if (!situation) return "";
 
@@ -126,32 +130,34 @@ function buildSituation(competition, event) {
     const possTeam = comps.find(
       c =>
         String(c.id) === String(situation.possession) ||
-        String(c.team?.id) === String(situation.possession)
+        (c.team && String(c.team.id) === String(situation.possession))
     );
-    possAbbr = possTeam?.team?.abbreviation || "";
+    if (possTeam && possTeam.team && possTeam.team.abbreviation) {
+      possAbbr = possTeam.team.abbreviation;
+    }
   }
 
   // Down & distance
   let downDist = "";
   if (down && dist != null) {
     const ordMap = { 1: "1st", 2: "2nd", 3: "3rd", 4: "4th" };
-    const ord = ordMap[down] || `${down}th`;
-    downDist = `${ord} & ${dist}`;
+    const ord = ordMap[down] || (down + "th");
+    downDist = ord + " & " + dist;
   }
 
   // Field position
   let fieldPos = "";
   if (yardLn != null && terr) {
-    fieldPos = `${terr} ${yardLn}`;
+    fieldPos = terr + " " + yardLn;
   }
 
   const pieces = [];
 
-  if (period) pieces.push(`Q${period}`);
+  if (period) pieces.push("Q" + period);
   if (clock)  pieces.push(clock);
   if (downDist) pieces.push(downDist);
-  if (possAbbr) pieces.push(`${possAbbr} ball`);
-  if (fieldPos) pieces.push(`@ ${fieldPos}`);
+  if (possAbbr) pieces.push(possAbbr + " ball");
+  if (fieldPos) pieces.push("@ " + fieldPos);
 
   return pieces.join(" • ");
 }
@@ -183,15 +189,15 @@ function buildBaseballSituation(competition, event) {
 
   if (inning != null) {
     const half = halfLabel || "";
-    pieces.push(`${half} ${inning}`.trim());
+    pieces.push((half + " " + inning).trim());
   }
 
   if (balls != null && strikes != null) {
-    pieces.push(`B:${balls} S:${strikes}`);
+    pieces.push("B:" + balls + " S:" + strikes);
   }
 
   if (outs != null) {
-    pieces.push(`O:${outs}`);
+    pieces.push("O:" + outs);
   }
 
   // Bases: 1--, -2-, --3, 123, etc.
@@ -201,7 +207,7 @@ function buildBaseballSituation(competition, event) {
     onThird  ? "3" : "-"
   ];
   const basesStr = basesArr.join("");
-  pieces.push(`Bases:${basesStr}`);
+  pieces.push("Bases:" + basesStr);
 
   return pieces.join(" • ");
 }
@@ -223,7 +229,7 @@ function buildStatus(event) {
     pillClass = "status-pill final";
   }
 
-  return { pill, pillClass, text, state };
+  return { pill: pill, pillClass: pillClass, text: text, state: state };
 }
 
 function updateTeamCard(prefix, abbr, scoreboardData, isFootball, isBaseball) {
@@ -232,20 +238,20 @@ function updateTeamCard(prefix, abbr, scoreboardData, isFootball, isBaseball) {
     const hit = findTeamGame(events, abbr);
 
     if (!hit) {
-      // No event for this team on today's scoreboard → hide
+      // No event for this team on today's scoreboard → hide the card
       setCardNoGame(prefix);
       return;
     }
 
-    // We have a game → ensure card is visible
+    // We have a game → make sure card is visible
     showCard(prefix);
 
     const line = buildGameLine(hit.competition);
     const st   = buildStatus(hit.event);
 
-    const gameEl = document.getElementById(`${prefix}-game`);
-    const pillEl = document.getElementById(`${prefix}-status-pill`);
-    const textEl = document.getElementById(`${prefix}-status-text`);
+    const gameEl = document.getElementById(prefix + "-game");
+    const pillEl = document.getElementById(prefix + "-status-pill");
+    const textEl = document.getElementById(prefix + "-status-text");
 
     if (!gameEl || !pillEl || !textEl) return;
 
@@ -256,7 +262,7 @@ function updateTeamCard(prefix, abbr, scoreboardData, isFootball, isBaseball) {
 
     // Football: down/distance/possession when live
     if (isFootball && st.state === "in") {
-      const situText = buildSituation(hit.competition, hit.event);
+      const situText = buildFootballSituation(hit.competition, hit.event);
       textEl.textContent = situText || st.text;
 
     // Baseball: inning / count / bases when live
@@ -269,7 +275,7 @@ function updateTeamCard(prefix, abbr, scoreboardData, isFootball, isBaseball) {
     }
 
   } catch (err) {
-    console.error(`Error updating card for ${prefix}:`, err);
+    console.error("Error updating card for " + prefix + ":", err);
     setCardError(prefix);
   }
 }
@@ -280,19 +286,26 @@ function updateTeamCard(prefix, abbr, scoreboardData, isFootball, isBaseball) {
 
 async function fetchScoreboard(url) {
   const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  if (!res.ok) throw new Error("HTTP " + res.status);
   return res.json();
 }
 
 async function refreshScores() {
-  Object.values(TEAM_CONFIG).forEach(team => setCardLoading(team.prefix));
+  // Start by showing all cards as loading
+  Object.values(TEAM_CONFIG).forEach(function (team) {
+    setCardLoading(team.prefix);
+  });
 
   try {
-    const [mlbData, nflData, cfbData] = await Promise.all([
+    const results = await Promise.all([
       fetchScoreboard(ENDPOINTS.mlb),
       fetchScoreboard(ENDPOINTS.lions),
       fetchScoreboard(ENDPOINTS.cfb)
     ]);
+
+    const mlbData  = results[0];
+    const nflData  = results[1];
+    const cfbData  = results[2];
 
     updateTeamCard("tigers",   "DET",  mlbData, false, true);
     updateTeamCard("giants",   "SF",   mlbData, false, true);
@@ -302,7 +315,9 @@ async function refreshScores() {
 
   } catch (err) {
     console.error("Error refreshing scores:", err);
-    Object.values(TEAM_CONFIG).forEach(team => setCardError(team.prefix));
+    Object.values(TEAM_CONFIG).forEach(function (team) {
+      setCardError(team.prefix);
+    });
   }
 }
 
