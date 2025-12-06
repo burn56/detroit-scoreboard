@@ -66,7 +66,6 @@ function setCardError(prefix) {
   textEl.textContent = "";
 }
 
-// For "no game", we now HIDE the card instead of showing text
 function setCardNoGame(prefix) {
   hideCard(prefix);
 }
@@ -272,6 +271,101 @@ function updateTeamCard(prefix, abbr, scoreboardData, isFootball, isBaseball) {
 }
 
 //////////////////////////////
+//  Championship Game Logic //
+//////////////////////////////
+
+function findWorldSeriesGame(events) {
+  if (!Array.isArray(events)) return null;
+  const keyword = "world series";
+  const lower = keyword.toLowerCase();
+
+  const ev = events.find(e => {
+    const name      = (e.name || "").toLowerCase();
+    const shortName = (e.shortName || "").toLowerCase();
+    return name.includes(lower) || shortName.includes(lower);
+  });
+  if (!ev) return null;
+
+  const comp = ev.competitions && ev.competitions[0];
+  if (!comp) return null;
+
+  return { event: ev, competition: comp, type: "mlb" };
+}
+
+function findSuperBowlGame(events) {
+  if (!Array.isArray(events)) return null;
+  const keyword = "super bowl";
+  const lower = keyword.toLowerCase();
+
+  const ev = events.find(e => {
+    const name      = (e.name || "").toLowerCase();
+    const shortName = (e.shortName || "").toLowerCase();
+    return name.includes(lower) || shortName.includes(lower);
+  });
+  if (!ev) return null;
+
+  const comp = ev.competitions && ev.competitions[0];
+  if (!comp) return null;
+
+  return { event: ev, competition: comp, type: "nfl" };
+}
+
+function updateChampionshipCard(mlbData, nflData) {
+  const champCardPrefix = "champ";
+
+  const mlbEvents = Array.isArray(mlbData?.events) ? mlbData.events : [];
+  const nflEvents = Array.isArray(nflData?.events) ? nflData.events : [];
+
+  // Priority: Super Bowl > World Series
+  let champ = findSuperBowlGame(nflEvents);
+  if (!champ) champ = findWorldSeriesGame(mlbEvents);
+
+  if (!champ) {
+    hideCard(champCardPrefix);
+    return;
+  }
+
+  showCard(champCardPrefix);
+
+  const leagueEl = document.getElementById("champ-league");
+  const nameEl   = document.getElementById("champ-name");
+  const gameEl   = document.getElementById("champ-game");
+  const pillEl   = document.getElementById("champ-status-pill");
+  const textEl   = document.getElementById("champ-status-text");
+  const logoImg  = document.querySelector("#champ-card .team-logo img");
+
+  if (!leagueEl || !nameEl || !gameEl || !pillEl || !textEl || !logoImg) return;
+
+  if (champ.type === "nfl") {
+    leagueEl.textContent = "NFL";
+    nameEl.textContent   = "Super Bowl";
+    logoImg.src          = "logos/superbowl.svg";
+  } else {
+    leagueEl.textContent = "MLB";
+    nameEl.textContent   = "World Series";
+    logoImg.src          = "logos/worldseries.svg";
+  }
+
+  const line = buildGameLine(champ.competition);
+  const st   = buildStatus(champ.event);
+
+  gameEl.textContent = line;
+  gameEl.classList.remove("error-text");
+  pillEl.textContent = st.pill;
+  pillEl.className   = st.pillClass;
+
+  if (champ.type === "nfl" && st.state === "in") {
+    const situText = buildFootballSituation(champ.competition, champ.event);
+    textEl.textContent = situText || st.text;
+  } else if (champ.type === "mlb" && st.state === "in") {
+    const bSitu = buildBaseballSituation(champ.competition, champ.event);
+    textEl.textContent = bSitu || st.text;
+  } else {
+    textEl.textContent = st.text;
+  }
+}
+
+//////////////////////////////
 //  Fetch + Refresh Logic   //
 //////////////////////////////
 
@@ -283,6 +377,7 @@ async function fetchScoreboard(url) {
 
 async function refreshScores() {
   Object.values(TEAM_CONFIG).forEach(team => setCardLoading(team.prefix));
+  setCardLoading("champ");
 
   try {
     const [mlbData, nflData, cfbData] = await Promise.all([
@@ -297,13 +392,16 @@ async function refreshScores() {
     updateTeamCard("michigan", "MICH", cfbData, true,  false);
     updateTeamCard("msu",      "MSU",  cfbData, true,  false);
 
+    updateChampionshipCard(mlbData, nflData);
+
   } catch (err) {
     console.error("Error refreshing scores:", err);
     Object.values(TEAM_CONFIG).forEach(team => setCardError(team.prefix));
+    setCardError("champ");
   }
 }
 
-// Initial load (use window load just to be extra-safe on mobile)
+// Initial load
 window.addEventListener("load", () => {
   refreshScores();
   setInterval(refreshScores, 60 * 1000);
