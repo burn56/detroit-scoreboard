@@ -13,10 +13,10 @@ const ENDPOINTS = {
 //////////////////////////////
 
 const TEAM_CONFIG = {
-  tigers:   { abbr: "DET",  prefix: "tigers",   source: "tigers" },
-  lions:    { abbr: "DET",  prefix: "lions",    source: "lions"  },
-  michigan: { abbr: "MICH", prefix: "michigan", source: "cfb"    },
-  msu:      { abbr: "MSU",  prefix: "msu",      source: "cfb"    }
+  tigers:   { abbr: "DET",  prefix: "tigers",   source: "tigers", isFootball: false },
+  lions:    { abbr: "DET",  prefix: "lions",    source: "lions",  isFootball: true  },
+  michigan: { abbr: "MICH", prefix: "michigan", source: "cfb",    isFootball: true  },
+  msu:      { abbr: "MSU",  prefix: "msu",      source: "cfb",    isFootball: true  }
 };
 
 //////////////////////////////
@@ -99,6 +99,57 @@ function buildGameLine(competition) {
   return `${awayAbbr} ${awayScore} @ ${homeAbbr} ${homeScore}`;
 }
 
+// Build down/distance/possession string for football
+function buildSituation(competition, event) {
+  const situation = competition.situation;
+  if (!situation) return "";
+
+  const status = event.status || {};
+  const period = status.period;
+  const clock  = status.displayClock || "";
+
+  const down   = situation.down;
+  const dist   = situation.distance;
+  const yardLn = situation.yardLine;
+  const terr   = situation.yardLineTerritory; // e.g. "DET"
+
+  // Figure out possession team abbreviation
+  let possAbbr = "";
+  if (situation.possession) {
+    const comps = competition.competitors || [];
+    const possTeam = comps.find(
+      c =>
+        String(c.id) === String(situation.possession) ||
+        String(c.team?.id) === String(situation.possession)
+    );
+    possAbbr = possTeam?.team?.abbreviation || "";
+  }
+
+  // Down & distance
+  let downDist = "";
+  if (down && dist != null) {
+    const ordMap = { 1: "1st", 2: "2nd", 3: "3rd", 4: "4th" };
+    const ord = ordMap[down] || `${down}th`;
+    downDist = `${ord} & ${dist}`;
+  }
+
+  // Field position
+  let fieldPos = "";
+  if (yardLn != null && terr) {
+    fieldPos = `${terr} ${yardLn}`;
+  }
+
+  const pieces = [];
+
+  if (period) pieces.push(`Q${period}`);
+  if (clock)  pieces.push(clock);
+  if (downDist) pieces.push(downDist);
+  if (possAbbr) pieces.push(`${possAbbr} ball`);
+  if (fieldPos) pieces.push(`@ ${fieldPos}`);
+
+  return pieces.join(" • ");
+}
+
 function buildStatus(event) {
   const status = event.status || {};
   const type   = status.type || {};
@@ -116,10 +167,10 @@ function buildStatus(event) {
     pillClass = "status-pill final";
   }
 
-  return { pill, pillClass, text };
+  return { pill, pillClass, text, state };
 }
 
-function updateTeamCard(prefix, abbr, scoreboardData) {
+function updateTeamCard(prefix, abbr, scoreboardData, isFootball) {
   try {
     const events = (scoreboardData && scoreboardData.events) || [];
     const hit = findTeamGame(events, abbr);
@@ -142,7 +193,14 @@ function updateTeamCard(prefix, abbr, scoreboardData) {
     gameEl.classList.remove("error-text");
     pillEl.textContent = st.pill;
     pillEl.className   = st.pillClass;
-    textEl.textContent = st.text;
+
+    // For football, when live, try to show down/distance/possession
+    if (isFootball && st.state === "in") {
+      const situText = buildSituation(hit.competition, hit.event);
+      textEl.textContent = situText || st.text;
+    } else {
+      textEl.textContent = st.text;
+    }
 
   } catch (err) {
     console.error(`Error updating card for ${prefix}:`, err);
@@ -170,10 +228,10 @@ async function refreshScores() {
       fetchScoreboard(ENDPOINTS.cfb)
     ]);
 
-    updateTeamCard("tigers",   "DET",  mlbData);
-    updateTeamCard("lions",    "DET",  nflData);
-    updateTeamCard("michigan", "MICH", cfbData);
-    updateTeamCard("msu",      "MSU",  cfbData);
+    updateTeamCard("tigers",   "DET",  mlbData, false);
+    updateTeamCard("lions",    "DET",  nflData, true);
+    updateTeamCard("michigan", "MICH", cfbData, true);
+    updateTeamCard("msu",      "MSU",  cfbData, true);
 
   } catch (err) {
     console.error("Error refreshing scores:", err);
