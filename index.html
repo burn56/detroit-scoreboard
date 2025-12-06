@@ -14,9 +14,7 @@
       --error: #ff453a;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -31,7 +29,7 @@
 
     .wrapper {
       padding: 1.5rem;
-      max-width: 1100px;
+      max-width: 1200px;
       width: 100%;
     }
 
@@ -68,38 +66,14 @@
       overflow: hidden;
     }
 
-    .team-card::before {
-      content: "";
-      position: absolute;
-      inset: -60%;
-      background:
-        radial-gradient(circle at 0 0, rgba(53, 199, 89, 0.07) 0, transparent 50%),
-        radial-gradient(circle at 100% 100%, rgba(77, 162, 255, 0.07) 0, transparent 50%);
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    .team-card-inner {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
     .team-logo {
       width: 80px;
       height: 80px;
       border-radius: 50%;
       overflow: hidden;
       border: 2px solid rgba(255, 255, 255, 0.16);
-      box-shadow:
-        0 0 0 4px rgba(255, 255, 255, 0.04),
-        0 12px 28px rgba(0, 0, 0, 0.6);
-      margin-bottom: 0.4rem;
       background: #000;
+      margin-bottom: 0.4rem;
     }
 
     .team-logo img {
@@ -124,17 +98,14 @@
     }
 
     .game-line {
-      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, monospace;
       font-size: 0.95rem;
       padding: 0.25rem 0.5rem;
       border-radius: 0.4rem;
       background: rgba(255, 255, 255, 0.04);
-      min-height: 1.4em;
       text-align: center;
       width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      min-height: 1.4em;
     }
 
     .status-row {
@@ -142,10 +113,8 @@
       justify-content: center;
       align-items: center;
       gap: 0.4rem;
-      margin-top: 0.2rem;
       font-size: 0.8rem;
       color: var(--text-muted);
-      min-height: 1.1em;
     }
 
     .status-pill {
@@ -172,107 +141,75 @@
       color: #87cefa;
     }
 
-    .status-text {
-      max-width: 140px;
-      text-align: center;
-    }
-
-    .separator {
-      font-weight: 800;
-      font-size: 1.4rem;
-      color: rgba(255, 255, 255, 0.28);
-      align-self: center;
-    }
-
     .updated {
       margin-top: 1rem;
       text-align: center;
       font-size: 0.75rem;
       color: var(--text-muted);
-      opacity: 0.85;
     }
 
     .error-text {
       color: var(--error);
     }
-
-    @media (max-width: 768px) {
-      .scoreboard {
-        gap: 1rem;
-      }
-      .team-card {
-        min-width: 180px;
-        padding: 1rem 1.1rem;
-      }
-      .separator {
-        display: none;
-      }
-    }
   </style>
 </head>
 <body>
   <div class="wrapper">
-    <div class="title">
-      Detroit Sports Board &mdash; Live / Today&apos;s Games
-    </div>
+    <div class="title">Detroit Sports Board — Live / Today</div>
 
     <div class="scoreboard">
+
       <!-- Tigers -->
       <div class="team-card" id="tigers-card">
-        <div class="team-card-inner">
-          <div class="team-logo">
-            <img src="logos/tigers.png" alt="Detroit Tigers logo">
-          </div>
-          <div class="team-league">MLB</div>
-          <div class="team-name">Detroit Tigers</div>
-          <div class="game-line" id="tigers-game">Loading...</div>
-          <div class="status-row">
-            <span class="status-pill" id="tigers-status-pill">...</span>
-            <span class="status-text" id="tigers-status-text"></span>
-          </div>
+        <div class="team-logo"><img src="logos/tigers.png"></div>
+        <div class="team-league">MLB</div>
+        <div class="team-name">Detroit Tigers</div>
+        <div class="game-line" id="tigers-game">Loading...</div>
+        <div class="status-row">
+          <span class="status-pill" id="tigers-status-pill">...</span>
+          <span class="status-text" id="tigers-status-text"></span>
         </div>
       </div>
-
-      <div class="separator">##</div>
 
       <!-- Lions -->
       <div class="team-card" id="lions-card">
-        <div class="team-card-inner">
-          <div class="team-logo">
-            <img src="logos/lions.png" alt="Detroit Lions logo">
-          </div>
-          <div class="team-league">NFL</div>
-          <div class="team-name">Detroit Lions</div>
-          <div class="game-line" id="lions-game">Loading...</div>
-          <div class="status-row">
-            <span class="status-pill" id="lions-status-pill">...</span>
-            <span class="status-text" id="lions-status-text"></span>
-          </div>
+        <div class="team-logo"><img src="logos/lions.png"></div>
+        <div class="team-league">NFL</div>
+        <div class="team-name">Detroit Lions</div>
+        <div class="game-line" id="lions-game">Loading...</div>
+        <div class="status-row">
+          <span class="status-pill" id="lions-status-pill">...</span>
+          <span class="status-text" id="lions-status-text"></span>
         </div>
       </div>
 
-      <div class="separator">##</div>
+      <!-- Michigan -->
+      <div class="team-card" id="michigan-card">
+        <div class="team-logo"><img src="logos/michigan.png"></div>
+        <div class="team-league">NCAA</div>
+        <div class="team-name">Michigan Wolverines</div>
+        <div class="game-line" id="michigan-game">Loading...</div>
+        <div class="status-row">
+          <span class="status-pill" id="michigan-status-pill">...</span>
+          <span class="status-text" id="michigan-status-text"></span>
+        </div>
+      </div>
 
-      <!-- Michigan State -->
+      <!-- MSU -->
       <div class="team-card" id="msu-card">
-        <div class="team-card-inner">
-          <div class="team-logo">
-            <img src="logos/msu.png" alt="Michigan State logo">
-          </div>
-          <div class="team-league">NCAA</div>
-          <div class="team-name">Michigan State</div>
-          <div class="game-line" id="msu-game">Loading...</div>
-          <div class="status-row">
-            <span class="status-pill" id="msu-status-pill">...</span>
-            <span class="status-text" id="msu-status-text"></span>
-          </div>
+        <div class="team-logo"><img src="logos/msu.png"></div>
+        <div class="team-league">NCAA</div>
+        <div class="team-name">Michigan State Spartans</div>
+        <div class="game-line" id="msu-game">Loading...</div>
+        <div class="status-row">
+          <span class="status-pill" id="msu-status-pill">...</span>
+          <span class="status-text" id="msu-status-text"></span>
         </div>
       </div>
+
     </div>
 
-    <div class="updated" id="updated-time">
-      &nbsp;
-    </div>
+    <div class="updated" id="updated-time">&nbsp;</div>
   </div>
 
   <script src="scores.js"></script>
