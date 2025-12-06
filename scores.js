@@ -3,9 +3,9 @@
 //////////////////////////////
 
 const ENDPOINTS = {
-  tigers: "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard",
-  lions:  "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
-  cfb:    "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80"
+  mlb:   "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard",
+  lions: "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
+  cfb:   "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80"
 };
 
 //////////////////////////////
@@ -13,10 +13,11 @@ const ENDPOINTS = {
 //////////////////////////////
 
 const TEAM_CONFIG = {
-  tigers:   { abbr: "DET",  prefix: "tigers",   source: "tigers", isFootball: false },
-  lions:    { abbr: "DET",  prefix: "lions",    source: "lions",  isFootball: true  },
-  michigan: { abbr: "MICH", prefix: "michigan", source: "cfb",    isFootball: true  },
-  msu:      { abbr: "MSU",  prefix: "msu",      source: "cfb",    isFootball: true  }
+  tigers:   { abbr: "DET", prefix: "tigers",  source: "mlb",   isFootball: false },
+  giants:   { abbr: "SF",  prefix: "giants",  source: "mlb",   isFootball: false },
+  lions:    { abbr: "DET", prefix: "lions",   source: "lions", isFootball: true  },
+  michigan: { abbr: "MICH",prefix: "michigan",source: "cfb",   isFootball: true  },
+  msu:      { abbr: "MSU", prefix: "msu",     source: "cfb",   isFootball: true  }
 };
 
 //////////////////////////////
@@ -223,12 +224,13 @@ async function refreshScores() {
 
   try {
     const [mlbData, nflData, cfbData] = await Promise.all([
-      fetchScoreboard(ENDPOINTS.tigers),
+      fetchScoreboard(ENDPOINTS.mlb),
       fetchScoreboard(ENDPOINTS.lions),
       fetchScoreboard(ENDPOINTS.cfb)
     ]);
 
     updateTeamCard("tigers",   "DET",  mlbData, false);
+    updateTeamCard("giants",   "SF",   mlbData, false);
     updateTeamCard("lions",    "DET",  nflData, true);
     updateTeamCard("michigan", "MICH", cfbData, true);
     updateTeamCard("msu",      "MSU",  cfbData, true);
