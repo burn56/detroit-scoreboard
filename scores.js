@@ -16,6 +16,7 @@ const TEAM_CONFIG = {
   tigers:   { abbr: "DET",  prefix: "tigers",  source: "mlb", isFootball: false, isBaseball: true },
   giants:   { abbr: "SF",   prefix: "giants",  source: "mlb", isFootball: false, isBaseball: true },
   lions:    { abbr: "DET",  prefix: "lions",   source: "nfl", isFootball: true,  isBaseball: false },
+  commanders: { abbr: "WSH", prefix: "commanders", source: "nfl", isFootball: true, isBaseball: false },
   michigan: { abbr: "MICH", prefix: "michigan",source: "cfb", isFootball: true,  isBaseball: false },
   msu:      { abbr: "MSU",  prefix: "msu",     source: "cfb", isFootball: true,  isBaseball: false }
 };
@@ -238,6 +239,7 @@ async function refreshScores() {
     updateTeamCard("tigers",   "DET",  mlb, false, true);
     updateTeamCard("giants",   "SF",   mlb, false, true);
     updateTeamCard("lions",    "DET",  nfl, true,  false);
+    updateTeamCard("commanders", "WSH", nfl, true, false);
     updateTeamCard("michigan", "MICH", cfb, true,  false);
     updateTeamCard("msu",      "MSU",  cfb, true,  false);
 
