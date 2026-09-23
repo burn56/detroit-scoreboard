@@ -29,7 +29,7 @@
             margin: 0;
             padding: 0;
             background: transparent !important;
-            overflow: hidden;
+            overflow: hidden !important;
             font-family: "Segoe UI", system-ui, sans-serif;
         }
 
@@ -47,6 +47,7 @@
             justify-content: center;
             align-items: flex-start;
             gap: 1.5rem;
+            overflow: visible;
         }
 
 
@@ -59,6 +60,7 @@
             width: 240px;
             padding: 1.25rem 1.5rem;
             border-radius: 0.75rem;
+
             background: #fff8b3;
 
             background-image:
@@ -138,6 +140,7 @@
             font-size: 1rem;
             font-weight: 700;
             text-align: center;
+            color: var(--text);
         }
 
         .game-line {
@@ -149,6 +152,7 @@
             background: rgba(255,255,255,0.4);
             font-weight: 600;
             text-align: center;
+            color: var(--text);
         }
 
         .status-row {
@@ -189,10 +193,10 @@
 
 
         /************************************************************
-         * BASEBALL PREVIEW
+         * BASEBALL DETAIL
          *
-         * Functional representation only.
-         * We will redesign this after backend approval.
+         * Functional for now.
+         * Visual redesign comes after backend validation.
          ************************************************************/
 
         .baseball-extra {
@@ -205,10 +209,15 @@
             display: block;
         }
 
+        .linescore-wrap {
+            width: 100%;
+            overflow: hidden;
+        }
+
         .linescore {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.62rem;
+            font-size: 0.58rem;
         }
 
         .linescore th,
@@ -267,7 +276,7 @@
 
 
         /************************************************************
-         * FOOTBALL PREVIEW
+         * FOOTBALL DETAIL
          ************************************************************/
 
         .football-extra {
@@ -304,7 +313,7 @@
 
 
         /************************************************************
-         * PREVIEW INDICATOR
+         * PREVIEW / DEBUG
          ************************************************************/
 
         #preview-indicator {
@@ -323,24 +332,6 @@
         body.preview #preview-indicator {
             display: block;
         }
-
-
-        /************************************************************
-         * MESSAGE
-         ************************************************************/
-
-        #message {
-            display: none;
-            padding: 20px;
-            color: #333;
-            background: rgba(255,255,255,0.8);
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        #message.visible {
-            display: block;
-        }
     </style>
 </head>
 
@@ -354,19 +345,29 @@
 
             <!-- TIGERS -->
 
-            <div class="team-card" id="tigers-card" data-team="tigers">
+            <div
+                class="team-card"
+                id="tigers-card"
+                data-team="tigers">
 
                 <div class="team-logo">
-                    <img src="logos/tigers.png" alt="Detroit Tigers">
+                    <img
+                        src="logos/tigers.png"
+                        alt="Detroit Tigers">
                 </div>
 
-                <div class="team-league">MLB</div>
+                <div class="team-league">
+                    MLB
+                </div>
 
                 <div class="team-name">
                     Detroit Tigers
                 </div>
 
-                <div class="game-line" id="tigers-game"></div>
+                <div
+                    class="game-line"
+                    id="tigers-game">
+                </div>
 
                 <div class="status-row">
 
@@ -382,10 +383,12 @@
 
                 </div>
 
-
                 <div class="baseball-extra">
 
-                    <div id="tigers-linescore"></div>
+                    <div
+                        class="linescore-wrap"
+                        id="tigers-linescore">
+                    </div>
 
                     <div
                         class="baseball-situation"
@@ -418,19 +421,29 @@
 
             <!-- GIANTS -->
 
-            <div class="team-card" id="giants-card" data-team="giants">
+            <div
+                class="team-card"
+                id="giants-card"
+                data-team="giants">
 
                 <div class="team-logo">
-                    <img src="logos/sfgiants.png" alt="San Francisco Giants">
+                    <img
+                        src="logos/sfgiants.png"
+                        alt="San Francisco Giants">
                 </div>
 
-                <div class="team-league">MLB</div>
+                <div class="team-league">
+                    MLB
+                </div>
 
                 <div class="team-name">
                     San Francisco Giants
                 </div>
 
-                <div class="game-line" id="giants-game"></div>
+                <div
+                    class="game-line"
+                    id="giants-game">
+                </div>
 
                 <div class="status-row">
 
@@ -451,19 +464,29 @@
 
             <!-- LIONS -->
 
-            <div class="team-card" id="lions-card" data-team="lions">
+            <div
+                class="team-card"
+                id="lions-card"
+                data-team="lions">
 
                 <div class="team-logo">
-                    <img src="logos/lions.png" alt="Detroit Lions">
+                    <img
+                        src="logos/lions.png"
+                        alt="Detroit Lions">
                 </div>
 
-                <div class="team-league">NFL</div>
+                <div class="team-league">
+                    NFL
+                </div>
 
                 <div class="team-name">
                     Detroit Lions
                 </div>
 
-                <div class="game-line" id="lions-game"></div>
+                <div
+                    class="game-line"
+                    id="lions-game">
+                </div>
 
                 <div class="status-row">
 
@@ -478,7 +501,6 @@
                     </span>
 
                 </div>
-
 
                 <div class="football-extra">
 
@@ -521,19 +543,29 @@
 
             <!-- COMMANDERS -->
 
-            <div class="team-card" id="commanders-card" data-team="commanders">
+            <div
+                class="team-card"
+                id="commanders-card"
+                data-team="commanders">
 
                 <div class="team-logo">
-                    <img src="logos/commanders.png" alt="Washington Commanders">
+                    <img
+                        src="logos/commanders.png"
+                        alt="Washington Commanders">
                 </div>
 
-                <div class="team-league">NFL</div>
+                <div class="team-league">
+                    NFL
+                </div>
 
                 <div class="team-name">
                     Washington Commanders
                 </div>
 
-                <div class="game-line" id="commanders-game"></div>
+                <div
+                    class="game-line"
+                    id="commanders-game">
+                </div>
 
                 <div class="status-row">
 
@@ -554,19 +586,29 @@
 
             <!-- MICHIGAN -->
 
-            <div class="team-card" id="michigan-card" data-team="michigan">
+            <div
+                class="team-card"
+                id="michigan-card"
+                data-team="michigan">
 
                 <div class="team-logo">
-                    <img src="logos/michigan.png" alt="Michigan Wolverines">
+                    <img
+                        src="logos/michigan.png"
+                        alt="Michigan Wolverines">
                 </div>
 
-                <div class="team-league">NCAA</div>
+                <div class="team-league">
+                    NCAA
+                </div>
 
                 <div class="team-name">
                     Michigan Wolverines
                 </div>
 
-                <div class="game-line" id="michigan-game"></div>
+                <div
+                    class="game-line"
+                    id="michigan-game">
+                </div>
 
                 <div class="status-row">
 
@@ -587,19 +629,29 @@
 
             <!-- MSU -->
 
-            <div class="team-card" id="msu-card" data-team="msu">
+            <div
+                class="team-card"
+                id="msu-card"
+                data-team="msu">
 
                 <div class="team-logo">
-                    <img src="logos/msu.png" alt="Michigan State Spartans">
+                    <img
+                        src="logos/msu.png"
+                        alt="Michigan State Spartans">
                 </div>
 
-                <div class="team-league">NCAA</div>
+                <div class="team-league">
+                    NCAA
+                </div>
 
                 <div class="team-name">
                     Michigan State Spartans
                 </div>
 
-                <div class="game-line" id="msu-game"></div>
+                <div
+                    class="game-line"
+                    id="msu-game">
+                </div>
 
                 <div class="status-row">
 
@@ -617,8 +669,6 @@
 
             </div>
 
-
-            <div id="message"></div>
 
         </div>
 
@@ -642,42 +692,104 @@
          ************************************************************
          ************************************************************/
 
+        const CONFIG = {
+
+            timeZone:
+                "America/Detroit",
+
+            refresh: {
+                normalMs: 60000,
+                liveMs: 30000
+            }
+
+        };
+
+
+        const ESPN = {
+
+            mlb:
+                "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard",
+
+            nfl:
+                "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
+
+            cfb:
+                "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&limit=1000"
+
+        };
+
+
         const TEAMS = {
+
             tigers: {
                 name: "Detroit Tigers",
                 league: "MLB",
-                sport: "baseball"
+                sport: "baseball",
+                source: "mlb",
+                abbr: "DET"
             },
 
             giants: {
                 name: "San Francisco Giants",
                 league: "MLB",
-                sport: "baseball"
+                sport: "baseball",
+                source: "mlb",
+                abbr: "SF"
             },
 
             lions: {
                 name: "Detroit Lions",
                 league: "NFL",
-                sport: "football"
+                sport: "football",
+                source: "nfl",
+                abbr: "DET"
             },
 
             commanders: {
                 name: "Washington Commanders",
                 league: "NFL",
-                sport: "football"
+                sport: "football",
+                source: "nfl",
+                abbr: "WSH"
             },
 
             michigan: {
                 name: "Michigan Wolverines",
                 league: "NCAA",
-                sport: "football"
+                sport: "football",
+                source: "cfb",
+                abbr: "MICH"
             },
 
             msu: {
                 name: "Michigan State Spartans",
                 league: "NCAA",
-                sport: "football"
+                sport: "football",
+                source: "cfb",
+                abbr: "MSU"
             }
+
+        };
+
+
+        /************************************************************
+         * RUNTIME STATE
+         ************************************************************/
+
+        const STATE = {
+
+            games: {},
+
+            lastGood: {
+                mlb: null,
+                nfl: null,
+                cfb: null
+            },
+
+            timer: null,
+
+            refreshing: false
+
         };
 
 
@@ -690,6 +802,7 @@
                 window.location.search
             );
 
+
         const PREVIEW =
             (
                 PARAMS.get("preview") ||
@@ -697,93 +810,708 @@
             ).toLowerCase();
 
 
+        const DEBUG =
+            PARAMS.get("debug") === "1";
+
+
         /************************************************************
          ************************************************************
          *
-         * BASIC HELPERS
+         * BASIC DOM HELPERS
          *
          ************************************************************
          ************************************************************/
 
-        function get(id) {
+        function get(id)
+        {
             return document.getElementById(id);
         }
 
 
-        function showCard(team) {
-            const card = get(team + "-card");
+        function showCard(team)
+        {
+            const card =
+                get(team + "-card");
 
-            if (card) {
+            if (card)
+            {
                 card.classList.add("visible");
             }
         }
 
 
-        function hideCard(team) {
-            const card = get(team + "-card");
+        function hideCard(team)
+        {
+            const card =
+                get(team + "-card");
 
-            if (card) {
+            if (card)
+            {
                 card.classList.remove("visible");
             }
         }
 
 
-        function hideAllCards() {
+        function hideAllCards()
+        {
             Object.keys(TEAMS).forEach(
-                function(team) {
+                function(team)
+                {
                     hideCard(team);
                 }
             );
         }
 
 
-        function setText(id, text) {
-            const element = get(id);
+        function setText(id, text)
+        {
+            const element =
+                get(id);
 
-            if (element) {
-                element.textContent =
-                    text == null
-                        ? ""
-                        : String(text);
-            }
-        }
-
-
-        function setStatus(team, type, text) {
-            const pill =
-                get(team + "-status-pill");
-
-            if (!pill) {
+            if (!element)
+            {
                 return;
             }
 
-            pill.textContent = text;
+            element.textContent =
+                text == null
+                    ? ""
+                    : String(text);
+        }
+
+
+        function setStatus(
+            team,
+            type,
+            text
+        )
+        {
+            const pill =
+                get(team + "-status-pill");
+
+            if (!pill)
+            {
+                return;
+            }
+
+            pill.textContent =
+                text;
 
             pill.className =
                 "status-pill " + type;
         }
 
 
-        function setBase(id, occupied) {
-            const base = get(id);
+        function setBase(
+            id,
+            occupied
+        )
+        {
+            const base =
+                get(id);
 
-            if (!base) {
+            if (!base)
+            {
                 return;
             }
 
-            if (occupied) {
+            if (occupied)
+            {
                 base.classList.add("on");
             }
-            else {
+            else
+            {
                 base.classList.remove("on");
             }
+        }
+
+
+        function clearLiveClasses(team)
+        {
+            const card =
+                get(team + "-card");
+
+            if (!card)
+            {
+                return;
+            }
+
+            card.classList.remove(
+                "baseball-live",
+                "football-live"
+            );
         }
 
 
         /************************************************************
          ************************************************************
          *
-         * GENERIC STICKY CARD
+         * TIME / DATE
+         *
+         ************************************************************
+         ************************************************************/
+
+        function getZonedDateParts(date)
+        {
+            const parts =
+                new Intl.DateTimeFormat(
+                    "en-US",
+                    {
+                        timeZone:
+                            CONFIG.timeZone,
+
+                        year:
+                            "numeric",
+
+                        month:
+                            "2-digit",
+
+                        day:
+                            "2-digit"
+                    }
+                ).formatToParts(date);
+
+
+            const values = {};
+
+
+            parts.forEach(
+                function(part)
+                {
+                    if (
+                        part.type !==
+                        "literal"
+                    )
+                    {
+                        values[
+                            part.type
+                        ] = part.value;
+                    }
+                }
+            );
+
+
+            return {
+                year:
+                    Number(values.year),
+
+                month:
+                    Number(values.month),
+
+                day:
+                    Number(values.day)
+            };
+        }
+
+
+        function getDayNumber(date)
+        {
+            const parts =
+                getZonedDateParts(date);
+
+
+            return Math.floor(
+                Date.UTC(
+                    parts.year,
+                    parts.month - 1,
+                    parts.day
+                ) /
+                86400000
+            );
+        }
+
+
+        function getDateKey(date)
+        {
+            const parts =
+                getZonedDateParts(date);
+
+
+            return (
+                String(parts.year) +
+
+                String(
+                    parts.month
+                ).padStart(
+                    2,
+                    "0"
+                ) +
+
+                String(
+                    parts.day
+                ).padStart(
+                    2,
+                    "0"
+                )
+            );
+        }
+
+
+        function getFootballWindow()
+        {
+            const today =
+                getDayNumber(
+                    new Date()
+                );
+
+
+            /*
+             * Convert our timezone-local date
+             * into a weekday.
+             *
+             * 0 = Sunday
+             * 1 = Monday
+             * 2 = Tuesday
+             */
+
+            const weekday =
+                new Date(
+                    today *
+                    86400000
+                ).getUTCDay();
+
+
+            /*
+             * Number of days since Tuesday.
+             */
+
+            const sinceTuesday =
+                (
+                    weekday -
+                    2 +
+                    7
+                ) % 7;
+
+
+            return {
+                start:
+                    today -
+                    sinceTuesday,
+
+                end:
+                    today -
+                    sinceTuesday +
+                    6
+            };
+        }
+
+
+        function getEventDayNumber(event)
+        {
+            return getDayNumber(
+                new Date(
+                    event.date
+                )
+            );
+        }
+
+
+        function formatGameTime(dateString)
+        {
+            return new Intl.DateTimeFormat(
+                "en-US",
+                {
+                    timeZone:
+                        CONFIG.timeZone,
+
+                    weekday:
+                        "short",
+
+                    month:
+                        "short",
+
+                    day:
+                        "numeric",
+
+                    hour:
+                        "numeric",
+
+                    minute:
+                        "2-digit"
+                }
+            ).format(
+                new Date(
+                    dateString
+                )
+            );
+        }
+
+
+        /************************************************************
+         ************************************************************
+         *
+         * ESPN EVENT SELECTION
+         *
+         ************************************************************
+         ************************************************************/
+
+        function eventContainsTeam(
+            event,
+            abbreviation
+        )
+        {
+            const competition =
+                event.competitions &&
+                event.competitions[0];
+
+
+            if (
+                !competition ||
+                !competition.competitors
+            )
+            {
+                return false;
+            }
+
+
+            return competition.competitors.some(
+                function(competitor)
+                {
+                    return (
+                        competitor.team &&
+                        competitor.team.abbreviation ===
+                            abbreviation
+                    );
+                }
+            );
+        }
+
+
+        function selectTeamEvent(
+            team,
+            data
+        )
+        {
+            const events =
+                data &&
+                Array.isArray(data.events)
+                    ? data.events
+                    : [];
+
+
+            const matches =
+                events.filter(
+                    function(event)
+                    {
+                        return eventContainsTeam(
+                            event,
+                            team.abbr
+                        );
+                    }
+                );
+
+
+            /*
+             * BASEBALL:
+             *
+             * Current calendar day only.
+             */
+
+            if (
+                team.sport ===
+                "baseball"
+            )
+            {
+                const today =
+                    getDayNumber(
+                        new Date()
+                    );
+
+
+                return (
+                    matches.find(
+                        function(event)
+                        {
+                            return (
+                                getEventDayNumber(
+                                    event
+                                ) === today
+                            );
+                        }
+                    ) ||
+                    null
+                );
+            }
+
+
+            /*
+             * FOOTBALL:
+             *
+             * Tuesday -> Monday board week.
+             */
+
+            const window =
+                getFootballWindow();
+
+
+            const currentWeek =
+                matches.filter(
+                    function(event)
+                    {
+                        const day =
+                            getEventDayNumber(
+                                event
+                            );
+
+
+                        return (
+                            day >=
+                                window.start &&
+
+                            day <=
+                                window.end
+                        );
+                    }
+                );
+
+
+            if (
+                currentWeek.length === 0
+            )
+            {
+                return null;
+            }
+
+
+            /*
+             * Live always wins.
+             */
+
+            const live =
+                currentWeek.find(
+                    function(event)
+                    {
+                        return (
+                            event.status &&
+                            event.status.type &&
+                            event.status.type.state ===
+                                "in"
+                        );
+                    }
+                );
+
+
+            if (live)
+            {
+                return live;
+            }
+
+
+            /*
+             * Otherwise upcoming game.
+             */
+
+            const upcoming =
+                currentWeek
+                    .filter(
+                        function(event)
+                        {
+                            return (
+                                event.status &&
+                                event.status.type &&
+                                event.status.type.state ===
+                                    "pre"
+                            );
+                        }
+                    )
+                    .sort(
+                        function(a, b)
+                        {
+                            return (
+                                new Date(a.date) -
+                                new Date(b.date)
+                            );
+                        }
+                    );
+
+
+            if (
+                upcoming.length > 0
+            )
+            {
+                return upcoming[0];
+            }
+
+
+            /*
+             * Otherwise most recent final.
+             */
+
+            return currentWeek
+                .slice()
+                .sort(
+                    function(a, b)
+                    {
+                        return (
+                            new Date(b.date) -
+                            new Date(a.date)
+                        );
+                    }
+                )[0];
+        }
+
+
+        /************************************************************
+         ************************************************************
+         *
+         * ESPN NORMALIZATION
+         *
+         ************************************************************
+         ************************************************************/
+
+        function normalizeEvent(
+            event,
+            sport
+        )
+        {
+            if (!event)
+            {
+                return null;
+            }
+
+
+            const competition =
+                event.competitions &&
+                event.competitions[0];
+
+
+            if (!competition)
+            {
+                return null;
+            }
+
+
+            const competitors =
+                competition.competitors ||
+                [];
+
+
+            const home =
+                competitors.find(
+                    function(team)
+                    {
+                        return (
+                            team.homeAway ===
+                            "home"
+                        );
+                    }
+                ) ||
+                competitors[0];
+
+
+            const away =
+                competitors.find(
+                    function(team)
+                    {
+                        return (
+                            team.homeAway ===
+                            "away"
+                        );
+                    }
+                ) ||
+                competitors[1];
+
+
+            const status =
+                event.status ||
+                {};
+
+
+            const type =
+                status.type ||
+                {};
+
+
+            return {
+
+                id:
+                    event.id,
+
+                date:
+                    event.date,
+
+                sport:
+                    sport,
+
+                state:
+                    type.state ||
+                    "pre",
+
+                detail:
+                    type.shortDetail ||
+                    type.detail ||
+                    "",
+
+                period:
+                    status.period,
+
+                clock:
+                    status.displayClock ||
+                    "",
+
+                home: {
+                    id:
+                        home &&
+                        (
+                            home.id ||
+                            (
+                                home.team &&
+                                home.team.id
+                            )
+                        ),
+
+                    abbr:
+                        home &&
+                        home.team &&
+                        home.team.abbreviation
+                            ? home.team.abbreviation
+                            : "HOME",
+
+                    score:
+                        home
+                            ? home.score
+                            : null
+                },
+
+                away: {
+                    id:
+                        away &&
+                        (
+                            away.id ||
+                            (
+                                away.team &&
+                                away.team.id
+                            )
+                        ),
+
+                    abbr:
+                        away &&
+                        away.team &&
+                        away.team.abbreviation
+                            ? away.team.abbreviation
+                            : "AWAY",
+
+                    score:
+                        away
+                            ? away.score
+                            : null
+                },
+
+                situation:
+                    competition.situation ||
+                    {},
+
+                competition:
+                    competition
+
+            };
+        }
+
+
+        /************************************************************
+         ************************************************************
+         *
+         * GENERIC CARD RENDERING
          *
          ************************************************************
          ************************************************************/
@@ -793,12 +1521,17 @@
             away,
             home,
             dateText
-        ) {
+        )
+        {
             showCard(team);
+
+            clearLiveClasses(team);
 
             setText(
                 team + "-game",
-                away + " @ " + home
+                away +
+                " @ " +
+                home
             );
 
             setStatus(
@@ -814,30 +1547,99 @@
         }
 
 
+        function renderFinal(
+            team,
+            game
+        )
+        {
+            showCard(team);
+
+            clearLiveClasses(team);
+
+            setText(
+                team + "-game",
+
+                game.away.abbr +
+                " " +
+                (
+                    game.away.score ??
+                    "-"
+                ) +
+
+                " @ " +
+
+                game.home.abbr +
+                " " +
+                (
+                    game.home.score ??
+                    "-"
+                )
+            );
+
+            setStatus(
+                team,
+                "final",
+                "Final"
+            );
+
+            setText(
+                team + "-status-text",
+                game.detail
+            );
+        }
+
+
         /************************************************************
          ************************************************************
          *
-         * BASEBALL PREVIEW
+         * BASEBALL LIVE
          *
          ************************************************************
          ************************************************************/
 
-        function renderBaseballPreview() {
-            const team = "tigers";
-
+        function renderBaseballLive(
+            team,
+            game
+        )
+        {
             showCard(team);
 
             const card =
                 get(team + "-card");
 
-            card.classList.add(
-                "baseball-live"
-            );
+
+            if (card)
+            {
+                card.classList.add(
+                    "baseball-live"
+                );
+
+                card.classList.remove(
+                    "football-live"
+                );
+            }
+
 
             setText(
                 team + "-game",
-                "CLE 2 @ DET 4"
+
+                game.away.abbr +
+                " " +
+                (
+                    game.away.score ??
+                    "-"
+                ) +
+
+                " @ " +
+
+                game.home.abbr +
+                " " +
+                (
+                    game.home.score ??
+                    "-"
+                )
             );
+
 
             setStatus(
                 team,
@@ -845,49 +1647,142 @@
                 "Live"
             );
 
+
+            const situation =
+                game.situation ||
+                {};
+
+
+            const inning =
+                situation.inning != null
+                    ? situation.inning
+                    : game.period;
+
+
+            let half =
+                situation.inningHalf ||
+                "";
+
+
+            if (
+                !half &&
+                typeof situation.isTopInning ===
+                    "boolean"
+            )
+            {
+                half =
+                    situation.isTopInning
+                        ? "Top"
+                        : "Bottom";
+            }
+
+
+            const pieces = [];
+
+
+            if (
+                inning != null
+            )
+            {
+                pieces.push(
+                    (
+                        half +
+                        " " +
+                        inning
+                    ).trim()
+                );
+            }
+
+
+            if (
+                situation.balls != null &&
+                situation.strikes != null
+            )
+            {
+                pieces.push(
+                    "B:" +
+                    situation.balls +
+                    " S:" +
+                    situation.strikes
+                );
+            }
+
+
+            if (
+                situation.outs != null
+            )
+            {
+                pieces.push(
+                    "O:" +
+                    situation.outs
+                );
+            }
+
+
             setText(
                 team + "-status-text",
-                "Bottom 6th"
+                pieces.join(" • ")
             );
 
 
-            const innings = [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9"
+            /*
+             * Only Tigers currently have the expanded
+             * functional live baseball panel.
+             *
+             * Giants still receive full live score /
+             * inning / count data in the standard card.
+             */
+
+            if (
+                team ===
+                "tigers"
+            )
+            {
+                renderBaseballDetail(
+                    team,
+                    game
+                );
+            }
+        }
+
+
+        function renderBaseballDetail(
+            team,
+            game
+        )
+        {
+            const competition =
+                game.competition;
+
+
+            const competitors =
+                competition.competitors ||
+                [];
+
+
+            const rows = [
+                game.away,
+                game.home
             ];
 
 
-            const cle = [
-                0,
-                0,
-                1,
-                0,
-                1,
-                0,
-                "",
-                "",
-                ""
-            ];
+            let maxInnings =
+                9;
 
 
-            const det = [
-                1,
-                0,
-                0,
-                2,
-                0,
-                1,
-                "",
-                "",
-                ""
-            ];
+            competitors.forEach(
+                function(competitor)
+                {
+                    maxInnings =
+                        Math.max(
+                            maxInnings,
+                            (
+                                competitor.linescores ||
+                                []
+                            ).length
+                        );
+                }
+            );
 
 
             let html =
@@ -897,14 +1792,17 @@
                 '<th class="team">TEAM</th>';
 
 
-            innings.forEach(
-                function(inning) {
-                    html +=
-                        "<th>" +
-                        inning +
-                        "</th>";
-                }
-            );
+            for (
+                let inning = 1;
+                inning <= maxInnings;
+                inning++
+            )
+            {
+                html +=
+                    "<th>" +
+                    inning +
+                    "</th>";
+            }
 
 
             html +=
@@ -916,76 +1814,204 @@
                 "<tbody>";
 
 
-            html +=
-                '<tr>' +
-                '<td class="team">CLE</td>';
+            rows.forEach(
+                function(row)
+                {
+                    const competitor =
+                        competitors.find(
+                            function(item)
+                            {
+                                return (
+                                    item.team &&
+                                    item.team.abbreviation ===
+                                        row.abbr
+                                );
+                            }
+                        ) ||
+                        {};
 
 
-            cle.forEach(
-                function(score) {
+                    html +=
+                        '<tr>' +
+                        '<td class="team">' +
+                        row.abbr +
+                        "</td>";
+
+
+                    for (
+                        let inning = 0;
+                        inning < maxInnings;
+                        inning++
+                    )
+                    {
+                        const line =
+                            (
+                                competitor.linescores ||
+                                []
+                            )[inning];
+
+
+                        html +=
+                            "<td>" +
+                            (
+                                line &&
+                                line.value != null
+                                    ? line.value
+                                    : ""
+                            ) +
+                            "</td>";
+                    }
+
+
+                    const stats = {};
+
+
+                    (
+                        competitor.statistics ||
+                        []
+                    ).forEach(
+                        function(stat)
+                        {
+                            const key =
+                                String(
+                                    stat.name ||
+                                    stat.abbreviation ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            stats[key] =
+                                stat.displayValue ??
+                                stat.value;
+                        }
+                    );
+
+
+                    const hits =
+                        stats.hits ??
+                        stats.h ??
+                        "";
+
+
+                    const errors =
+                        stats.errors ??
+                        stats.e ??
+                        "";
+
+
                     html +=
                         "<td>" +
-                        score +
-                        "</td>";
+                        (
+                            row.score ??
+                            ""
+                        ) +
+                        "</td>" +
+
+                        "<td>" +
+                        hits +
+                        "</td>" +
+
+                        "<td>" +
+                        errors +
+                        "</td>" +
+
+                        "</tr>";
                 }
             );
 
 
             html +=
-                "<td>2</td>" +
-                "<td>5</td>" +
-                "<td>0</td>" +
-                "</tr>";
-
-
-            html +=
-                '<tr>' +
-                '<td class="team">DET</td>';
-
-
-            det.forEach(
-                function(score) {
-                    html +=
-                        "<td>" +
-                        score +
-                        "</td>";
-                }
-            );
-
-
-            html +=
-                "<td>4</td>" +
-                "<td>7</td>" +
-                "<td>1</td>" +
-                "</tr>" +
                 "</tbody>" +
                 "</table>";
 
 
-            get(
-                team + "-linescore"
-            ).innerHTML = html;
+            const lineScore =
+                get(
+                    team +
+                    "-linescore"
+                );
+
+
+            if (lineScore)
+            {
+                lineScore.innerHTML =
+                    html;
+            }
+
+
+            const situation =
+                game.situation ||
+                {};
+
+
+            const situationPieces =
+                [];
+
+
+            if (
+                situation.balls != null
+            )
+            {
+                situationPieces.push(
+                    "B:" +
+                    situation.balls
+                );
+            }
+
+
+            if (
+                situation.strikes != null
+            )
+            {
+                situationPieces.push(
+                    "S:" +
+                    situation.strikes
+                );
+            }
+
+
+            if (
+                situation.outs != null
+            )
+            {
+                situationPieces.push(
+                    "O:" +
+                    situation.outs
+                );
+            }
 
 
             setText(
-                team + "-baseball-situation",
-                "B:2  S:1  O:1"
+                team +
+                "-baseball-situation",
+
+                situationPieces.join(
+                    "  "
+                )
             );
 
 
             setBase(
                 team + "-first",
-                true
+                Boolean(
+                    situation.onFirst
+                )
             );
+
 
             setBase(
                 team + "-second",
-                false
+                Boolean(
+                    situation.onSecond
+                )
             );
+
 
             setBase(
                 team + "-third",
-                true
+                Boolean(
+                    situation.onThird
+                )
             );
         }
 
@@ -993,27 +2019,132 @@
         /************************************************************
          ************************************************************
          *
-         * FOOTBALL PREVIEW
+         * FOOTBALL LIVE
          *
          ************************************************************
          ************************************************************/
 
-        function renderFootballPreview() {
-            const team = "lions";
+        function getOrdinalDown(down)
+        {
+            const map = {
+                1: "1st",
+                2: "2nd",
+                3: "3rd",
+                4: "4th"
+            };
 
+
+            return (
+                map[down] ||
+                (
+                    down
+                        ? down + "th"
+                        : ""
+                )
+            );
+        }
+
+
+        function getPossessionAbbreviation(
+            game
+        )
+        {
+            const situation =
+                game.situation ||
+                {};
+
+
+            if (
+                !situation.possession
+            )
+            {
+                return "";
+            }
+
+
+            const competitors =
+                game.competition.competitors ||
+                [];
+
+
+            const possessionTeam =
+                competitors.find(
+                    function(competitor)
+                    {
+                        return (
+                            String(
+                                competitor.id
+                            ) ===
+                            String(
+                                situation.possession
+                            ) ||
+
+                            String(
+                                competitor.team &&
+                                competitor.team.id
+                            ) ===
+                            String(
+                                situation.possession
+                            )
+                        );
+                    }
+                );
+
+
+            return (
+                possessionTeam &&
+                possessionTeam.team &&
+                possessionTeam.team.abbreviation
+            )
+                ? possessionTeam.team.abbreviation
+                : "";
+        }
+
+
+        function renderFootballLive(
+            team,
+            game
+        )
+        {
             showCard(team);
+
 
             const card =
                 get(team + "-card");
 
-            card.classList.add(
-                "football-live"
-            );
+
+            if (card)
+            {
+                card.classList.add(
+                    "football-live"
+                );
+
+                card.classList.remove(
+                    "baseball-live"
+                );
+            }
+
 
             setText(
                 team + "-game",
-                "GB 14 @ DET 17"
+
+                game.away.abbr +
+                " " +
+                (
+                    game.away.score ??
+                    "-"
+                ) +
+
+                " @ " +
+
+                game.home.abbr +
+                " " +
+                (
+                    game.home.score ??
+                    "-"
+                )
             );
+
 
             setStatus(
                 team,
@@ -1021,29 +2152,267 @@
                 "Live"
             );
 
+
+            const situation =
+                game.situation ||
+                {};
+
+
+            const pieces = [];
+
+
+            if (
+                game.period
+            )
+            {
+                pieces.push(
+                    "Q" +
+                    game.period
+                );
+            }
+
+
+            if (
+                game.clock
+            )
+            {
+                pieces.push(
+                    game.clock
+                );
+            }
+
+
+            const ordinal =
+                getOrdinalDown(
+                    situation.down
+                );
+
+
+            if (
+                ordinal &&
+                situation.distance != null
+            )
+            {
+                pieces.push(
+                    ordinal +
+                    " & " +
+                    situation.distance
+                );
+            }
+
+
+            const possession =
+                getPossessionAbbreviation(
+                    game
+                );
+
+
+            if (possession)
+            {
+                pieces.push(
+                    possession +
+                    " ball"
+                );
+            }
+
+
+            const territory =
+                situation.yardLineTerritory ||
+                situation.territory ||
+                "";
+
+
+            if (
+                territory &&
+                situation.yardLine != null
+            )
+            {
+                pieces.push(
+                    "@ " +
+                    territory +
+                    " " +
+                    situation.yardLine
+                );
+            }
+
+
             setText(
                 team + "-status-text",
-                "3rd Quarter"
+                pieces.join(" • ")
             );
 
-            setText(
-                team + "-quarter",
-                "Q3"
-            );
 
-            setText(
-                team + "-clock",
-                "8:42"
-            );
+            /*
+             * Expanded functional football panel
+             * currently exists on Lions card.
+             */
 
-            setText(
-                team + "-down",
-                "2nd & 6"
-            );
+            if (
+                team ===
+                "lions"
+            )
+            {
+                setText(
+                    "lions-quarter",
 
-            setText(
-                team + "-possession",
-                "DET 38"
+                    game.period
+                        ? "Q" +
+                          game.period
+                        : ""
+                );
+
+
+                setText(
+                    "lions-clock",
+                    game.clock
+                );
+
+
+                setText(
+                    "lions-down",
+
+                    (
+                        ordinal &&
+                        situation.distance != null
+                    )
+                        ? ordinal +
+                          " & " +
+                          situation.distance
+
+                        : ""
+                );
+
+
+                let fieldPosition =
+                    "";
+
+
+                if (
+                    territory &&
+                    situation.yardLine != null
+                )
+                {
+                    fieldPosition =
+                        territory +
+                        " " +
+                        situation.yardLine;
+                }
+
+
+                setText(
+                    "lions-possession",
+
+                    [
+                        possession,
+                        fieldPosition
+                    ]
+                    .filter(Boolean)
+                    .join(" • ")
+                );
+            }
+        }
+
+
+        /************************************************************
+         ************************************************************
+         *
+         * PRODUCTION TEAM RENDERER
+         *
+         ************************************************************
+         ************************************************************/
+
+        function renderProductionTeam(
+            teamKey,
+            team,
+            event
+        )
+        {
+            /*
+             * Successful feed but no relevant game:
+             * hide this team's card.
+             */
+
+            if (!event)
+            {
+                delete STATE.games[
+                    teamKey
+                ];
+
+                hideCard(
+                    teamKey
+                );
+
+                return;
+            }
+
+
+            const game =
+                normalizeEvent(
+                    event,
+                    team.sport
+                );
+
+
+            if (!game)
+            {
+                return;
+            }
+
+
+            STATE.games[
+                teamKey
+            ] = game;
+
+
+            if (
+                game.state ===
+                "pre"
+            )
+            {
+                renderScheduled(
+                    teamKey,
+                    game.away.abbr,
+                    game.home.abbr,
+                    formatGameTime(
+                        game.date
+                    )
+                );
+
+                return;
+            }
+
+
+            if (
+                game.state ===
+                "post"
+            )
+            {
+                renderFinal(
+                    teamKey,
+                    game
+                );
+
+                return;
+            }
+
+
+            if (
+                team.sport ===
+                "baseball"
+            )
+            {
+                renderBaseballLive(
+                    teamKey,
+                    game
+                );
+
+                return;
+            }
+
+
+            renderFootballLive(
+                teamKey,
+                game
             );
         }
 
@@ -1051,18 +2420,513 @@
         /************************************************************
          ************************************************************
          *
-         * STICKY PREVIEW
+         * FETCH ENGINE
          *
          ************************************************************
          ************************************************************/
 
-        function renderStickyPreview() {
+        async function fetchJSON(url)
+        {
+            const separator =
+                url.includes("?")
+                    ? "&"
+                    : "?";
+
+
+            const response =
+                await fetch(
+                    url +
+                    separator +
+                    "_=" +
+                    Date.now(),
+
+                    {
+                        cache:
+                            "no-store"
+                    }
+                );
+
+
+            if (!response.ok)
+            {
+                throw new Error(
+                    "HTTP " +
+                    response.status +
+                    " for " +
+                    url
+                );
+            }
+
+
+            return response.json();
+        }
+
+
+        async function refreshProduction()
+        {
+            if (
+                STATE.refreshing ||
+                PREVIEW
+            )
+            {
+                return;
+            }
+
+
+            STATE.refreshing =
+                true;
+
+
+            try
+            {
+                const results =
+                    await Promise.allSettled(
+                        [
+                            fetchJSON(
+                                ESPN.mlb
+                            ),
+
+                            fetchJSON(
+                                ESPN.nfl
+                            ),
+
+                            fetchJSON(
+                                ESPN.cfb
+                            )
+                        ]
+                    );
+
+
+                const sources =
+                    [
+                        "mlb",
+                        "nfl",
+                        "cfb"
+                    ];
+
+
+                results.forEach(
+                    function(
+                        result,
+                        index
+                    )
+                    {
+                        const source =
+                            sources[index];
+
+
+                        /*
+                         * IMPORTANT:
+                         *
+                         * Failed source does NOT alter
+                         * the current screen.
+                         *
+                         * This preserves last-known-good
+                         * visual data.
+                         */
+
+                        if (
+                            result.status !==
+                            "fulfilled"
+                        )
+                        {
+                            console.error(
+                                source +
+                                " fetch failed:",
+
+                                result.reason
+                            );
+
+                            return;
+                        }
+
+
+                        STATE.lastGood[
+                            source
+                        ] =
+                            result.value;
+
+
+                        Object.keys(
+                            TEAMS
+                        ).forEach(
+                            function(teamKey)
+                            {
+                                const team =
+                                    TEAMS[
+                                        teamKey
+                                    ];
+
+
+                                if (
+                                    team.source !==
+                                    source
+                                )
+                                {
+                                    return;
+                                }
+
+
+                                const event =
+                                    selectTeamEvent(
+                                        team,
+                                        result.value
+                                    );
+
+
+                                renderProductionTeam(
+                                    teamKey,
+                                    team,
+                                    event
+                                );
+                            }
+                        );
+                    }
+                );
+
+
+                if (DEBUG)
+                {
+                    console.log(
+                        "Sports Board Debug",
+                        {
+                            timeZone:
+                                CONFIG.timeZone,
+
+                            currentDate:
+                                getDateKey(
+                                    new Date()
+                                ),
+
+                            footballWindow:
+                                getFootballWindow(),
+
+                            games:
+                                STATE.games,
+
+                            sources:
+                                {
+                                    mlb:
+                                        Boolean(
+                                            STATE.lastGood.mlb
+                                        ),
+
+                                    nfl:
+                                        Boolean(
+                                            STATE.lastGood.nfl
+                                        ),
+
+                                    cfb:
+                                        Boolean(
+                                            STATE.lastGood.cfb
+                                        )
+                                }
+                        }
+                    );
+                }
+            }
+            catch (error)
+            {
+                /*
+                 * This should only catch unexpected
+                 * renderer-level failures because
+                 * individual network failures are
+                 * handled by allSettled().
+                 */
+
+                console.error(
+                    "Unexpected refresh error:",
+                    error
+                );
+            }
+            finally
+            {
+                STATE.refreshing =
+                    false;
+
+                scheduleNextRefresh();
+            }
+        }
+
+
+        function scheduleNextRefresh()
+        {
+            if (
+                STATE.timer
+            )
+            {
+                clearTimeout(
+                    STATE.timer
+                );
+            }
+
+
+            const anyLive =
+                Object.values(
+                    STATE.games
+                ).some(
+                    function(game)
+                    {
+                        return (
+                            game &&
+                            game.state ===
+                                "in"
+                        );
+                    }
+                );
+
+
+            const delay =
+                anyLive
+                    ? CONFIG.refresh.liveMs
+                    : CONFIG.refresh.normalMs;
+
+
+            STATE.timer =
+                setTimeout(
+                    refreshProduction,
+                    delay
+                );
+        }
+
+
+        /************************************************************
+         ************************************************************
+         *
+         * PREVIEW MODE
+         *
+         ************************************************************
+         ************************************************************/
+
+        function renderBaseballPreview()
+        {
+            const team =
+                "tigers";
+
+
+            showCard(team);
+
+
+            const card =
+                get(
+                    team +
+                    "-card"
+                );
+
+
+            card.classList.add(
+                "baseball-live"
+            );
+
+
+            setText(
+                team + "-game",
+                "CLE 2 @ DET 4"
+            );
+
+
+            setStatus(
+                team,
+                "live",
+                "Live"
+            );
+
+
+            setText(
+                team + "-status-text",
+                "Bottom 6 • B:2 S:1 • O:1"
+            );
+
+
+            const fakeGame = {
+
+                away: {
+                    abbr: "CLE",
+                    score: 2
+                },
+
+                home: {
+                    abbr: "DET",
+                    score: 4
+                },
+
+                situation: {
+                    balls: 2,
+                    strikes: 1,
+                    outs: 1,
+                    inning: 6,
+                    isTopInning: false,
+                    onFirst: true,
+                    onSecond: false,
+                    onThird: true
+                },
+
+                competition: {
+
+                    competitors: [
+
+                        {
+                            team: {
+                                abbreviation:
+                                    "CLE"
+                            },
+
+                            score:
+                                "2",
+
+                            linescores: [
+                                { value: 0 },
+                                { value: 0 },
+                                { value: 1 },
+                                { value: 0 },
+                                { value: 1 },
+                                { value: 0 }
+                            ],
+
+                            statistics: [
+                                {
+                                    name:
+                                        "hits",
+
+                                    displayValue:
+                                        "5"
+                                },
+
+                                {
+                                    name:
+                                        "errors",
+
+                                    displayValue:
+                                        "0"
+                                }
+                            ]
+                        },
+
+                        {
+                            team: {
+                                abbreviation:
+                                    "DET"
+                            },
+
+                            score:
+                                "4",
+
+                            linescores: [
+                                { value: 1 },
+                                { value: 0 },
+                                { value: 0 },
+                                { value: 2 },
+                                { value: 0 },
+                                { value: 1 }
+                            ],
+
+                            statistics: [
+                                {
+                                    name:
+                                        "hits",
+
+                                    displayValue:
+                                        "7"
+                                },
+
+                                {
+                                    name:
+                                        "errors",
+
+                                    displayValue:
+                                        "1"
+                                }
+                            ]
+                        }
+
+                    ]
+
+                }
+
+            };
+
+
+            renderBaseballDetail(
+                team,
+                fakeGame
+            );
+        }
+
+
+        function renderFootballPreview()
+        {
+            const team =
+                "lions";
+
+
+            showCard(team);
+
+
+            const card =
+                get(
+                    team +
+                    "-card"
+                );
+
+
+            card.classList.add(
+                "football-live"
+            );
+
+
+            setText(
+                team + "-game",
+                "GB 14 @ DET 17"
+            );
+
+
+            setStatus(
+                team,
+                "live",
+                "Live"
+            );
+
+
+            setText(
+                team + "-status-text",
+                "Q3 • 8:42 • 2nd & 6 • DET ball • @ DET 38"
+            );
+
+
+            setText(
+                "lions-quarter",
+                "Q3"
+            );
+
+
+            setText(
+                "lions-clock",
+                "8:42"
+            );
+
+
+            setText(
+                "lions-down",
+                "2nd & 6"
+            );
+
+
+            setText(
+                "lions-possession",
+                "DET • DET 38"
+            );
+        }
+
+
+        function renderStickyPreview()
+        {
             renderScheduled(
                 "tigers",
                 "CLE",
                 "DET",
                 "Tonight • 7:10 PM"
             );
+
 
             renderScheduled(
                 "giants",
@@ -1071,12 +2935,14 @@
                 "Tonight • 10:10 PM"
             );
 
+
             renderScheduled(
                 "lions",
                 "DET",
                 "CHI",
                 "Sunday • 1:00 PM"
             );
+
 
             renderScheduled(
                 "commanders",
@@ -1085,12 +2951,14 @@
                 "Sunday • 4:25 PM"
             );
 
+
             renderScheduled(
                 "michigan",
                 "MICH",
                 "WIS",
                 "Saturday • 12:00 PM"
             );
+
 
             renderScheduled(
                 "msu",
@@ -1109,55 +2977,62 @@
          ************************************************************
          ************************************************************/
 
-        function start() {
+        function start()
+        {
             hideAllCards();
 
-            if (PREVIEW) {
+
+            /*
+             * Preview modes are intentionally
+             * completely isolated from ESPN.
+             */
+
+            if (PREVIEW)
+            {
                 document.body.classList.add(
                     "preview"
                 );
-            }
 
 
-            if (PREVIEW === "baseball") {
-                renderBaseballPreview();
-                return;
-            }
+                if (
+                    PREVIEW ===
+                    "baseball"
+                )
+                {
+                    renderBaseballPreview();
+
+                    return;
+                }
 
 
-            if (PREVIEW === "football") {
-                renderFootballPreview();
-                return;
-            }
+                if (
+                    PREVIEW ===
+                    "football"
+                )
+                {
+                    renderFootballPreview();
+
+                    return;
+                }
 
 
-            if (PREVIEW === "sticky") {
-                renderStickyPreview();
-                return;
+                if (
+                    PREVIEW ===
+                    "sticky"
+                )
+                {
+                    renderStickyPreview();
+
+                    return;
+                }
             }
 
 
             /*
-             * IMPORTANT:
-             *
-             * Production intentionally does nothing in this
-             * validation build.
-             *
-             * There is NO ESPN request yet.
-             *
-             * A blank normal URL is therefore EXPECTED during
-             * this specific test.
+             * Production
              */
 
-            const message =
-                get("message");
-
-            message.textContent =
-                "Preview validation build";
-
-            message.classList.add(
-                "visible"
-            );
+            refreshProduction();
         }
 
 
