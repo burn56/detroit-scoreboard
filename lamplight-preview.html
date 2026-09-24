@@ -3,126 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Lamplight Park Live Preview</title>
+<title>Lamplight Park Calibrated Preview</title>
 <style>
 *{box-sizing:border-box}
 html,body{width:100%;height:100%;margin:0;overflow:hidden;background:transparent}
 body{font-family:"Arial Narrow","Roboto Condensed","Helvetica Neue Condensed",Impact,sans-serif}
-.lp-stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#07101a}
-.lp-wrap{position:relative;width:min(100vw,177.777vh);aspect-ratio:16/9;overflow:hidden}
-.lp-shell{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#07101a}
+.shell{position:relative;width:min(100vw,177.683vh);aspect-ratio:1672/941}
+.shell>img{position:absolute;inset:0;width:100%;height:100%;display:block}
 
-/* All positions below are percentages of the approved 16:9 shell. */
-.lp-team{
- position:absolute;left:10.1%;width:19.6%;height:7.9%;
- display:flex;align-items:center;gap:.65vw;color:#eee4c9;
+/* Calibrated against the actual 1672 x 941 approved shell. */
+.team{
+ position:absolute;left:9.65%;width:19.7%;height:8.1%;
+ display:flex;align-items:center;gap:.65%;color:#eee4c9;
  font-family:Georgia,"Times New Roman",serif;font-weight:900;
- font-size:clamp(14px,2vw,35px);letter-spacing:.04em;text-shadow:0 2px 3px #000
+ font-size:clamp(13px,2.0vw,34px);letter-spacing:.04em;text-shadow:0 2px 3px #000
 }
-.lp-team.away{top:47.1%}.lp-team.home{top:56.0%}
-.lp-logo{width:clamp(28px,4.2vw,66px);height:80%;object-fit:contain;filter:drop-shadow(0 2px 2px #000)}
-.lp-abbr{white-space:nowrap}
+.team.away{top:45.65%}.team.home{top:54.45%}
+.logo{width:23%;height:80%;object-fit:contain;filter:drop-shadow(0 2px 2px #000)}
+.abbr{white-space:nowrap}
 
-.lp-cell{
- position:absolute;display:grid;place-items:center;color:#e9dfc2;
- font-weight:900;font-size:clamp(16px,2.25vw,39px);line-height:1;
- text-shadow:0 2px 3px #000;
+.cell{
+ position:absolute;display:grid;place-items:center;color:#eee3c6;
+ font-family:"Arial Narrow",Impact,sans-serif;font-weight:900;
+ font-size:clamp(15px,2.15vw,37px);line-height:1;text-shadow:0 2px 3px #000
 }
-.lp-cell.empty{color:#827d6d}
+.cell.empty{color:#716d60}
+.row-away{top:45.82%}.row-home{top:54.63%}
+.score{width:3.45%;height:7.55%}
+.c1{left:30.45%}.c2{left:34.86%}.c3{left:39.27%}.c4{left:43.68%}.c5{left:48.09%}
+.c6{left:52.50%}.c7{left:56.91%}.c8{left:61.32%}.c9{left:65.73%}
+.cR{left:72.07%}.cH{left:77.73%}.cE{left:83.40%}
 
-/* score cells: columns 1-9, R/H/E */
-.lp-row-away{top:47.4%}.lp-row-home{top:56.3%}
-.lp-score-cell{width:3.55%;height:7.15%}
-.c1{left:31.25%}.c2{left:35.65%}.c3{left:40.0%}.c4{left:44.35%}.c5{left:48.75%}
-.c6{left:53.1%}.c7{left:57.45%}.c8{left:61.85%}.c9{left:66.2%}
-.cR{left:72.9%}.cH{left:78.55%}.cE{left:84.2%}
-
-.lp-bottom-value{
- position:absolute;display:grid;place-items:center;color:#e9dfc2;font-weight:900;
- font-size:clamp(16px,2.35vw,40px);line-height:1;text-shadow:0 2px 3px #000
+.value{
+ position:absolute;display:grid;place-items:center;color:#eee3c6;
+ font-weight:900;font-size:clamp(15px,2.2vw,38px);line-height:1;text-shadow:0 2px 3px #000
 }
-.lp-atbat{left:10.9%;top:75.7%;width:7.45%;height:7.5%}
-.lp-pitcher{left:55.2%;top:75.7%;width:7.45%;height:7.5%}
-.lp-inning{left:68.55%;top:75.7%;width:4.05%;height:7.5%}
+.atbat{left:10.82%;top:72.25%;width:7.22%;height:7.8%}
+.pitcher{left:54.72%;top:72.25%;width:7.3%;height:7.8%}
+.inning{left:68.15%;top:72.25%;width:3.72%;height:7.8%}
 
-.lp-bulb{
- position:absolute;width:2.35%;aspect-ratio:1;border-radius:50%;
- background:transparent;opacity:0;box-shadow:0 0 1.1vw .25vw currentColor;
+.bulb{
+ position:absolute;width:2.25%;aspect-ratio:1;border-radius:50%;
+ opacity:0;box-shadow:0 0 1vw .22vw currentColor
 }
-.lp-bulb.on{opacity:.92}
-.lp-ball{color:#f4bd48;background:#e8a92d}
-.lp-strike{color:#f4bd48;background:#e8a92d}
-.lp-out{color:#e45036;background:#c93827}
-.b1{left:22.1%}.b2{left:25.0%}.b3{left:27.9%}
-.s1{left:33.5%}.s2{left:36.4%}
-.o1{left:43.35%}.o2{left:46.25%}.o3{left:49.15%}
-.lp-bulb{top:77.45%}
+.bulb.on{opacity:.88}
+.ball,.strike{color:#f6bf49;background:#e4a52c}
+.out{color:#ed5138;background:#c93a27}
+.bulb{top:73.88%}
+.b1{left:21.83%}.b2{left:24.66%}.b3{left:27.50%}
+.s1{left:33.00%}.s2{left:35.84%}
+.o1{left:42.76%}.o2{left:45.59%}.o3{left:48.42%}
 
-.lp-base{
- position:absolute;width:2.65%;aspect-ratio:1;transform:rotate(45deg);
- background:transparent;opacity:0;box-shadow:0 0 1vw .18vw #f2b643
+.base{
+ position:absolute;width:2.48%;aspect-ratio:1;transform:rotate(45deg);
+ opacity:0;box-shadow:0 0 .9vw .16vw #f0b13b
 }
-.lp-base.on{background:rgba(240,177,57,.88);opacity:.95}
-.base2{left:83.15%;top:70.45%}.base1{left:85.8%;top:75.25%}.base3{left:80.5%;top:75.25%}
-
-.lp-half{
- position:absolute;left:72.7%;top:76.6%;width:2.4%;height:5%;
- display:grid;place-items:center;color:#dba550;font-size:clamp(13px,1.7vw,29px);
+.base.on{background:rgba(240,177,57,.88);opacity:.9}
+.base2{left:82.17%;top:67.68%}.base1{left:84.88%;top:72.40%}.base3{left:79.48%;top:72.40%}
+.half{
+ position:absolute;left:72.08%;top:73.22%;width:2.35%;height:4.8%;
+ display:grid;place-items:center;color:#dca451;font-size:clamp(12px,1.55vw,27px);
  text-shadow:0 0 7px #c7802c
-}
-.lp-credit{
- position:absolute;right:.5%;bottom:.4%;font:10px system-ui,sans-serif;color:rgba(255,255,255,.38)
 }
 </style>
 </head>
 <body>
-<div class="lp-stage">
- <div class="lp-wrap">
-  <img class="lp-shell" src="lamplight-park.png" alt="Lamplight Park scoreboard">
-
-  <div class="lp-team away"><span class="lp-abbr">CLE</span></div>
-  <div class="lp-team home"><img class="lp-logo" src="logos/tigers.png" alt=""><span class="lp-abbr">DET</span></div>
-
+<div class="stage">
+ <div class="shell">
+  <img src="lamplight-park.png" alt="Lamplight Park">
+  <div class="team away"><img class="logo" id="away-logo" alt=""><span class="abbr" id="away-abbr"></span></div>
+  <div class="team home"><img class="logo" id="home-logo" alt=""><span class="abbr" id="home-abbr"></span></div>
   <div id="scores"></div>
-
-  <div class="lp-bottom-value lp-atbat">24</div>
-  <div class="lp-bottom-value lp-pitcher">29</div>
-  <div class="lp-bottom-value lp-inning">6</div>
-  <div class="lp-half">▼</div>
-
-  <i class="lp-bulb lp-ball on b1"></i><i class="lp-bulb lp-ball on b2"></i><i class="lp-bulb lp-ball b3"></i>
-  <i class="lp-bulb lp-strike on s1"></i><i class="lp-bulb lp-strike s2"></i>
-  <i class="lp-bulb lp-out on o1"></i><i class="lp-bulb lp-out o2"></i><i class="lp-bulb lp-out o3"></i>
-
-  <i class="lp-base base2"></i><i class="lp-base base1 on"></i><i class="lp-base base3 on"></i>
+  <div class="value atbat" id="atbat"></div>
+  <div class="value pitcher" id="pitcher"></div>
+  <div class="value inning" id="inning"></div>
+  <div class="half" id="half"></div>
+  <i class="bulb ball b1"></i><i class="bulb ball b2"></i><i class="bulb ball b3"></i>
+  <i class="bulb strike s1"></i><i class="bulb strike s2"></i>
+  <i class="bulb out o1"></i><i class="bulb out o2"></i><i class="bulb out o3"></i>
+  <i class="base base2"></i><i class="base base1"></i><i class="base base3"></i>
  </div>
 </div>
 <script>
 "use strict";
 
+/*
+ * This preview deliberately uses ESPN-hosted team artwork rather than
+ * local sticky-note assets. Production will take these URLs directly
+ * from competition.competitors[].team.logo / team.logos[].
+ */
 const PREVIEW = {
- away: { abbr:"CLE", innings:[0,0,1,0,1,0,null,null,null], r:2, h:5, e:0 },
- home: { abbr:"DET", innings:[1,0,0,2,0,1,null,null,null], r:4, h:7, e:1 }
+ away:{
+  abbr:"CLE",
+  logo:"https://a.espncdn.com/i/teamlogos/mlb/500/cle.png",
+  innings:[0,0,1,0,1,0,null,null,null],r:2,h:5,e:0
+ },
+ home:{
+  abbr:"DET",
+  logo:"https://a.espncdn.com/i/teamlogos/mlb/500/det.png",
+  innings:[1,0,0,2,0,1,null,null,null],r:4,h:7,e:1
+ },
+ balls:2,strikes:1,outs:1,inning:6,half:"bottom",
+ atBat:"24",pitcher:"29",bases:{first:true,second:false,third:true}
 };
 
-function addCell(rowClass, colClass, value)
-{
- const cell=document.createElement("div");
- cell.className="lp-cell lp-score-cell "+rowClass+" "+colClass+(value==null?" empty":"");
- cell.textContent=value==null?"–":value;
- document.getElementById("scores").appendChild(cell);
+function setTeam(side,data){
+ document.getElementById(side+"-abbr").textContent=data.abbr;
+ const img=document.getElementById(side+"-logo");
+ img.src=data.logo; img.alt=data.abbr;
 }
-
-function renderRow(rowClass,team)
-{
- team.innings.forEach((v,i)=>addCell(rowClass,"c"+(i+1),v));
- addCell(rowClass,"cR",team.r);
- addCell(rowClass,"cH",team.h);
- addCell(rowClass,"cE",team.e);
+function addCell(row,col,value){
+ const el=document.createElement("div");
+ el.className="cell score "+row+" "+col+(value==null?" empty":"");
+ el.textContent=value==null?"–":value;
+ document.getElementById("scores").appendChild(el);
 }
-
-renderRow("lp-row-away",PREVIEW.away);
-renderRow("lp-row-home",PREVIEW.home);
+function row(cls,t){
+ t.innings.forEach((v,i)=>addCell(cls,"c"+(i+1),v));
+ addCell(cls,"cR",t.r); addCell(cls,"cH",t.h); addCell(cls,"cE",t.e);
+}
+function light(selector,count){
+ document.querySelectorAll(selector).forEach((x,i)=>x.classList.toggle("on",i<count));
+}
+setTeam("away",PREVIEW.away); setTeam("home",PREVIEW.home);
+row("row-away",PREVIEW.away); row("row-home",PREVIEW.home);
+document.getElementById("atbat").textContent=PREVIEW.atBat;
+document.getElementById("pitcher").textContent=PREVIEW.pitcher;
+document.getElementById("inning").textContent=PREVIEW.inning;
+document.getElementById("half").textContent=PREVIEW.half==="top"?"▲":"▼";
+light(".ball",PREVIEW.balls); light(".strike",PREVIEW.strikes); light(".out",PREVIEW.outs);
+document.querySelector(".base1").classList.toggle("on",PREVIEW.bases.first);
+document.querySelector(".base2").classList.toggle("on",PREVIEW.bases.second);
+document.querySelector(".base3").classList.toggle("on",PREVIEW.bases.third);
 </script>
 </body>
 </html>
