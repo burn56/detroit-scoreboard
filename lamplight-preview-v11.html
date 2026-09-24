@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lamplight Park Calibrated Preview</title>
+<style>
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:transparent}
+body{font-family:"Arial Narrow","Roboto Condensed","Helvetica Neue Condensed",Impact,sans-serif}
+.stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#07101a}
+.shell{position:relative;width:min(100vw,177.683vh);aspect-ratio:1672/941}
+.shell>img{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+/* Calibrated against the actual 1672 x 941 approved shell. */
+.team{
+ position:absolute;left:13.839%;width:18.8%;height:8.1%;
+ display:flex;align-items:center;gap:1.8%;color:#eee4c9;
+ font-family:Georgia,"Times New Roman",serif;font-weight:900;
+ font-size:clamp(13px,2.0vw,34px);letter-spacing:.04em;text-shadow:0 2px 3px #000
+}
+.team.away{top:46.607%}.team.home{top:55.407%}
+.logo{width:19%;height:68%;object-fit:contain;filter:drop-shadow(0 2px 2px #000)}
+.abbr{white-space:nowrap}
+
+.cell{
+ position:absolute;display:grid;place-items:center;color:#eee3c6;
+ font-family:"Arial Narrow",Impact,sans-serif;font-weight:900;
+ font-size:clamp(15px,2.15vw,37px);line-height:1;text-shadow:0 2px 3px #000
+}
+.cell.empty{color:#716d60}
+.row-away{top:46.884%}.row-home{top:55.694%}
+.score{width:3.45%;height:7.55%}
+.rhe-away{top:46.884%!important}.rhe-home{top:55.694%!important}
+.c1{left:31.227%}.c2{left:35.637%}.c3{left:40.047%}.c4{left:44.457%}.c5{left:48.867%}
+.c6{left:53.277%}.c7{left:57.687%}.c8{left:62.097%}.c9{left:66.507%}
+.cR{left:73.924%}.cH{left:79.704%}.cE{left:85.494%}
+
+.value{
+ position:absolute;display:grid;place-items:center;color:#eee3c6;
+ font-weight:900;font-size:clamp(15px,2.2vw,38px);line-height:1;text-shadow:0 2px 3px #000
+}
+.atbat{left:11.569%;top:73.295%;width:6.65%;height:7.35%;display:block}
+.atbat span{position:absolute;top:50%;transform:translateY(-50%)}
+#atbat-left{left:calc(50% - 12px)}
+#atbat-right{left:calc(50% + 4px)}
+.pitcher{left:55.469%;top:73.295%;width:6.65%;height:7.35%;display:block}
+.pitcher span{position:absolute;top:50%;transform:translateY(-50%)}
+#pitcher-left{left:calc(50% - 10px)}
+#pitcher-right{left:calc(50% + 8px)}
+.inning{left:68.919%;top:73.295%;width:3.45%;height:7.35%}
+
+.bulb{
+ position:absolute;width:1.72%;aspect-ratio:1;border-radius:50%;
+ opacity:0;box-shadow:0 0 1vw .22vw currentColor
+}
+.bulb.on{opacity:.88}
+.ball,.strike{color:#f6bf49;background:#e4a52c}
+.out{color:#ed5138;background:#c93a27}
+.ball{top:74.952%}.strike{top:74.952%}.out{top:74.952%}
+.b1{left:22.520%}.b2{left:25.498%}.b3{left:27.638%}
+.s1{left:33.620%}.s2{left:35.940%}
+.o1{left:43.082%}.o2{left:45.402%}.o3{left:47.722%}
+
+.base{
+ position:absolute;width:1.92%;aspect-ratio:1;transform:rotate(45deg);
+ opacity:0;box-shadow:0 0 .9vw .16vw #f0b13b
+}
+.base.on{background:rgba(240,177,57,.88);opacity:.9}
+.base2{left:83.409%;top:69.632%}.base1{left:85.719%;top:74.025%}.base3{left:81.099%;top:74.025%}
+.half{
+ position:absolute;left:72.42%;top:73.54%;width:2.55%;height:5.35%;
+ display:grid;place-items:center;
+ background:#101714;
+ border:1px solid rgba(178,142,80,.55);
+ box-shadow:inset 0 0 5px #000,0 1px 2px #000;
+ font-size:0
+}
+.half::after{
+ content:"";display:block;width:0;height:0;
+ border-left:clamp(5px,.48vw,8px) solid transparent;
+ border-right:clamp(5px,.48vw,8px) solid transparent;
+ border-top:clamp(8px,.72vw,12px) solid #d6a04a;
+ filter:drop-shadow(0 0 3px rgba(214,160,74,.65))
+}
+.half.top::after{
+ border-top:0;
+ border-bottom:clamp(8px,.72vw,12px) solid #d6a04a;
+}
+
+/* v8 individual lamp micro-calibration */
+.b1,.b2{transform:translateY(1px)}
+.o1{transform:translateY(1px)}
+.s1{transform:translateY(1px)}
+
+
+/* v11 remaining state calibration */
+.b3,.s2,.o2{transform:translate(3px,1px)}
+
+</style>
+</head>
+<body>
+<div class="stage">
+ <div class="shell">
+  <img src="lamplight-park.png" alt="Lamplight Park">
+  <div class="team away"><img class="logo" id="away-logo" alt=""><span class="abbr" id="away-abbr"></span></div>
+  <div class="team home"><img class="logo" id="home-logo" alt=""><span class="abbr" id="home-abbr"></span></div>
+  <div id="scores"></div>
+  <div class="value atbat" id="atbat"><span id="atbat-left"></span><span id="atbat-right"></span></div>
+  <div class="value pitcher" id="pitcher"><span id="pitcher-left"></span><span id="pitcher-right"></span></div>
+  <div class="value inning" id="inning"></div>
+  <div class="half" id="half"></div>
+  <i class="bulb ball b1"></i><i class="bulb ball b2"></i><i class="bulb ball b3"></i>
+  <i class="bulb strike s1"></i><i class="bulb strike s2"></i>
+  <i class="bulb out o1"></i><i class="bulb out o2"></i><i class="bulb out o3"></i>
+  <i class="base base2"></i><i class="base base1"></i><i class="base base3"></i>
+ </div>
+</div>
+<script>
+"use strict";
+
+/*
+ * This preview deliberately uses ESPN-hosted team artwork rather than
+ * local sticky-note assets. Production will take these URLs directly
+ * from competition.competitors[].team.logo / team.logos[].
+ */
+const PREVIEW = {
+ away:{
+  abbr:"CLE",
+  logo:"https://a.espncdn.com/i/teamlogos/mlb/500/cle.png",
+  innings:[0,0,1,0,1,0,2,1,null],r:5,h:9,e:0
+ },
+ home:{
+  abbr:"DET",
+  logo:"https://a.espncdn.com/i/teamlogos/mlb/500/det.png",
+  innings:[1,0,0,2,0,1,0,null,null],r:4,h:8,e:1
+ },
+ balls:3,strikes:2,outs:2,inning:8,half:"top",
+ atBat:"24",pitcher:"29",bases:{first:false,second:true,third:false}
+};
+
+function setTeam(side,data){
+ document.getElementById(side+"-abbr").textContent=data.abbr;
+ const img=document.getElementById(side+"-logo");
+ img.src=data.logo; img.alt=data.abbr;
+}
+function addCell(row,col,value){
+ const el=document.createElement("div");
+ el.className="cell score "+row+" "+col+(value==null?" empty":"");
+ el.textContent=value==null?"–":value;
+ document.getElementById("scores").appendChild(el);
+}
+function row(cls,t){
+ t.innings.forEach((v,i)=>addCell(cls,"c"+(i+1),v));
+ const rhe = cls==="row-away" ? "rhe-away" : "rhe-home";
+ addCell(cls+" "+rhe,"cR",t.r); addCell(cls+" "+rhe,"cH",t.h); addCell(cls+" "+rhe,"cE",t.e);
+}
+function light(selector,count){
+ document.querySelectorAll(selector).forEach((x,i)=>x.classList.toggle("on",i<count));
+}
+setTeam("away",PREVIEW.away); setTeam("home",PREVIEW.home);
+row("row-away",PREVIEW.away); row("row-home",PREVIEW.home);
+document.getElementById("atbat-left").textContent=PREVIEW.atBat.charAt(0);
+document.getElementById("atbat-right").textContent=PREVIEW.atBat.charAt(1);
+document.getElementById("pitcher-left").textContent=PREVIEW.pitcher.charAt(0);
+document.getElementById("pitcher-right").textContent=PREVIEW.pitcher.charAt(1);
+document.getElementById("inning").textContent=PREVIEW.inning;
+document.getElementById("half").classList.toggle("top",PREVIEW.half==="top");
+light(".ball",PREVIEW.balls); light(".strike",PREVIEW.strikes); light(".out",PREVIEW.outs);
+document.querySelector(".base1").classList.toggle("on",PREVIEW.bases.first);
+document.querySelector(".base2").classList.toggle("on",PREVIEW.bases.second);
+document.querySelector(".base3").classList.toggle("on",PREVIEW.bases.third);
+</script>
+</body>
+</html>
