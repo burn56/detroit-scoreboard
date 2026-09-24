@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lamplight Court Calibration v1</title>
+<style>
+*{box-sizing:border-box}
+html,body{
+    width:100%;height:100%;margin:0;padding:0;
+    overflow:hidden;background:#000;
+}
+body{display:flex;align-items:center;justify-content:center}
+.shell{
+    position:relative;
+    width:min(100vw,266.6667vh);
+    aspect-ratio:2048/768;
+    overflow:hidden;
+}
+.art{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+.dynamic{
+    position:absolute;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#f3e7c7;
+    font-family:Impact,"Arial Narrow",sans-serif;
+    font-weight:900;
+    line-height:1;
+    text-shadow:0 2px 4px #000;
+}
+
+/* Team logo windows */
+.team img{
+    width:78%;height:78%;
+    object-fit:contain;
+    filter:drop-shadow(0 2px 3px #000);
+}
+.away-team{left:34.55%;top:13.05%;width:4.75%;height:11.85%}
+.home-team{left:60.60%;top:13.05%;width:4.75%;height:11.85%}
+
+/* Score windows */
+.score{
+    top:13.05%;
+    width:5.35%;height:11.85%;
+    font-size:clamp(22px,4.15vw,72px);
+    letter-spacing:.01em;
+}
+.away-score{left:39.55%}
+.home-score{left:55.15%}
+
+/* Center stack */
+.quarter{
+    left:48.15%;top:10.25%;
+    width:3.75%;height:5.15%;
+    font-size:clamp(17px,2.35vw,40px);
+}
+.clock{
+    left:46.10%;top:16.25%;
+    width:7.80%;height:7.45%;
+    color:#e9a52c;
+    font-size:clamp(18px,3.05vw,52px);
+    letter-spacing:.025em;
+}
+.shot-clock{
+    left:47.85%;top:24.65%;
+    width:4.25%;height:6.35%;
+    color:#e83a24;
+    font-size:clamp(18px,2.8vw,48px);
+    text-shadow:0 0 4px rgba(232,58,36,.45),0 2px 4px #000;
+}
+
+/* Fouls */
+.fouls{
+    top:28.35%;
+    width:3.55%;height:4.65%;
+    font-size:clamp(15px,2.0vw,34px);
+}
+.away-fouls{left:40.15%}
+.home-fouls{left:56.30%}
+
+/* Timeout bulbs */
+.timeout{
+    position:absolute;
+    top:30.15%;
+    width:1.05%;
+    aspect-ratio:1;
+    border-radius:50%;
+    opacity:0;
+    background:#e8a92d;
+    box-shadow:0 0 .55vw .10vw #f0b13b;
+}
+.timeout.on{opacity:.9}
+.a1{left:35.18%}.a2{left:36.43%}.a3{left:37.68%}
+.h1{left:62.05%}.h2{left:63.30%}.h3{left:64.55%}
+</style>
+</head>
+<body>
+<div class="shell">
+    <img class="art" src="lamplight-court.png" alt="Lamplight Court">
+
+    <div class="dynamic team away-team">
+        <img src="https://a.espncdn.com/i/teamlogos/wnba/500/min.png" alt="Minnesota">
+    </div>
+    <div class="dynamic score away-score">82</div>
+
+    <div class="dynamic quarter">4</div>
+    <div class="dynamic clock">3:24</div>
+    <div class="dynamic shot-clock">16</div>
+
+    <div class="dynamic score home-score">78</div>
+    <div class="dynamic team home-team">
+        <img src="https://a.espncdn.com/i/teamlogos/wnba/500/ind.png" alt="Indiana Fever">
+    </div>
+
+    <div class="dynamic fouls away-fouls">5</div>
+    <div class="dynamic fouls home-fouls">3</div>
+
+    <i class="timeout a1 on"></i>
+    <i class="timeout a2 on"></i>
+    <i class="timeout a3 on"></i>
+    <i class="timeout h1 on"></i>
+    <i class="timeout h2 on"></i>
+    <i class="timeout h3"></i>
+</div>
+</body>
+</html>
