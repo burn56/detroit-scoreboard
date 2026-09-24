@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lamplight Stadium Preview v2</title>
+<style>
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:transparent}
+body{display:flex;align-items:center;justify-content:center}
+.shell{position:relative;width:min(100vw,200.000vh);aspect-ratio:1774/887;overflow:hidden}
+.art{position:absolute;inset:0;width:100%;height:100%;display:block}
+.dynamic{position:absolute;display:flex;align-items:center;justify-content:center;color:#f3e7c7;font-family:Impact,"Arial Narrow",sans-serif;font-weight:900;line-height:1;text-shadow:0 2px 4px #000}
+.team{font-family:Georgia,serif;font-size:clamp(14px,1.45vw,29px);letter-spacing:.03em}
+.team img{width:52%;height:82%;object-fit:contain;filter:drop-shadow(0 2px 3px #000)}
+.away-team{left:10.2%;top:38.0%;width:10.2%;height:11.3%}
+.away-name{left:21.2%;top:38.0%;width:10.2%;height:11.3%}
+.home-team{left:68.8%;top:38.0%;width:10.2%;height:11.3%}
+.home-name{left:80.0%;top:38.0%;width:10.2%;height:11.3%}
+.score{top:38.0%;width:10.2%;height:11.3%;font-size:clamp(28px,5vw,84px);letter-spacing:.04em}
+.away-score{left:21.2%} .home-score{left:80.0%}
+.quarter{left:36.8%;top:38.6%;width:7.8%;height:10.2%;font-size:clamp(28px,4.2vw,72px)}
+.clock{left:48.0%;top:38.4%;width:15.3%;height:10.5%;font-size:clamp(28px,4.5vw,76px);letter-spacing:.03em}
+.down{left:26.5%;top:55.1%;width:4.4%;height:8.9%;font-size:clamp(24px,3.5vw,60px)}
+.togo{left:37.5%;top:55.1%;width:5.3%;height:8.9%;font-size:clamp(24px,3.5vw,60px)}
+.ballon{left:49.2%;top:55.1%;width:5.7%;height:8.9%;font-size:clamp(24px,3.5vw,60px)}
+.possession{left:61.6%;top:55.2%;width:9.4%;height:8.6%;font-size:clamp(16px,2.1vw,38px);color:#f0b13b}
+.timeout{position:absolute;top:57.2%;width:2.25%;aspect-ratio:1;border-radius:50%;opacity:.12;background:#f0b13b;box-shadow:0 0 .7vw .12vw #f0b13b}
+.timeout.on{opacity:.95}
+.a1{left:12.0%}.a2{left:15.1%}.a3{left:18.2%}
+.h1{left:77.4%}.h2{left:80.5%}.h3{left:83.6%}
+.last-play{left:11.6%;top:67.4%;width:76.8%;height:7.0%;justify-content:flex-start;padding:0 1.2%;font-family:Georgia,serif;font-size:clamp(12px,1.55vw,27px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style>
+</head>
+<body>
+<div class="shell">
+<img class="art" src="lamplight-stadium.png" alt="Lamplight Stadium">
+<div class="dynamic team away-team"><img src="https://a.espncdn.com/i/teamlogos/nfl/500/gb.png" alt="Green Bay"></div>
+<div class="dynamic away-name">GB</div>
+<div class="dynamic team home-team"><img src="https://a.espncdn.com/i/teamlogos/nfl/500/det.png" alt="Detroit"></div>
+<div class="dynamic home-name">DET</div>
+<div class="dynamic score away-score">14</div>
+<div class="dynamic score home-score">17</div>
+<div class="dynamic quarter">3</div>
+<div class="dynamic clock">8:42</div>
+<div class="dynamic down">2</div>
+<div class="dynamic togo">6</div>
+<div class="dynamic ballon">38</div>
+<div class="dynamic possession">DET ▶</div>
+<i class="timeout a1 on"></i><i class="timeout a2 on"></i><i class="timeout a3"></i>
+<i class="timeout h1 on"></i><i class="timeout h2 on"></i><i class="timeout h3 on"></i>
+<div class="dynamic last-play">Goff pass complete to St. Brown for 12 yards</div>
+</div>
+</body>
+</html>
