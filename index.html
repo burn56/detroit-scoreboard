@@ -25,11 +25,6 @@ html,body{width:100%;height:100%;margin:0;padding:0;background:transparent!impor
  * LAMPLIGHT PARK LIVE BASEBALL TAKEOVER
  * Geometry locked to approved v14 calibration.
  ************************************************************/
-#live-baseball-stage{display:none;position:fixed;inset:0;z-index:5000;align-items:center;justify-content:center;background:transparent}
-body.baseball-takeover #live-baseball-stage{display:flex}
-body.baseball-takeover .wrapper{display:none}
-.lp-boards{width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:1vw}
-.lp-boards.two .lp-shell{width:min(49vw,87.05vh)}
 .lp-shell{position:relative;width:min(100vw,177.683vh);aspect-ratio:1672/941;overflow:hidden}
 .lp-shell>img.lp-art{position:absolute;inset:0;width:100%;height:100%;display:block}
 .lp-team{position:absolute;left:13.839%;width:18.8%;height:8.1%;display:flex;align-items:center;gap:1.8%;color:#eee4c9;font-family:Georgia,"Times New Roman",serif;font-weight:900;font-size:clamp(13px,2vw,34px);letter-spacing:.04em;text-shadow:0 2px 3px #000}
@@ -56,11 +51,134 @@ body.baseball-takeover .wrapper{display:none}
 .lp-half::after{content:"";display:block;width:0;height:0;border-left:clamp(5px,.48vw,8px) solid transparent;border-right:clamp(5px,.48vw,8px) solid transparent;border-top:clamp(8px,.72vw,12px) solid #d6a04a;filter:drop-shadow(0 0 3px rgba(214,160,74,.65))}
 .lp-half.top::after{border-top:0;border-bottom:clamp(8px,.72vw,12px) solid #d6a04a}
 .lp-shell.no-player-numbers .lp-atbat,.lp-shell.no-player-numbers .lp-pitcher{color:transparent}
+
+/************************************************************
+ * LAMPLIGHT STADIUM LIVE FOOTBALL TAKEOVER
+ * Geometry locked to approved v12 calibration.
+ ************************************************************/
+body.live-takeover{background:#000!important}
+body.live-takeover .wrapper{display:none}
+#live-takeover-stage{display:none;position:fixed;inset:0;z-index:5000;align-items:center;justify-content:center;background:#000}
+body.live-takeover #live-takeover-stage{display:flex}
+.live-boards{width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:1vw}
+.live-boards.two .lp-shell{width:min(49vw,87.05vh)}
+.live-boards.two .ls-shell{width:min(49vw,98vh)}
+
+
+
+
+.ls-shell{position:relative;width:min(100vw,200vh);aspect-ratio:1774/887;overflow:hidden}
+.ls-art{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ls-dynamic{position:absolute;display:flex;align-items:center;justify-content:center;color:#f3e7c7;font-family:Impact,"Arial Narrow",sans-serif;font-weight:900;line-height:1;text-shadow:0 2px 4px #000}
+
+/* Team logo windows */
+.ls-team{font-family:Georgia,serif}
+.ls-team img{width:72%;height:72%;object-fit:contain;filter:drop-shadow(0 2px 3px #000)}
+.ls-away-team{left:10.10%;top:43.15%;width:10.10%;height:11.55%}
+.ls-home-team{left:68.55%;top:43.15%;width:10.10%;height:11.55%}
+
+/* Score windows */
+.ls-score{top:43.15%;width:10.05%;height:11.55%;font-size:clamp(20px,3.7vw,64px);letter-spacing:.02em}
+.ls-away-score{left:21.20%}
+.ls-home-score{left:79.55%}
+
+/* Center clock windows */
+.ls-quarter{left:36.75%;top:43.55%;width:7.75%;height:10.95%;font-size:clamp(20px,3.15vw,54px)}
+.ls-clock{left:48.05%;top:43.55%;width:15.20%;height:10.95%;font-size:clamp(20px,3.25vw,56px);letter-spacing:.015em}
+
+/* Lower number windows */
+.ls-down{left:26.45%;top:62.25%;width:4.45%;height:7.55%;font-size:clamp(18px,2.65vw,46px)}
+.ls-togo{left:37.45%;top:62.25%;width:5.35%;height:7.55%;font-size:clamp(18px,2.65vw,46px)}
+.ls-ballon{left:49.15%;top:62.25%;width:5.75%;height:7.55%;font-size:clamp(18px,2.65vw,46px)}
+
+/* Possession is a lamp/indicator, not another giant score */
+.ls-possession{left:61.60%;top:62.25%;width:9.35%;height:7.55%;font-size:clamp(11px,1.35vw,24px);color:#f0b13b;letter-spacing:.03em}
+
+/* Timeout bulbs aligned to the physical rings */
+.ls-timeout{position:absolute;top:63.65%;width:2.15%;aspect-ratio:1;border-radius:50%;opacity:0;background:#f0b13b;box-shadow:0 0 .55vw .10vw #f0b13b}
+.ls-timeout.on{opacity:.88}
+.ls-a1{left:12.05%}.ls-a2{left:15.15%}.ls-a3{left:18.25%}
+.ls-h1{left:77.45%}.ls-h2{left:80.55%}.ls-h3{left:83.65%}
+
+/* Last play belongs inside the large blank lower display */
+.ls-last-play{left:11.60%;top:76.75%;width:76.75%;height:5.55%;justify-content:flex-start;padding:0 1.15%;font-family:Georgia,serif;font-size:clamp(9px,1.15vw,20px);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* v5 screenshot calibration */
+.ls-away-team,.ls-home-team{transform:translateY(6px)}
+.ls-away-score,.ls-home-score{transform:translateY(3px)}
+
+.ls-a1,.ls-a2,.ls-a3{margin-left:2px;transform:translateY(4px)}
+.ls-h1,.ls-h2,.ls-h3{margin-left:6px;transform:translateY(2px)}
+
+.ls-down,.ls-togo,.ls-ballon{transform:translate(6px,4px)}
+.ls-possession{transform:translate(4px,4px)}
+.ls-last-play{transform:translateY(5px)}
+
+
+/* v6 screenshot calibration */
+.ls-away-score{margin-left:3px}
+.ls-clock{transform:translateX(6px)}
+.ls-away-team,.ls-home-team{margin-top:-3px}
+.ls-down{margin-left:-2px}
+.ls-togo{margin-left:-1px}
+.ls-ballon{margin-left:2px}
+.ls-a1,.ls-a2,.ls-a3,.ls-h1,.ls-h2,.ls-h3{margin-left:1px;margin-top:3px}
+.ls-quarter{transform:translateX(-2px)}
+
+
+/* v7 timeout calibration */
+.ls-a1,.ls-a2,.ls-a3{transform:translate(-1px,1px)}
+.ls-h1,.ls-h2,.ls-h3{margin-left:4px}
+
+
+/* v8 timeout calibration */
+.ls-a1,.ls-a2,.ls-a3{margin-left:2px}
+.ls-h1,.ls-h2,.ls-h3{margin-left:9px;margin-top:2px}
+
+
+/* v9 alternate-state validation + mechanical possession indicator */
+.ls-possession{gap:8px}
+.ls-poss-team{display:inline-block}
+.ls-poss-lamp{
+    display:inline-block;
+    width:13px;
+    height:13px;
+    border-radius:50%;
+    background:#e8a92d;
+    border:1px solid #f6d27a;
+    box-shadow:0 0 7px 2px rgba(240,177,59,.72), inset 0 0 3px rgba(255,255,255,.55);
+}
+
+
+/* v11 possession treatment: illuminated team abbreviation only */
+.ls-possession{gap:0}
+.ls-poss-team{
+    color:#f3bd4f;
+    text-shadow:
+        0 0 3px rgba(240,177,59,.85),
+        0 0 7px rgba(240,177,59,.45),
+        0 2px 3px #000;
+}
+.ls-poss-lamp{display:none!important}
+
+
+/* v12 possession + page background */
+
+.ls-possession{transform:translate(9px,4px)}
+.ls-poss-team{
+    color:#f3e7c7;
+    text-shadow:0 2px 4px #000;
+}
+
+
+.ls-shell{position:relative;width:min(100vw,200vh);aspect-ratio:1774/887;overflow:hidden}
+.ls-art{position:absolute;inset:0;width:100%;height:100%;display:block}
+
 </style>
 </head>
 <body>
 <div class="wrapper"><div class="scoreboard" id="scoreboard"></div></div>
-<div id="live-baseball-stage"><div class="lp-boards" id="lp-boards"></div></div>
+<div id="live-takeover-stage"><div class="live-boards" id="live-boards"></div></div>
 <div id="preview-indicator">PREVIEW</div>
 
 <script>
@@ -210,13 +328,99 @@ function makeLamplightBoard(g){
  return shell;
 }
 function renderBaseballTakeover(games){
- const unique=[];const ids=new Set();games.forEach(g=>{if(g&&!ids.has(g.id)){ids.add(g.id);unique.push(g)}});
- const stage=get("lp-boards");stage.innerHTML="";stage.classList.toggle("two",unique.length>1);unique.slice(0,2).forEach(g=>stage.appendChild(makeLamplightBoard(g)));
- document.body.classList.toggle("baseball-takeover",unique.length>0);
+ renderLiveTakeover((games||[]).map(g=>({sport:"baseball",game:g})));
+}
+
+function footballTimeouts(g){
+ const s=g.situation||{};
+ let away=s.awayTimeouts,home=s.homeTimeouts;
+ if(away==null)away=g.away&&g.away.raw&&g.away.raw.timeoutsRemaining;
+ if(home==null)home=g.home&&g.home.raw&&g.home.raw.timeoutsRemaining;
+ return{away:away==null?null:Number(away),home:home==null?null:Number(home)};
+}
+function footballPossession(g){
+ const s=g.situation||{};
+ if(typeof s.possession==="string"||typeof s.possession==="number"){
+  const id=String(s.possession);
+  const c=(g.competition.competitors||[]).find(x=>String(x.id)===id||String(x.team&&x.team.id)===id);
+  if(c&&c.team)return c.team.abbreviation||"";
+ }
+ if(s.possession&&s.possession.abbreviation)return s.possession.abbreviation;
+ if(s.possession&&s.possession.team&&s.possession.team.abbreviation)return s.possession.team.abbreviation;
+ return possessionAbbr(g);
+}
+function footballLastPlay(g){
+ const s=g.situation||{},p=s.lastPlay||{};
+ return p.text||p.shortText||p.description||s.lastPlayText||"";
+}
+function makeLamplightStadiumBoard(g){
+ const shell=document.createElement("div");shell.className="ls-shell";
+ shell.innerHTML=
+  '<img class="ls-art" src="lamplight-stadium.png" alt="Lamplight Stadium">'+
+  '<div class="ls-dynamic ls-team ls-away-team"><img class="ls-away-logo" alt=""></div>'+
+  '<div class="ls-dynamic ls-team ls-home-team"><img class="ls-home-logo" alt=""></div>'+
+  '<div class="ls-dynamic ls-score ls-away-score"></div>'+
+  '<div class="ls-dynamic ls-score ls-home-score"></div>'+
+  '<div class="ls-dynamic ls-quarter"></div>'+
+  '<div class="ls-dynamic ls-clock"></div>'+
+  '<div class="ls-dynamic ls-down"></div>'+
+  '<div class="ls-dynamic ls-togo"></div>'+
+  '<div class="ls-dynamic ls-ballon"></div>'+
+  '<div class="ls-dynamic ls-possession"><span class="ls-poss-team"></span></div>'+
+  '<i class="ls-timeout ls-a1"></i><i class="ls-timeout ls-a2"></i><i class="ls-timeout ls-a3"></i>'+
+  '<i class="ls-timeout ls-h1"></i><i class="ls-timeout ls-h2"></i><i class="ls-timeout ls-h3"></i>'+
+  '<div class="ls-dynamic ls-last-play"></div>';
+ const q=s=>shell.querySelector(s),qa=s=>[...shell.querySelectorAll(s)],s=g.situation||{};
+ q(".ls-away-logo").src=g.away.logo||"";q(".ls-home-logo").src=g.home.logo||"";
+ q(".ls-away-score").textContent=g.away.score??"";q(".ls-home-score").textContent=g.home.score??"";
+ q(".ls-quarter").textContent=g.period??"";q(".ls-clock").textContent=g.clock||"";
+ q(".ls-down").textContent=s.down??"";q(".ls-togo").textContent=s.distance??"";
+ q(".ls-ballon").textContent=s.yardLine??"";
+ q(".ls-poss-team").textContent=footballPossession(g);
+ q(".ls-last-play").textContent=footballLastPlay(g);
+ const t=footballTimeouts(g);
+ qa(".ls-a1,.ls-a2,.ls-a3").forEach((e,i)=>e.classList.toggle("on",t.away!=null&&i<t.away));
+ qa(".ls-h1,.ls-h2,.ls-h3").forEach((e,i)=>e.classList.toggle("on",t.home!=null&&i<t.home));
+ return shell;
+}
+function renderLiveTakeover(items){
+ const unique=[],ids=new Set();
+ (items||[]).forEach(x=>{if(x&&x.game&&!ids.has(x.game.id)){ids.add(x.game.id);unique.push(x)}});
+ const stage=get("live-boards");stage.innerHTML="";stage.classList.toggle("two",unique.length>1);
+ unique.slice(0,2).forEach(x=>stage.appendChild(x.sport==="football"?makeLamplightStadiumBoard(x.game):makeLamplightBoard(x.game)));
+ document.body.classList.toggle("live-takeover",unique.length>0);
 }
 function refreshTakeover(){
- const live=Object.entries(STATE.games).filter(([key,g])=>TEAMS[key].sport==="baseball"&&g&&g.state==="in").map(x=>x[1]);
- renderBaseballTakeover(live);
+ const items=[];
+ Object.entries(STATE.games).forEach(([key,g])=>{
+  if(!g||g.state!=="in")return;
+  items.push({sport:TEAMS[key].sport,game:g});
+ });
+ renderLiveTakeover(items);
+}
+
+
+async function enrichLiveFootballGame(g,source){
+ if(!g||g.state!=="in"||g.sport!=="football")return g;
+ try{
+  const league=source==="cfb"?"college-football":"nfl";
+  const data=await fetchJSON("https://site.api.espn.com/apis/site/v2/sports/football/"+league+"/summary?event="+encodeURIComponent(g.id));
+  const hc=data&&data.header&&data.header.competitions&&data.header.competitions[0];
+  if(hc){
+   if(hc.situation)g.situation=Object.assign({},g.situation||{},hc.situation);
+   if(hc.status){g.period=hc.status.period??g.period;g.clock=hc.status.displayClock||g.clock}
+   if(Array.isArray(hc.competitors)){
+    const ah=hc.competitors.find(x=>x.homeAway==="away"),hh=hc.competitors.find(x=>x.homeAway==="home");
+    if(ah){g.away.raw=ah;g.away.score=ah.score??g.away.score;g.away.logo=teamLogo(ah.team)||g.away.logo}
+    if(hh){g.home.raw=hh;g.home.score=hh.score??g.home.score;g.home.logo=teamLogo(hh.team)||g.home.logo}
+   }
+  }
+  if(data&&data.drives&&data.drives.current&&data.drives.current.plays&&data.drives.current.plays.length){
+   const plays=data.drives.current.plays,last=plays[plays.length-1];
+   if(last)g.situation=Object.assign({},g.situation||{},{lastPlay:last});
+  }
+ }catch(e){console.warn("Football live enrichment failed:",e)}
+ return g;
 }
 
 /* ---------- Fetch / production ---------- */
@@ -225,11 +429,18 @@ async function refreshProduction(){
  if(STATE.refreshing||PREVIEW)return;STATE.refreshing=true;
  try{
   const sources=["mlb","nfl","cfb"],results=await Promise.allSettled(sources.map(s=>fetchJSON(ESPN[s])));
+  const enrich=[];
   results.forEach((r,i)=>{
    const source=sources[i];if(r.status!=="fulfilled"){console.error(source+" fetch failed:",r.reason);return}
    STATE.lastGood[source]=r.value;
-   Object.entries(TEAMS).forEach(([key,t])=>{if(t.source===source)renderProductionTeam(key,t,selectTeamEvent(t,r.value))});
+   Object.entries(TEAMS).forEach(([key,t])=>{
+    if(t.source!==source)return;
+    renderProductionTeam(key,t,selectTeamEvent(t,r.value));
+    const g=STATE.games[key];
+    if(g&&g.state==="in"&&t.sport==="football")enrich.push(enrichLiveFootballGame(g,source));
+   });
   });
+  if(enrich.length)await Promise.allSettled(enrich);
   refreshTakeover();
   if(DEBUG)console.log("Sports Board Debug",{date:getDateKey(new Date()),footballWindow:getFootballWindow(),games:STATE.games,lastGood:STATE.lastGood});
  }catch(e){console.error("Unexpected refresh error:",e)}
@@ -246,7 +457,12 @@ function previewBaseballGame(){
 }
 function renderBaseballPreview(){hideAllCards();renderBaseballTakeover([previewBaseballGame()])}
 function renderFootballPreview(){
- hideAllCards();const g={away:{abbr:"GB",score:14},home:{abbr:"DET",score:17},period:3,clock:"8:42",situation:{down:2,distance:6,yardLineTerritory:"DET",yardLine:38},competition:{competitors:[]}};showCard("lions");get("lions-card").classList.add("football-live");setText("lions-game","GB 14 @ DET 17");setStatus("lions","live","Live");setText("lions-status-text","Q3 • 8:42 • 2nd & 6 • DET ball • @ DET 38");setText("lions-quarter","Q3");setText("lions-clock","8:42");setText("lions-down","2nd & 6");setText("lions-possession","DET • DET 38")
+ hideAllCards();
+ const mk=(abbr,homeAway,score,logo,timeouts)=>({id:abbr,homeAway,score:String(score),timeoutsRemaining:timeouts,team:{id:abbr,abbreviation:abbr,displayName:abbr,logo}});
+ const away=mk("MIN","away",7,"https://a.espncdn.com/i/teamlogos/nfl/500/min.png",3);
+ const home=mk("DET","home",31,"https://a.espncdn.com/i/teamlogos/nfl/500/det.png",3);
+ const g=normalizeEvent({id:"preview-football",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in",shortDetail:"Q4 12:46"}},competitions:[{competitors:[away,home],situation:{down:3,distance:12,yardLine:49,possession:"MIN",awayTimeouts:3,homeTimeouts:3,lastPlay:{text:"Darnold pass complete to Jefferson for 18 yards to the DET 49"}}}]},"football");
+ renderLiveTakeover([{sport:"football",game:g}]);
 }
 function renderStickyPreview(){
  hideAllCards();const data={tigers:["CLE","DET","Tonight • 7:10 PM"],giants:["SF","LAD","Tonight • 10:10 PM"],lions:["DET","CHI","Sunday • 1:00 PM"],commanders:["WSH","DAL","Sunday • 4:25 PM"],michigan:["MICH","WIS","Saturday • 12:00 PM"],msu:["MSU","IOWA","Saturday • 3:30 PM"]};
