@@ -372,72 +372,33 @@ body.live-takeover #live-takeover-stage{display:flex}
 
 
 /************************************************************
- * SCALE-SAFE LIVE BOARD SYSTEM — REBUILT
- * cqw/cqh are relative to each scoreboard's own dimensions.
+ * DUAL LIVE BOARD COMPOSITION — UNIFORM SCALE
+ * Preserve each approved board internally; scale the finished
+ * board as one object so artwork + overlays remain identical.
  ************************************************************/
-.lp-shell,.ls-shell,.lc-shell{container-type:size}
-
-/* Typography: replace viewport-based clamps with board-relative sizing.
-   Values preserve the approved full-size appearance and continue shrinking. */
-.lp-team{font-size:2.033cqw}
-.lp-cell{font-size:2.213cqw}
-.lp-value{font-size:2.273cqw}
-.lp-half::after{
- border-left-width:.478cqw;
- border-right-width:.478cqw;
- border-top-width:.718cqw;
-}
-.lp-half.top::after{border-top-width:0;border-bottom-width:.718cqw}
-
-.ls-score{font-size:3.608cqw}
-.ls-quarter{font-size:3.044cqw}
-.ls-clock{font-size:3.157cqw}
-.ls-down,.ls-togo,.ls-ballon{font-size:2.593cqw}
-.ls-possession{font-size:1.353cqw}
-.ls-last-play{font-size:1.127cqw}
-
-/* Restore approved Stadium pixel calibration as board-relative units.
-   1 cqw = 1% of 1774 source width; 1 cqh = 1% of 887 source height. */
-.ls-away-team,.ls-home-team{margin-top:-.338cqh;transform:translateY(.676cqh)}
-.ls-away-score{margin-left:.169cqw;transform:translateY(.338cqh)}
-.ls-home-score{transform:translateY(.338cqh)}
-.ls-clock{transform:translateX(.338cqw)}
-.ls-quarter{transform:translateX(-.113cqw)}
-.ls-down{margin-left:-.113cqw;transform:translate(.338cqw,.451cqh)}
-.ls-togo{margin-left:-.056cqw;transform:translate(.338cqw,.451cqh)}
-.ls-ballon{margin-left:.113cqw;transform:translate(.338cqw,.451cqh)}
-.ls-possession{transform:translate(.507cqw,.451cqh)}
-.ls-last-play{transform:translateY(.564cqh)}
-.ls-a1,.ls-a2,.ls-a3{
- margin-left:.113cqw;margin-top:.338cqh;
- transform:translate(-.056cqw,.113cqh)
-}
-.ls-h1,.ls-h2,.ls-h3{
- margin-left:.507cqw;margin-top:.225cqh;
- transform:translateY(.225cqh)
+.live-boards.two{
+    position:relative;
+    display:block;
+    width:100%;
+    height:100%;
+    overflow:hidden;
 }
 
-/* Court typography from approved v13. No fixed px floors. */
-.lc-score{font-size:1.514cqw;letter-spacing:-.035em;white-space:nowrap}
-.lc-quarter{font-size:1.025cqw}
-.lc-clock{font-size:1.172cqw;letter-spacing:0;white-space:nowrap}
-.lc-shot-clock{font-size:.977cqw}
-.lc-fouls{font-size:.488cqw;transform:translateY(.260cqh)}
+/* In dual mode each renderer gets its own fixed design-space wrapper.
+   JS computes one common scale factor and centers both wrappers. */
+.live-boards.two .dual-slot{
+    position:absolute;
+    top:50%;
+    transform-origin:center center;
+}
+.live-boards.two .dual-slot.left{left:25%}
+.live-boards.two .dual-slot.right{left:75%}
 
-/* Court timeout calibration. Preserve v13 full-size positions while scaling. */
-.lc-a1{transform:translateX(.049cqw)}
-.lc-h1,.lc-h2{transform:translateX(.098cqw)}
-.lc-h3{transform:translateX(-.342cqw)}
-
-/* Board glow also scales with its board. */
-.lc-timeout{box-shadow:0 0 .22cqw .04cqw #f0b13b}
-.lp-bulb{box-shadow:0 0 1.1cqw .25cqw currentColor}
-.lp-base{box-shadow:0 0 .9cqw .16cqw #f0b13b}
-
-/* Two-board fit. Court is panoramic, so it may be wider for the same height. */
-.live-boards.two .lp-shell{width:min(49vw,87.05vh)}
-.live-boards.two .ls-shell{width:min(49vw,98vh)}
-.live-boards.two .lc-shell{width:min(49vw,130.667vh)}
+/* Override the old .two width rules: the board itself stays in its
+   calibrated design space. Only .dual-slot is transformed. */
+.live-boards.two .dual-slot .lp-shell{width:1672px;max-width:none}
+.live-boards.two .dual-slot .ls-shell{width:1774px;max-width:none}
+.live-boards.two .dual-slot .lc-shell{width:2048px;max-width:none}
 
 </style>
 </head>
@@ -686,9 +647,53 @@ function makeLamplightCourtBoard(g){
 function renderLiveTakeover(items){
  const unique=[],ids=new Set();
  (items||[]).forEach(x=>{if(x&&x.game&&!ids.has(x.game.id)){ids.add(x.game.id);unique.push(x)}});
- const stage=get("live-boards");stage.innerHTML="";stage.classList.toggle("two",unique.length>1);
- unique.slice(0,2).forEach(x=>stage.appendChild(x.sport==="football"?makeLamplightStadiumBoard(x.game):x.sport==="basketball"?makeLamplightCourtBoard(x.game):makeLamplightBoard(x.game)));
- document.body.classList.toggle("live-takeover",unique.length>0);
+ const stage=get("live-boards");stage.innerHTML="";
+ const shown=unique.slice(0,2);
+ stage.classList.toggle("two",shown.length>1);
+
+ function boardFor(x){
+  return x.sport==="football"?makeLamplightStadiumBoard(x.game):x.sport==="basketball"?makeLamplightCourtBoard(x.game):makeLamplightBoard(x.game);
+ }
+
+ if(shown.length===1){
+  stage.appendChild(boardFor(shown[0]));
+ }else if(shown.length===2){
+  const designWidth={baseball:1672,football:1774,basketball:2048};
+  const designHeight={baseball:941,football:887,basketball:768};
+
+  shown.forEach((x,i)=>{
+   const slot=document.createElement("div");
+   slot.className="dual-slot "+(i===0?"left":"right");
+   slot.dataset.sport=x.sport;
+   slot.style.width=designWidth[x.sport]+"px";
+   slot.style.height=designHeight[x.sport]+"px";
+   slot.appendChild(boardFor(x));
+   stage.appendChild(slot);
+  });
+
+  const layout=()=>{
+   const slots=[...stage.querySelectorAll(".dual-slot")];
+   if(slots.length!==2)return;
+   const halfW=stage.clientWidth/2;
+   const availW=halfW*.96;
+   const availH=stage.clientHeight*.94;
+
+   /* One common scale for both boards. This is intentional:
+      neither board gets different internal proportions. */
+   const needed=slots.map(s=>{
+    const sport=s.dataset.sport;
+    return Math.min(availW/designWidth[sport],availH/designHeight[sport]);
+   });
+   const scale=Math.min(...needed);
+
+   slots.forEach(s=>{
+    s.style.transform="translate(-50%,-50%) scale("+scale+")";
+   });
+  };
+  requestAnimationFrame(layout);
+  setTimeout(layout,50);
+ }
+ document.body.classList.toggle("live-takeover",shown.length>0);
 }
 function refreshTakeover(){
  const items=[];
@@ -794,28 +799,30 @@ function renderBasketballPreview(){
 }
 
 
-function makeDualFootball(){
- const a={id:"MIN",homeAway:"away",score:"7",timeoutsRemaining:3,team:{id:"MIN",abbreviation:"MIN",displayName:"Minnesota Vikings",logo:"https://a.espncdn.com/i/teamlogos/nfl/500/min.png"}};
- const h={id:"DET",homeAway:"home",score:"31",timeoutsRemaining:3,team:{id:"DET",abbreviation:"DET",displayName:"Detroit Lions",logo:"https://a.espncdn.com/i/teamlogos/nfl/500/det.png"}};
- return normalizeEvent({id:"dual-football",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in"}},competitions:[{competitors:[a,h],situation:{down:3,distance:12,yardLine:49,possession:"MIN",awayTimeouts:3,homeTimeouts:3,lastPlay:{text:"Darnold pass complete to Jefferson for 18 yards to the DET 49"}}}]},"football");
-}
-function makeDualBasketball(){
- const a={id:"MIN",homeAway:"away",score:"108",timeoutsRemaining:3,team:{id:"MIN",abbreviation:"MIN",displayName:"Minnesota Lynx",logo:"https://a.espncdn.com/i/teamlogos/wnba/500/min.png"}};
- const h={id:"IND",homeAway:"home",score:"78",timeoutsRemaining:2,team:{id:"IND",abbreviation:"IND",displayName:"Indiana Fever",logo:"https://a.espncdn.com/i/teamlogos/wnba/500/ind.png"}};
- return normalizeEvent({id:"dual-basketball",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in"}},competitions:[{competitors:[a,h],situation:{shotClock:16,awayFouls:5,homeFouls:3,awayTimeouts:3,homeTimeouts:2}}]},"basketball");
-}
-function makeDualBaseball(){
- const mk=(abbr,homeAway,score,logo,innings,h,e)=>({homeAway,score:String(score),team:{abbreviation:abbr,displayName:abbr,logo},linescores:innings.map(value=>({value})),statistics:[{name:"hits",displayValue:String(h)},{name:"errors",displayValue:String(e)}]});
- const a=mk("CLE","away",2,"https://a.espncdn.com/i/teamlogos/mlb/500/cle.png",[0,0,1,0,1,0],5,0);
- const h=mk("DET","home",4,"https://a.espncdn.com/i/teamlogos/mlb/500/det.png",[1,0,0,2,0,1],7,1);
- return normalizeEvent({id:"dual-baseball",date:new Date().toISOString(),status:{period:6,type:{state:"in"}},competitions:[{competitors:[a,h],situation:{balls:2,strikes:1,outs:1,inning:6,isTopInning:false,onFirst:true,onSecond:false,onThird:true,batter:{jersey:"24"},pitcher:{jersey:"29"}}}]},"baseball");
-}
 function renderDualPreview(kind){
  hideAllCards();
+
+ function football(){
+  const a={id:"MIN",homeAway:"away",score:"7",timeoutsRemaining:3,team:{id:"MIN",abbreviation:"MIN",displayName:"Minnesota Vikings",logo:"https://a.espncdn.com/i/teamlogos/nfl/500/min.png"}};
+  const h={id:"DET",homeAway:"home",score:"31",timeoutsRemaining:3,team:{id:"DET",abbreviation:"DET",displayName:"Detroit Lions",logo:"https://a.espncdn.com/i/teamlogos/nfl/500/det.png"}};
+  return normalizeEvent({id:"dual-football",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in"}},competitions:[{competitors:[a,h],situation:{down:3,distance:12,yardLine:49,possession:"MIN",awayTimeouts:3,homeTimeouts:3,lastPlay:{text:"Darnold pass complete to Jefferson for 18 yards to the DET 49"}}}]},"football");
+ }
+ function basketball(){
+  const a={id:"MIN",homeAway:"away",score:"108",timeoutsRemaining:3,team:{id:"MIN",abbreviation:"MIN",displayName:"Minnesota Lynx",logo:"https://a.espncdn.com/i/teamlogos/wnba/500/min.png"}};
+  const h={id:"IND",homeAway:"home",score:"78",timeoutsRemaining:2,team:{id:"IND",abbreviation:"IND",displayName:"Indiana Fever",logo:"https://a.espncdn.com/i/teamlogos/wnba/500/ind.png"}};
+  return normalizeEvent({id:"dual-basketball",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in"}},competitions:[{competitors:[a,h],situation:{shotClock:16,awayFouls:5,homeFouls:3,awayTimeouts:3,homeTimeouts:2}}]},"basketball");
+ }
+ function baseball(){
+  const mk=(abbr,homeAway,score,logo,innings,h,e)=>({homeAway,score:String(score),team:{abbreviation:abbr,displayName:abbr,logo},linescores:innings.map(value=>({value})),statistics:[{name:"hits",displayValue:String(h)},{name:"errors",displayValue:String(e)}]});
+  const a=mk("CLE","away",2,"https://a.espncdn.com/i/teamlogos/mlb/500/cle.png",[0,0,1,0,1,0],5,0);
+  const h=mk("DET","home",4,"https://a.espncdn.com/i/teamlogos/mlb/500/det.png",[1,0,0,2,0,1],7,1);
+  return normalizeEvent({id:"dual-baseball",date:new Date().toISOString(),status:{period:6,type:{state:"in"}},competitions:[{competitors:[a,h],situation:{balls:2,strikes:1,outs:1,inning:6,isTopInning:false,onFirst:true,onSecond:false,onThird:true,batter:{jersey:"24"},pitcher:{jersey:"29"}}}]},"baseball");
+ }
+
  let items;
- if(kind==="dual-park-court")items=[{sport:"baseball",game:makeDualBaseball()},{sport:"basketball",game:makeDualBasketball()}];
- else if(kind==="dual-park-stadium")items=[{sport:"baseball",game:makeDualBaseball()},{sport:"football",game:makeDualFootball()}];
- else items=[{sport:"football",game:makeDualFootball()},{sport:"basketball",game:makeDualBasketball()}];
+ if(kind==="dual-park-court")items=[{sport:"baseball",game:baseball()},{sport:"basketball",game:basketball()}];
+ else if(kind==="dual-park-stadium")items=[{sport:"baseball",game:baseball()},{sport:"football",game:football()}];
+ else items=[{sport:"football",game:football()},{sport:"basketball",game:basketball()}];
  renderLiveTakeover(items);
 }
 
