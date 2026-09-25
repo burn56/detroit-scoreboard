@@ -600,10 +600,25 @@ function getZonedDateParts(date){
 function getDayNumber(date){const p=getZonedDateParts(date);return Math.floor(Date.UTC(p.year,p.month-1,p.day)/86400000)}
 function getDateKey(date){const p=getZonedDateParts(date);return String(p.year)+String(p.month).padStart(2,"0")+String(p.day).padStart(2,"0")}
 function dateKeyFromDayNumber(n){const d=new Date(n*86400000);return String(d.getUTCFullYear())+String(d.getUTCMonth()+1).padStart(2,"0")+String(d.getUTCDate()).padStart(2,"0")}
-function sourceUrl(source){
+function sourceUrl(source,dayNumber=null){
  if(source!=="mlb"&&source!=="wnba")return ESPN[source];
- const today=getDayNumber(new Date()),dates=dateKeyFromDayNumber(today-1)+"-"+dateKeyFromDayNumber(today);
- return ESPN[source]+(ESPN[source].includes("?")?"&":"?")+"dates="+dates;
+ const day=dayNumber==null?getDayNumber(new Date()):dayNumber;
+ return ESPN[source]+(ESPN[source].includes("?")?"&":"?")+"dates="+dateKeyFromDayNumber(day);
+}
+async function fetchSourceData(source){
+ if(source!=="mlb"&&source!=="wnba")return fetchJSON(sourceUrl(source));
+ const today=getDayNumber(new Date());
+ const results=await Promise.allSettled([
+  fetchJSON(sourceUrl(source,today-1)),
+  fetchJSON(sourceUrl(source,today))
+ ]);
+ const good=results.filter(x=>x.status==="fulfilled").map(x=>x.value);
+ if(!good.length)throw(results[0].reason||results[1].reason||new Error(source+" fetch failed"));
+ const merged=Object.assign({},good[good.length-1]);
+ const byId=new Map();
+ good.forEach(data=>(data.events||[]).forEach(e=>byId.set(String(e.id),e)));
+ merged.events=[...byId.values()];
+ return merged;
 }
 function getFootballWindow(){const today=getDayNumber(new Date()),weekday=new Date(today*86400000).getUTCDay(),sinceTuesday=(weekday-2+7)%7;return{start:today-sinceTuesday,end:today-sinceTuesday+6}}
 function getEventDayNumber(event){return getDayNumber(new Date(event.date))}
@@ -1080,7 +1095,7 @@ async function fetchJSON(url){const sep=url.includes("?")?"&":"?";const r=await 
 async function refreshProduction(){
  if(STATE.refreshing||PREVIEW)return;STATE.refreshing=true;
  try{
-  const sources=["mlb","nfl","cfb","wnba"],requests=sources.map(s=>fetchJSON(sourceUrl(s)));
+  const sources=["mlb","nfl","cfb","wnba"],requests=sources.map(s=>fetchSourceData(s));
   requests.push(fetchJSON(WPBL.games),fetchJSON(WPBL.teams));
   const results=await Promise.allSettled(requests),enrich=[];
   results.slice(0,sources.length).forEach((r,i)=>{
