@@ -372,33 +372,78 @@ body.live-takeover #live-takeover-stage{display:flex}
 
 
 /************************************************************
- * DUAL LIVE BOARD COMPOSITION — UNIFORM SCALE
- * Preserve each approved board internally; scale the finished
- * board as one object so artwork + overlays remain identical.
+ * AUDITED SCALE-SAFE CALIBRATION
+ * Canonical approved shell width: 430 CSS px.
+ * Every former px/vw/clamp calibration is expressed as a
+ * percentage of board WIDTH (cqw), including vertical nudges.
  ************************************************************/
-.live-boards.two{
-    position:relative;
-    display:block;
-    width:100%;
-    height:100%;
-    overflow:hidden;
+.lp-shell,.ls-shell,.lc-shell{container-type:inline-size}
+
+/* ---------- LAMPLIGHT PARK ---------- */
+.lp-team{font-size:3.023256cqw}
+.lp-cell{font-size:3.488372cqw}
+.lp-value{font-size:3.488372cqw}
+.lp-atbat-left{left:calc(50% - 3.023256cqw)}
+.lp-atbat-right{left:calc(50% + .930233cqw)}
+.lp-pitcher-left{left:calc(50% - 2.325581cqw)}
+.lp-pitcher-right{left:calc(50% + 1.860465cqw)}
+.lp-ball,.lp-strike,.lp-out{margin-left:-.232558cqw}
+.lp-b1,.lp-b2,.lp-s1,.lp-o1{margin-left:0;transform:translateY(.232558cqw)}
+.lp-b3,.lp-s2,.lp-o2{transform:translate(.930233cqw,.232558cqw)}
+.lp-half{border-width:.232558cqw;box-shadow:inset 0 0 1.162791cqw #000,0 .232558cqw .465116cqw #000}
+.lp-half::after{border-left-width:1.162791cqw;border-right-width:1.162791cqw;border-top-width:1.860465cqw;filter:drop-shadow(0 0 .697674cqw rgba(214,160,74,.65))}
+.lp-half.top::after{border-top-width:0;border-bottom-width:1.860465cqw}
+
+/* ---------- LAMPLIGHT STADIUM ---------- */
+.ls-score{font-size:4.651163cqw}
+.ls-quarter{font-size:4.651163cqw}
+.ls-clock{font-size:4.651163cqw}
+.ls-down,.ls-togo,.ls-ballon{font-size:4.186047cqw}
+.ls-possession{font-size:2.558140cqw}
+.ls-last-play{font-size:2.093023cqw}
+
+.ls-dynamic{text-shadow:0 .465116cqw .930233cqw #000}
+.ls-team img{filter:drop-shadow(0 .465116cqw .697674cqw #000)}
+
+.ls-away-team,.ls-home-team{margin-top:-.697674cqw;transform:translateY(1.395349cqw)}
+.ls-away-score{margin-left:.697674cqw;transform:translateY(.697674cqw)}
+.ls-home-score{transform:translateY(.697674cqw)}
+.ls-clock{transform:translateX(1.395349cqw)}
+.ls-quarter{transform:translateX(-.465116cqw)}
+
+.ls-down{margin-left:-.465116cqw;transform:translate(1.395349cqw,.930233cqw)}
+.ls-togo{margin-left:-.232558cqw;transform:translate(1.395349cqw,.930233cqw)}
+.ls-ballon{margin-left:.465116cqw;transform:translate(1.395349cqw,.930233cqw)}
+.ls-possession{transform:translate(2.093023cqw,.930233cqw)}
+.ls-last-play{transform:translateY(1.162791cqw)}
+
+.ls-a1,.ls-a2,.ls-a3{
+ margin-left:.465116cqw;
+ margin-top:.697674cqw;
+ transform:translate(-.232558cqw,.232558cqw)
+}
+.ls-h1,.ls-h2,.ls-h3{
+ margin-left:2.093023cqw;
+ margin-top:.465116cqw;
+ transform:translateY(.465116cqw)
 }
 
-/* In dual mode each renderer gets its own fixed design-space wrapper.
-   JS computes one common scale factor and centers both wrappers. */
-.live-boards.two .dual-slot{
-    position:absolute;
-    top:50%;
-    transform-origin:center center;
-}
-.live-boards.two .dual-slot.left{left:25%}
-.live-boards.two .dual-slot.right{left:75%}
+/* ---------- LAMPLIGHT COURT v13 ---------- */
+.lc-score{font-size:2.790698cqw}
+.lc-quarter{font-size:2.558140cqw}
+.lc-clock{font-size:2.558140cqw}
+.lc-shot-clock{font-size:2.325581cqw}
+.lc-fouls{font-size:1.395349cqw;transform:translateY(.465116cqw)}
+.lc-dynamic{text-shadow:0 .465116cqw .930233cqw #000}
+.lc-team img{filter:drop-shadow(0 .465116cqw .697674cqw #000)}
+.lc-a1{transform:translateX(.232558cqw)}
+.lc-h1,.lc-h2{transform:translateX(.465116cqw)}
+.lc-h3{transform:translateX(-1.627907cqw)}
 
-/* Override the old .two width rules: the board itself stays in its
-   calibrated design space. Only .dual-slot is transformed. */
-.live-boards.two .dual-slot .lp-shell{width:1672px;max-width:none}
-.live-boards.two .dual-slot .ls-shell{width:1774px;max-width:none}
-.live-boards.two .dual-slot .lc-shell{width:2048px;max-width:none}
+/* ---------- DUAL BOARD COMPOSITION ---------- */
+.live-boards.two .lp-shell{width:min(49vw,87.05vh)}
+.live-boards.two .ls-shell{width:min(49vw,98vh)}
+.live-boards.two .lc-shell{width:min(49vw,130.667vh)}
 
 </style>
 </head>
@@ -647,53 +692,9 @@ function makeLamplightCourtBoard(g){
 function renderLiveTakeover(items){
  const unique=[],ids=new Set();
  (items||[]).forEach(x=>{if(x&&x.game&&!ids.has(x.game.id)){ids.add(x.game.id);unique.push(x)}});
- const stage=get("live-boards");stage.innerHTML="";
- const shown=unique.slice(0,2);
- stage.classList.toggle("two",shown.length>1);
-
- function boardFor(x){
-  return x.sport==="football"?makeLamplightStadiumBoard(x.game):x.sport==="basketball"?makeLamplightCourtBoard(x.game):makeLamplightBoard(x.game);
- }
-
- if(shown.length===1){
-  stage.appendChild(boardFor(shown[0]));
- }else if(shown.length===2){
-  const designWidth={baseball:1672,football:1774,basketball:2048};
-  const designHeight={baseball:941,football:887,basketball:768};
-
-  shown.forEach((x,i)=>{
-   const slot=document.createElement("div");
-   slot.className="dual-slot "+(i===0?"left":"right");
-   slot.dataset.sport=x.sport;
-   slot.style.width=designWidth[x.sport]+"px";
-   slot.style.height=designHeight[x.sport]+"px";
-   slot.appendChild(boardFor(x));
-   stage.appendChild(slot);
-  });
-
-  const layout=()=>{
-   const slots=[...stage.querySelectorAll(".dual-slot")];
-   if(slots.length!==2)return;
-   const halfW=stage.clientWidth/2;
-   const availW=halfW*.96;
-   const availH=stage.clientHeight*.94;
-
-   /* One common scale for both boards. This is intentional:
-      neither board gets different internal proportions. */
-   const needed=slots.map(s=>{
-    const sport=s.dataset.sport;
-    return Math.min(availW/designWidth[sport],availH/designHeight[sport]);
-   });
-   const scale=Math.min(...needed);
-
-   slots.forEach(s=>{
-    s.style.transform="translate(-50%,-50%) scale("+scale+")";
-   });
-  };
-  requestAnimationFrame(layout);
-  setTimeout(layout,50);
- }
- document.body.classList.toggle("live-takeover",shown.length>0);
+ const stage=get("live-boards");stage.innerHTML="";stage.classList.toggle("two",unique.length>1);
+ unique.slice(0,2).forEach(x=>stage.appendChild(x.sport==="football"?makeLamplightStadiumBoard(x.game):x.sport==="basketball"?makeLamplightCourtBoard(x.game):makeLamplightBoard(x.game)));
+ document.body.classList.toggle("live-takeover",unique.length>0);
 }
 function refreshTakeover(){
  const items=[];
@@ -801,7 +802,6 @@ function renderBasketballPreview(){
 
 function renderDualPreview(kind){
  hideAllCards();
-
  function football(){
   const a={id:"MIN",homeAway:"away",score:"7",timeoutsRemaining:3,team:{id:"MIN",abbreviation:"MIN",displayName:"Minnesota Vikings",logo:"https://a.espncdn.com/i/teamlogos/nfl/500/min.png"}};
   const h={id:"DET",homeAway:"home",score:"31",timeoutsRemaining:3,team:{id:"DET",abbreviation:"DET",displayName:"Detroit Lions",logo:"https://a.espncdn.com/i/teamlogos/nfl/500/det.png"}};
@@ -818,7 +818,6 @@ function renderDualPreview(kind){
   const h=mk("DET","home",4,"https://a.espncdn.com/i/teamlogos/mlb/500/det.png",[1,0,0,2,0,1],7,1);
   return normalizeEvent({id:"dual-baseball",date:new Date().toISOString(),status:{period:6,type:{state:"in"}},competitions:[{competitors:[a,h],situation:{balls:2,strikes:1,outs:1,inning:6,isTopInning:false,onFirst:true,onSecond:false,onThird:true,batter:{jersey:"24"},pitcher:{jersey:"29"}}}]},"baseball");
  }
-
  let items;
  if(kind==="dual-park-court")items=[{sport:"baseball",game:baseball()},{sport:"basketball",game:basketball()}];
  else if(kind==="dual-park-stadium")items=[{sport:"baseball",game:baseball()},{sport:"football",game:football()}];
