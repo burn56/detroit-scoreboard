@@ -462,6 +462,11 @@ const ESPN={
  cfb:"https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&limit=1000",
  wnba:"https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard"
 };
+const WPBL={
+ games:"https://stats.womensprobaseballleague.com/v1/games",
+ teams:"https://stats.womensprobaseballleague.com/v1/teams",
+ boxscore:id=>"https://stats.womensprobaseballleague.com/v1/games/"+encodeURIComponent(id)+"/boxscore"
+};
 const TEAMS={
  tigers:{name:"Detroit Tigers",league:"MLB",sport:"baseball",source:"mlb",abbr:"DET",logo:"logos/tigers.png"},
  giants:{name:"San Francisco Giants",league:"MLB",sport:"baseball",source:"mlb",abbr:"SF",logo:"logos/sfgiants.png"},
@@ -479,7 +484,8 @@ const LIVE_PRIORITY={
   msu:85,
   fever:80,
   giants:75,
-  commanders:70
+  commanders:70,
+  wpbl:60
  },
  seasonMax:40,
  postseason:100,
@@ -494,7 +500,7 @@ const LIVE_PRIORITY={
  overtime:20,
  incumbent:8
 };
-const STATE={games:{},lastGood:{mlb:null,nfl:null,cfb:null,wnba:null},timer:null,refreshing:false,liveDisplayedIds:[]};
+const STATE={games:{},gameMeta:{},lastGood:{mlb:null,nfl:null,cfb:null,wnba:null,wpbl:null,wpblTeams:null},timer:null,refreshing:false,liveDisplayedIds:[]};
 const PARAMS=new URLSearchParams(location.search);
 const PREVIEW=(PARAMS.get("preview")||"").toLowerCase();
 const DEBUG=PARAMS.get("debug")==="1";
@@ -529,6 +535,37 @@ function buildCards(){
  });
 }
 
+
+function wpblCardKey(id){return"wpbl-"+String(id).replace(/[^a-zA-Z0-9_-]/g,"")}
+function removeWpblCards(){document.querySelectorAll('.team-card[data-source="wpbl"]').forEach(x=>x.remove())}
+function ensureWpblCard(g){
+ const key=wpblCardKey(g.id);let card=get(key+"-card");if(card)return key;
+ card=document.createElement("div");card.className="team-card";card.id=key+"-card";card.dataset.team=key;card.dataset.source="wpbl";
+ card.innerHTML=
+  '<div class="team-logo"><img id="'+key+'-logo" alt="WPBL"></div>'+
+  '<div class="team-league">WPBL</div>'+
+  '<div class="team-name" id="'+key+'-name">WPBL</div>'+
+  '<div class="game-line" id="'+key+'-game"></div>'+
+  '<div class="status-row"><span class="status-pill" id="'+key+'-status-pill"></span><span class="status-text" id="'+key+'-status-text"></span></div>';
+ get("scoreboard").appendChild(card);return key;
+}
+function renderWpblCard(g){
+ const key=ensureWpblCard(g),img=get(key+"-logo");
+ const preferred=(g.home&&g.home.logo)||(g.away&&g.away.logo)||"";
+ if(img)img.src=preferred;
+ setText(key+"-name",(g.away.name||g.away.abbr)+" @ "+(g.home.name||g.home.abbr));
+ if(g.state==="pre"){
+  showCard(key);setText(key+"-game",g.away.abbr+" @ "+g.home.abbr);setStatus(key,"scheduled","Scheduled");setText(key+"-status-text",formatGameTime(g.date));
+ }else if(g.state==="post"){
+  showCard(key);setText(key+"-game",g.away.abbr+" "+(g.away.score??"-")+" @ "+g.home.abbr+" "+(g.home.score??"-"));setStatus(key,"final","Final");setText(key+"-status-text",g.detail||"Final");
+ }else if(g.state==="in"){
+  showCard(key);setText(key+"-game",g.away.abbr+" "+(g.away.score??"-")+" @ "+g.home.abbr+" "+(g.home.score??"-"));setStatus(key,"live","Live");setText(key+"-status-text",g.detail||((g.period?"Inning "+g.period:"")));
+ }else{
+  showCard(key);setText(key+"-game",g.away.abbr+" @ "+g.home.abbr);setStatus(key,"scheduled","Delayed");setText(key+"-status-text",g.detail||"");
+ }
+ return key;
+}
+
 function getZonedDateParts(date){
  const p=new Intl.DateTimeFormat("en-US",{timeZone:CONFIG.timeZone,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(date),v={};
  p.forEach(x=>{if(x.type!=="literal")v[x.type]=x.value});
@@ -560,6 +597,105 @@ function normalizeEvent(event,sport){
  const cs=c.competitors||[],home=cs.find(x=>x.homeAway==="home")||cs[0],away=cs.find(x=>x.homeAway==="away")||cs[1],status=event.status||{},type=status.type||{};
  const side=x=>({id:x&&(x.id||(x.team&&x.team.id)),abbr:x&&x.team&&x.team.abbreviation||"---",name:x&&x.team&&(x.team.displayName||x.team.shortDisplayName)||"",logo:x&&teamLogo(x.team),score:x?x.score:null,raw:x||{}});
  return{id:event.id,date:event.date,sport,state:type.state||"pre",detail:type.shortDetail||type.detail||"",period:status.period,clock:status.displayClock||"",home:side(home),away:side(away),situation:c.situation||{},competition:c,season:event.season||c.season||null,name:event.name||event.shortName||""};
+}
+
+
+function wpblAbbr(name){
+ const words=String(name||"").trim().split(/\s+/).filter(Boolean);if(!words.length)return"";
+ const place=words.slice(0,-1);if(place.length<=1)return String(place[0]||words[0]).slice(0,3).toUpperCase();
+ return place.map(x=>x[0]).join("").slice(0,3).toUpperCase();
+}
+function wpblState(status,code){
+ const s=String(status||"").toLowerCase();
+ if(s.startsWith("final")||s.includes("complete"))return"post";
+ if(s.includes("postponed")||s.includes("cancel")||s.includes("suspended")||s.includes("delay"))return"off";
+ if(s.includes("in progress"))return"in";
+ if(s.includes("not started")||s.includes("scheduled")||s.includes("pregame"))return"pre";
+ if(Number(code)===-2)return"pre";if(Number(code)===-1)return"in";if(Number(code)===0)return"post";return"off";
+}
+function wpblInning(status,state){
+ const m=String(status||"").match(/(\d+)\s*(?:st|nd|rd|th)\b/i);
+ if(m)return Number(m[1]);const n=Number(state&&state.inning);return Number.isFinite(n)&&n>0?n:null;
+}
+function wpblTeamMap(data){
+ const map={};for(const t of(data&&Array.isArray(data.teams)?data.teams:[]))map[String(t.team_id||"")]=t;return map;
+}
+function normalizeWpblGame(row,teams){
+ const presto=row&&row.presto_data||{},live=row&&row.state||{},status=String(row&&row.status||presto.status||"");
+ function side(which){
+  const id=String(row&&row[which+"_team_id"]||""),t=teams[id]||{};
+  const name=String(row&&row[which+"_team_name"]||t.team_name||"");
+  const liveScore=live[which+"_score"],prestoScore=presto.score&&presto.score[which];
+  const score=liveScore!==undefined&&liveScore!==null?liveScore:(prestoScore!==undefined&&prestoScore!==null?prestoScore:null);
+  return{id,abbr:wpblAbbr(name),name,logo:t.logo_url||"",score:score===null?null:String(score),raw:{team:{id,abbreviation:wpblAbbr(name),displayName:name,logo:t.logo_url||""},score}};
+ }
+ const home=side("home"),away=side("away"),period=wpblInning(status,live);
+ const half=/top/i.test(status)?"top":/bottom/i.test(status)?"bottom":String(live.half||"").toLowerCase();
+ const competition={competitors:[
+  {id:away.id,homeAway:"away",score:away.score,team:{id:away.id,abbreviation:away.abbr,displayName:away.name,logo:away.logo},linescores:[],statistics:[]},
+  {id:home.id,homeAway:"home",score:home.score,team:{id:home.id,abbreviation:home.abbr,displayName:home.name,logo:home.logo},linescores:[],statistics:[]}
+ ]};
+ return{id:String(row.game_id||""),date:row.scheduled_start,sport:"baseball",source:"wpbl",state:wpblState(status,presto.statusCode),detail:status,period,clock:"",home,away,
+  situation:{inning:period,inningHalf:half,isTopInning:half==="top"},competition,season:{slug:"wpbl-2026"},name:(away.name||away.abbr)+" @ "+(home.name||home.abbr)};
+}
+function selectWpblGames(data,teamsData){
+ const rows=data&&Array.isArray(data.games)?data.games:[],teams=wpblTeamMap(teamsData),today=getDayNumber(new Date()),seen=new Set(),out=[];
+ for(const row of rows){
+  if(!row||!row.game_id||!row.scheduled_start)continue;
+  if(getDayNumber(new Date(row.scheduled_start))!==today)continue;
+  const id=String(row.game_id);if(seen.has(id))continue;seen.add(id);
+  const g=normalizeWpblGame(row,teams);
+  if(!g.home.name||!g.away.name)continue;
+  out.push(g);
+ }
+ return out.sort((a,b)=>new Date(a.date)-new Date(b.date));
+}
+function findDeepNumber(obj,names){
+ const wanted=new Set(names.map(x=>x.toLowerCase())),seen=new Set();
+ function walk(v,depth){
+  if(v==null||depth>8||typeof v!=="object"||seen.has(v))return null;seen.add(v);
+  for(const [k,val] of Object.entries(v)){
+   if(wanted.has(k.toLowerCase())&&(typeof val==="number"||/^\d+$/.test(String(val))))return Number(val);
+  }
+  for(const val of Object.values(v)){const x=walk(val,depth+1);if(x!=null)return x}
+  return null;
+ }
+ return walk(obj,0);
+}
+function findDeepArray(obj,names){
+ const wanted=new Set(names.map(x=>x.toLowerCase())),seen=new Set();
+ function walk(v,depth){
+  if(v==null||depth>8||typeof v!=="object"||seen.has(v))return null;seen.add(v);
+  for(const [k,val] of Object.entries(v))if(wanted.has(k.toLowerCase())&&Array.isArray(val))return val;
+  for(const val of Object.values(v)){const x=walk(val,depth+1);if(x)return x}
+  return null;
+ }
+ return walk(obj,0);
+}
+function applyWpblBoxscore(g,data){
+ if(!g||!data)return g;
+ // The schedule feed is authoritative for score/status. Boxscore enrichment is best-effort
+ // for the physical Lamplight Park inning/count/base displays.
+ const innings=findDeepArray(data,["linescore","line_score","innings","inning_scores"]);
+ if(Array.isArray(innings)){
+  const awayComp=g.competition.competitors.find(x=>x.homeAway==="away"),homeComp=g.competition.competitors.find(x=>x.homeAway==="home");
+  const av=[],hv=[];
+  for(const x of innings){
+   if(!x||typeof x!=="object")continue;
+   const a=x.away_runs??x.away??x.awayScore??(x.score&&x.score.away),h=x.home_runs??x.home??x.homeScore??(x.score&&x.score.home);
+   if(a!==undefined&&a!==null)av.push({value:Number(a)});if(h!==undefined&&h!==null)hv.push({value:Number(h)});
+  }
+  if(av.length)awayComp.linescores=av;if(hv.length)homeComp.linescores=hv;
+ }
+ const balls=findDeepNumber(data,["balls"]),strikes=findDeepNumber(data,["strikes"]),outs=findDeepNumber(data,["outs"]);
+ if(balls!=null)g.situation.balls=balls;if(strikes!=null)g.situation.strikes=strikes;if(outs!=null)g.situation.outs=outs;
+ const inning=findDeepNumber(data,["inning","current_inning"]);if(inning!=null&&inning>0){g.period=inning;g.situation.inning=inning}
+ return g;
+}
+async function enrichLiveWpblGame(g){
+ if(!g||g.state!=="in")return g;
+ try{applyWpblBoxscore(g,await fetchJSON(WPBL.boxscore(g.id)))}catch(e){console.warn("WPBL boxscore enrichment failed:",e)}
+ return g;
 }
 
 function renderScheduled(key,g){showCard(key);clearLiveClasses(key);setText(key+"-game",g.away.abbr+" @ "+g.home.abbr);setStatus(key,"scheduled","Scheduled");setText(key+"-status-text",formatGameTime(g.date))}
@@ -720,6 +856,12 @@ function renderLiveTakeover(items){
  document.body.classList.toggle("live-takeover",unique.length>0);
 }
 function seasonProgressWeight(key,g){
+ if(g&&g.source==="wpbl"){
+  const rows=STATE.lastGood.wpbl&&Array.isArray(STATE.lastGood.wpbl.games)?STATE.lastGood.wpbl.games:[];
+  const dates=rows.map(x=>Date.parse(x.scheduled_start)).filter(Number.isFinite).sort((a,b)=>a-b);
+  if(dates.length<2)return 0;const now=Date.parse(g.date||new Date()),p=Math.max(0,Math.min(1,(now-dates[0])/(dates[dates.length-1]-dates[0])));
+  return Math.round(LIVE_PRIORITY.seasonMax*p*p);
+ }
  const t=TEAMS[key],data=t&&STATE.lastGood[t.source],league=data&&data.leagues&&data.leagues[0],season=league&&league.season;
  if(!season||!season.startDate||!season.endDate)return 0;
  const start=Date.parse(season.startDate),end=Date.parse(season.endDate),now=Date.parse(g.date||new Date());
@@ -773,7 +915,7 @@ function gameSituationWeight(g){
 
 function livePriority(item){
  const key=item.key,g=item.game;
- let score=LIVE_PRIORITY.team[key]??50;
+ let score=g&&g.source==="wpbl"?LIVE_PRIORITY.team.wpbl:(LIVE_PRIORITY.team[key]??50);
  score+=seasonProgressWeight(key,g);
  score+=postseasonInfo(g).bonus;
  score+=gameSituationWeight(g);
@@ -785,7 +927,7 @@ function refreshTakeover(){
  const items=[];
  Object.entries(STATE.games).forEach(([key,g])=>{
   if(!g||g.state!=="in")return;
-  items.push({key,sport:TEAMS[key].sport,game:g});
+  const meta=STATE.gameMeta[key];items.push({key,sport:(meta&&meta.sport)||(TEAMS[key]&&TEAMS[key].sport)||g.sport,game:g});
  });
  items.sort((a,b)=>livePriority(b)-livePriority(a)||(String(a.game.id).localeCompare(String(b.game.id))));
  const shown=items.slice(0,2);
@@ -849,9 +991,10 @@ async function fetchJSON(url){const sep=url.includes("?")?"&":"?";const r=await 
 async function refreshProduction(){
  if(STATE.refreshing||PREVIEW)return;STATE.refreshing=true;
  try{
-  const sources=["mlb","nfl","cfb","wnba"],results=await Promise.allSettled(sources.map(s=>fetchJSON(ESPN[s])));
-  const enrich=[];
-  results.forEach((r,i)=>{
+  const sources=["mlb","nfl","cfb","wnba"],requests=sources.map(s=>fetchJSON(ESPN[s]));
+  requests.push(fetchJSON(WPBL.games),fetchJSON(WPBL.teams));
+  const results=await Promise.allSettled(requests),enrich=[];
+  results.slice(0,sources.length).forEach((r,i)=>{
    const source=sources[i];if(r.status!=="fulfilled"){console.error(source+" fetch failed:",r.reason);return}
    STATE.lastGood[source]=r.value;
    Object.entries(TEAMS).forEach(([key,t])=>{
@@ -862,6 +1005,19 @@ async function refreshProduction(){
     if(g&&g.state==="in"&&t.sport==="basketball")enrich.push(enrichLiveBasketballGame(g));
    });
   });
+
+  const wpblGamesResult=results[sources.length],wpblTeamsResult=results[sources.length+1];
+  if(wpblGamesResult.status==="fulfilled")STATE.lastGood.wpbl=wpblGamesResult.value;else console.error("wpbl games fetch failed:",wpblGamesResult.reason);
+  if(wpblTeamsResult.status==="fulfilled")STATE.lastGood.wpblTeams=wpblTeamsResult.value;else console.error("wpbl teams fetch failed:",wpblTeamsResult.reason);
+  if(STATE.lastGood.wpbl&&STATE.lastGood.wpblTeams){
+   removeWpblCards();
+   Object.keys(STATE.games).filter(k=>k.startsWith("wpbl-")).forEach(k=>{delete STATE.games[k];delete STATE.gameMeta[k]});
+   const wpblGames=selectWpblGames(STATE.lastGood.wpbl,STATE.lastGood.wpblTeams);
+   for(const g of wpblGames){
+    const key=renderWpblCard(g);STATE.games[key]=g;STATE.gameMeta[key]={sport:"baseball",source:"wpbl"};
+    if(g.state==="in")enrich.push(enrichLiveWpblGame(g));
+   }
+  }
   if(enrich.length)await Promise.allSettled(enrich);
   refreshTakeover();
   if(DEBUG)console.log("Sports Board Debug",{date:getDateKey(new Date()),footballWindow:getFootballWindow(),games:STATE.games,lastGood:STATE.lastGood});
@@ -921,13 +1077,31 @@ function renderDualPreview(kind){
  renderLiveTakeover(items);
 }
 
+
+function renderWpblPreview(){
+ hideAllCards();
+ const teams={teams:[
+  {team_id:"v4gisr4rbgmn67b0",team_name:"Los Angeles Queens",logo_url:"https://static.prestosports.com/action/sports/logos?rpi=WPBL002&sport=bsb"},
+  {team_id:"vhubhz8li07tmgq8",team_name:"San Francisco Firebells",logo_url:""}
+ ]};
+ const row={game_id:"preview-wpbl",home_team_id:"vhubhz8li07tmgq8",away_team_id:"v4gisr4rbgmn67b0",
+  home_team_name:"San Francisco Firebells",away_team_name:"Los Angeles Queens",status:"In Progress - Top of 6th",
+  scheduled_start:new Date().toISOString(),state:{home_score:3,away_score:5,inning:6,half:"top"},
+  presto_data:{statusCode:-1,score:{away:"5",home:"3"}}};
+ const g=normalizeWpblGame(row,wpblTeamMap(teams));
+ g.situation=Object.assign(g.situation,{balls:2,strikes:1,outs:1,onFirst:true,onSecond:false,onThird:true});
+ const a=g.competition.competitors.find(x=>x.homeAway==="away"),h=g.competition.competitors.find(x=>x.homeAway==="home");
+ a.linescores=[1,0,0,2,1,1].map(value=>({value}));h.linescores=[0,1,0,0,2].map(value=>({value}));
+ renderLiveTakeover([{key:"wpbl-preview",sport:"baseball",game:g}]);
+}
+
 function renderStickyPreview(){
  hideAllCards();const data={tigers:["CLE","DET","Tonight • 7:10 PM"],giants:["SF","LAD","Tonight • 10:10 PM"],lions:["DET","CHI","Sunday • 1:00 PM"],commanders:["WSH","DAL","Sunday • 4:25 PM"],michigan:["MICH","WIS","Saturday • 12:00 PM"],msu:["MSU","IOWA","Saturday • 3:30 PM"]};
  Object.entries(data).forEach(([k,v])=>{showCard(k);setText(k+"-game",v[0]+" @ "+v[1]);setStatus(k,"scheduled","Scheduled");setText(k+"-status-text",v[2])});
 }
 function start(){
  buildCards();hideAllCards();
- if(PREVIEW){document.body.classList.add("preview");if(PREVIEW==="baseball")return renderBaseballPreview();if(PREVIEW==="football")return renderFootballPreview();if(PREVIEW==="basketball")return renderBasketballPreview();if(PREVIEW==="dual"||PREVIEW==="dual-stadium-court"||PREVIEW==="dual-park-court"||PREVIEW==="dual-park-stadium")return renderDualPreview(PREVIEW);if(PREVIEW==="sticky")return renderStickyPreview()}
+ if(PREVIEW){document.body.classList.add("preview");if(PREVIEW==="wpbl")return renderWpblPreview();if(PREVIEW==="baseball")return renderBaseballPreview();if(PREVIEW==="football")return renderFootballPreview();if(PREVIEW==="basketball")return renderBasketballPreview();if(PREVIEW==="dual"||PREVIEW==="dual-stadium-court"||PREVIEW==="dual-park-court"||PREVIEW==="dual-park-stadium")return renderDualPreview(PREVIEW);if(PREVIEW==="sticky")return renderStickyPreview()}
  refreshProduction();
 }
 start();
