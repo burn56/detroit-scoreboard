@@ -371,52 +371,19 @@ body.live-takeover #live-takeover-stage{display:flex}
 .live-boards.two .lc-shell{width:min(49vw,18.375vh)}
 
 
-/************************************************************
- * SCALE-SAFE CALIBRATION OVERRIDES
- * Replaces literal positional px nudges with proportional
- * transforms based on each approved source artwork.
- ************************************************************/
-
-/* Lamplight Park — 1672 x 941 */
-.lp-atbat-left{left:38.308%}
-.lp-atbat-right{left:53.597%}
-.lp-pitcher-left{left:41.006%}
-.lp-pitcher-right{left:57.195%}
+/* SCALE-SAFE CALIBRATION OVERRIDES */
+.lp-atbat-left{left:38.308%}.lp-atbat-right{left:53.597%}.lp-pitcher-left{left:41.006%}.lp-pitcher-right{left:57.195%}
 .lp-ball,.lp-strike,.lp-out{margin-left:0}
 .lp-b1,.lp-b2,.lp-s1,.lp-o1{transform:translate(0,3.477%)}
-.lp-b3,.lp-s2,.lp-o2{transform:translate(10.432%,3.477%)}
-.lp-o3{transform:translateX(-3.477%)}
-
-/* Lamplight Stadium — 1774 x 887 */
+.lp-b3,.lp-s2,.lp-o2{transform:translate(10.432%,3.477%)}.lp-o3{transform:translateX(-3.477%)}
 .ls-away-team,.ls-home-team{margin-top:0;transform:translateY(2.928%)}
-.ls-away-score{margin-left:0;transform:translate(1.683%,2.928%)}
-.ls-home-score{transform:translateY(2.928%)}
-.ls-quarter{transform:translateX(-1.455%)}
-.ls-clock{transform:translateX(2.225%)}
-.ls-down{margin-left:0;transform:translate(5.067%,5.973%)}
-.ls-togo{margin-left:0;transform:translate(5.268%,5.973%)}
-.ls-ballon{margin-left:0;transform:translate(7.843%,5.973%)}
-.ls-possession{transform:translate(5.426%,5.973%)}
-.ls-last-play{transform:translateY(10.157%)}
-.ls-a1,.ls-a2,.ls-a3{
-    margin-left:0;margin-top:0;
-    transform:translate(2.622%,10.487%);
-}
-.ls-h1,.ls-h2,.ls-h3{
-    margin-left:0;margin-top:0;
-    transform:translate(23.597%,10.487%);
-}
-
-/* Lamplight Court — 2048 x 768, approved v13 */
-.lc-fouls{transform:translateY(5.600%)}
-.lc-a1{transform:translateX(8.719%)}
-.lc-h1,.lc-h2{transform:translateX(17.438%)}
-.lc-h3{transform:translateX(-61.035%)}
-
-/* Correct scale-preserving two-board widths for all three aspect ratios. */
-.live-boards.two .lp-shell{width:min(49vw,87.05vh)}
-.live-boards.two .ls-shell{width:min(49vw,98vh)}
-.live-boards.two .lc-shell{width:min(49vw,130.667vh)}
+.ls-away-score{margin-left:0;transform:translate(1.683%,2.928%)}.ls-home-score{transform:translateY(2.928%)}
+.ls-quarter{transform:translateX(-1.455%)}.ls-clock{transform:translateX(2.225%)}
+.ls-down{margin-left:0;transform:translate(5.067%,5.973%)}.ls-togo{margin-left:0;transform:translate(5.268%,5.973%)}.ls-ballon{margin-left:0;transform:translate(7.843%,5.973%)}
+.ls-possession{transform:translate(5.426%,5.973%)}.ls-last-play{transform:translateY(10.157%)}
+.ls-a1,.ls-a2,.ls-a3{margin-left:0;margin-top:0;transform:translate(2.622%,10.487%)}.ls-h1,.ls-h2,.ls-h3{margin-left:0;margin-top:0;transform:translate(23.597%,10.487%)}
+.lc-fouls{transform:translateY(5.600%)}.lc-a1{transform:translateX(8.719%)}.lc-h1,.lc-h2{transform:translateX(17.438%)}.lc-h3{transform:translateX(-61.035%)}
+.live-boards.two .lp-shell{width:min(49vw,87.05vh)}.live-boards.two .ls-shell{width:min(49vw,98vh)}.live-boards.two .lc-shell{width:min(49vw,130.667vh)}
 
 </style>
 </head>
@@ -775,16 +742,12 @@ function renderBasketballPreview(){
 
 function renderDualPreview(){
  hideAllCards();
- const footballMk=(abbr,homeAway,score,logo,timeouts)=>({id:abbr,homeAway,score:String(score),timeoutsRemaining:timeouts,team:{id:abbr,abbreviation:abbr,displayName:abbr,logo}});
- const fa=footballMk("MIN","away",7,"https://a.espncdn.com/i/teamlogos/nfl/500/min.png",3);
- const fh=footballMk("DET","home",31,"https://a.espncdn.com/i/teamlogos/nfl/500/det.png",3);
- const fg=normalizeEvent({id:"preview-dual-football",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in",shortDetail:"Q4 12:46"}},competitions:[{competitors:[fa,fh],situation:{down:3,distance:12,yardLine:49,possession:"MIN",awayTimeouts:3,homeTimeouts:3,lastPlay:{text:"Darnold pass complete to Jefferson for 18 yards to the DET 49"}}}]},"football");
-
- const basketballMk=(abbr,homeAway,score,logo,timeouts)=>({id:abbr,homeAway,score:String(score),timeoutsRemaining:timeouts,team:{id:abbr,abbreviation:abbr,displayName:abbr,logo}});
- const ba=basketballMk("MIN","away",108,"https://a.espncdn.com/i/teamlogos/wnba/500/min.png",3);
- const bh=basketballMk("IND","home",78,"https://a.espncdn.com/i/teamlogos/wnba/500/ind.png",2);
- const bg=normalizeEvent({id:"preview-dual-basketball",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in",shortDetail:"Q4 12:46"}},competitions:[{competitors:[ba,bh],situation:{shotClock:16,awayFouls:5,homeFouls:3,awayTimeouts:3,homeTimeouts:2}}]},"basketball");
-
+ const fa={id:"MIN",homeAway:"away",score:"7",timeoutsRemaining:3,team:{id:"MIN",abbreviation:"MIN",displayName:"Minnesota Vikings",logo:"https://a.espncdn.com/i/teamlogos/nfl/500/min.png"}};
+ const fh={id:"DET",homeAway:"home",score:"31",timeoutsRemaining:3,team:{id:"DET",abbreviation:"DET",displayName:"Detroit Lions",logo:"https://a.espncdn.com/i/teamlogos/nfl/500/det.png"}};
+ const fg=normalizeEvent({id:"preview-dual-football",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in"}},competitions:[{competitors:[fa,fh],situation:{down:3,distance:12,yardLine:49,possession:"MIN",awayTimeouts:3,homeTimeouts:3,lastPlay:{text:"Darnold pass complete to Jefferson for 18 yards to the DET 49"}}}]},"football");
+ const ba={id:"MIN",homeAway:"away",score:"108",timeoutsRemaining:3,team:{id:"MIN",abbreviation:"MIN",displayName:"Minnesota Lynx",logo:"https://a.espncdn.com/i/teamlogos/wnba/500/min.png"}};
+ const bh={id:"IND",homeAway:"home",score:"78",timeoutsRemaining:2,team:{id:"IND",abbreviation:"IND",displayName:"Indiana Fever",logo:"https://a.espncdn.com/i/teamlogos/wnba/500/ind.png"}};
+ const bg=normalizeEvent({id:"preview-dual-basketball",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in"}},competitions:[{competitors:[ba,bh],situation:{shotClock:16,awayFouls:5,homeFouls:3,awayTimeouts:3,homeTimeouts:2}}]},"basketball");
  renderLiveTakeover([{sport:"football",game:fg},{sport:"basketball",game:bg}]);
 }
 
