@@ -449,26 +449,20 @@ body.live-takeover #live-takeover-stage{display:flex}
 /* ---------- DAKBOARD BOTTOM OVERLAY ---------- */
 .wrapper{
  position:fixed;left:0;right:0;bottom:0;top:auto;
- width:100%;padding:clamp(6px,1.25vw,16px);
+ width:100%;padding:0;
  display:flex;justify-content:center;align-items:flex-end;
- background:transparent!important;z-index:100;
+ background:transparent!important;z-index:100;overflow:visible;
 }
 .scoreboard{
- width:100%;display:flex;flex-flow:row nowrap;justify-content:center;align-items:flex-end;
- gap:clamp(6px,1.15vw,18px);overflow:visible;
+ display:flex;flex-flow:row nowrap;justify-content:center;align-items:flex-end;
+ gap:18px;width:max-content;max-width:none;overflow:visible;
+ transform-origin:bottom center;
 }
 .team-card.visible{
- /* Preserve the original 240px card size when space allows; shrink evenly as a group. */
- width:240px;max-width:240px;min-width:0;flex:1 1 240px;
- padding:clamp(.55rem,1.2vw,1.25rem) clamp(.65rem,1.4vw,1.5rem);
+ /* Canonical sticky-note dimensions stay intact. The whole strip scales together. */
+ width:240px;max-width:240px;min-width:240px;flex:0 0 240px;
+ padding:1.25rem 1.5rem;
 }
-.team-card.visible .team-logo{width:clamp(36px,5vw,80px);height:clamp(36px,5vw,80px)}
-.team-card.visible .game-line,.team-card.visible .team-name,.team-card.visible .status-row{max-width:100%;overflow:hidden}
-.team-card.visible .team-league{font-size:clamp(.55rem,.72vw,.75rem)}
-.team-card.visible .team-name{font-size:clamp(.72rem,1vw,1rem)}
-.team-card.visible .game-line{font-size:clamp(.78rem,1.12vw,1.1rem)}
-.team-card.visible .status-pill{font-size:clamp(.55rem,.72vw,.72rem)}
-.team-card.visible .status-text{font-size:clamp(.62rem,.8vw,.8rem)}
 body.live-takeover .wrapper{display:none}
 
 </style>
@@ -779,8 +773,19 @@ function pruneFinalSeen(){
  if(changed)saveFinalSeen();
 }
 function updateStickyLayout(){
- const visible=[...document.querySelectorAll(".team-card.visible")];
+ const board=get("scoreboard"),visible=[...document.querySelectorAll(".team-card.visible")];
  document.documentElement.dataset.visibleCards=String(visible.length);
+ if(!board)return;
+ board.style.transform="none";
+ board.style.width="max-content";
+ if(!visible.length)return;
+ const natural=board.scrollWidth;
+ const available=Math.max(1,window.innerWidth-12);
+ const scale=Math.min(1,available/natural);
+ board.style.transform="scale("+scale+")";
+ /* Reserve the scaled visual height so the strip remains flush with the viewport bottom. */
+ const naturalHeight=board.scrollHeight;
+ board.parentElement.style.height=(naturalHeight*scale)+"px";
 }
 function renderFinal(key,g){showCard(key);clearLiveClasses(key);setText(key+"-game",g.away.abbr+" "+(g.away.score??"-")+" @ "+g.home.abbr+" "+(g.home.score??"-"));setStatus(key,"final","Final");setText(key+"-status-text",g.detail)}
 function ordinal(n){return({1:"1st",2:"2nd",3:"3rd",4:"4th"})[n]||(n?n+"th":"")}
@@ -1187,6 +1192,7 @@ function renderStickyPreview(){
 function start(){
  loadFinalSeen();pruneFinalSeen();
  buildCards();hideAllCards();
+ window.addEventListener("resize",()=>{if(!document.body.classList.contains("live-takeover"))updateStickyLayout()});
  if(PREVIEW){document.body.classList.add("preview");if(PREVIEW==="wpbl")return renderWpblPreview();if(PREVIEW==="baseball")return renderBaseballPreview();if(PREVIEW==="football")return renderFootballPreview();if(PREVIEW==="basketball")return renderBasketballPreview();if(PREVIEW==="dual"||PREVIEW==="dual-stadium-court"||PREVIEW==="dual-park-court"||PREVIEW==="dual-park-stadium")return renderDualPreview(PREVIEW);if(PREVIEW==="sticky")return renderStickyPreview()}
  refreshProduction();
 }
