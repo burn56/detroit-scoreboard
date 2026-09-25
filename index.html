@@ -467,6 +467,12 @@ const WPBL={
  teams:"https://stats.womensprobaseballleague.com/v1/teams",
  boxscore:id=>"https://stats.womensprobaseballleague.com/v1/games/"+encodeURIComponent(id)+"/boxscore"
 };
+const WPBL_TEAMS={
+ "v4gisr4rbgmn67b0":{name:"Los Angeles Queens",nickname:"QUEENS",logo:"logos/IMG_0724.png"},
+ "9f08or2mffx81409":{name:"Boston Hunters",nickname:"HUNTERS",logo:"logos/IMG_0725.png"},
+ "vhubhz8li07tmgq8":{name:"San Francisco Firebells",nickname:"FIREBELLS",logo:"logos/IMG_0726.png"},
+ "fttth861nft1j2s7":{name:"New York Heights",nickname:"HEIGHTS",logo:"logos/IMG_0727.png"}
+};
 const TEAMS={
  tigers:{name:"Detroit Tigers",league:"MLB",sport:"baseball",source:"mlb",abbr:"DET",logo:"logos/tigers.png"},
  giants:{name:"San Francisco Giants",league:"MLB",sport:"baseball",source:"mlb",abbr:"SF",logo:"logos/sfgiants.png"},
@@ -623,11 +629,13 @@ function wpblTeamMap(data){
 function normalizeWpblGame(row,teams){
  const presto=row&&row.presto_data||{},live=row&&row.state||{},status=String(row&&row.status||presto.status||"");
  function side(which){
-  const id=String(row&&row[which+"_team_id"]||""),t=teams[id]||{};
-  const name=String(row&&row[which+"_team_name"]||t.team_name||"");
+  const id=String(row&&row[which+"_team_id"]||""),t=teams[id]||{},local=WPBL_TEAMS[id]||null;
+  const name=String((local&&local.name)||row&&row[which+"_team_name"]||t.team_name||"");
+  const display=String((local&&local.nickname)||name.trim().split(/\s+/).pop()||wpblAbbr(name)).toUpperCase();
+  const logo=(local&&local.logo)||t.logo_url||"";
   const liveScore=live[which+"_score"],prestoScore=presto.score&&presto.score[which];
   const score=liveScore!==undefined&&liveScore!==null?liveScore:(prestoScore!==undefined&&prestoScore!==null?prestoScore:null);
-  return{id,abbr:wpblAbbr(name),name,logo:t.logo_url||"",score:score===null?null:String(score),raw:{team:{id,abbreviation:wpblAbbr(name),displayName:name,logo:t.logo_url||""},score}};
+  return{id,abbr:display,name,logo,score:score===null?null:String(score),raw:{team:{id,abbreviation:display,displayName:name,logo},score}};
  }
  const home=side("home"),away=side("away"),period=wpblInning(status,live);
  const half=/top/i.test(status)?"top":/bottom/i.test(status)?"bottom":String(live.half||"").toLowerCase();
@@ -1081,8 +1089,8 @@ function renderDualPreview(kind){
 function renderWpblPreview(){
  hideAllCards();
  const teams={teams:[
-  {team_id:"v4gisr4rbgmn67b0",team_name:"Los Angeles Queens",logo_url:"https://static.prestosports.com/action/sports/logos?rpi=WPBL002&sport=bsb"},
-  {team_id:"vhubhz8li07tmgq8",team_name:"San Francisco Firebells",logo_url:""}
+  {team_id:"v4gisr4rbgmn67b0",team_name:"Los Angeles Queens",logo_url:"logos/IMG_0724.png"},
+  {team_id:"vhubhz8li07tmgq8",team_name:"San Francisco Firebells",logo_url:"logos/IMG_0726.png"}
  ]};
  const row={game_id:"preview-wpbl",home_team_id:"vhubhz8li07tmgq8",away_team_id:"v4gisr4rbgmn67b0",
   home_team_name:"San Francisco Firebells",away_team_name:"Los Angeles Queens",status:"In Progress - Top of 6th",
