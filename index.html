@@ -471,7 +471,30 @@ const TEAMS={
  msu:{name:"Michigan State Spartans",league:"NCAA",sport:"football",source:"cfb",abbr:"MSU",logo:"logos/msu.png"},
  fever:{name:"Indiana Fever",league:"WNBA",sport:"basketball",source:"wnba",abbr:"IND",logo:"https://a.espncdn.com/i/teamlogos/wnba/500/ind.png"}
 };
-const STATE={games:{},lastGood:{mlb:null,nfl:null,cfb:null,wnba:null},timer:null,refreshing:false};
+const LIVE_PRIORITY={
+ team:{
+  lions:100,
+  michigan:95,
+  tigers:90,
+  msu:85,
+  fever:80,
+  giants:75,
+  commanders:70
+ },
+ seasonMax:40,
+ postseason:100,
+ postseasonRound:{
+  first:10,
+  divisional:20,
+  semifinal:30,
+  championship:50
+ },
+ lateGame:15,
+ closeGame:15,
+ overtime:20,
+ incumbent:8
+};
+const STATE={games:{},lastGood:{mlb:null,nfl:null,cfb:null,wnba:null},timer:null,refreshing:false,liveDisplayedIds:[]};
 const PARAMS=new URLSearchParams(location.search);
 const PREVIEW=(PARAMS.get("preview")||"").toLowerCase();
 const DEBUG=PARAMS.get("debug")==="1";
@@ -536,7 +559,7 @@ function normalizeEvent(event,sport){
  if(!event)return null;const c=event.competitions&&event.competitions[0];if(!c)return null;
  const cs=c.competitors||[],home=cs.find(x=>x.homeAway==="home")||cs[0],away=cs.find(x=>x.homeAway==="away")||cs[1],status=event.status||{},type=status.type||{};
  const side=x=>({id:x&&(x.id||(x.team&&x.team.id)),abbr:x&&x.team&&x.team.abbreviation||"---",name:x&&x.team&&(x.team.displayName||x.team.shortDisplayName)||"",logo:x&&teamLogo(x.team),score:x?x.score:null,raw:x||{}});
- return{id:event.id,date:event.date,sport,state:type.state||"pre",detail:type.shortDetail||type.detail||"",period:status.period,clock:status.displayClock||"",home:side(home),away:side(away),situation:c.situation||{},competition:c};
+ return{id:event.id,date:event.date,sport,state:type.state||"pre",detail:type.shortDetail||type.detail||"",period:status.period,clock:status.displayClock||"",home:side(home),away:side(away),situation:c.situation||{},competition:c,season:event.season||c.season||null,name:event.name||event.shortName||""};
 }
 
 function renderScheduled(key,g){showCard(key);clearLiveClasses(key);setText(key+"-game",g.away.abbr+" @ "+g.home.abbr);setStatus(key,"scheduled","Scheduled");setText(key+"-status-text",formatGameTime(g.date))}
@@ -696,13 +719,86 @@ function renderLiveTakeover(items){
  unique.slice(0,2).forEach(x=>stage.appendChild(x.sport==="football"?makeLamplightStadiumBoard(x.game):x.sport==="basketball"?makeLamplightCourtBoard(x.game):makeLamplightBoard(x.game)));
  document.body.classList.toggle("live-takeover",unique.length>0);
 }
+function seasonProgressWeight(key,g){
+ const t=TEAMS[key],data=t&&STATE.lastGood[t.source],league=data&&data.leagues&&data.leagues[0],season=league&&league.season;
+ if(!season||!season.startDate||!season.endDate)return 0;
+ const start=Date.parse(season.startDate),end=Date.parse(season.endDate),now=Date.parse(g.date||new Date());
+ if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start)return 0;
+ const p=Math.max(0,Math.min(1,(now-start)/(end-start)));
+ // Deliberately back-loaded: early season barely matters, final stretch matters a lot.
+ return Math.round(LIVE_PRIORITY.seasonMax*p*p);
+}
+
+function postseasonInfo(g){
+ const season=g.season||{},type=Number(season.type);
+ const slug=String(season.slug||"").toLowerCase();
+ const text=[slug,g.name,g.detail,g.competition&&g.competition.notes&&g.competition.notes.map(x=>x&&x.headline).join(" ")].filter(Boolean).join(" ").toLowerCase();
+ const isPost=type===3||/postseason|playoff|wild card|wildcard|divisional|semifinal|conference championship|world series|super bowl|finals|championship/.test(text);
+ if(!isPost)return{bonus:0,round:"regular"};
+ let round="first",bonus=LIVE_PRIORITY.postseason+LIVE_PRIORITY.postseasonRound.first;
+ if(/super bowl|world series|wnba finals|championship game|championship series|\bfinals\b/.test(text)){
+  round="championship";bonus=LIVE_PRIORITY.postseason+LIVE_PRIORITY.postseasonRound.championship;
+ }else if(/conference championship|semifinal|semi-final/.test(text)){
+  round="semifinal";bonus=LIVE_PRIORITY.postseason+LIVE_PRIORITY.postseasonRound.semifinal;
+ }else if(/divisional/.test(text)){
+  round="divisional";bonus=LIVE_PRIORITY.postseason+LIVE_PRIORITY.postseasonRound.divisional;
+ }
+ return{bonus,round};
+}
+
+function gameSituationWeight(g){
+ let bonus=0;
+ const a=Number(g.away&&g.away.score),h=Number(g.home&&g.home.score);
+ const diff=Number.isFinite(a)&&Number.isFinite(h)?Math.abs(a-h):999;
+ let late=false,close=false,ot=false;
+
+ if(g.sport==="baseball"){
+  late=Number(g.period)>=7;
+  close=diff<=2;
+  ot=Number(g.period)>9;
+ }else if(g.sport==="football"){
+  late=Number(g.period)>=4;
+  close=diff<=8;
+  ot=Number(g.period)>4||/ot|overtime/i.test(String(g.detail||""));
+ }else if(g.sport==="basketball"){
+  late=Number(g.period)>=4;
+  close=diff<=8;
+  ot=Number(g.period)>4||/ot|overtime/i.test(String(g.detail||""));
+ }
+ if(late)bonus+=LIVE_PRIORITY.lateGame;
+ if(late&&close)bonus+=LIVE_PRIORITY.closeGame;
+ if(ot)bonus+=LIVE_PRIORITY.overtime;
+ return bonus;
+}
+
+function livePriority(item){
+ const key=item.key,g=item.game;
+ let score=LIVE_PRIORITY.team[key]??50;
+ score+=seasonProgressWeight(key,g);
+ score+=postseasonInfo(g).bonus;
+ score+=gameSituationWeight(g);
+ if(STATE.liveDisplayedIds.includes(String(g.id)))score+=LIVE_PRIORITY.incumbent;
+ return score;
+}
+
 function refreshTakeover(){
  const items=[];
  Object.entries(STATE.games).forEach(([key,g])=>{
   if(!g||g.state!=="in")return;
-  items.push({sport:TEAMS[key].sport,game:g});
+  items.push({key,sport:TEAMS[key].sport,game:g});
  });
- renderLiveTakeover(items);
+ items.sort((a,b)=>livePriority(b)-livePriority(a)||(String(a.game.id).localeCompare(String(b.game.id))));
+ const shown=items.slice(0,2);
+ STATE.liveDisplayedIds=shown.map(x=>String(x.game.id));
+ if(DEBUG&&items.length)console.table(items.map(x=>({
+  team:x.key,
+  game:x.game.id,
+  priority:livePriority(x),
+  season:seasonProgressWeight(x.key,x.game),
+  postseason:postseasonInfo(x.game).bonus,
+  situation:gameSituationWeight(x.game)
+ })));
+ renderLiveTakeover(shown);
 }
 
 
