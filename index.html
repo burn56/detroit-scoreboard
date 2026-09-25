@@ -174,6 +174,202 @@ body.live-takeover #live-takeover-stage{display:flex}
 .ls-shell{position:relative;width:min(100vw,200vh);aspect-ratio:1774/887;overflow:hidden}
 .ls-art{position:absolute;inset:0;width:100%;height:100%;display:block}
 
+
+
+/************************************************************
+ * LAMPLIGHT COURT LIVE WNBA TAKEOVER
+ * Geometry locked to approved v13 calibration.
+ ************************************************************/
+.lc-shell{
+    position:relative;
+    width:min(100vw,266.6667vh);
+    aspect-ratio:2048/768;
+    overflow:hidden;
+}
+.lc-art{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+.lc-dynamic{
+    position:absolute;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#f3e7c7;
+    font-family:Impact,"Arial Narrow",sans-serif;
+    font-weight:900;
+    line-height:1;
+    text-shadow:0 2px 4px #000;
+}
+
+/* Team logo windows */
+.lc-team img{
+    width:78%;height:78%;
+    object-fit:contain;
+    filter:drop-shadow(0 2px 3px #000);
+}
+.lc-away-team{left:34.55%;top:13.05%;width:4.75%;height:11.85%}
+.lc-home-team{left:60.60%;top:13.05%;width:4.75%;height:11.85%}
+
+/* Score windows */
+.lc-score{
+    top:13.05%;
+    width:5.35%;height:11.85%;
+    font-size:clamp(22px,4.15vw,72px);
+    letter-spacing:.01em;
+}
+.lc-away-score{left:39.55%}
+.lc-home-score{left:55.15%}
+
+/* Center stack */
+.lc-quarter{
+    left:48.15%;top:10.25%;
+    width:3.75%;height:5.15%;
+    font-size:clamp(17px,2.35vw,40px);
+}
+.lc-clock{
+    left:46.10%;top:16.25%;
+    width:7.80%;height:7.45%;
+    color:#e9a52c;
+    font-size:clamp(18px,3.05vw,52px);
+    letter-spacing:.025em;
+}
+.lc-shot-clock{
+    left:47.85%;top:24.65%;
+    width:4.25%;height:6.35%;
+    color:#e83a24;
+    font-size:clamp(18px,2.8vw,48px);
+    text-shadow:0 0 4px rgba(232,58,36,.45),0 2px 4px #000;
+}
+
+/* Fouls */
+.lc-fouls{
+    top:28.35%;
+    width:3.55%;height:4.65%;
+    font-size:clamp(15px,2.0vw,34px);
+}
+.lc-away-fouls{left:40.15%}
+.lc-home-fouls{left:56.30%}
+
+/* Timeout bulbs */
+.lc-timeout{
+    position:absolute;
+    top:30.15%;
+    width:1.05%;
+    aspect-ratio:1;
+    border-radius:50%;
+    opacity:0;
+    background:#e8a92d;
+    box-shadow:0 0 .55vw .10vw #f0b13b;
+}
+.lc-timeout.on{opacity:.9}
+.lc-a1{left:35.18%}.lc-a2{left:36.43%}.lc-a3{left:37.68%}
+.lc-h1{left:62.05%}.lc-h2{left:63.30%}.lc-h3{left:64.55%}
+
+/* v2: slightly smaller Jumbotron typography */
+.lc-score{font-size:clamp(20px,3.65vw,63px)}
+.lc-quarter{font-size:clamp(15px,2.05vw,35px)}
+.lc-clock{font-size:clamp(16px,2.65vw,46px)}
+.lc-shot-clock{font-size:clamp(16px,2.45vw,42px)}
+.lc-fouls{font-size:clamp(13px,1.75vw,30px)}
+
+
+/* v3: sized for real basketball ranges, including 3-digit scores */
+.lc-score{font-size:clamp(16px,2.85vw,49px);letter-spacing:-.015em}
+.lc-quarter{font-size:clamp(13px,1.60vw,28px)}
+.lc-clock{font-size:clamp(14px,2.05vw,36px);letter-spacing:.015em}
+.lc-shot-clock{font-size:clamp(14px,1.90vw,33px)}
+.lc-fouls{font-size:clamp(12px,1.35vw,24px)}
+
+
+/* v4: deliberately conservative sizing with room for 3-digit scores */
+.lc-score{font-size:clamp(13px,2.05vw,36px);letter-spacing:-.02em}
+.lc-quarter{font-size:clamp(11px,1.20vw,21px)}
+.lc-clock{font-size:clamp(12px,1.55vw,27px);letter-spacing:.01em}
+.lc-shot-clock{font-size:clamp(12px,1.45vw,25px)}
+.lc-fouls{font-size:clamp(10px,1.05vw,19px)}
+
+
+/* v5: stress-test triple-digit score + 5-character clock */
+.lc-score{
+    font-size:clamp(12px,1.75vw,31px);
+    letter-spacing:-.035em;
+    white-space:nowrap;
+}
+.lc-clock{
+    font-size:clamp(11px,1.35vw,24px);
+    letter-spacing:0;
+    white-space:nowrap;
+}
+.lc-shot-clock{font-size:clamp(11px,1.25vw,22px)}
+.lc-fouls{font-size:clamp(9px,.72vw,14px)}
+
+/* Timeout lamps reduced to fit the physical unlit bulb locations */
+.lc-timeout{
+    width:.68%;
+    top:30.38%;
+    box-shadow:0 0 .30vw .055vw #f0b13b;
+}
+.lc-a1{left:35.31%}.lc-a2{left:36.56%}.lc-a3{left:37.81%}
+.lc-h1{left:62.18%}.lc-h2{left:63.43%}.lc-h3{left:64.68%}
+
+
+/* v6: finer sizing adjustments from v5 screenshot */
+.lc-fouls{font-size:clamp(7px,.55vw,11px)}
+.lc-timeout{
+    width:.52%;
+    top:30.48%;
+    box-shadow:0 0 .22vw .04vw #f0b13b;
+}
+.lc-shot-clock{font-size:clamp(10px,1.12vw,20px)}
+
+/* Re-center smaller timeout lamps over the physical bulb spots */
+.lc-a1{left:35.39%}.lc-a2{left:36.64%}.lc-a3{left:37.89%}
+.lc-h1{left:62.26%}.lc-h2{left:63.51%}.lc-h3{left:64.76%}
+
+
+/* v7: requested fine calibration */
+.lc-fouls{
+    font-size:clamp(6px,.50vw,10px);
+    transform:translateY(2px);
+}
+.lc-timeout{
+    width:.56%;
+    top:30.46%;
+}
+/* Right-side timeout group: 2px right */
+.lc-h1,.lc-h2,.lc-h3{transform:translateX(2px)}
+
+
+/* v8: individual outer timeout calibration */
+/* Left group #1 = far-left bulb: 2px right */
+.lc-a1{transform:translateX(2px)}
+/* Right group #1 = far-right bulb (h3): retain group +2px, then 1px left */
+.lc-h3{transform:translateX(1px)}
+
+
+/* v9: individual outer timeout calibration */
+/* Left #1: 1px left from v8 */
+.lc-a1{transform:translateX(1px)}
+/* Right #1: 1px left from v8 */
+.lc-h3{transform:translateX(0)}
+
+
+/* v10: right outer timeout #1 another 1px left from v9 */
+.lc-h3{transform:translateX(-1px)}
+
+
+/* v11: right outer timeout #1 another 2px left from v10 */
+.lc-h3{transform:translateX(-3px)}
+
+
+/* v12: right outer timeout #1 another 2px left from v11 */
+.lc-h3{transform:translateX(-5px)}
+
+
+/* v13: far-right timeout another 2px left from v12 */
+.lc-h3{transform:translateX(-7px)}
+
+.live-boards.two .lc-shell{width:min(49vw,18.375vh)}
+
 </style>
 </head>
 <body>
@@ -188,7 +384,8 @@ const CONFIG={timeZone:"America/Detroit",refresh:{normalMs:60000,liveMs:30000}};
 const ESPN={
  mlb:"https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard",
  nfl:"https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
- cfb:"https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&limit=1000"
+ cfb:"https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&limit=1000",
+ wnba:"https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard"
 };
 const TEAMS={
  tigers:{name:"Detroit Tigers",league:"MLB",sport:"baseball",source:"mlb",abbr:"DET",logo:"logos/tigers.png"},
@@ -196,9 +393,10 @@ const TEAMS={
  lions:{name:"Detroit Lions",league:"NFL",sport:"football",source:"nfl",abbr:"DET",logo:"logos/lions.png"},
  commanders:{name:"Washington Commanders",league:"NFL",sport:"football",source:"nfl",abbr:"WSH",logo:"logos/commanders.png"},
  michigan:{name:"Michigan Wolverines",league:"NCAA",sport:"football",source:"cfb",abbr:"MICH",logo:"logos/michigan.png"},
- msu:{name:"Michigan State Spartans",league:"NCAA",sport:"football",source:"cfb",abbr:"MSU",logo:"logos/msu.png"}
+ msu:{name:"Michigan State Spartans",league:"NCAA",sport:"football",source:"cfb",abbr:"MSU",logo:"logos/msu.png"},
+ fever:{name:"Indiana Fever",league:"WNBA",sport:"basketball",source:"wnba",abbr:"IND",logo:"https://a.espncdn.com/i/teamlogos/wnba/500/ind.png"}
 };
-const STATE={games:{},lastGood:{mlb:null,nfl:null,cfb:null},timer:null,refreshing:false};
+const STATE={games:{},lastGood:{mlb:null,nfl:null,cfb:null,wnba:null},timer:null,refreshing:false};
 const PARAMS=new URLSearchParams(location.search);
 const PREVIEW=(PARAMS.get("preview")||"").toLowerCase();
 const DEBUG=PARAMS.get("debug")==="1";
@@ -246,7 +444,7 @@ function formatGameTime(s){return new Intl.DateTimeFormat("en-US",{timeZone:CONF
 function eventContainsTeam(event,abbr){const c=event.competitions&&event.competitions[0];return!!(c&&c.competitors&&c.competitors.some(x=>x.team&&x.team.abbreviation===abbr))}
 function selectTeamEvent(team,data){
  const events=data&&Array.isArray(data.events)?data.events:[],matches=events.filter(e=>eventContainsTeam(e,team.abbr));
- if(team.sport==="baseball"){const today=getDayNumber(new Date());return matches.find(e=>getEventDayNumber(e)===today)||null}
+ if(team.sport==="baseball"||team.sport==="basketball"){const today=getDayNumber(new Date());return matches.find(e=>getEventDayNumber(e)===today)||null}
  const w=getFootballWindow(),week=matches.filter(e=>{const d=getEventDayNumber(e);return d>=w.start&&d<=w.end});
  if(!week.length)return null;
  const live=week.find(e=>e.status&&e.status.type&&e.status.type.state==="in");if(live)return live;
@@ -279,7 +477,7 @@ function renderFootballLive(key,g){
 function renderProductionTeam(key,t,event){
  if(!event){delete STATE.games[key];hideCard(key);return}
  const g=normalizeEvent(event,t.sport);if(!g)return;STATE.games[key]=g;
- if(g.state==="pre")renderScheduled(key,g);else if(g.state==="post")renderFinal(key,g);else if(t.sport==="football")renderFootballLive(key,g);
+ if(g.state==="pre")renderScheduled(key,g);else if(g.state==="post")renderFinal(key,g);else if(t.sport==="football")renderFootballLive(key,g);else if(t.sport==="basketball"){showCard(key);clearLiveClasses(key);setText(key+"-game",g.away.abbr+" "+(g.away.score??"-")+" @ "+g.home.abbr+" "+(g.home.score??"-"));setStatus(key,"live","Live");setText(key+"-status-text",["Q"+(g.period||""),g.clock].filter(Boolean).join(" • "))}
 }
 
 /* ---------- Lamplight Park data helpers ---------- */
@@ -383,11 +581,44 @@ function makeLamplightStadiumBoard(g){
  qa(".ls-h1,.ls-h2,.ls-h3").forEach((e,i)=>e.classList.toggle("on",t.home!=null&&i<t.home));
  return shell;
 }
+
+function basketballTimeouts(g){
+ const s=g.situation||{};
+ function n(...vals){for(const v of vals)if(v!==undefined&&v!==null&&v!==""){const x=Number(v);if(Number.isFinite(x))return x}return null}
+ return{away:n(s.awayTimeouts,s.awayTimeoutsRemaining,g.away&&g.away.raw&&g.away.raw.timeoutsRemaining),home:n(s.homeTimeouts,s.homeTimeoutsRemaining,g.home&&g.home.raw&&g.home.raw.timeoutsRemaining)};
+}
+function basketballFouls(g){
+ const s=g.situation||{};
+ function n(...vals){for(const v of vals)if(v!==undefined&&v!==null&&v!==""){const x=Number(v);if(Number.isFinite(x))return x}return null}
+ return{away:n(s.awayFouls,s.awayTeamFouls,g.away&&g.away.raw&&(g.away.raw.fouls??g.away.raw.teamFouls)),home:n(s.homeFouls,s.homeTeamFouls,g.home&&g.home.raw&&(g.home.raw.fouls??g.home.raw.teamFouls))};
+}
+function basketballShotClock(g){
+ const s=g.situation||{};
+ for(const v of [s.shotClock,s.shotClockSeconds,s.shotClockTime,s.displayShotClock])if(v!==undefined&&v!==null&&v!=="")return String(v).replace(/\.0$/,"");
+ return"";
+}
+function makeLamplightCourtBoard(g){
+ const shell=document.createElement("div");shell.className="lc-shell";
+ shell.innerHTML='<img class="lc-art" src="lamplight-court.png" alt="Lamplight Court">'+
+  '<div class="lc-dynamic lc-team lc-away-team"><img class="lc-away-logo" alt=""></div><div class="lc-dynamic lc-score lc-away-score"></div>'+
+  '<div class="lc-dynamic lc-quarter"></div><div class="lc-dynamic lc-clock"></div><div class="lc-dynamic lc-shot-clock"></div>'+
+  '<div class="lc-dynamic lc-score lc-home-score"></div><div class="lc-dynamic lc-team lc-home-team"><img class="lc-home-logo" alt=""></div>'+
+  '<div class="lc-dynamic lc-fouls lc-away-fouls"></div><div class="lc-dynamic lc-fouls lc-home-fouls"></div>'+
+  '<i class="lc-timeout lc-a1"></i><i class="lc-timeout lc-a2"></i><i class="lc-timeout lc-a3"></i><i class="lc-timeout lc-h1"></i><i class="lc-timeout lc-h2"></i><i class="lc-timeout lc-h3"></i>';
+ const q=s=>shell.querySelector(s),qa=s=>[...shell.querySelectorAll(s)];
+ q(".lc-away-logo").src=g.away.logo||"";q(".lc-home-logo").src=g.home.logo||"";
+ q(".lc-away-score").textContent=g.away.score??"";q(".lc-home-score").textContent=g.home.score??"";
+ q(".lc-quarter").textContent=g.period??"";q(".lc-clock").textContent=g.clock||"";q(".lc-shot-clock").textContent=basketballShotClock(g);
+ const f=basketballFouls(g);q(".lc-away-fouls").textContent=f.away??"";q(".lc-home-fouls").textContent=f.home??"";
+ const t=basketballTimeouts(g);qa(".lc-a1,.lc-a2,.lc-a3").forEach((e,i)=>e.classList.toggle("on",t.away!=null&&i<t.away));qa(".lc-h1,.lc-h2,.lc-h3").forEach((e,i)=>e.classList.toggle("on",t.home!=null&&i<t.home));
+ return shell;
+}
+
 function renderLiveTakeover(items){
  const unique=[],ids=new Set();
  (items||[]).forEach(x=>{if(x&&x.game&&!ids.has(x.game.id)){ids.add(x.game.id);unique.push(x)}});
  const stage=get("live-boards");stage.innerHTML="";stage.classList.toggle("two",unique.length>1);
- unique.slice(0,2).forEach(x=>stage.appendChild(x.sport==="football"?makeLamplightStadiumBoard(x.game):makeLamplightBoard(x.game)));
+ unique.slice(0,2).forEach(x=>stage.appendChild(x.sport==="football"?makeLamplightStadiumBoard(x.game):x.sport==="basketball"?makeLamplightCourtBoard(x.game):makeLamplightBoard(x.game)));
  document.body.classList.toggle("live-takeover",unique.length>0);
 }
 function refreshTakeover(){
@@ -423,12 +654,31 @@ async function enrichLiveFootballGame(g,source){
  return g;
 }
 
+
+async function enrichLiveBasketballGame(g){
+ if(!g||g.state!=="in"||g.sport!=="basketball")return g;
+ try{
+  const data=await fetchJSON("https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/summary?event="+encodeURIComponent(g.id));
+  const hc=data&&data.header&&data.header.competitions&&data.header.competitions[0];
+  if(hc){
+   if(hc.situation)g.situation=Object.assign({},g.situation||{},hc.situation);
+   if(hc.status){g.period=hc.status.period??g.period;g.clock=hc.status.displayClock||g.clock}
+   if(Array.isArray(hc.competitors)){
+    const ah=hc.competitors.find(x=>x.homeAway==="away"),hh=hc.competitors.find(x=>x.homeAway==="home");
+    if(ah){g.away.raw=Object.assign({},g.away.raw||{},ah);g.away.score=ah.score??g.away.score;g.away.logo=teamLogo(ah.team)||g.away.logo}
+    if(hh){g.home.raw=Object.assign({},g.home.raw||{},hh);g.home.score=hh.score??g.home.score;g.home.logo=teamLogo(hh.team)||g.home.logo}
+   }
+  }
+ }catch(e){console.warn("WNBA live enrichment failed:",e)}
+ return g;
+}
+
 /* ---------- Fetch / production ---------- */
 async function fetchJSON(url){const sep=url.includes("?")?"&":"?";const r=await fetch(url+sep+"_="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status+" for "+url);return r.json()}
 async function refreshProduction(){
  if(STATE.refreshing||PREVIEW)return;STATE.refreshing=true;
  try{
-  const sources=["mlb","nfl","cfb"],results=await Promise.allSettled(sources.map(s=>fetchJSON(ESPN[s])));
+  const sources=["mlb","nfl","cfb","wnba"],results=await Promise.allSettled(sources.map(s=>fetchJSON(ESPN[s])));
   const enrich=[];
   results.forEach((r,i)=>{
    const source=sources[i];if(r.status!=="fulfilled"){console.error(source+" fetch failed:",r.reason);return}
@@ -438,6 +688,7 @@ async function refreshProduction(){
     renderProductionTeam(key,t,selectTeamEvent(t,r.value));
     const g=STATE.games[key];
     if(g&&g.state==="in"&&t.sport==="football")enrich.push(enrichLiveFootballGame(g,source));
+    if(g&&g.state==="in"&&t.sport==="basketball")enrich.push(enrichLiveBasketballGame(g));
    });
   });
   if(enrich.length)await Promise.allSettled(enrich);
@@ -464,13 +715,22 @@ function renderFootballPreview(){
  const g=normalizeEvent({id:"preview-football",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in",shortDetail:"Q4 12:46"}},competitions:[{competitors:[away,home],situation:{down:3,distance:12,yardLine:49,possession:"MIN",awayTimeouts:3,homeTimeouts:3,lastPlay:{text:"Darnold pass complete to Jefferson for 18 yards to the DET 49"}}}]},"football");
  renderLiveTakeover([{sport:"football",game:g}]);
 }
+
+function renderBasketballPreview(){
+ hideAllCards();
+ const mk=(abbr,homeAway,score,logo,timeouts)=>({id:abbr,homeAway,score:String(score),timeoutsRemaining:timeouts,team:{id:abbr,abbreviation:abbr,displayName:abbr,logo}});
+ const away=mk("MIN","away",108,"https://a.espncdn.com/i/teamlogos/wnba/500/min.png",3),home=mk("IND","home",78,"https://a.espncdn.com/i/teamlogos/wnba/500/ind.png",2);
+ const g=normalizeEvent({id:"preview-basketball",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in",shortDetail:"Q4 12:46"}},competitions:[{competitors:[away,home],situation:{shotClock:16,awayFouls:5,homeFouls:3,awayTimeouts:3,homeTimeouts:2}}]},"basketball");
+ renderLiveTakeover([{sport:"basketball",game:g}]);
+}
+
 function renderStickyPreview(){
  hideAllCards();const data={tigers:["CLE","DET","Tonight • 7:10 PM"],giants:["SF","LAD","Tonight • 10:10 PM"],lions:["DET","CHI","Sunday • 1:00 PM"],commanders:["WSH","DAL","Sunday • 4:25 PM"],michigan:["MICH","WIS","Saturday • 12:00 PM"],msu:["MSU","IOWA","Saturday • 3:30 PM"]};
  Object.entries(data).forEach(([k,v])=>{showCard(k);setText(k+"-game",v[0]+" @ "+v[1]);setStatus(k,"scheduled","Scheduled");setText(k+"-status-text",v[2])});
 }
 function start(){
  buildCards();hideAllCards();
- if(PREVIEW){document.body.classList.add("preview");if(PREVIEW==="baseball")return renderBaseballPreview();if(PREVIEW==="football")return renderFootballPreview();if(PREVIEW==="sticky")return renderStickyPreview()}
+ if(PREVIEW){document.body.classList.add("preview");if(PREVIEW==="baseball")return renderBaseballPreview();if(PREVIEW==="football")return renderFootballPreview();if(PREVIEW==="basketball")return renderBasketballPreview();if(PREVIEW==="sticky")return renderStickyPreview()}
  refreshProduction();
 }
 start();
