@@ -371,19 +371,73 @@ body.live-takeover #live-takeover-stage{display:flex}
 .live-boards.two .lc-shell{width:min(49vw,18.375vh)}
 
 
-/* SCALE-SAFE CALIBRATION OVERRIDES */
-.lp-atbat-left{left:38.308%}.lp-atbat-right{left:53.597%}.lp-pitcher-left{left:41.006%}.lp-pitcher-right{left:57.195%}
-.lp-ball,.lp-strike,.lp-out{margin-left:0}
-.lp-b1,.lp-b2,.lp-s1,.lp-o1{transform:translate(0,3.477%)}
-.lp-b3,.lp-s2,.lp-o2{transform:translate(10.432%,3.477%)}.lp-o3{transform:translateX(-3.477%)}
-.ls-away-team,.ls-home-team{margin-top:0;transform:translateY(2.928%)}
-.ls-away-score{margin-left:0;transform:translate(1.683%,2.928%)}.ls-home-score{transform:translateY(2.928%)}
-.ls-quarter{transform:translateX(-1.455%)}.ls-clock{transform:translateX(2.225%)}
-.ls-down{margin-left:0;transform:translate(5.067%,5.973%)}.ls-togo{margin-left:0;transform:translate(5.268%,5.973%)}.ls-ballon{margin-left:0;transform:translate(7.843%,5.973%)}
-.ls-possession{transform:translate(5.426%,5.973%)}.ls-last-play{transform:translateY(10.157%)}
-.ls-a1,.ls-a2,.ls-a3{margin-left:0;margin-top:0;transform:translate(2.622%,10.487%)}.ls-h1,.ls-h2,.ls-h3{margin-left:0;margin-top:0;transform:translate(23.597%,10.487%)}
-.lc-fouls{transform:translateY(5.600%)}.lc-a1{transform:translateX(8.719%)}.lc-h1,.lc-h2{transform:translateX(17.438%)}.lc-h3{transform:translateX(-61.035%)}
-.live-boards.two .lp-shell{width:min(49vw,87.05vh)}.live-boards.two .ls-shell{width:min(49vw,98vh)}.live-boards.two .lc-shell{width:min(49vw,130.667vh)}
+/************************************************************
+ * SCALE-SAFE LIVE BOARD SYSTEM — REBUILT
+ * cqw/cqh are relative to each scoreboard's own dimensions.
+ ************************************************************/
+.lp-shell,.ls-shell,.lc-shell{container-type:size}
+
+/* Typography: replace viewport-based clamps with board-relative sizing.
+   Values preserve the approved full-size appearance and continue shrinking. */
+.lp-team{font-size:2.033cqw}
+.lp-cell{font-size:2.213cqw}
+.lp-value{font-size:2.273cqw}
+.lp-half::after{
+ border-left-width:.478cqw;
+ border-right-width:.478cqw;
+ border-top-width:.718cqw;
+}
+.lp-half.top::after{border-top-width:0;border-bottom-width:.718cqw}
+
+.ls-score{font-size:3.608cqw}
+.ls-quarter{font-size:3.044cqw}
+.ls-clock{font-size:3.157cqw}
+.ls-down,.ls-togo,.ls-ballon{font-size:2.593cqw}
+.ls-possession{font-size:1.353cqw}
+.ls-last-play{font-size:1.127cqw}
+
+/* Restore approved Stadium pixel calibration as board-relative units.
+   1 cqw = 1% of 1774 source width; 1 cqh = 1% of 887 source height. */
+.ls-away-team,.ls-home-team{margin-top:-.338cqh;transform:translateY(.676cqh)}
+.ls-away-score{margin-left:.169cqw;transform:translateY(.338cqh)}
+.ls-home-score{transform:translateY(.338cqh)}
+.ls-clock{transform:translateX(.338cqw)}
+.ls-quarter{transform:translateX(-.113cqw)}
+.ls-down{margin-left:-.113cqw;transform:translate(.338cqw,.451cqh)}
+.ls-togo{margin-left:-.056cqw;transform:translate(.338cqw,.451cqh)}
+.ls-ballon{margin-left:.113cqw;transform:translate(.338cqw,.451cqh)}
+.ls-possession{transform:translate(.507cqw,.451cqh)}
+.ls-last-play{transform:translateY(.564cqh)}
+.ls-a1,.ls-a2,.ls-a3{
+ margin-left:.113cqw;margin-top:.338cqh;
+ transform:translate(-.056cqw,.113cqh)
+}
+.ls-h1,.ls-h2,.ls-h3{
+ margin-left:.507cqw;margin-top:.225cqh;
+ transform:translateY(.225cqh)
+}
+
+/* Court typography from approved v13. No fixed px floors. */
+.lc-score{font-size:1.514cqw;letter-spacing:-.035em;white-space:nowrap}
+.lc-quarter{font-size:1.025cqw}
+.lc-clock{font-size:1.172cqw;letter-spacing:0;white-space:nowrap}
+.lc-shot-clock{font-size:.977cqw}
+.lc-fouls{font-size:.488cqw;transform:translateY(.260cqh)}
+
+/* Court timeout calibration. Preserve v13 full-size positions while scaling. */
+.lc-a1{transform:translateX(.049cqw)}
+.lc-h1,.lc-h2{transform:translateX(.098cqw)}
+.lc-h3{transform:translateX(-.342cqw)}
+
+/* Board glow also scales with its board. */
+.lc-timeout{box-shadow:0 0 .22cqw .04cqw #f0b13b}
+.lp-bulb{box-shadow:0 0 1.1cqw .25cqw currentColor}
+.lp-base{box-shadow:0 0 .9cqw .16cqw #f0b13b}
+
+/* Two-board fit. Court is panoramic, so it may be wider for the same height. */
+.live-boards.two .lp-shell{width:min(49vw,87.05vh)}
+.live-boards.two .ls-shell{width:min(49vw,98vh)}
+.live-boards.two .lc-shell{width:min(49vw,130.667vh)}
 
 </style>
 </head>
@@ -740,15 +794,29 @@ function renderBasketballPreview(){
 }
 
 
-function renderDualPreview(){
+function makeDualFootball(){
+ const a={id:"MIN",homeAway:"away",score:"7",timeoutsRemaining:3,team:{id:"MIN",abbreviation:"MIN",displayName:"Minnesota Vikings",logo:"https://a.espncdn.com/i/teamlogos/nfl/500/min.png"}};
+ const h={id:"DET",homeAway:"home",score:"31",timeoutsRemaining:3,team:{id:"DET",abbreviation:"DET",displayName:"Detroit Lions",logo:"https://a.espncdn.com/i/teamlogos/nfl/500/det.png"}};
+ return normalizeEvent({id:"dual-football",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in"}},competitions:[{competitors:[a,h],situation:{down:3,distance:12,yardLine:49,possession:"MIN",awayTimeouts:3,homeTimeouts:3,lastPlay:{text:"Darnold pass complete to Jefferson for 18 yards to the DET 49"}}}]},"football");
+}
+function makeDualBasketball(){
+ const a={id:"MIN",homeAway:"away",score:"108",timeoutsRemaining:3,team:{id:"MIN",abbreviation:"MIN",displayName:"Minnesota Lynx",logo:"https://a.espncdn.com/i/teamlogos/wnba/500/min.png"}};
+ const h={id:"IND",homeAway:"home",score:"78",timeoutsRemaining:2,team:{id:"IND",abbreviation:"IND",displayName:"Indiana Fever",logo:"https://a.espncdn.com/i/teamlogos/wnba/500/ind.png"}};
+ return normalizeEvent({id:"dual-basketball",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in"}},competitions:[{competitors:[a,h],situation:{shotClock:16,awayFouls:5,homeFouls:3,awayTimeouts:3,homeTimeouts:2}}]},"basketball");
+}
+function makeDualBaseball(){
+ const mk=(abbr,homeAway,score,logo,innings,h,e)=>({homeAway,score:String(score),team:{abbreviation:abbr,displayName:abbr,logo},linescores:innings.map(value=>({value})),statistics:[{name:"hits",displayValue:String(h)},{name:"errors",displayValue:String(e)}]});
+ const a=mk("CLE","away",2,"https://a.espncdn.com/i/teamlogos/mlb/500/cle.png",[0,0,1,0,1,0],5,0);
+ const h=mk("DET","home",4,"https://a.espncdn.com/i/teamlogos/mlb/500/det.png",[1,0,0,2,0,1],7,1);
+ return normalizeEvent({id:"dual-baseball",date:new Date().toISOString(),status:{period:6,type:{state:"in"}},competitions:[{competitors:[a,h],situation:{balls:2,strikes:1,outs:1,inning:6,isTopInning:false,onFirst:true,onSecond:false,onThird:true,batter:{jersey:"24"},pitcher:{jersey:"29"}}}]},"baseball");
+}
+function renderDualPreview(kind){
  hideAllCards();
- const fa={id:"MIN",homeAway:"away",score:"7",timeoutsRemaining:3,team:{id:"MIN",abbreviation:"MIN",displayName:"Minnesota Vikings",logo:"https://a.espncdn.com/i/teamlogos/nfl/500/min.png"}};
- const fh={id:"DET",homeAway:"home",score:"31",timeoutsRemaining:3,team:{id:"DET",abbreviation:"DET",displayName:"Detroit Lions",logo:"https://a.espncdn.com/i/teamlogos/nfl/500/det.png"}};
- const fg=normalizeEvent({id:"preview-dual-football",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in"}},competitions:[{competitors:[fa,fh],situation:{down:3,distance:12,yardLine:49,possession:"MIN",awayTimeouts:3,homeTimeouts:3,lastPlay:{text:"Darnold pass complete to Jefferson for 18 yards to the DET 49"}}}]},"football");
- const ba={id:"MIN",homeAway:"away",score:"108",timeoutsRemaining:3,team:{id:"MIN",abbreviation:"MIN",displayName:"Minnesota Lynx",logo:"https://a.espncdn.com/i/teamlogos/wnba/500/min.png"}};
- const bh={id:"IND",homeAway:"home",score:"78",timeoutsRemaining:2,team:{id:"IND",abbreviation:"IND",displayName:"Indiana Fever",logo:"https://a.espncdn.com/i/teamlogos/wnba/500/ind.png"}};
- const bg=normalizeEvent({id:"preview-dual-basketball",date:new Date().toISOString(),status:{period:4,displayClock:"12:46",type:{state:"in"}},competitions:[{competitors:[ba,bh],situation:{shotClock:16,awayFouls:5,homeFouls:3,awayTimeouts:3,homeTimeouts:2}}]},"basketball");
- renderLiveTakeover([{sport:"football",game:fg},{sport:"basketball",game:bg}]);
+ let items;
+ if(kind==="dual-park-court")items=[{sport:"baseball",game:makeDualBaseball()},{sport:"basketball",game:makeDualBasketball()}];
+ else if(kind==="dual-park-stadium")items=[{sport:"baseball",game:makeDualBaseball()},{sport:"football",game:makeDualFootball()}];
+ else items=[{sport:"football",game:makeDualFootball()},{sport:"basketball",game:makeDualBasketball()}];
+ renderLiveTakeover(items);
 }
 
 function renderStickyPreview(){
@@ -757,7 +825,7 @@ function renderStickyPreview(){
 }
 function start(){
  buildCards();hideAllCards();
- if(PREVIEW){document.body.classList.add("preview");if(PREVIEW==="baseball")return renderBaseballPreview();if(PREVIEW==="football")return renderFootballPreview();if(PREVIEW==="basketball")return renderBasketballPreview();if(PREVIEW==="dual")return renderDualPreview();if(PREVIEW==="sticky")return renderStickyPreview()}
+ if(PREVIEW){document.body.classList.add("preview");if(PREVIEW==="baseball")return renderBaseballPreview();if(PREVIEW==="football")return renderFootballPreview();if(PREVIEW==="basketball")return renderBasketballPreview();if(PREVIEW==="dual"||PREVIEW==="dual-stadium-court"||PREVIEW==="dual-park-court"||PREVIEW==="dual-park-stadium")return renderDualPreview(PREVIEW);if(PREVIEW==="sticky")return renderStickyPreview()}
  refreshProduction();
 }
 start();
