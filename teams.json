@@ -1,11 +1,4767 @@
 {
-  "generated": null,
-  "source": "ESPN",
+  "generated": "2026-09-26T03:16:33.841679+00:00",
+  "source": "ESPN Core API",
   "leagues": {
-    "MLB": [],
-    "NFL": [],
-    "WNBA": [],
-    "CFB": [],
+    "MLB": [
+      {
+        "name": "Arizona Diamondbacks",
+        "abbr": "ARI",
+        "id": "29",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/ari.png"
+      },
+      {
+        "name": "Athletics",
+        "abbr": "ATH",
+        "id": "11",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/ath.png"
+      },
+      {
+        "name": "Atlanta Braves",
+        "abbr": "ATL",
+        "id": "15",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/atl.png"
+      },
+      {
+        "name": "Baltimore Orioles",
+        "abbr": "BAL",
+        "id": "1",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/bal.png"
+      },
+      {
+        "name": "Boston Red Sox",
+        "abbr": "BOS",
+        "id": "2",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/bos.png"
+      },
+      {
+        "name": "Chicago Cubs",
+        "abbr": "CHC",
+        "id": "16",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/chc.png"
+      },
+      {
+        "name": "Chicago White Sox",
+        "abbr": "CHW",
+        "id": "4",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/chw.png"
+      },
+      {
+        "name": "Cincinnati Reds",
+        "abbr": "CIN",
+        "id": "17",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/cin.png"
+      },
+      {
+        "name": "Cleveland Guardians",
+        "abbr": "CLE",
+        "id": "5",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/cle.png"
+      },
+      {
+        "name": "Colorado Rockies",
+        "abbr": "COL",
+        "id": "27",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/col.png"
+      },
+      {
+        "name": "Detroit Tigers",
+        "abbr": "DET",
+        "id": "6",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/det.png"
+      },
+      {
+        "name": "Houston Astros",
+        "abbr": "HOU",
+        "id": "18",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/hou.png"
+      },
+      {
+        "name": "Kansas City Royals",
+        "abbr": "KC",
+        "id": "7",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/kc.png"
+      },
+      {
+        "name": "Los Angeles Angels",
+        "abbr": "LAA",
+        "id": "3",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/laa.png"
+      },
+      {
+        "name": "Los Angeles Dodgers",
+        "abbr": "LAD",
+        "id": "19",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/lad.png"
+      },
+      {
+        "name": "Miami Marlins",
+        "abbr": "MIA",
+        "id": "28",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/mia.png"
+      },
+      {
+        "name": "Milwaukee Brewers",
+        "abbr": "MIL",
+        "id": "8",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/mil.png"
+      },
+      {
+        "name": "Minnesota Twins",
+        "abbr": "MIN",
+        "id": "9",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/min.png"
+      },
+      {
+        "name": "New York Mets",
+        "abbr": "NYM",
+        "id": "21",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/nym.png"
+      },
+      {
+        "name": "New York Yankees",
+        "abbr": "NYY",
+        "id": "10",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/nyy.png"
+      },
+      {
+        "name": "Philadelphia Phillies",
+        "abbr": "PHI",
+        "id": "22",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/phi.png"
+      },
+      {
+        "name": "Pittsburgh Pirates",
+        "abbr": "PIT",
+        "id": "23",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/pit.png"
+      },
+      {
+        "name": "San Diego Padres",
+        "abbr": "SD",
+        "id": "25",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/sd.png"
+      },
+      {
+        "name": "San Francisco Giants",
+        "abbr": "SF",
+        "id": "26",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/sf.png"
+      },
+      {
+        "name": "Seattle Mariners",
+        "abbr": "SEA",
+        "id": "12",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/sea.png"
+      },
+      {
+        "name": "St. Louis Cardinals",
+        "abbr": "STL",
+        "id": "24",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/stl.png"
+      },
+      {
+        "name": "Tampa Bay Rays",
+        "abbr": "TB",
+        "id": "30",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/tb.png"
+      },
+      {
+        "name": "Texas Rangers",
+        "abbr": "TEX",
+        "id": "13",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/tex.png"
+      },
+      {
+        "name": "Toronto Blue Jays",
+        "abbr": "TOR",
+        "id": "14",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/tor.png"
+      },
+      {
+        "name": "Washington Nationals",
+        "abbr": "WSH",
+        "id": "20",
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/wsh.png"
+      }
+    ],
+    "NFL": [
+      {
+        "name": "Arizona Cardinals",
+        "abbr": "ARI",
+        "id": "22",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/ari.png"
+      },
+      {
+        "name": "Atlanta Falcons",
+        "abbr": "ATL",
+        "id": "1",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/atl.png"
+      },
+      {
+        "name": "Baltimore Ravens",
+        "abbr": "BAL",
+        "id": "33",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/bal.png"
+      },
+      {
+        "name": "Buffalo Bills",
+        "abbr": "BUF",
+        "id": "2",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/buf.png"
+      },
+      {
+        "name": "Carolina Panthers",
+        "abbr": "CAR",
+        "id": "29",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/car.png"
+      },
+      {
+        "name": "Chicago Bears",
+        "abbr": "CHI",
+        "id": "3",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/chi.png"
+      },
+      {
+        "name": "Cincinnati Bengals",
+        "abbr": "CIN",
+        "id": "4",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/cin.png"
+      },
+      {
+        "name": "Cleveland Browns",
+        "abbr": "CLE",
+        "id": "5",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/cle.png"
+      },
+      {
+        "name": "Dallas Cowboys",
+        "abbr": "DAL",
+        "id": "6",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/dal.png"
+      },
+      {
+        "name": "Denver Broncos",
+        "abbr": "DEN",
+        "id": "7",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/den.png"
+      },
+      {
+        "name": "Detroit Lions",
+        "abbr": "DET",
+        "id": "8",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/det.png"
+      },
+      {
+        "name": "Green Bay Packers",
+        "abbr": "GB",
+        "id": "9",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/gb.png"
+      },
+      {
+        "name": "Houston Texans",
+        "abbr": "HOU",
+        "id": "34",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/hou.png"
+      },
+      {
+        "name": "Indianapolis Colts",
+        "abbr": "IND",
+        "id": "11",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/ind.png"
+      },
+      {
+        "name": "Jacksonville Jaguars",
+        "abbr": "JAX",
+        "id": "30",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/jax.png"
+      },
+      {
+        "name": "Kansas City Chiefs",
+        "abbr": "KC",
+        "id": "12",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/kc.png"
+      },
+      {
+        "name": "Las Vegas Raiders",
+        "abbr": "LV",
+        "id": "13",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/lv.png"
+      },
+      {
+        "name": "Los Angeles Chargers",
+        "abbr": "LAC",
+        "id": "24",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/lac.png"
+      },
+      {
+        "name": "Los Angeles Rams",
+        "abbr": "LAR",
+        "id": "14",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/lar.png"
+      },
+      {
+        "name": "Miami Dolphins",
+        "abbr": "MIA",
+        "id": "15",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/mia.png"
+      },
+      {
+        "name": "Minnesota Vikings",
+        "abbr": "MIN",
+        "id": "16",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/min.png"
+      },
+      {
+        "name": "New England Patriots",
+        "abbr": "NE",
+        "id": "17",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/ne.png"
+      },
+      {
+        "name": "New Orleans Saints",
+        "abbr": "NO",
+        "id": "18",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/no.png"
+      },
+      {
+        "name": "New York Giants",
+        "abbr": "NYG",
+        "id": "19",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/nyg.png"
+      },
+      {
+        "name": "New York Jets",
+        "abbr": "NYJ",
+        "id": "20",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/nyj.png"
+      },
+      {
+        "name": "Philadelphia Eagles",
+        "abbr": "PHI",
+        "id": "21",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/phi.png"
+      },
+      {
+        "name": "Pittsburgh Steelers",
+        "abbr": "PIT",
+        "id": "23",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/pit.png"
+      },
+      {
+        "name": "San Francisco 49ers",
+        "abbr": "SF",
+        "id": "25",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/sf.png"
+      },
+      {
+        "name": "Seattle Seahawks",
+        "abbr": "SEA",
+        "id": "26",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/sea.png"
+      },
+      {
+        "name": "Tampa Bay Buccaneers",
+        "abbr": "TB",
+        "id": "27",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/tb.png"
+      },
+      {
+        "name": "Tennessee Titans",
+        "abbr": "TEN",
+        "id": "10",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/ten.png"
+      },
+      {
+        "name": "Washington Commanders",
+        "abbr": "WSH",
+        "id": "28",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/wsh.png"
+      }
+    ],
+    "WNBA": [
+      {
+        "name": "Atlanta Dream",
+        "abbr": "ATL",
+        "id": "20",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/atl.png"
+      },
+      {
+        "name": "Chicago Sky",
+        "abbr": "CHI",
+        "id": "19",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/chi.png"
+      },
+      {
+        "name": "Connecticut Sun",
+        "abbr": "CON",
+        "id": "18",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/con.png"
+      },
+      {
+        "name": "Dallas Wings",
+        "abbr": "DAL",
+        "id": "3",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/dal.png"
+      },
+      {
+        "name": "Golden State Valkyries",
+        "abbr": "GS",
+        "id": "129689",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/gs.png"
+      },
+      {
+        "name": "Indiana Fever",
+        "abbr": "IND",
+        "id": "5",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/ind.png"
+      },
+      {
+        "name": "JAPAN",
+        "abbr": "JPN",
+        "id": "17475",
+        "logo": ""
+      },
+      {
+        "name": "Las Vegas Aces",
+        "abbr": "LV",
+        "id": "17",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/lv.png"
+      },
+      {
+        "name": "Los Angeles Sparks",
+        "abbr": "LA",
+        "id": "6",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/la.png"
+      },
+      {
+        "name": "Minnesota Lynx",
+        "abbr": "MIN",
+        "id": "8",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/min.png"
+      },
+      {
+        "name": "NIGERIA",
+        "abbr": "NIGER",
+        "id": "17476",
+        "logo": ""
+      },
+      {
+        "name": "New York Liberty",
+        "abbr": "NY",
+        "id": "9",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/ny.png"
+      },
+      {
+        "name": "Phoenix Mercury",
+        "abbr": "PHX",
+        "id": "11",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/phx.png"
+      },
+      {
+        "name": "Portland Fire",
+        "abbr": "POR",
+        "id": "132052",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/por.png"
+      },
+      {
+        "name": "Seattle Storm",
+        "abbr": "SEA",
+        "id": "14",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/sea.png"
+      },
+      {
+        "name": "Toronto Tempo",
+        "abbr": "TOR",
+        "id": "131935",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/tor.png"
+      },
+      {
+        "name": "Washington Mystics",
+        "abbr": "WSH",
+        "id": "16",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/wsh.png"
+      }
+    ],
+    "CFB": [
+      {
+        "name": "Abilene Christian Wildcats",
+        "abbr": "ACU",
+        "id": "2000",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2000.png"
+      },
+      {
+        "name": "Adams State Grizzlies",
+        "abbr": "ADA",
+        "id": "2001",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2001.png"
+      },
+      {
+        "name": "Adrian Bulldogs",
+        "abbr": "ADR",
+        "id": "2003",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2003.png"
+      },
+      {
+        "name": "Air Force Falcons",
+        "abbr": "AFA",
+        "id": "2005",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2005.png"
+      },
+      {
+        "name": "Akron Zips",
+        "abbr": "AKR",
+        "id": "2006",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2006.png"
+      },
+      {
+        "name": "Alabama A&M Bulldogs",
+        "abbr": "AAMU",
+        "id": "2010",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2010.png"
+      },
+      {
+        "name": "Alabama Crimson Tide",
+        "abbr": "ALA",
+        "id": "333",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/333.png"
+      },
+      {
+        "name": "Alabama State Hornets",
+        "abbr": "ALST",
+        "id": "2011",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2011.png"
+      },
+      {
+        "name": "Albany State Golden Rams",
+        "abbr": "ALBS",
+        "id": "2013",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2013.png"
+      },
+      {
+        "name": "Albion Britons",
+        "abbr": "ALBI",
+        "id": "2790",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2790.png"
+      },
+      {
+        "name": "Albright Lions",
+        "abbr": "ALB",
+        "id": "2015",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2015.png"
+      },
+      {
+        "name": "Alcorn State Braves",
+        "abbr": "ALCN",
+        "id": "2016",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2016.png"
+      },
+      {
+        "name": "Alfred State College Pioneers",
+        "abbr": "ALF",
+        "id": "3162",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/3162.png"
+      },
+      {
+        "name": "Allegheny Gators",
+        "abbr": "ALL",
+        "id": "2018",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2018.png"
+      },
+      {
+        "name": "Allen Yellow Jackets",
+        "abbr": "ALN",
+        "id": "2019",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2019.png"
+      },
+      {
+        "name": "Alma College Scots",
+        "abbr": "ALM",
+        "id": "2800",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2800.png"
+      },
+      {
+        "name": "Alvernia Golden Wolves",
+        "abbr": "ALV",
+        "id": "111674",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/111674.png"
+      },
+      {
+        "name": "American International Yellow Jackets",
+        "abbr": "AIC",
+        "id": "2022",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2022.png"
+      },
+      {
+        "name": "Amherst Mammoths",
+        "abbr": "AMH",
+        "id": "7",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/7.png"
+      },
+      {
+        "name": "Andrew Fighting Tigers",
+        "abbr": "AND",
+        "id": "134002",
+        "logo": ""
+      },
+      {
+        "name": "Angelo State Rams",
+        "abbr": "ANG",
+        "id": "2025",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2025.png"
+      },
+      {
+        "name": "Apprentice School Builders",
+        "abbr": "APP",
+        "id": "3111",
+        "logo": ""
+      },
+      {
+        "name": "Arizona Christian Firestorm",
+        "abbr": "AZCH",
+        "id": "108358",
+        "logo": ""
+      },
+      {
+        "name": "Arizona State Sun Devils",
+        "abbr": "ASU",
+        "id": "9",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/9.png"
+      },
+      {
+        "name": "Arizona Wildcats",
+        "abbr": "ARIZ",
+        "id": "12",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/12.png"
+      },
+      {
+        "name": "Arkansas Baptist Buffaloes",
+        "abbr": "ARBA",
+        "id": "124386",
+        "logo": ""
+      },
+      {
+        "name": "Arkansas State Red Wolves",
+        "abbr": "ARST",
+        "id": "2032",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2032.png"
+      },
+      {
+        "name": "Arkansas Tech Wonder Boys",
+        "abbr": "ARK",
+        "id": "2033",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2033.png"
+      },
+      {
+        "name": "Arkansas-Pine Bluff Golden Lions",
+        "abbr": "UAPB",
+        "id": "2029",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2029.png"
+      },
+      {
+        "name": "Army Black Knights",
+        "abbr": "ARMY",
+        "id": "349",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/349.png"
+      },
+      {
+        "name": "Ashland Eagles",
+        "abbr": "ASH",
+        "id": "308",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/308.png"
+      },
+      {
+        "name": "Assumption Greyhounds",
+        "abbr": "ASP",
+        "id": "2038",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2038.png"
+      },
+      {
+        "name": "Auburn Tigers",
+        "abbr": "AUB",
+        "id": "2",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2.png"
+      },
+      {
+        "name": "Augsburg Auggies",
+        "abbr": "AUG",
+        "id": "124",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/124.png"
+      },
+      {
+        "name": "Augustana (IL) Vikings",
+        "abbr": "AUGC",
+        "id": "2042",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2042.png"
+      },
+      {
+        "name": "Augustana (SD) Vikings",
+        "abbr": "AUSD",
+        "id": "2043",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2043.png"
+      },
+      {
+        "name": "Aurora Spartans",
+        "abbr": "AUR",
+        "id": "2044",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2044.png"
+      },
+      {
+        "name": "Austin 'Roos",
+        "abbr": "AUS",
+        "id": "2045",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2045.png"
+      },
+      {
+        "name": "Austin Peay Governors",
+        "abbr": "APSU",
+        "id": "2046",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2046.png"
+      },
+      {
+        "name": "Ave Maria Gyrenes",
+        "abbr": "AVE",
+        "id": "3178",
+        "logo": ""
+      },
+      {
+        "name": "Avila College Eagles",
+        "abbr": "AVI",
+        "id": "2048",
+        "logo": ""
+      },
+      {
+        "name": "Azusa Pacific Cougars",
+        "abbr": "APU",
+        "id": "2049",
+        "logo": "https://a.espncdn.com/guid/0aa67bb7-1cce-622a-b14f-d2a82aa2349b/logos/default.png"
+      },
+      {
+        "name": "BYU Cougars",
+        "abbr": "BYU",
+        "id": "252",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/252.png"
+      },
+      {
+        "name": "Baker University Baker",
+        "abbr": "BAK",
+        "id": "488",
+        "logo": ""
+      },
+      {
+        "name": "Baldwin Wallace Yellow Jackets",
+        "abbr": "BALW",
+        "id": "188",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/188.png"
+      },
+      {
+        "name": "Ball State Cardinals",
+        "abbr": "BALL",
+        "id": "2050",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2050.png"
+      },
+      {
+        "name": "Barber-Scotia College Barber-Scotia",
+        "abbr": "BARBE",
+        "id": "17151",
+        "logo": ""
+      },
+      {
+        "name": "Barton Bulldogs",
+        "abbr": "BAR",
+        "id": "122666",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/122666.png"
+      },
+      {
+        "name": "Bates College Bobcats",
+        "abbr": "BAT",
+        "id": "121",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/121.png"
+      },
+      {
+        "name": "Baylor Bears",
+        "abbr": "BAY",
+        "id": "239",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/239.png"
+      },
+      {
+        "name": "Bccc",
+        "abbr": "BCCC",
+        "id": "110963",
+        "logo": ""
+      },
+      {
+        "name": "Belhaven Blazers",
+        "abbr": "BEL",
+        "id": "2056",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2056.png"
+      },
+      {
+        "name": "Bemidji State Beavers",
+        "abbr": "BST",
+        "id": "132",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/132.png"
+      },
+      {
+        "name": "Benedict Tigers",
+        "abbr": "BEN",
+        "id": "490",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/490.png"
+      },
+      {
+        "name": "Benedictine Ravens",
+        "abbr": "BENC",
+        "id": "16111",
+        "logo": ""
+      },
+      {
+        "name": "Bentley Falcons",
+        "abbr": "BENT",
+        "id": "2060",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2060.png"
+      },
+      {
+        "name": "Berry College Vikings",
+        "abbr": "BER",
+        "id": "2757",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2757.png"
+      },
+      {
+        "name": "Bethany (KS) Swedes",
+        "abbr": "BYKS",
+        "id": "492",
+        "logo": ""
+      },
+      {
+        "name": "Bethel (MN) Royals",
+        "abbr": "BET",
+        "id": "2802",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2802.png"
+      },
+      {
+        "name": "Bethel (TN) Wildcats",
+        "abbr": "BTTN",
+        "id": "2064",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2064.png"
+      },
+      {
+        "name": "Bethune-Cookman Wildcats",
+        "abbr": "BCU",
+        "id": "2065",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2065.png"
+      },
+      {
+        "name": "Black Hills State Yellow Jackets",
+        "abbr": "BHS",
+        "id": "2069",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2069.png"
+      },
+      {
+        "name": "Bloomsburg Huskies",
+        "abbr": "BLOM",
+        "id": "2071",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2071.png"
+      },
+      {
+        "name": "Bluefield State University Big Blue",
+        "abbr": "BLST",
+        "id": "124180",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/124180.png"
+      },
+      {
+        "name": "Bluffton Beavers",
+        "abbr": "BLU",
+        "id": "2074",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2074.png"
+      },
+      {
+        "name": "Boise State Broncos",
+        "abbr": "BOIS",
+        "id": "68",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/68.png"
+      },
+      {
+        "name": "Boston College Eagles",
+        "abbr": "BC",
+        "id": "103",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/103.png"
+      },
+      {
+        "name": "Bowdoin Polar Bears",
+        "abbr": "BOW",
+        "id": "340",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/340.png"
+      },
+      {
+        "name": "Bowie State Bulldogs",
+        "abbr": "BSU",
+        "id": "2075",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2075.png"
+      },
+      {
+        "name": "Bowling Green Falcons",
+        "abbr": "BGSU",
+        "id": "189",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/189.png"
+      },
+      {
+        "name": "Brevard College Tornados",
+        "abbr": "BRE",
+        "id": "2913",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2913.png"
+      },
+      {
+        "name": "British Columbia British Col",
+        "abbr": "BRI",
+        "id": "2080",
+        "logo": ""
+      },
+      {
+        "name": "Brockport Golden Eagles",
+        "abbr": "THE",
+        "id": "2781",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2781.png"
+      },
+      {
+        "name": "Brown Bears",
+        "abbr": "BRWN",
+        "id": "225",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/225.png"
+      },
+      {
+        "name": "Bryant Bulldogs",
+        "abbr": "BRY",
+        "id": "2803",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2803.png"
+      },
+      {
+        "name": "Bucknell Bison",
+        "abbr": "BUCK",
+        "id": "2083",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2083.png"
+      },
+      {
+        "name": "Buena Vista Beavers",
+        "abbr": "BUE",
+        "id": "63",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/63.png"
+      },
+      {
+        "name": "Buffalo Bulls",
+        "abbr": "BUFF",
+        "id": "2084",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2084.png"
+      },
+      {
+        "name": "Buffalo State Bengals",
+        "abbr": "BUF",
+        "id": "2085",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2085.png"
+      },
+      {
+        "name": "Butler Bulldogs",
+        "abbr": "BTLR",
+        "id": "2086",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2086.png"
+      },
+      {
+        "name": "CSU Pueblo ThunderWolves",
+        "abbr": "CSUP",
+        "id": "2570",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2570.png"
+      },
+      {
+        "name": "Cal Lutheran Kingsmen",
+        "abbr": "CLU",
+        "id": "2094",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2094.png"
+      },
+      {
+        "name": "Cal Poly Mustangs",
+        "abbr": "CP",
+        "id": "13",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/13.png"
+      },
+      {
+        "name": "Calgary Dinosaurs",
+        "abbr": "CDD",
+        "id": "100961",
+        "logo": ""
+      },
+      {
+        "name": "California (PA) Vulcans",
+        "abbr": "PWC",
+        "id": "2858",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2858.png"
+      },
+      {
+        "name": "Calvin University Knights",
+        "abbr": "CAL",
+        "id": "129738",
+        "logo": ""
+      },
+      {
+        "name": "Campbell Fighting Camels",
+        "abbr": "CAM",
+        "id": "2097",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2097.png"
+      },
+      {
+        "name": "Campbellsville Tigers",
+        "abbr": "CBVU",
+        "id": "2098",
+        "logo": ""
+      },
+      {
+        "name": "Capital Comets",
+        "abbr": "CAP",
+        "id": "424",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/424.png"
+      },
+      {
+        "name": "Carthage Firebirds",
+        "abbr": "CAR",
+        "id": "2106",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2106.png"
+      },
+      {
+        "name": "Case Western Reserve Spartans",
+        "abbr": "CAS",
+        "id": "2963",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2963.png"
+      },
+      {
+        "name": "Catholic Cardinals",
+        "abbr": "CAT",
+        "id": "2108",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2108.png"
+      },
+      {
+        "name": "Centenary Gentlemen",
+        "abbr": "CEN",
+        "id": "101442",
+        "logo": "https://a.espncdn.com/guid/9840c56b-7307-362b-9947-6ce6f5161ebd/logos/default.png"
+      },
+      {
+        "name": "Central Arkansas Bears",
+        "abbr": "CARK",
+        "id": "2110",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2110.png"
+      },
+      {
+        "name": "Central Connecticut Blue Devils",
+        "abbr": "CCSU",
+        "id": "2115",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2115.png"
+      },
+      {
+        "name": "Central International University Cardinals",
+        "abbr": "CINU",
+        "id": "109424",
+        "logo": ""
+      },
+      {
+        "name": "Central Michigan Chippewas",
+        "abbr": "CMU",
+        "id": "2117",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2117.png"
+      },
+      {
+        "name": "Central Missouri Mules",
+        "abbr": "CENM",
+        "id": "2118",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2118.png"
+      },
+      {
+        "name": "Central Oklahoma Bronchos",
+        "abbr": "CENO",
+        "id": "2122",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2122.png"
+      },
+      {
+        "name": "Chadron State Eagles",
+        "abbr": "CHA",
+        "id": "2123",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2123.png"
+      },
+      {
+        "name": "Chapman Panthers",
+        "abbr": "CHAP",
+        "id": "411",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/411.png"
+      },
+      {
+        "name": "Charleston Southern Buccaneers",
+        "abbr": "CHSO",
+        "id": "2127",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2127.png"
+      },
+      {
+        "name": "Charlotte 49ers",
+        "abbr": "CLT",
+        "id": "2429",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2429.png"
+      },
+      {
+        "name": "Chattanooga Mocs",
+        "abbr": "UTC",
+        "id": "236",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/236.png"
+      },
+      {
+        "name": "Chicago Maroons",
+        "abbr": "CHI",
+        "id": "80",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/80.png"
+      },
+      {
+        "name": "Chicago State Cougars",
+        "abbr": "CHST",
+        "id": "2130",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2130.png"
+      },
+      {
+        "name": "Chowan Hawks",
+        "abbr": "CHO",
+        "id": "2804",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2804.png"
+      },
+      {
+        "name": "Christopher Newport Captains",
+        "abbr": "CHR",
+        "id": "3112",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/3112.png"
+      },
+      {
+        "name": "Cincinnati Bearcats",
+        "abbr": "CIN",
+        "id": "2132",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2132.png"
+      },
+      {
+        "name": "Claremont Mudd Scripps Stags",
+        "abbr": "CMS",
+        "id": "17",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/17.png"
+      },
+      {
+        "name": "Clark Atlanta Panthers",
+        "abbr": "CLA",
+        "id": "2805",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2805.png"
+      },
+      {
+        "name": "Clemson Tigers",
+        "abbr": "CLEM",
+        "id": "228",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/228.png"
+      },
+      {
+        "name": "Coast Guard Bears",
+        "abbr": "CGA",
+        "id": "2557",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2557.png"
+      },
+      {
+        "name": "Coastal Carolina Chanticleers",
+        "abbr": "CCU",
+        "id": "324",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/324.png"
+      },
+      {
+        "name": "Coe College Kohawks",
+        "abbr": "COE",
+        "id": "2141",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2141.png"
+      },
+      {
+        "name": "Cole College Jaguars",
+        "abbr": "COL",
+        "id": "3210",
+        "logo": ""
+      },
+      {
+        "name": "Colgate Raiders",
+        "abbr": "COLG",
+        "id": "2142",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2142.png"
+      },
+      {
+        "name": "College of Faith - Charlotte Saints",
+        "abbr": "FCH",
+        "id": "3253",
+        "logo": ""
+      },
+      {
+        "name": "College of Faith Crusaders",
+        "abbr": "FAI",
+        "id": "3211",
+        "logo": ""
+      },
+      {
+        "name": "College of Idaho Yotes",
+        "abbr": "COI",
+        "id": "108382",
+        "logo": ""
+      },
+      {
+        "name": "Colorado Buffaloes",
+        "abbr": "COLO",
+        "id": "38",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/38.png"
+      },
+      {
+        "name": "Colorado Mesa Mavericks",
+        "abbr": "MES",
+        "id": "11",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/11.png"
+      },
+      {
+        "name": "Colorado State Rams",
+        "abbr": "CSU",
+        "id": "36",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/36.png"
+      },
+      {
+        "name": "Columbia Lions",
+        "abbr": "COLU",
+        "id": "171",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/171.png"
+      },
+      {
+        "name": "Columbus State Cougars",
+        "abbr": "COLUMST",
+        "id": "127946",
+        "logo": ""
+      },
+      {
+        "name": "Concordia Canada Eagles",
+        "abbr": "CONCO",
+        "id": "112266",
+        "logo": ""
+      },
+      {
+        "name": "Concordia-St. Paul Golden Bears",
+        "abbr": "CON",
+        "id": "3066",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/3066.png"
+      },
+      {
+        "name": "Concordia-Wisconsin Falcons",
+        "abbr": "CONW",
+        "id": "409",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/409.png"
+      },
+      {
+        "name": "Cornell (IA) Rams",
+        "abbr": "CNIA",
+        "id": "2155",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2155.png"
+      },
+      {
+        "name": "Cortland Red Dragons",
+        "abbr": "COR",
+        "id": "2782",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2782.png"
+      },
+      {
+        "name": "Crown College Polars",
+        "abbr": "CROWN",
+        "id": "509",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/509.png"
+      },
+      {
+        "name": "Culver-Stockton Wildcats",
+        "abbr": "CUL",
+        "id": "510",
+        "logo": ""
+      },
+      {
+        "name": "Cumberland (TN) Bulldogs",
+        "abbr": "CUMB",
+        "id": "2161",
+        "logo": ""
+      },
+      {
+        "name": "Curry College Colonels",
+        "abbr": "CUR",
+        "id": "40",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/40.png"
+      },
+      {
+        "name": "Dakota State University Trojans",
+        "abbr": "DAKOT",
+        "id": "512",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/512.png"
+      },
+      {
+        "name": "Dakota Wesleyan Tigers",
+        "abbr": "DWU",
+        "id": "513",
+        "logo": ""
+      },
+      {
+        "name": "Dartmouth Big Green",
+        "abbr": "DART",
+        "id": "159",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/159.png"
+      },
+      {
+        "name": "Davidson Wildcats",
+        "abbr": "DAV",
+        "id": "2166",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2166.png"
+      },
+      {
+        "name": "Dayton Flyers",
+        "abbr": "DAY",
+        "id": "2168",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2168.png"
+      },
+      {
+        "name": "DePauw Tigers",
+        "abbr": "DPU",
+        "id": "83",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/83.png"
+      },
+      {
+        "name": "Dean College Bulldogs",
+        "abbr": "DEA",
+        "id": "110438",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/110438.png"
+      },
+      {
+        "name": "Defiance Yellow Jackets",
+        "abbr": "DEF",
+        "id": "190",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/190.png"
+      },
+      {
+        "name": "Delaware State Hornets",
+        "abbr": "DSU",
+        "id": "2169",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2169.png"
+      },
+      {
+        "name": "Delaware Valley Aggies",
+        "abbr": "DEL",
+        "id": "2808",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2808.png"
+      },
+      {
+        "name": "Delta State Statesmen",
+        "abbr": "DELT",
+        "id": "2170",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2170.png"
+      },
+      {
+        "name": "Denison Big Red",
+        "abbr": "DEN",
+        "id": "2171",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2171.png"
+      },
+      {
+        "name": "Dickinson (PA) Red Devils",
+        "abbr": "DCK",
+        "id": "2175",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2175.png"
+      },
+      {
+        "name": "Dickinson State Blue Hawks",
+        "abbr": "DIC",
+        "id": "316",
+        "logo": ""
+      },
+      {
+        "name": "Doane College Tigers",
+        "abbr": "DOANE",
+        "id": "5829",
+        "logo": ""
+      },
+      {
+        "name": "Drake Bulldogs",
+        "abbr": "DRKE",
+        "id": "2181",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2181.png"
+      },
+      {
+        "name": "Dubuque Spartans",
+        "abbr": "DUB",
+        "id": "49",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/49.png"
+      },
+      {
+        "name": "Duke Blue Devils",
+        "abbr": "DUKE",
+        "id": "150",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/150.png"
+      },
+      {
+        "name": "Duquesne Dukes",
+        "abbr": "DUQ",
+        "id": "2184",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2184.png"
+      },
+      {
+        "name": "East Carolina Pirates",
+        "abbr": "ECU",
+        "id": "151",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/151.png"
+      },
+      {
+        "name": "East Tennessee State Buccaneers",
+        "abbr": "ETSU",
+        "id": "2193",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2193.png"
+      },
+      {
+        "name": "East Texas A&M Lions",
+        "abbr": "ETAM",
+        "id": "2837",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2837.png"
+      },
+      {
+        "name": "Eastern Illinois Panthers",
+        "abbr": "EIU",
+        "id": "2197",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2197.png"
+      },
+      {
+        "name": "Eastern Kentucky Colonels",
+        "abbr": "EKU",
+        "id": "2198",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2198.png"
+      },
+      {
+        "name": "Eastern Michigan Eagles",
+        "abbr": "EMU",
+        "id": "2199",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2199.png"
+      },
+      {
+        "name": "Eastern New Mexico Greyhounds",
+        "abbr": "EAS",
+        "id": "2201",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2201.png"
+      },
+      {
+        "name": "Eastern Oregon",
+        "abbr": "EOR",
+        "id": "2202",
+        "logo": ""
+      },
+      {
+        "name": "Eastern University Eagles",
+        "abbr": "EASTE",
+        "id": "127954",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/127954.png"
+      },
+      {
+        "name": "Eastern Washington Eagles",
+        "abbr": "EWU",
+        "id": "331",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/331.png"
+      },
+      {
+        "name": "Edinboro Fighting Scots",
+        "abbr": "EDI",
+        "id": "2205",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2205.png"
+      },
+      {
+        "name": "Edward Waters Tigers",
+        "abbr": "EAU",
+        "id": "2206",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2206.png"
+      },
+      {
+        "name": "Elizabeth City State Vikings",
+        "abbr": "ELIZ",
+        "id": "2207",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2207.png"
+      },
+      {
+        "name": "Elmhurst Bluejays",
+        "abbr": "ELM",
+        "id": "72",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/72.png"
+      },
+      {
+        "name": "Elon Phoenix",
+        "abbr": "ELON",
+        "id": "2210",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2210.png"
+      },
+      {
+        "name": "Emory & Henry College Wasps",
+        "abbr": "EMO",
+        "id": "2213",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2213.png"
+      },
+      {
+        "name": "Emporia State Hornets",
+        "abbr": "EMP",
+        "id": "2214",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2214.png"
+      },
+      {
+        "name": "Endicott College Gulls",
+        "abbr": "END",
+        "id": "452",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/452.png"
+      },
+      {
+        "name": "Erie Community College Kats",
+        "abbr": "ERI",
+        "id": "3236",
+        "logo": ""
+      },
+      {
+        "name": "Erskine Flying Fleet",
+        "abbr": "ERS",
+        "id": "101784",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/101784.png"
+      },
+      {
+        "name": "Eureka College Red Devils",
+        "abbr": "EUR",
+        "id": "101",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/101.png"
+      },
+      {
+        "name": "Evangel Crusaders",
+        "abbr": "EVA",
+        "id": "2865",
+        "logo": ""
+      },
+      {
+        "name": "FDU-Florham Devils",
+        "abbr": "FDU",
+        "id": "2221",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2221.png"
+      },
+      {
+        "name": "Fayetteville State Broncos",
+        "abbr": "FAY",
+        "id": "2220",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2220.png"
+      },
+      {
+        "name": "Ferris State Bulldogs",
+        "abbr": "FRST",
+        "id": "2222",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2222.png"
+      },
+      {
+        "name": "Ferrum Panthers",
+        "abbr": "FER",
+        "id": "366",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/366.png"
+      },
+      {
+        "name": "Findlay Oilers",
+        "abbr": "FIN",
+        "id": "2224",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2224.png"
+      },
+      {
+        "name": "Fitchburg State Falcons",
+        "abbr": "FIT",
+        "id": "114",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/114.png"
+      },
+      {
+        "name": "Florida A&M Rattlers",
+        "abbr": "FAMU",
+        "id": "50",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/50.png"
+      },
+      {
+        "name": "Florida Atlantic Owls",
+        "abbr": "FAU",
+        "id": "2226",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2226.png"
+      },
+      {
+        "name": "Florida Gators",
+        "abbr": "FLA",
+        "id": "57",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/57.png"
+      },
+      {
+        "name": "Florida International Panthers",
+        "abbr": "FIU",
+        "id": "2229",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2229.png"
+      },
+      {
+        "name": "Florida Memorial Lions",
+        "abbr": "FMU",
+        "id": "125762",
+        "logo": ""
+      },
+      {
+        "name": "Florida State Seminoles",
+        "abbr": "FSU",
+        "id": "52",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/52.png"
+      },
+      {
+        "name": "Fordham Rams",
+        "abbr": "FOR",
+        "id": "2230",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2230.png"
+      },
+      {
+        "name": "Fork Union Blue Devils",
+        "abbr": "FORK",
+        "id": "109423",
+        "logo": ""
+      },
+      {
+        "name": "Fort Hays State Tigers",
+        "abbr": "FHSU",
+        "id": "2231",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2231.png"
+      },
+      {
+        "name": "Fort Valley State Wildcats",
+        "abbr": "FVS",
+        "id": "2232",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2232.png"
+      },
+      {
+        "name": "Framingham State Rams",
+        "abbr": "FRA",
+        "id": "2967",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2967.png"
+      },
+      {
+        "name": "Franklin & Marshall Diplomats",
+        "abbr": "FR&M",
+        "id": "2234",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2234.png"
+      },
+      {
+        "name": "Franklin Grizzlies",
+        "abbr": "FRNK",
+        "id": "2233",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2233.png"
+      },
+      {
+        "name": "Franklin Pierce Ravens",
+        "abbr": "FP",
+        "id": "112334",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/112334.png"
+      },
+      {
+        "name": "Fresno State Bulldogs",
+        "abbr": "FRES",
+        "id": "278",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/278.png"
+      },
+      {
+        "name": "Friends University Friends",
+        "abbr": "FRI",
+        "id": "527",
+        "logo": ""
+      },
+      {
+        "name": "Frostburg State Bobcats",
+        "abbr": "FRO",
+        "id": "341",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/341.png"
+      },
+      {
+        "name": "Furman Paladins",
+        "abbr": "FUR",
+        "id": "231",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/231.png"
+      },
+      {
+        "name": "Gallaudet Bison",
+        "abbr": "GAL",
+        "id": "417",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/417.png"
+      },
+      {
+        "name": "Gannon Golden Knights",
+        "abbr": "GAN",
+        "id": "367",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/367.png"
+      },
+      {
+        "name": "Gardner-Webb Runnin' Bulldogs",
+        "abbr": "GWEB",
+        "id": "2241",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2241.png"
+      },
+      {
+        "name": "Gccc",
+        "abbr": "GCCC",
+        "id": "110962",
+        "logo": ""
+      },
+      {
+        "name": "Geneva Golden Tornadoes",
+        "abbr": "GEN",
+        "id": "2242",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2242.png"
+      },
+      {
+        "name": "George Fox Bruins",
+        "abbr": "GFX",
+        "id": "415",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/415.png"
+      },
+      {
+        "name": "George Mason Patriots",
+        "abbr": "GMU",
+        "id": "2244",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2244.png"
+      },
+      {
+        "name": "Georgetown (KY) Tigers",
+        "abbr": "GTKY",
+        "id": "2245",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2245.png"
+      },
+      {
+        "name": "Georgetown Hoyas",
+        "abbr": "GTWN",
+        "id": "46",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/46.png"
+      },
+      {
+        "name": "Georgia Bulldogs",
+        "abbr": "UGA",
+        "id": "61",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png"
+      },
+      {
+        "name": "Georgia Southern Eagles",
+        "abbr": "GASO",
+        "id": "290",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/290.png"
+      },
+      {
+        "name": "Georgia State Panthers",
+        "abbr": "GAST",
+        "id": "2247",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2247.png"
+      },
+      {
+        "name": "Georgia Tech Yellow Jackets",
+        "abbr": "GT",
+        "id": "59",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/59.png"
+      },
+      {
+        "name": "Gettysburg Bullets",
+        "abbr": "GET",
+        "id": "2248",
+        "logo": ""
+      },
+      {
+        "name": "Glenville State Pioneers",
+        "abbr": "GLN",
+        "id": "2249",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2249.png"
+      },
+      {
+        "name": "Graceland University Graceland",
+        "abbr": "GRA",
+        "id": "530",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/530.png"
+      },
+      {
+        "name": "Grambling Tigers",
+        "abbr": "GRAM",
+        "id": "2755",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2755.png"
+      },
+      {
+        "name": "Grand Valley State Lakers",
+        "abbr": "GRV",
+        "id": "125",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/125.png"
+      },
+      {
+        "name": "Grand View Vikings",
+        "abbr": "GRVW",
+        "id": "2254",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2254.png"
+      },
+      {
+        "name": "Greenville Panthers",
+        "abbr": "GRE",
+        "id": "2257",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2257.png"
+      },
+      {
+        "name": "Grinnell Pioneers",
+        "abbr": "GRI",
+        "id": "65",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/65.png"
+      },
+      {
+        "name": "Grove City College Wolverines",
+        "abbr": "GRO",
+        "id": "146",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/146.png"
+      },
+      {
+        "name": "Guilford Quakers",
+        "abbr": "GUI",
+        "id": "2258",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2258.png"
+      },
+      {
+        "name": "Gustavus Adolphus Golden Gusties",
+        "abbr": "GUS",
+        "id": "2968",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2968.png"
+      },
+      {
+        "name": "Hamilton Continentals",
+        "abbr": "HAM",
+        "id": "348",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/348.png"
+      },
+      {
+        "name": "Hampden-Sydney Tigers",
+        "abbr": "HAC",
+        "id": "297",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/297.png"
+      },
+      {
+        "name": "Hampton Pirates",
+        "abbr": "HAMP",
+        "id": "2261",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2261.png"
+      },
+      {
+        "name": "Hanover Panthers",
+        "abbr": "HAN",
+        "id": "2262",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2262.png"
+      },
+      {
+        "name": "Hardin-Simmons Cowboys",
+        "abbr": "HAR",
+        "id": "2810",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2810.png"
+      },
+      {
+        "name": "Hartwick Hawks",
+        "abbr": "HARW",
+        "id": "173",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/173.png"
+      },
+      {
+        "name": "Harvard Crimson",
+        "abbr": "HARV",
+        "id": "108",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/108.png"
+      },
+      {
+        "name": "Hastings College Broncos",
+        "abbr": "HAS",
+        "id": "536",
+        "logo": ""
+      },
+      {
+        "name": "Hawai'i Rainbow Warriors",
+        "abbr": "HAW",
+        "id": "62",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/62.png"
+      },
+      {
+        "name": "Heidelberg Student Princes",
+        "abbr": "HEI",
+        "id": "191",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/191.png"
+      },
+      {
+        "name": "Henderson State Reddies",
+        "abbr": "HEN",
+        "id": "2271",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2271.png"
+      },
+      {
+        "name": "Hilbert College Hawks",
+        "abbr": "HIL",
+        "id": "125974",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/125974.png"
+      },
+      {
+        "name": "Hiram College Terriers",
+        "abbr": "HIR",
+        "id": "2274",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2274.png"
+      },
+      {
+        "name": "Hobart Statesmen",
+        "abbr": "HBRT",
+        "id": "174",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/174.png"
+      },
+      {
+        "name": "Holland College Hurricanes",
+        "abbr": "HOL",
+        "id": "108354",
+        "logo": ""
+      },
+      {
+        "name": "Holy Cross Crusaders",
+        "abbr": "HC",
+        "id": "107",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/107.png"
+      },
+      {
+        "name": "Hope Flying Dutchmen",
+        "abbr": "HOP",
+        "id": "2812",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2812.png"
+      },
+      {
+        "name": "Houston Christian Huskies",
+        "abbr": "HCU",
+        "id": "2277",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2277.png"
+      },
+      {
+        "name": "Houston Cougars",
+        "abbr": "HOU",
+        "id": "248",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png"
+      },
+      {
+        "name": "Howard Bison",
+        "abbr": "HOW",
+        "id": "47",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/47.png"
+      },
+      {
+        "name": "Howard Payne Yellow Jackets",
+        "abbr": "HOWP",
+        "id": "2758",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2758.png"
+      },
+      {
+        "name": "Hudson Valley CC Vikings",
+        "abbr": "HUD",
+        "id": "3237",
+        "logo": ""
+      },
+      {
+        "name": "Huntingdon College (AL) Hawks",
+        "abbr": "HUNT",
+        "id": "2938",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2938.png"
+      },
+      {
+        "name": "Huron",
+        "abbr": "HURON",
+        "id": "6192",
+        "logo": ""
+      },
+      {
+        "name": "Husson Eagles",
+        "abbr": "HUS",
+        "id": "2280",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2280.png"
+      },
+      {
+        "name": "Idaho State Bengals",
+        "abbr": "IDST",
+        "id": "304",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/304.png"
+      },
+      {
+        "name": "Idaho Vandals",
+        "abbr": "IDHO",
+        "id": "70",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/70.png"
+      },
+      {
+        "name": "Illinois College Blueboys",
+        "abbr": "ILL",
+        "id": "2286",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2286.png"
+      },
+      {
+        "name": "Illinois State Redbirds",
+        "abbr": "ILST",
+        "id": "2287",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2287.png"
+      },
+      {
+        "name": "Illinois Wesleyan Titans",
+        "abbr": "ILW",
+        "id": "306",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/306.png"
+      },
+      {
+        "name": "Incarnate Word Cardinals",
+        "abbr": "UIW",
+        "id": "2916",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2916.png"
+      },
+      {
+        "name": "Indiana Hoosiers",
+        "abbr": "IU",
+        "id": "84",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/84.png"
+      },
+      {
+        "name": "Indiana State Sycamores",
+        "abbr": "INST",
+        "id": "282",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/282.png"
+      },
+      {
+        "name": "Indiana Wesleyan Wildcats",
+        "abbr": "INWS",
+        "id": "111756",
+        "logo": ""
+      },
+      {
+        "name": "Indiana-Pennsylvania Crimson Hawks",
+        "abbr": "IUP",
+        "id": "2291",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2291.png"
+      },
+      {
+        "name": "Indianapolis Greyhounds",
+        "abbr": "IND",
+        "id": "2292",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2292.png"
+      },
+      {
+        "name": "Iowa Hawkeyes",
+        "abbr": "IOWA",
+        "id": "2294",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2294.png"
+      },
+      {
+        "name": "Iowa State Cyclones",
+        "abbr": "ISU",
+        "id": "66",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/66.png"
+      },
+      {
+        "name": "Ithaca Bombers",
+        "abbr": "ITH",
+        "id": "175",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/175.png"
+      },
+      {
+        "name": "Jackson State Tigers",
+        "abbr": "JKST",
+        "id": "2296",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2296.png"
+      },
+      {
+        "name": "Jacksonville State Gamecocks",
+        "abbr": "JXST",
+        "id": "55",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/55.png"
+      },
+      {
+        "name": "James Madison Dukes",
+        "abbr": "JMU",
+        "id": "256",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/256.png"
+      },
+      {
+        "name": "Jamestown Jimmies",
+        "abbr": "JAM",
+        "id": "2939",
+        "logo": ""
+      },
+      {
+        "name": "Johns Hopkins Blue Jays",
+        "abbr": "JHU",
+        "id": "118",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/118.png"
+      },
+      {
+        "name": "Johnson C Smith Golden Bulls",
+        "abbr": "JOH",
+        "id": "2304",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2304.png"
+      },
+      {
+        "name": "Judson University Eagles",
+        "abbr": "JUDSO",
+        "id": "122775",
+        "logo": ""
+      },
+      {
+        "name": "Juniata Eagles",
+        "abbr": "JUN",
+        "id": "246",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/246.png"
+      },
+      {
+        "name": "Kalamazoo Hornets",
+        "abbr": "KAL",
+        "id": "126",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/126.png"
+      },
+      {
+        "name": "Kansas Jayhawks",
+        "abbr": "KU",
+        "id": "2305",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2305.png"
+      },
+      {
+        "name": "Kansas State Wildcats",
+        "abbr": "KSU",
+        "id": "2306",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2306.png"
+      },
+      {
+        "name": "Kansas Wesleyan University Ks Wesleyan",
+        "abbr": "KAN",
+        "id": "547",
+        "logo": ""
+      },
+      {
+        "name": "Kean Cougars",
+        "abbr": "KEA",
+        "id": "2871",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2871.png"
+      },
+      {
+        "name": "Keiser University Keiser",
+        "abbr": "KEI",
+        "id": "126110",
+        "logo": ""
+      },
+      {
+        "name": "Kennesaw State Owls",
+        "abbr": "KENN",
+        "id": "338",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/338.png"
+      },
+      {
+        "name": "Kent State Golden Flashes",
+        "abbr": "KENT",
+        "id": "2309",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2309.png"
+      },
+      {
+        "name": "Kentucky Christian Knights",
+        "abbr": "KYCH",
+        "id": "3077",
+        "logo": ""
+      },
+      {
+        "name": "Kentucky State Thorobreds",
+        "abbr": "KYST",
+        "id": "2310",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2310.png"
+      },
+      {
+        "name": "Kentucky Wesleyan Panthers",
+        "abbr": "KYW",
+        "id": "2316",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2316.png"
+      },
+      {
+        "name": "Kentucky Wildcats",
+        "abbr": "UK",
+        "id": "96",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/96.png"
+      },
+      {
+        "name": "Kenyon Owls",
+        "abbr": "KEN",
+        "id": "352",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/352.png"
+      },
+      {
+        "name": "Keystone Giants",
+        "abbr": "KYSTN",
+        "id": "122774",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/122774.png"
+      },
+      {
+        "name": "King's College (PA) Monarchs",
+        "abbr": "KIN",
+        "id": "247",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/247.png"
+      },
+      {
+        "name": "Knox College Prairie Fire",
+        "abbr": "KNO",
+        "id": "255",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/255.png"
+      },
+      {
+        "name": "Knoxville Bulldogs",
+        "abbr": "KNOX",
+        "id": "2314",
+        "logo": ""
+      },
+      {
+        "name": "Kutztown Golden Bears",
+        "abbr": "KUT",
+        "id": "2315",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2315.png"
+      },
+      {
+        "name": "LSU Tigers",
+        "abbr": "LSU",
+        "id": "99",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/99.png"
+      },
+      {
+        "name": "La Verne Leopards",
+        "abbr": "ULV",
+        "id": "2318",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2318.png"
+      },
+      {
+        "name": "LaGrange College Panthers",
+        "abbr": "LAG",
+        "id": "548",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/548.png"
+      },
+      {
+        "name": "Lackawanna Falcons",
+        "abbr": "LAC",
+        "id": "132714",
+        "logo": ""
+      },
+      {
+        "name": "Lafayette Leopards",
+        "abbr": "LAF",
+        "id": "322",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/322.png"
+      },
+      {
+        "name": "Lake Erie Storm",
+        "abbr": "LKE",
+        "id": "437",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/437.png"
+      },
+      {
+        "name": "Lake Forest Foresters",
+        "abbr": "LAK",
+        "id": "262",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/262.png"
+      },
+      {
+        "name": "Lakeland University Muskies",
+        "abbr": "LAKE",
+        "id": "6353",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/6353.png"
+      },
+      {
+        "name": "Lamar Cardinals",
+        "abbr": "LAM",
+        "id": "2320",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2320.png"
+      },
+      {
+        "name": "Langston Lions",
+        "abbr": "LAN",
+        "id": "2324",
+        "logo": ""
+      },
+      {
+        "name": "Laurier Golden Hawks",
+        "abbr": "LAUR",
+        "id": "129561",
+        "logo": ""
+      },
+      {
+        "name": "Laval LAVAL",
+        "abbr": "LAVAL",
+        "id": "82530",
+        "logo": ""
+      },
+      {
+        "name": "Lawrence Tech Blue Devils",
+        "abbr": "LTC",
+        "id": "102071",
+        "logo": ""
+      },
+      {
+        "name": "Lawrence University Vikings",
+        "abbr": "LAW",
+        "id": "268",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/268.png"
+      },
+      {
+        "name": "Lebanon Valley Flying Dutchmen",
+        "abbr": "LEB",
+        "id": "388",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/388.png"
+      },
+      {
+        "name": "Lehigh Mountain Hawks",
+        "abbr": "LEH",
+        "id": "2329",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2329.png"
+      },
+      {
+        "name": "Lenoir-Rhyne Bears",
+        "abbr": "LEN",
+        "id": "2331",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2331.png"
+      },
+      {
+        "name": "Lewis & Clark River Otters",
+        "abbr": "LEW",
+        "id": "2333",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2333.png"
+      },
+      {
+        "name": "Liberty Flames",
+        "abbr": "LIB",
+        "id": "2335",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2335.png"
+      },
+      {
+        "name": "Lincoln (CA) Oaklanders",
+        "abbr": "LCLN",
+        "id": "124179",
+        "logo": "https://a.espncdn.com/guid/cb1cc6a4-cffe-3cdd-88c7-4a67fadd7cc0/logos/default.png"
+      },
+      {
+        "name": "Lincoln (MO) Blue Tigers",
+        "abbr": "LIMO",
+        "id": "2876",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2876.png"
+      },
+      {
+        "name": "Lincoln (PA) Lions",
+        "abbr": "LINP",
+        "id": "2339",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2339.png"
+      },
+      {
+        "name": "Lindenwood Belleville Lynx",
+        "abbr": "LIN",
+        "id": "3209",
+        "logo": ""
+      },
+      {
+        "name": "Livingstone Blue Bears",
+        "abbr": "LIV",
+        "id": "2940",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2940.png"
+      },
+      {
+        "name": "Lock Haven Bald Eagles",
+        "abbr": "LHU",
+        "id": "209",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/209.png"
+      },
+      {
+        "name": "Long Island University Sharks",
+        "abbr": "LIU",
+        "id": "2341",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2341.png"
+      },
+      {
+        "name": "Loras College Duhawks",
+        "abbr": "LOR",
+        "id": "263",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/263.png"
+      },
+      {
+        "name": "Louisburg LOUBR",
+        "abbr": "LSBG",
+        "id": "102118",
+        "logo": ""
+      },
+      {
+        "name": "Louisiana Christian Wildcats",
+        "abbr": "LCHR",
+        "id": "2347",
+        "logo": ""
+      },
+      {
+        "name": "Louisiana Ragin' Cajuns",
+        "abbr": "UL",
+        "id": "309",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/309.png"
+      },
+      {
+        "name": "Louisiana Tech Bulldogs",
+        "abbr": "LT",
+        "id": "2348",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2348.png"
+      },
+      {
+        "name": "Louisville Cardinals",
+        "abbr": "LOU",
+        "id": "97",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/97.png"
+      },
+      {
+        "name": "Luther Norse",
+        "abbr": "LUT",
+        "id": "67",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/67.png"
+      },
+      {
+        "name": "Lycoming Warriors",
+        "abbr": "LYC",
+        "id": "2354",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2354.png"
+      },
+      {
+        "name": "Lyon College Scots",
+        "abbr": "LYON",
+        "id": "101161",
+        "logo": ""
+      },
+      {
+        "name": "MONTANASTN Lights",
+        "abbr": "MSUN",
+        "id": "124390",
+        "logo": ""
+      },
+      {
+        "name": "MONTREAL",
+        "abbr": "MONTR",
+        "id": "102107",
+        "logo": ""
+      },
+      {
+        "name": "Macalester Scots",
+        "abbr": "MAC",
+        "id": "2359",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2359.png"
+      },
+      {
+        "name": "Madonna University MADONNA",
+        "abbr": "MDNN",
+        "id": "126146",
+        "logo": ""
+      },
+      {
+        "name": "Maine Black Bears",
+        "abbr": "ME",
+        "id": "311",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/311.png"
+      },
+      {
+        "name": "Maine Maritime Mariners",
+        "abbr": "MAI",
+        "id": "274",
+        "logo": ""
+      },
+      {
+        "name": "Manchester Spartans",
+        "abbr": "MNCH",
+        "id": "2362",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2362.png"
+      },
+      {
+        "name": "Manitoba MANITOBA",
+        "abbr": "MAN",
+        "id": "2770",
+        "logo": ""
+      },
+      {
+        "name": "Marist Red Foxes",
+        "abbr": "MRST",
+        "id": "2368",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2368.png"
+      },
+      {
+        "name": "Mars Hill Lions",
+        "abbr": "MH",
+        "id": "2369",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2369.png"
+      },
+      {
+        "name": "Marshall Thundering Herd",
+        "abbr": "MRSH",
+        "id": "276",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/276.png"
+      },
+      {
+        "name": "Mary Hardin-Baylor Crusaders",
+        "abbr": "MAR",
+        "id": "2371",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2371.png"
+      },
+      {
+        "name": "Maryland Terrapins",
+        "abbr": "MD",
+        "id": "120",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/120.png"
+      },
+      {
+        "name": "Maryville College (TN) Scots",
+        "abbr": "MVTN",
+        "id": "2373",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2373.png"
+      },
+      {
+        "name": "Mass Maritime Buccaneers",
+        "abbr": "MAS",
+        "id": "110",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/110.png"
+      },
+      {
+        "name": "Massachusetts Minutemen",
+        "abbr": "MASS",
+        "id": "113",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/113.png"
+      },
+      {
+        "name": "Mayville State Comets",
+        "abbr": "MAY",
+        "id": "561",
+        "logo": ""
+      },
+      {
+        "name": "McDaniel College Green Terror",
+        "abbr": "MCD",
+        "id": "2700",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2700.png"
+      },
+      {
+        "name": "McGill Martlets",
+        "abbr": "MCGIL",
+        "id": "108246",
+        "logo": ""
+      },
+      {
+        "name": "McKendree Bearcats",
+        "abbr": "MCK",
+        "id": "2816",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2816.png"
+      },
+      {
+        "name": "McMurry War Hawks",
+        "abbr": "MMR",
+        "id": "241",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/241.png"
+      },
+      {
+        "name": "McNeese Cowboys",
+        "abbr": "MCN",
+        "id": "2377",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2377.png"
+      },
+      {
+        "name": "Mcpherson College McPHERSON",
+        "abbr": "MCPHE",
+        "id": "6584",
+        "logo": ""
+      },
+      {
+        "name": "Memphis Tigers",
+        "abbr": "MEM",
+        "id": "235",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/235.png"
+      },
+      {
+        "name": "Menlo Oaks",
+        "abbr": "MNLO",
+        "id": "2381",
+        "logo": ""
+      },
+      {
+        "name": "Merchant Marine Mariners",
+        "abbr": "MER",
+        "id": "2383",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2383.png"
+      },
+      {
+        "name": "Mercyhurst Lakers",
+        "abbr": "MERC",
+        "id": "2385",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2385.png"
+      },
+      {
+        "name": "Merrimack Warriors",
+        "abbr": "MRMK",
+        "id": "2771",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2771.png"
+      },
+      {
+        "name": "Methodist Monarchs",
+        "abbr": "MET",
+        "id": "291",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/291.png"
+      },
+      {
+        "name": "Miami (OH) RedHawks",
+        "abbr": "M-OH",
+        "id": "193",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/193.png"
+      },
+      {
+        "name": "Miami Hurricanes",
+        "abbr": "MIA",
+        "id": "2390",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png"
+      },
+      {
+        "name": "Michigan State Spartans",
+        "abbr": "MSU",
+        "id": "127",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/127.png"
+      },
+      {
+        "name": "Michigan Tech Huskies",
+        "abbr": "MTU",
+        "id": "2392",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2392.png"
+      },
+      {
+        "name": "Michigan Wolverines",
+        "abbr": "MICH",
+        "id": "130",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/130.png"
+      },
+      {
+        "name": "MidAmerica Nazarene MID-AM NAZARENE",
+        "abbr": "MNU",
+        "id": "419",
+        "logo": ""
+      },
+      {
+        "name": "Middle Georgia State College Knights",
+        "abbr": "MGST",
+        "id": "111755",
+        "logo": ""
+      },
+      {
+        "name": "Middle Tennessee Blue Raiders",
+        "abbr": "MTSU",
+        "id": "2393",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2393.png"
+      },
+      {
+        "name": "Midwestern State Mustangs",
+        "abbr": "MID",
+        "id": "2395",
+        "logo": ""
+      },
+      {
+        "name": "Miles College Golden Bears",
+        "abbr": "MIL",
+        "id": "2396",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2396.png"
+      },
+      {
+        "name": "Millersville Marauders",
+        "abbr": "MLR",
+        "id": "210",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/210.png"
+      },
+      {
+        "name": "Millikin Big Blue",
+        "abbr": "MLK",
+        "id": "74",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/74.png"
+      },
+      {
+        "name": "Millsaps Majors",
+        "abbr": "MLSP",
+        "id": "2398",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2398.png"
+      },
+      {
+        "name": "Minnesota Duluth Bulldogs",
+        "abbr": "UMD",
+        "id": "134",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/134.png"
+      },
+      {
+        "name": "Minnesota Golden Gophers",
+        "abbr": "MINN",
+        "id": "135",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/135.png"
+      },
+      {
+        "name": "Minnesota Morris Cougars",
+        "abbr": "MINM",
+        "id": "2399",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2399.png"
+      },
+      {
+        "name": "Minnesota State Moorhead Dragons",
+        "abbr": "MNST",
+        "id": "2817",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2817.png"
+      },
+      {
+        "name": "Minot State Beavers",
+        "abbr": "MNT",
+        "id": "568",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/568.png"
+      },
+      {
+        "name": "Misericordia Cougars",
+        "abbr": "MIS",
+        "id": "2969",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2969.png"
+      },
+      {
+        "name": "Mississippi State Bulldogs",
+        "abbr": "MSST",
+        "id": "344",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/344.png"
+      },
+      {
+        "name": "Mississippi Valley State Delta Devils",
+        "abbr": "MVSU",
+        "id": "2400",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2400.png"
+      },
+      {
+        "name": "Missouri Baptist Spartans",
+        "abbr": "MBAP",
+        "id": "2880",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2880.png"
+      },
+      {
+        "name": "Missouri S&T Miners",
+        "abbr": "MS&T",
+        "id": "2402",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2402.png"
+      },
+      {
+        "name": "Missouri Southern State Lions",
+        "abbr": "MOS",
+        "id": "2403",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2403.png"
+      },
+      {
+        "name": "Missouri State Bears",
+        "abbr": "MOST",
+        "id": "2623",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2623.png"
+      },
+      {
+        "name": "Missouri Tigers",
+        "abbr": "MIZ",
+        "id": "142",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/142.png"
+      },
+      {
+        "name": "Missouri Valley College Vikings",
+        "abbr": "MVC",
+        "id": "6776",
+        "logo": ""
+      },
+      {
+        "name": "Monmouth (IL) Fighting Scots",
+        "abbr": "MNM",
+        "id": "2919",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2919.png"
+      },
+      {
+        "name": "Monmouth Hawks",
+        "abbr": "MONM",
+        "id": "2405",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2405.png"
+      },
+      {
+        "name": "Monroe Mustangs",
+        "abbr": "MON",
+        "id": "134001",
+        "logo": ""
+      },
+      {
+        "name": "Montana Grizzlies",
+        "abbr": "MONT",
+        "id": "149",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/149.png"
+      },
+      {
+        "name": "Montana State Bobcats",
+        "abbr": "MTST",
+        "id": "147",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/147.png"
+      },
+      {
+        "name": "Montana Tech Orediggers",
+        "abbr": "MTTC",
+        "id": "148",
+        "logo": ""
+      },
+      {
+        "name": "Montana-Western Bulldogs",
+        "abbr": "MTW",
+        "id": "2701",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2701.png"
+      },
+      {
+        "name": "Morehead State Eagles",
+        "abbr": "MORE",
+        "id": "2413",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2413.png"
+      },
+      {
+        "name": "Morgan State Bears",
+        "abbr": "MORG",
+        "id": "2415",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2415.png"
+      },
+      {
+        "name": "Mount Mercy Mustangs",
+        "abbr": "MOU",
+        "id": "133688",
+        "logo": ""
+      },
+      {
+        "name": "Mount St. Joseph Lions",
+        "abbr": "MSJ",
+        "id": "2419",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2419.png"
+      },
+      {
+        "name": "Muhlenberg Mules",
+        "abbr": "MUH",
+        "id": "2422",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2422.png"
+      },
+      {
+        "name": "Murray State Racers",
+        "abbr": "MUR",
+        "id": "93",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/93.png"
+      },
+      {
+        "name": "Muskingum Fighting Muskies",
+        "abbr": "MUS",
+        "id": "332",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/332.png"
+      },
+      {
+        "name": "NC State Wolfpack",
+        "abbr": "NCSU",
+        "id": "152",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/152.png"
+      },
+      {
+        "name": "NORTH FLORIDA STARS",
+        "abbr": "UNF",
+        "id": "3197",
+        "logo": ""
+      },
+      {
+        "name": "Navy Midshipmen",
+        "abbr": "NAVY",
+        "id": "2426",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2426.png"
+      },
+      {
+        "name": "Nebraska Cornhuskers",
+        "abbr": "NEB",
+        "id": "158",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/158.png"
+      },
+      {
+        "name": "Nebraska Wesleyan Prairie Wolves",
+        "abbr": "NEBW",
+        "id": "6845",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/6845.png"
+      },
+      {
+        "name": "Nebraska-Kearney Lopers",
+        "abbr": "NK",
+        "id": "2438",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2438.png"
+      },
+      {
+        "name": "Nelson University Lions",
+        "abbr": "NEL",
+        "id": "2904",
+        "logo": ""
+      },
+      {
+        "name": "Nevada Wolf Pack",
+        "abbr": "NEV",
+        "id": "2440",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2440.png"
+      },
+      {
+        "name": "New England College Pilgrims",
+        "abbr": "NEW",
+        "id": "131108",
+        "logo": ""
+      },
+      {
+        "name": "New Hampshire Wildcats",
+        "abbr": "UNH",
+        "id": "160",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/160.png"
+      },
+      {
+        "name": "New Haven Chargers",
+        "abbr": "NH",
+        "id": "2441",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2441.png"
+      },
+      {
+        "name": "New Mexico Highlands Cowboys",
+        "abbr": "NMH",
+        "id": "2424",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2424.png"
+      },
+      {
+        "name": "New Mexico Lobos",
+        "abbr": "UNM",
+        "id": "167",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/167.png"
+      },
+      {
+        "name": "New Mexico State Aggies",
+        "abbr": "NMSU",
+        "id": "166",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/166.png"
+      },
+      {
+        "name": "Newberry Wolves",
+        "abbr": "NBR",
+        "id": "2444",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2444.png"
+      },
+      {
+        "name": "Nicholls Colonels",
+        "abbr": "NICH",
+        "id": "2447",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2447.png"
+      },
+      {
+        "name": "Nichols College Bison",
+        "abbr": "NIC",
+        "id": "2884",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2884.png"
+      },
+      {
+        "name": "Norfolk State Spartans",
+        "abbr": "NORF",
+        "id": "2450",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2450.png"
+      },
+      {
+        "name": "North Alabama Lions",
+        "abbr": "UNA",
+        "id": "2453",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2453.png"
+      },
+      {
+        "name": "North American University Stallions",
+        "abbr": "NOAM",
+        "id": "123086",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/123086.png"
+      },
+      {
+        "name": "North Carolina A&T Aggies",
+        "abbr": "NCAT",
+        "id": "2448",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2448.png"
+      },
+      {
+        "name": "North Carolina Central Eagles",
+        "abbr": "NCCU",
+        "id": "2428",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2428.png"
+      },
+      {
+        "name": "North Carolina Tar Heels",
+        "abbr": "UNC",
+        "id": "153",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/153.png"
+      },
+      {
+        "name": "North Carolina Wesleyan Battling Bishops",
+        "abbr": "NCW",
+        "id": "286",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/286.png"
+      },
+      {
+        "name": "North Central College Cardinals",
+        "abbr": "NOR",
+        "id": "3071",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/3071.png"
+      },
+      {
+        "name": "North Dakota Fighting Hawks",
+        "abbr": "UND",
+        "id": "155",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/155.png"
+      },
+      {
+        "name": "North Dakota State Bison",
+        "abbr": "NDSU",
+        "id": "2449",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2449.png"
+      },
+      {
+        "name": "North Greenville Trailblazers",
+        "abbr": "NG",
+        "id": "2822",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2822.png"
+      },
+      {
+        "name": "North Park Vikings",
+        "abbr": "NP",
+        "id": "75",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/75.png"
+      },
+      {
+        "name": "North Texas Mean Green",
+        "abbr": "UNT",
+        "id": "249",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/249.png"
+      },
+      {
+        "name": "Northeastern State RiverHawks",
+        "abbr": "NEOS",
+        "id": "196",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/196.png"
+      },
+      {
+        "name": "Northern Arizona Lumberjacks",
+        "abbr": "NAU",
+        "id": "2464",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2464.png"
+      },
+      {
+        "name": "Northern Colorado Bears",
+        "abbr": "UNCO",
+        "id": "2458",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2458.png"
+      },
+      {
+        "name": "Northern Illinois Huskies",
+        "abbr": "NIU",
+        "id": "2459",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2459.png"
+      },
+      {
+        "name": "Northern Michigan Wildcats",
+        "abbr": "NMI",
+        "id": "128",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/128.png"
+      },
+      {
+        "name": "Northern State Wolves",
+        "abbr": "NSU",
+        "id": "425",
+        "logo": ""
+      },
+      {
+        "name": "Northwestern (IA) Red Raiders",
+        "abbr": "NWC",
+        "id": "2471",
+        "logo": ""
+      },
+      {
+        "name": "Northwestern (MN) Eagles",
+        "abbr": "NMN",
+        "id": "583",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/583.png"
+      },
+      {
+        "name": "Northwestern Oklahoma State Rangers",
+        "abbr": "NWOS",
+        "id": "2823",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2823.png"
+      },
+      {
+        "name": "Northwestern State Demons",
+        "abbr": "NWST",
+        "id": "2466",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2466.png"
+      },
+      {
+        "name": "Northwestern Wildcats",
+        "abbr": "NU",
+        "id": "77",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/77.png"
+      },
+      {
+        "name": "Northwood (MI) Timberwolves",
+        "abbr": "NAR",
+        "id": "2886",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2886.png"
+      },
+      {
+        "name": "Notre Dame Fighting Irish",
+        "abbr": "ND",
+        "id": "87",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png"
+      },
+      {
+        "name": "Oberlin Yeomen",
+        "abbr": "OBE",
+        "id": "391",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/391.png"
+      },
+      {
+        "name": "Ohio Bobcats",
+        "abbr": "OHIO",
+        "id": "195",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/195.png"
+      },
+      {
+        "name": "Ohio Dominican Panthers",
+        "abbr": "OHDM",
+        "id": "2477",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2477.png"
+      },
+      {
+        "name": "Ohio Northern Polar Bears",
+        "abbr": "ON",
+        "id": "427",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/427.png"
+      },
+      {
+        "name": "Ohio State Buckeyes",
+        "abbr": "OSU",
+        "id": "194",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png"
+      },
+      {
+        "name": "Ohio State Newark Titans",
+        "abbr": "OHI",
+        "id": "3161",
+        "logo": ""
+      },
+      {
+        "name": "Ohio Wesleyan Battling Bishops",
+        "abbr": "OW",
+        "id": "2980",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2980.png"
+      },
+      {
+        "name": "Oklahoma Baptist Bison",
+        "abbr": "OKB",
+        "id": "319",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/319.png"
+      },
+      {
+        "name": "Oklahoma Panhandle State OK PANHANDLE ST",
+        "abbr": "OKL",
+        "id": "2824",
+        "logo": ""
+      },
+      {
+        "name": "Oklahoma Sooners",
+        "abbr": "OU",
+        "id": "201",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/201.png"
+      },
+      {
+        "name": "Oklahoma State Cowboys",
+        "abbr": "OKST",
+        "id": "197",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png"
+      },
+      {
+        "name": "Old Dominion Monarchs",
+        "abbr": "ODU",
+        "id": "295",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/295.png"
+      },
+      {
+        "name": "Ole Miss Rebels",
+        "abbr": "MISS",
+        "id": "145",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png"
+      },
+      {
+        "name": "Olivet College Comets",
+        "abbr": "OLI",
+        "id": "354",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/354.png"
+      },
+      {
+        "name": "Olivet Nazarene Tigers",
+        "abbr": "ONZ",
+        "id": "2922",
+        "logo": ""
+      },
+      {
+        "name": "Oregon Ducks",
+        "abbr": "ORE",
+        "id": "2483",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png"
+      },
+      {
+        "name": "Oregon State Beavers",
+        "abbr": "ORST",
+        "id": "204",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/204.png"
+      },
+      {
+        "name": "Ottawa University Arizona Spirit",
+        "abbr": "OUAZ",
+        "id": "112390",
+        "logo": ""
+      },
+      {
+        "name": "Ottawa University Kansas Ottawa Ks",
+        "abbr": "OTTAW",
+        "id": "7053",
+        "logo": ""
+      },
+      {
+        "name": "Otterbein Cardinals",
+        "abbr": "OTT",
+        "id": "359",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/359.png"
+      },
+      {
+        "name": "Ouachita Baptist Tigers",
+        "abbr": "OBU",
+        "id": "2888",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2888.png"
+      },
+      {
+        "name": "Pace Setters",
+        "abbr": "PAC",
+        "id": "2487",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2487.png"
+      },
+      {
+        "name": "Pacific (OR) Boxers",
+        "abbr": "PACO",
+        "id": "205",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/205.png"
+      },
+      {
+        "name": "Pacific Lutheran Lutes",
+        "abbr": "PL",
+        "id": "2486",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2486.png"
+      },
+      {
+        "name": "Paul Quinn Tigers",
+        "abbr": "PPN",
+        "id": "2491",
+        "logo": ""
+      },
+      {
+        "name": "Penn State Nittany Lions",
+        "abbr": "PSU",
+        "id": "213",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/213.png"
+      },
+      {
+        "name": "Pennsylvania Quakers",
+        "abbr": "PENN",
+        "id": "219",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/219.png"
+      },
+      {
+        "name": "Peru State PERU STATE",
+        "abbr": "PSC",
+        "id": "596",
+        "logo": ""
+      },
+      {
+        "name": "Pikeville Bears",
+        "abbr": "PIKE",
+        "id": "95",
+        "logo": ""
+      },
+      {
+        "name": "Pittsburg State Gorillas",
+        "abbr": "PST",
+        "id": "90",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/90.png"
+      },
+      {
+        "name": "Pittsburgh Panthers",
+        "abbr": "PITT",
+        "id": "221",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/221.png"
+      },
+      {
+        "name": "Plymouth State Panthers",
+        "abbr": "PLY",
+        "id": "2972",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2972.png"
+      },
+      {
+        "name": "Point University Skyhawks",
+        "abbr": "POI",
+        "id": "3179",
+        "logo": ""
+      },
+      {
+        "name": "Pomona Pitzer Sagehens",
+        "abbr": "POPI",
+        "id": "2923",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2923.png"
+      },
+      {
+        "name": "Portland State Vikings",
+        "abbr": "PRST",
+        "id": "2502",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2502.png"
+      },
+      {
+        "name": "Post University Eagles",
+        "abbr": "POS",
+        "id": "126086",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/126086.png"
+      },
+      {
+        "name": "Prairie View A&M Panthers",
+        "abbr": "PV",
+        "id": "2504",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2504.png"
+      },
+      {
+        "name": "Presbyterian Blue Hose",
+        "abbr": "PRES",
+        "id": "2506",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2506.png"
+      },
+      {
+        "name": "Princeton Tigers",
+        "abbr": "PRIN",
+        "id": "163",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/163.png"
+      },
+      {
+        "name": "Puget Sound Loggers",
+        "abbr": "PUG",
+        "id": "2508",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2508.png"
+      },
+      {
+        "name": "Purdue Boilermakers",
+        "abbr": "PUR",
+        "id": "2509",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2509.png"
+      },
+      {
+        "name": "Quincy Hawks",
+        "abbr": "QUI",
+        "id": "2825",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2825.png"
+      },
+      {
+        "name": "Randolph-Macon Yellow Jackets",
+        "abbr": "RAN",
+        "id": "2516",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2516.png"
+      },
+      {
+        "name": "Redlands Bulldogs",
+        "abbr": "REDL",
+        "id": "29",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/29.png"
+      },
+      {
+        "name": "Regina Seahawks",
+        "abbr": "REGIN",
+        "id": "82533",
+        "logo": ""
+      },
+      {
+        "name": "Reinhardt Eagles",
+        "abbr": "REI",
+        "id": "2890",
+        "logo": ""
+      },
+      {
+        "name": "Rensselaer Engineers",
+        "abbr": "RPI",
+        "id": "2528",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2528.png"
+      },
+      {
+        "name": "Rhode Island Rams",
+        "abbr": "URI",
+        "id": "227",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/227.png"
+      },
+      {
+        "name": "Rhodes College Lynx",
+        "abbr": "RHO",
+        "id": "2519",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2519.png"
+      },
+      {
+        "name": "Rice Owls",
+        "abbr": "RICE",
+        "id": "242",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/242.png"
+      },
+      {
+        "name": "Richmond Spiders",
+        "abbr": "RICH",
+        "id": "257",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/257.png"
+      },
+      {
+        "name": "Ripon Red Hawks",
+        "abbr": "RIP",
+        "id": "2891",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2891.png"
+      },
+      {
+        "name": "Roanoke College Maroons",
+        "abbr": "ROA",
+        "id": "131109",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/131109.png"
+      },
+      {
+        "name": "Robert Morris (IL) Lakers",
+        "abbr": "ROB",
+        "id": "599",
+        "logo": ""
+      },
+      {
+        "name": "Robert Morris Colonials",
+        "abbr": "RMU",
+        "id": "2523",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2523.png"
+      },
+      {
+        "name": "Rockford Regents",
+        "abbr": "ROCK",
+        "id": "2524",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2524.png"
+      },
+      {
+        "name": "Rocky Mountain Bears",
+        "abbr": "RRK",
+        "id": "2826",
+        "logo": ""
+      },
+      {
+        "name": "Roosevelt Lakers",
+        "abbr": "RSWT",
+        "id": "127991",
+        "logo": ""
+      },
+      {
+        "name": "Rose-Hulman Fightin' Engineers",
+        "abbr": "RHIT",
+        "id": "86",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/86.png"
+      },
+      {
+        "name": "Rowan Profs",
+        "abbr": "ROW",
+        "id": "2827",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2827.png"
+      },
+      {
+        "name": "Rutgers Scarlet Knights",
+        "abbr": "RUTG",
+        "id": "164",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/164.png"
+      },
+      {
+        "name": "SE Louisiana Lions",
+        "abbr": "SELA",
+        "id": "2545",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2545.png"
+      },
+      {
+        "name": "SMU Mustangs",
+        "abbr": "SMU",
+        "id": "2567",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2567.png"
+      },
+      {
+        "name": "SOUTH FLORIDA STARS",
+        "abbr": "SFX",
+        "id": "3198",
+        "logo": ""
+      },
+      {
+        "name": "SUNY Maritime Privateers",
+        "abbr": "SUNY",
+        "id": "2951",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2951.png"
+      },
+      {
+        "name": "SUNY Morrisville Mustangs",
+        "abbr": "MOR",
+        "id": "3110",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/3110.png"
+      },
+      {
+        "name": "Sacramento State Hornets",
+        "abbr": "SAC",
+        "id": "16",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/16.png"
+      },
+      {
+        "name": "Sacred Heart Pioneers",
+        "abbr": "SHU",
+        "id": "2529",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2529.png"
+      },
+      {
+        "name": "Saginaw Valley State Cardinals",
+        "abbr": "SVS",
+        "id": "129",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/129.png"
+      },
+      {
+        "name": "Saint Francis Red Flash",
+        "abbr": "SFPA",
+        "id": "2598",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2598.png"
+      },
+      {
+        "name": "Saint John's (MN) Johnnies",
+        "abbr": "SJMN",
+        "id": "2600",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2600.png"
+      },
+      {
+        "name": "Saint Vincent Bearcats",
+        "abbr": "STVN",
+        "id": "2614",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2614.png"
+      },
+      {
+        "name": "Saint Xavier (Il) Cougars",
+        "abbr": "STX",
+        "id": "130180",
+        "logo": ""
+      },
+      {
+        "name": "Salve Regina Seahawks",
+        "abbr": "SAL",
+        "id": "2776",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2776.png"
+      },
+      {
+        "name": "Sam Houston Bearkats",
+        "abbr": "SHSU",
+        "id": "2534",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2534.png"
+      },
+      {
+        "name": "Samford Bulldogs",
+        "abbr": "SAM",
+        "id": "2535",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2535.png"
+      },
+      {
+        "name": "San Diego State Aztecs",
+        "abbr": "SDSU",
+        "id": "21",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/21.png"
+      },
+      {
+        "name": "San Diego Toreros",
+        "abbr": "USD",
+        "id": "301",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/301.png"
+      },
+      {
+        "name": "San Jos\u00e9 State Spartans",
+        "abbr": "SJSU",
+        "id": "23",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/23.png"
+      },
+      {
+        "name": "Saskatchewan (CAN) SASKATCHEW",
+        "abbr": "SASK",
+        "id": "82532",
+        "logo": ""
+      },
+      {
+        "name": "Savannah State Tigers",
+        "abbr": "SAV",
+        "id": "2542",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2542.png"
+      },
+      {
+        "name": "Schreiner Mountaineers",
+        "abbr": "SCH",
+        "id": "102549",
+        "logo": ""
+      },
+      {
+        "name": "Seton Hill Griffins",
+        "abbr": "SH",
+        "id": "611",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/611.png"
+      },
+      {
+        "name": "Sewanee Tigers",
+        "abbr": "SEW",
+        "id": "2553",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2553.png"
+      },
+      {
+        "name": "Shaw Bears",
+        "abbr": "SHAW",
+        "id": "2551",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2551.png"
+      },
+      {
+        "name": "Shenandoah Hornets",
+        "abbr": "SHEN",
+        "id": "2828",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2828.png"
+      },
+      {
+        "name": "Shepherd Rams",
+        "abbr": "SHEP",
+        "id": "2974",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2974.png"
+      },
+      {
+        "name": "Shippensburg Raiders",
+        "abbr": "SHIP",
+        "id": "2559",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2559.png"
+      },
+      {
+        "name": "Shorter Hawks",
+        "abbr": "SHOR",
+        "id": "2560",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2560.png"
+      },
+      {
+        "name": "Siena Heights Saints",
+        "abbr": "SIE",
+        "id": "2562",
+        "logo": ""
+      },
+      {
+        "name": "Simpson College (IA) Storm",
+        "abbr": "SCIA",
+        "id": "2564",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2564.png"
+      },
+      {
+        "name": "Simpson University (Ca) Red Hawks",
+        "abbr": "SUCA",
+        "id": "129758",
+        "logo": ""
+      },
+      {
+        "name": "Sioux Falls Cougars",
+        "abbr": "SIO",
+        "id": "2894",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2894.png"
+      },
+      {
+        "name": "Slippery Rock The Rock",
+        "abbr": "SLI",
+        "id": "215",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/215.png"
+      },
+      {
+        "name": "South Alabama Jaguars",
+        "abbr": "USA",
+        "id": "6",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/6.png"
+      },
+      {
+        "name": "South Carolina Gamecocks",
+        "abbr": "SC",
+        "id": "2579",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2579.png"
+      },
+      {
+        "name": "South Carolina State Bulldogs",
+        "abbr": "SCST",
+        "id": "2569",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2569.png"
+      },
+      {
+        "name": "South Dakota Coyotes",
+        "abbr": "SDAK",
+        "id": "233",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/233.png"
+      },
+      {
+        "name": "South Dakota Mines Hardrockers",
+        "abbr": "SDM",
+        "id": "613",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/613.png"
+      },
+      {
+        "name": "South Dakota State Jackrabbits",
+        "abbr": "SDST",
+        "id": "2571",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2571.png"
+      },
+      {
+        "name": "South Florida Bulls",
+        "abbr": "USF",
+        "id": "58",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/58.png"
+      },
+      {
+        "name": "Southeast Missouri State Redhawks",
+        "abbr": "SEMO",
+        "id": "2546",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2546.png"
+      },
+      {
+        "name": "Southeastern Oklahoma State Savage Storm",
+        "abbr": "SEOS",
+        "id": "199",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/199.png"
+      },
+      {
+        "name": "Southern Arkansas Muleriders",
+        "abbr": "SA",
+        "id": "2568",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2568.png"
+      },
+      {
+        "name": "Southern Connecticut State Owls",
+        "abbr": "SCSU",
+        "id": "2583",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2583.png"
+      },
+      {
+        "name": "Southern Illinois Salukis",
+        "abbr": "SIU",
+        "id": "79",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/79.png"
+      },
+      {
+        "name": "Southern Miss Golden Eagles",
+        "abbr": "USM",
+        "id": "2572",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2572.png"
+      },
+      {
+        "name": "Southern Nazarene Crimson Storm",
+        "abbr": "SN",
+        "id": "200",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/200.png"
+      },
+      {
+        "name": "Southern Oregon Raiders",
+        "abbr": "SOU",
+        "id": "2584",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2584.png"
+      },
+      {
+        "name": "Southern Utah Thunderbirds",
+        "abbr": "SUU",
+        "id": "253",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/253.png"
+      },
+      {
+        "name": "Southern Virginia Knights",
+        "abbr": "SV",
+        "id": "2896",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2896.png"
+      },
+      {
+        "name": "Southwest Baptist Bearcats",
+        "abbr": "SWB",
+        "id": "2586",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2586.png"
+      },
+      {
+        "name": "Southwest Minnesota State Mustangs",
+        "abbr": "SWMN",
+        "id": "2587",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2587.png"
+      },
+      {
+        "name": "Southwestern Oklahoma State Bulldogs",
+        "abbr": "SWOK",
+        "id": "2927",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2927.png"
+      },
+      {
+        "name": "Southwestern University Pirates",
+        "abbr": "SU",
+        "id": "2588",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2588.png"
+      },
+      {
+        "name": "Springfield Pride",
+        "abbr": "SPRI",
+        "id": "81",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/81.png"
+      },
+      {
+        "name": "St. Andrews Knights",
+        "abbr": "STAU",
+        "id": "111610",
+        "logo": ""
+      },
+      {
+        "name": "St. Anselm Hawks",
+        "abbr": "STA",
+        "id": "2830",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2830.png"
+      },
+      {
+        "name": "St. John Fisher University Cardinals",
+        "abbr": "SJFU",
+        "id": "374",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/374.png"
+      },
+      {
+        "name": "St. Lawrence Saints",
+        "abbr": "USL",
+        "id": "2779",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2779.png"
+      },
+      {
+        "name": "St. Mary's (CA) Spires",
+        "abbr": "SMC",
+        "id": "2608",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2608.png"
+      },
+      {
+        "name": "St. Norbert Green Knights",
+        "abbr": "STNO",
+        "id": "2832",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2832.png"
+      },
+      {
+        "name": "St. Olaf Oles",
+        "abbr": "OLAF",
+        "id": "133",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/133.png"
+      },
+      {
+        "name": "St. Scholastica Saints",
+        "abbr": "STS",
+        "id": "375",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/375.png"
+      },
+      {
+        "name": "St. Thomas Tommies",
+        "abbr": "STMN",
+        "id": "2900",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2900.png"
+      },
+      {
+        "name": "St. Thomas University (Fl) Bobcats",
+        "abbr": "STTHO",
+        "id": "125730",
+        "logo": ""
+      },
+      {
+        "name": "St. Xavier (IL) Cougars",
+        "abbr": "ST",
+        "id": "2615",
+        "logo": ""
+      },
+      {
+        "name": "Stanford Cardinal",
+        "abbr": "STAN",
+        "id": "24",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/24.png"
+      },
+      {
+        "name": "Stephen F. Austin Lumberjacks",
+        "abbr": "SFA",
+        "id": "2617",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2617.png"
+      },
+      {
+        "name": "Sterling College STERLING KS",
+        "abbr": "STE",
+        "id": "618",
+        "logo": ""
+      },
+      {
+        "name": "Stetson Hatters",
+        "abbr": "STET",
+        "id": "56",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/56.png"
+      },
+      {
+        "name": "Stevenson Mustangs",
+        "abbr": "STEV",
+        "id": "471",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/471.png"
+      },
+      {
+        "name": "Stonehill Skyhawks",
+        "abbr": "STO",
+        "id": "284",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/284.png"
+      },
+      {
+        "name": "Stony Brook Seawolves",
+        "abbr": "STBK",
+        "id": "2619",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2619.png"
+      },
+      {
+        "name": "Sul Ross State Lobos",
+        "abbr": "SROS",
+        "id": "2834",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2834.png"
+      },
+      {
+        "name": "Susquehanna River Hawks",
+        "abbr": "SUS",
+        "id": "216",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/216.png"
+      },
+      {
+        "name": "Syracuse Orange",
+        "abbr": "SYR",
+        "id": "183",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/183.png"
+      },
+      {
+        "name": "TCU Horned Frogs",
+        "abbr": "TCU",
+        "id": "2628",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2628.png"
+      },
+      {
+        "name": "Tabor College TABOR",
+        "abbr": "TABOR",
+        "id": "619",
+        "logo": ""
+      },
+      {
+        "name": "Tarleton State Texans",
+        "abbr": "TAR",
+        "id": "2627",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2627.png"
+      },
+      {
+        "name": "Taylor Trojans",
+        "abbr": "TAY",
+        "id": "620",
+        "logo": ""
+      },
+      {
+        "name": "Temple Owls",
+        "abbr": "TEM",
+        "id": "218",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/218.png"
+      },
+      {
+        "name": "Tennessee State Tigers",
+        "abbr": "TNST",
+        "id": "2634",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2634.png"
+      },
+      {
+        "name": "Tennessee Tech Golden Eagles",
+        "abbr": "TNTC",
+        "id": "2635",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2635.png"
+      },
+      {
+        "name": "Tennessee Volunteers",
+        "abbr": "TENN",
+        "id": "2633",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2633.png"
+      },
+      {
+        "name": "Texas A&M Aggies",
+        "abbr": "TA&M",
+        "id": "245",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/245.png"
+      },
+      {
+        "name": "Texas A&M-Kingsville Javelinas",
+        "abbr": "TXKI",
+        "id": "2658",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2658.png"
+      },
+      {
+        "name": "Texas College Steers",
+        "abbr": "TC",
+        "id": "2637",
+        "logo": ""
+      },
+      {
+        "name": "Texas Longhorns",
+        "abbr": "TEX",
+        "id": "251",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png"
+      },
+      {
+        "name": "Texas Lutheran Bulldogs",
+        "abbr": "TXL",
+        "id": "2639",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2639.png"
+      },
+      {
+        "name": "Texas Southern Tigers",
+        "abbr": "TXSO",
+        "id": "2640",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2640.png"
+      },
+      {
+        "name": "Texas State Bobcats",
+        "abbr": "TXST",
+        "id": "326",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/326.png"
+      },
+      {
+        "name": "Texas Tech Red Raiders",
+        "abbr": "TTU",
+        "id": "2641",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png"
+      },
+      {
+        "name": "Texas Wesleyan Rams",
+        "abbr": "TWES",
+        "id": "102626",
+        "logo": ""
+      },
+      {
+        "name": "Thaddeus Stevens Bulldogs",
+        "abbr": "TSCT",
+        "id": "122776",
+        "logo": ""
+      },
+      {
+        "name": "The Citadel Bulldogs",
+        "abbr": "CIT",
+        "id": "2643",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2643.png"
+      },
+      {
+        "name": "The College of New Jersey Lions",
+        "abbr": "TCNJ",
+        "id": "2442",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2442.png"
+      },
+      {
+        "name": "Thiel Tomcats",
+        "abbr": "THL",
+        "id": "2644",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2644.png"
+      },
+      {
+        "name": "Thomas Night Hawks",
+        "abbr": "THO",
+        "id": "134000",
+        "logo": ""
+      },
+      {
+        "name": "Tiffin Dragons",
+        "abbr": "TIFF",
+        "id": "2838",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2838.png"
+      },
+      {
+        "name": "Toledo Rockets",
+        "abbr": "TOL",
+        "id": "2649",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2649.png"
+      },
+      {
+        "name": "Towson Tigers",
+        "abbr": "TOW",
+        "id": "119",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/119.png"
+      },
+      {
+        "name": "Trinity (CT) Bantams",
+        "abbr": "TRIN",
+        "id": "2977",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2977.png"
+      },
+      {
+        "name": "Trinity Bible Lions",
+        "abbr": "TRI",
+        "id": "3214",
+        "logo": ""
+      },
+      {
+        "name": "Trinity Christian TRINITY IL",
+        "abbr": "TRCC",
+        "id": "2652",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2652.png"
+      },
+      {
+        "name": "Trinity International (IL) Trojans",
+        "abbr": "TRN",
+        "id": "2907",
+        "logo": ""
+      },
+      {
+        "name": "Troy Trojans",
+        "abbr": "TROY",
+        "id": "2653",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2653.png"
+      },
+      {
+        "name": "Truman State Bulldogs",
+        "abbr": "TRUM",
+        "id": "2654",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2654.png"
+      },
+      {
+        "name": "Tufts Jumbos",
+        "abbr": "TUF",
+        "id": "112",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/112.png"
+      },
+      {
+        "name": "Tulane Green Wave",
+        "abbr": "TULN",
+        "id": "2655",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2655.png"
+      },
+      {
+        "name": "Tulsa Golden Hurricane",
+        "abbr": "TLSA",
+        "id": "202",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/202.png"
+      },
+      {
+        "name": "Tusculum Pioneers",
+        "abbr": "TUSC",
+        "id": "2839",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2839.png"
+      },
+      {
+        "name": "Tuskegee Golden Tigers",
+        "abbr": "TUSK",
+        "id": "2657",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2657.png"
+      },
+      {
+        "name": "UAB Blazers",
+        "abbr": "UAB",
+        "id": "5",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/5.png"
+      },
+      {
+        "name": "UC Davis Aggies",
+        "abbr": "UCD",
+        "id": "302",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/302.png"
+      },
+      {
+        "name": "UCF Knights",
+        "abbr": "UCF",
+        "id": "2116",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2116.png"
+      },
+      {
+        "name": "UCLA Bruins",
+        "abbr": "UCLA",
+        "id": "26",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/26.png"
+      },
+      {
+        "name": "UConn Huskies",
+        "abbr": "CONN",
+        "id": "41",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/41.png"
+      },
+      {
+        "name": "UFTL Eagles",
+        "abbr": "UFTL",
+        "id": "124110",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/124110.png"
+      },
+      {
+        "name": "UL Monroe Warhawks",
+        "abbr": "ULM",
+        "id": "2433",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2433.png"
+      },
+      {
+        "name": "UMass Dartmouth Corsairs",
+        "abbr": "MDAR",
+        "id": "379",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/379.png"
+      },
+      {
+        "name": "UNC Pembroke Braves",
+        "abbr": "UNCP",
+        "id": "2882",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2882.png"
+      },
+      {
+        "name": "UNLV Rebels",
+        "abbr": "UNLV",
+        "id": "2439",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2439.png"
+      },
+      {
+        "name": "USC Trojans",
+        "abbr": "USC",
+        "id": "30",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/30.png"
+      },
+      {
+        "name": "UT Martin Skyhawks",
+        "abbr": "UTM",
+        "id": "2630",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2630.png"
+      },
+      {
+        "name": "UT Permian Basin Falcons",
+        "abbr": "UTPB",
+        "id": "110243",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/110243.png"
+      },
+      {
+        "name": "UT Rio Grande Valley Vaqueros",
+        "abbr": "RGV",
+        "id": "292",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/292.png"
+      },
+      {
+        "name": "UTEP Miners",
+        "abbr": "UTEP",
+        "id": "2638",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2638.png"
+      },
+      {
+        "name": "UTSA Roadrunners",
+        "abbr": "UTSA",
+        "id": "2636",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2636.png"
+      },
+      {
+        "name": "UVA Wise Cavaliers",
+        "abbr": "UVAW",
+        "id": "2842",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2842.png"
+      },
+      {
+        "name": "Union (NY) Garnet Chargers",
+        "abbr": "UNNY",
+        "id": "237",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/237.png"
+      },
+      {
+        "name": "University Of Charleston (WV) Golden Eagles",
+        "abbr": "CHWV",
+        "id": "2128",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2128.png"
+      },
+      {
+        "name": "University of Faith Glory Eagles",
+        "abbr": "UFTH",
+        "id": "3254",
+        "logo": ""
+      },
+      {
+        "name": "University of Mary Marauders",
+        "abbr": "MARY",
+        "id": "559",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/559.png"
+      },
+      {
+        "name": "University of Mexico MEXICO U",
+        "abbr": "UNI",
+        "id": "3212",
+        "logo": ""
+      },
+      {
+        "name": "University of New England Nor'easters",
+        "abbr": "UNE",
+        "id": "111675",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/111675.png"
+      },
+      {
+        "name": "University of Rochester (NY) Yellow Jackets",
+        "abbr": "ROC",
+        "id": "184",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/184.png"
+      },
+      {
+        "name": "Upper Iowa Peacocks",
+        "abbr": "UPP",
+        "id": "389",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/389.png"
+      },
+      {
+        "name": "Ursinus Bears",
+        "abbr": "URS",
+        "id": "2667",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2667.png"
+      },
+      {
+        "name": "Utah State Aggies",
+        "abbr": "USU",
+        "id": "328",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/328.png"
+      },
+      {
+        "name": "Utah Tech Trailblazers",
+        "abbr": "UTU",
+        "id": "3101",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/3101.png"
+      },
+      {
+        "name": "Utah Utes",
+        "abbr": "UTAH",
+        "id": "254",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/254.png"
+      },
+      {
+        "name": "Utica Pioneers",
+        "abbr": "UTI",
+        "id": "390",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/390.png"
+      },
+      {
+        "name": "VMI Keydets",
+        "abbr": "VMI",
+        "id": "2678",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2678.png"
+      },
+      {
+        "name": "Valley City State Vikings",
+        "abbr": "VCSU",
+        "id": "628",
+        "logo": ""
+      },
+      {
+        "name": "Valley Forge Christian VALLEYFGCR",
+        "abbr": "UVF",
+        "id": "12320",
+        "logo": ""
+      },
+      {
+        "name": "Valparaiso Beacons",
+        "abbr": "VAL",
+        "id": "2674",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2674.png"
+      },
+      {
+        "name": "Vanderbilt Commodores",
+        "abbr": "VAN",
+        "id": "238",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/238.png"
+      },
+      {
+        "name": "Villanova Wildcats",
+        "abbr": "VILL",
+        "id": "222",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/222.png"
+      },
+      {
+        "name": "Virginia Cavaliers",
+        "abbr": "UVA",
+        "id": "258",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/258.png"
+      },
+      {
+        "name": "Virginia Lynchburg Dragons",
+        "abbr": "UVAL",
+        "id": "2355",
+        "logo": ""
+      },
+      {
+        "name": "Virginia State Trojans",
+        "abbr": "VIR",
+        "id": "330",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/330.png"
+      },
+      {
+        "name": "Virginia Tech Hokies",
+        "abbr": "VT",
+        "id": "259",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/259.png"
+      },
+      {
+        "name": "Virginia Union Panthers",
+        "abbr": "VU",
+        "id": "2676",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2676.png"
+      },
+      {
+        "name": "WPI Engineers",
+        "abbr": "WPI",
+        "id": "2749",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2749.png"
+      },
+      {
+        "name": "Wabash College Little Giants",
+        "abbr": "WAB",
+        "id": "89",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/89.png"
+      },
+      {
+        "name": "Wagner Seahawks",
+        "abbr": "WAG",
+        "id": "2681",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2681.png"
+      },
+      {
+        "name": "Wake Forest Demon Deacons",
+        "abbr": "WAKE",
+        "id": "154",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/154.png"
+      },
+      {
+        "name": "Waldorf Warriors",
+        "abbr": "WAL",
+        "id": "3080",
+        "logo": ""
+      },
+      {
+        "name": "Wartburg College Knights",
+        "abbr": "WAR",
+        "id": "2685",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2685.png"
+      },
+      {
+        "name": "Washburn Ichabods",
+        "abbr": "WASH",
+        "id": "2687",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2687.png"
+      },
+      {
+        "name": "Washington State Cougars",
+        "abbr": "WSU",
+        "id": "265",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/265.png"
+      },
+      {
+        "name": "Washington University-St. Louis Bears",
+        "abbr": "WSTL",
+        "id": "143",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/143.png"
+      },
+      {
+        "name": "Washington and Lee Generals",
+        "abbr": "WLEE",
+        "id": "2688",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2688.png"
+      },
+      {
+        "name": "Wayland Baptist Pioneers",
+        "abbr": "WAY",
+        "id": "630",
+        "logo": ""
+      },
+      {
+        "name": "Wayne State (NE) Wildcats",
+        "abbr": "WNST",
+        "id": "2844",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2844.png"
+      },
+      {
+        "name": "Waynesburg Yellow Jackets",
+        "abbr": "WAYN",
+        "id": "2845",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2845.png"
+      },
+      {
+        "name": "Webber International Warriors",
+        "abbr": "WEBB",
+        "id": "2691",
+        "logo": ""
+      },
+      {
+        "name": "Weber State Wildcats",
+        "abbr": "WEB",
+        "id": "2692",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2692.png"
+      },
+      {
+        "name": "Wesleyan University (CT) Cardinals",
+        "abbr": "WCT",
+        "id": "336",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/336.png"
+      },
+      {
+        "name": "West Florida Argonauts",
+        "abbr": "UWF",
+        "id": "110242",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/110242.png"
+      },
+      {
+        "name": "West Liberty Hilltoppers",
+        "abbr": "WLIB",
+        "id": "2699",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2699.png"
+      },
+      {
+        "name": "West Texas A&M Buffaloes",
+        "abbr": "WTAM",
+        "id": "2704",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2704.png"
+      },
+      {
+        "name": "West Virginia Mountaineers",
+        "abbr": "WVU",
+        "id": "277",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/277.png"
+      },
+      {
+        "name": "West Virginia State Yellow Jackets",
+        "abbr": "WVST",
+        "id": "2707",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2707.png"
+      },
+      {
+        "name": "Western Carolina Catamounts",
+        "abbr": "WCU",
+        "id": "2717",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2717.png"
+      },
+      {
+        "name": "Western Colorado Mountaineers",
+        "abbr": "WCOL",
+        "id": "2714",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2714.png"
+      },
+      {
+        "name": "Western Illinois Leathernecks",
+        "abbr": "WIU",
+        "id": "2710",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2710.png"
+      },
+      {
+        "name": "Western Kentucky Hilltoppers",
+        "abbr": "WKU",
+        "id": "98",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/98.png"
+      },
+      {
+        "name": "Western Michigan Broncos",
+        "abbr": "WMU",
+        "id": "2711",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2711.png"
+      },
+      {
+        "name": "Western Mustangs",
+        "abbr": "WEST",
+        "id": "87517",
+        "logo": ""
+      },
+      {
+        "name": "Western New England Golden Bears",
+        "abbr": "WNE",
+        "id": "2702",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2702.png"
+      },
+      {
+        "name": "Western Oregon Wolves",
+        "abbr": "WOR",
+        "id": "2848",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2848.png"
+      },
+      {
+        "name": "Westfield State Owls",
+        "abbr": "WSTF",
+        "id": "2909",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2909.png"
+      },
+      {
+        "name": "Westgate Christian University Ravens",
+        "abbr": "WES",
+        "id": "134087",
+        "logo": ""
+      },
+      {
+        "name": "Westminster (MO) Blue Jays",
+        "abbr": "WMO",
+        "id": "433",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/433.png"
+      },
+      {
+        "name": "Westminster (PA) Titans",
+        "abbr": "WPA",
+        "id": "2849",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2849.png"
+      },
+      {
+        "name": "Wheaton Thunder",
+        "abbr": "WHE",
+        "id": "396",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/396.png"
+      },
+      {
+        "name": "Wheeling Cardinals",
+        "abbr": "WHEE",
+        "id": "112335",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/112335.png"
+      },
+      {
+        "name": "Whittier College Poets",
+        "abbr": "WHI",
+        "id": "2850",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2850.png"
+      },
+      {
+        "name": "Whitworth Pirates",
+        "abbr": "WHIT",
+        "id": "2721",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2721.png"
+      },
+      {
+        "name": "Widener Pride",
+        "abbr": "WID",
+        "id": "2725",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2725.png"
+      },
+      {
+        "name": "Willamette Bearcats",
+        "abbr": "WLME",
+        "id": "2930",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2930.png"
+      },
+      {
+        "name": "William & Mary Tribe",
+        "abbr": "W&M",
+        "id": "2729",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2729.png"
+      },
+      {
+        "name": "William Jewell Cardinals",
+        "abbr": "WJC",
+        "id": "2911",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2911.png"
+      },
+      {
+        "name": "William Paterson Pioneers",
+        "abbr": "WLPT",
+        "id": "2970",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2970.png"
+      },
+      {
+        "name": "William Woods Owls",
+        "abbr": "WLWD",
+        "id": "129741",
+        "logo": ""
+      },
+      {
+        "name": "Williams Ephs",
+        "abbr": "WILL",
+        "id": "2731",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2731.png"
+      },
+      {
+        "name": "Williamson Trade Mechanics",
+        "abbr": "WIL",
+        "id": "3130",
+        "logo": ""
+      },
+      {
+        "name": "Wilmington (OH) Fightin' Quakers",
+        "abbr": "WILM",
+        "id": "2733",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2733.png"
+      },
+      {
+        "name": "Winona State Warriors",
+        "abbr": "WIN",
+        "id": "2851",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2851.png"
+      },
+      {
+        "name": "Winston-Salem Rams",
+        "abbr": "WNSL",
+        "id": "2736",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2736.png"
+      },
+      {
+        "name": "Wisconsin Lutheran Warriors",
+        "abbr": "WIS",
+        "id": "2741",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2741.png"
+      },
+      {
+        "name": "Wisconsin-Eau Claire Blugolds",
+        "abbr": "WISE",
+        "id": "2738",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2738.png"
+      },
+      {
+        "name": "Wisconsin-Lacrosse Eagles",
+        "abbr": "WISL",
+        "id": "2740",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2740.png"
+      },
+      {
+        "name": "Wisconsin-Oshkosh Titans",
+        "abbr": "WISO",
+        "id": "271",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/271.png"
+      },
+      {
+        "name": "Wisconsin-Platteville Pioneers",
+        "abbr": "WIPL",
+        "id": "272",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/272.png"
+      },
+      {
+        "name": "Wisconsin-River Falls Falcons",
+        "abbr": "WIRF",
+        "id": "2723",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2723.png"
+      },
+      {
+        "name": "Wisconsin-Stevens Pt Pointers",
+        "abbr": "WISP",
+        "id": "2743",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2743.png"
+      },
+      {
+        "name": "Wisconsin-Stout Blue Devils",
+        "abbr": "WISS",
+        "id": "2744",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2744.png"
+      },
+      {
+        "name": "Wisconsin-Whitewater Warhawks",
+        "abbr": "WISW",
+        "id": "2745",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2745.png"
+      },
+      {
+        "name": "Wittenberg Tigers",
+        "abbr": "WIT",
+        "id": "2746",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2746.png"
+      },
+      {
+        "name": "Wofford Terriers",
+        "abbr": "WOF",
+        "id": "2747",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2747.png"
+      },
+      {
+        "name": "Wooster Fighting Scots",
+        "abbr": "WOO",
+        "id": "2748",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2748.png"
+      },
+      {
+        "name": "Wyoming Cowboys",
+        "abbr": "WYO",
+        "id": "2751",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2751.png"
+      },
+      {
+        "name": "Yale Bulldogs",
+        "abbr": "YALE",
+        "id": "43",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/43.png"
+      },
+      {
+        "name": "Youngstown State Penguins",
+        "abbr": "YSU",
+        "id": "2754",
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2754.png"
+      }
+    ],
     "WPBL": [
       {
         "name": "Boston Hunters",

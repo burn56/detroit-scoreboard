@@ -1,0 +1,158 @@
+name: Update Team Catalog
+
+on:
+  push:
+    branches: ["Custom-Teams-Display", "main"]
+    paths:
+      - ".github/workflows/update-teams.yml"
+      - "builder.html"
+  workflow_dispatch:
+  schedule:
+    - cron: "17 8 * * 1"
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Build teams.json
+        run: |
+          python - <<'PY'
+          import json
+          import urllib.request
+          import datetime
+          import sys
+
+          # Use ESPN's Core API for catalog discovery. It returns a collection
+          # of $ref URLs; each referenced team document is then fetched.
+          endpoints = {
+              "MLB":  "https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/teams?limit=100",
+              "NFL":  "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/teams?limit=100",
+              "WNBA": "https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/teams?limit=100",
+              "CFB":  "https://sports.core.api.espn.com/v2/sports/football/leagues/college-football/teams?limit=1000",
+          }
+
+          def get(url):
+              # Do not spoof a browser UA. GitHub Actions is a server-side client.
+              req = urllib.request.Request(
+                  url,
+                  headers={
+                      "Accept": "application/json",
+                      "User-Agent": "lamplight-scoreboard-catalog/1.0",
+                  },
+              )
+              with urllib.request.urlopen(req, timeout=30) as response:
+                  return json.load(response)
+
+          def add_team(out, team):
+              if not isinstance(team, dict):
+                  return
+              abbr = str(team.get("abbreviation", "")).strip().upper()
+              name = (
+                  team.get("displayName")
+                  or team.get("shortDisplayName")
+                  or team.get("name")
+              )
+              if not abbr or not name:
+                  return
+
+              logos = team.get("logos") or []
+              logo = ""
+              if logos and isinstance(logos[0], dict):
+                  logo = logos[0].get("href", "")
+
+              out[abbr] = {
+                  "name": name,
+                  "abbr": abbr,
+                  "id": str(team.get("id", "")),
+                  "logo": logo,
+              }
+
+          def extract_core(data):
+              out = {}
+
+              # Core collection response: {"items":[{"$ref":"..."}, ...]}
+              for item in data.get("items", []):
+                  if not isinstance(item, dict):
+                      continue
+
+                  ref = item.get("$ref")
+                  if ref:
+                      try:
+                          add_team(out, get(ref))
+                      except Exception as e:
+                          print("Team ref failed:", ref, e)
+                      continue
+
+                  # Be tolerant if ESPN returns embedded team objects.
+                  add_team(out, item.get("team", item))
+
+              return sorted(out.values(), key=lambda x: x["name"])
+
+          try:
+              with open("teams.json", "r", encoding="utf-8") as f:
+                  old = json.load(f).get("leagues", {})
+          except Exception:
+              old = {}
+
+          leagues = {}
+          failures = []
+
+          for league, url in endpoints.items():
+              try:
+                  data = get(url)
+                  teams = extract_core(data)
+                  if not teams:
+                      raise RuntimeError("ESPN returned zero usable teams")
+                  leagues[league] = teams
+                  print(f"{league}: {len(teams)} teams")
+              except Exception as e:
+                  print(f"{league} FAILED: {e}")
+                  existing = old.get(league, [])
+                  if existing:
+                      print(f"{league}: preserving {len(existing)} existing teams")
+                      leagues[league] = existing
+                  else:
+                      leagues[league] = []
+                      failures.append(league)
+
+          leagues["WPBL"] = old.get("WPBL") or [
+              {"name":"Boston Hunters","abbr":"9f08or2mffx81409","id":"9f08or2mffx81409","logo":"logos/IMG_0725.png"},
+              {"name":"Los Angeles Queens","abbr":"v4gisr4rbgmn67b0","id":"v4gisr4rbgmn67b0","logo":"logos/IMG_0724.png"},
+              {"name":"New York Heights","abbr":"fttth861nft1j2s7","id":"fttth861nft1j2s7","logo":"logos/IMG_0727.png"},
+              {"name":"San Francisco Firebells","abbr":"vhubhz8li07tmgq8","id":"vhubhz8li07tmgq8","logo":"logos/IMG_0726.png"},
+          ]
+
+          result = {
+              "generated": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "source": "ESPN Core API",
+              "leagues": leagues,
+          }
+
+          with open("teams.json", "w", encoding="utf-8") as f:
+              json.dump(result, f, indent=2)
+
+          if failures:
+              print("Catalog build failed for leagues with no fallback:", ", ".join(failures))
+              sys.exit(1)
+          PY
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- teams.json; then
+            echo "No catalog changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add teams.json
+          git commit -m "Update team catalog"
+          git push
