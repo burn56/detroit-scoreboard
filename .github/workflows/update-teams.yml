@@ -1,7 +1,7 @@
 name: Update Team Catalog
 on:
   push:
-    branches: ["Custom-Teams-Display"]
+    branches: ["Custom-Teams-Display", "main"]
     paths:
       - ".github/workflows/update-teams.yml"
       - "builder.html"
@@ -33,24 +33,34 @@ jobs:
             with urllib.request.urlopen(req,timeout=30) as r:return json.load(r)
           def extract(data):
             out={}
-            for sport in data.get("sports",[]):
-              for league in sport.get("leagues",[]):
-                for item in league.get("teams",[]):
-                  t=item.get("team",item); ab=str(t.get("abbreviation","")).upper()
-                  name=t.get("displayName") or t.get("shortDisplayName") or t.get("name")
-                  if ab and name:
-                    logos=t.get("logos") or []
-                    out[ab]={"name":name,"abbr":ab,"id":str(t.get("id","")),"logo":logos[0].get("href","") if logos else ""}
+            def add(t):
+              if not isinstance(t,dict): return
+              ab=str(t.get("abbreviation","")).strip().upper()
+              name=t.get("displayName") or t.get("shortDisplayName") or t.get("name")
+              if not ab or not name: return
+              logos=t.get("logos") or []
+              logo=logos[0].get("href","") if logos and isinstance(logos[0],dict) else ""
+              out[ab]={"name":name,"abbr":ab,"id":str(t.get("id","")),"logo":logo}
+            def walk(x):
+              if isinstance(x,list):
+                for v in x: walk(v)
+              elif isinstance(x,dict):
+                if "abbreviation" in x and ("displayName" in x or "name" in x): add(x)
+                if isinstance(x.get("team"),dict): add(x["team"])
+                for v in x.values(): walk(v)
+            walk(data)
             return sorted(out.values(),key=lambda x:x["name"])
-          old={}
-          try:
-            old=json.load(open("teams.json")).get("leagues",{})
-          except: pass
+          try: old=json.load(open("teams.json")).get("leagues",{})
+          except: old={}
           leagues={}
           for key,url in endpoints.items():
-            try: leagues[key]=extract(get(url))
+            try:
+              leagues[key]=extract(get(url))
+              print(key, len(leagues[key]), "teams")
+              if not leagues[key]: raise RuntimeError("ESPN returned data but parser found zero teams")
             except Exception as e:
-              print(key,"failed:",e); leagues[key]=old.get(key,[])
+              print(key,"failed:",e)
+              leagues[key]=old.get(key,[])
           leagues["WPBL"]=old.get("WPBL",[
             {"name":"Boston Hunters","abbr":"9f08or2mffx81409","id":"9f08or2mffx81409","logo":"logos/IMG_0725.png"},
             {"name":"Los Angeles Queens","abbr":"v4gisr4rbgmn67b0","id":"v4gisr4rbgmn67b0","logo":"logos/IMG_0724.png"},
