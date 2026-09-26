@@ -1272,9 +1272,18 @@ function makeLamplightStadiumBoard(g)
     q(".ls-home-score").textContent = g.home.score ?? "";
     q(".ls-quarter").textContent = g.period ?? "";
     q(".ls-clock").textContent = g.clock || "";
-    q(".ls-down").textContent = s.down ?? "";
-    q(".ls-togo").textContent = s.distance ?? "";
-    q(".ls-ballon").textContent = s.yardLine ?? "";
+    // ESPN uses -1 for down / distance during kickoffs, changes of possession,
+    // and other between-play states.  Do not put ESPN's placeholder values
+    // on the physical board.  The yard line can be stale during that same
+    // transition, so only show field position when there is a real down.
+    const Down = Number(s.down);
+    const Distance = Number(s.distance);
+    const YardLine = Number(s.yardLine);
+    const HasDown = Number.isFinite(Down) && Down >= 1;
+
+    q(".ls-down").textContent = HasDown ? Down : "";
+    q(".ls-togo").textContent = HasDown && Number.isFinite(Distance) && Distance >= 0 ? Distance : "";
+    q(".ls-ballon").textContent = HasDown && Number.isFinite(YardLine) && YardLine >= 0 ? YardLine : "";
     q(".ls-poss-team").textContent = footballPossession(g);
     q(".ls-last-play").textContent = footballLastPlay(g);
     const t = footballTimeouts(g);
