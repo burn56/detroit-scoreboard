@@ -493,7 +493,7 @@ const WPBL_TEAMS={
  "vhubhz8li07tmgq8":{name:"San Francisco Firebells",nickname:"FIREBELLS",logo:"logos/IMG_0726.png"},
  "fttth861nft1j2s7":{name:"New York Heights",nickname:"HEIGHTS",logo:"logos/IMG_0727.png"}
 };
-const TEAMS={
+const DEFAULT_TEAMS={
  tigers:{name:"Detroit Tigers",league:"MLB",sport:"baseball",source:"mlb",abbr:"DET",logo:"logos/tigers.png"},
  giants:{name:"San Francisco Giants",league:"MLB",sport:"baseball",source:"mlb",abbr:"SF",logo:"logos/sfgiants.png"},
  lions:{name:"Detroit Lions",league:"NFL",sport:"football",source:"nfl",abbr:"DET",logo:"logos/lions.png"},
@@ -502,6 +502,44 @@ const TEAMS={
  msu:{name:"Michigan State Spartans",league:"NCAA",sport:"football",source:"cfb",abbr:"MSU",logo:"logos/msu.png"},
  fever:{name:"Indiana Fever",league:"WNBA",sport:"basketball",source:"wnba",abbr:"IND",logo:"https://a.espncdn.com/i/teamlogos/wnba/500/ind.png"}
 };
+let TEAMS={...DEFAULT_TEAMS};
+let CUSTOM_WPBL=null;
+function decodeTeamsParam(value){
+ try{
+  let b=String(value||"").replace(/-/g,"+").replace(/_/g,"/");
+  while(b.length%4)b+="=";
+  const bytes=Uint8Array.from(atob(b),c=>c.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+ }catch(e){console.error("Invalid teams parameter",e);return""}
+}
+async function applyCustomTeams(){
+ const encoded=new URLSearchParams(location.search).get("teams");
+ if(!encoded)return;
+ const raw=decodeTeamsParam(encoded);if(!raw)return;
+ let catalog;
+ try{catalog=await fetchJSON("teams.json")}catch(e){console.error("Could not load teams.json",e);return}
+ const leagues=catalog&&catalog.leagues||{},next={},wpbl=new Set(),map={
+  MLB:{source:"mlb",sport:"baseball",league:"MLB"},
+  NFL:{source:"nfl",sport:"football",league:"NFL"},
+  WNBA:{source:"wnba",sport:"basketball",league:"WNBA"},
+  CFB:{source:"cfb",sport:"football",league:"NCAA"}
+ };
+ for(const part of raw.split(";")){
+  const i=part.indexOf(":");if(i<1)continue;
+  const league=part.slice(0,i).trim().toUpperCase(),codes=part.slice(i+1).split(",").map(x=>x.trim()).filter(Boolean);
+  if(league==="WPBL"){codes.forEach(x=>wpbl.add(x));continue}
+  const meta=map[league];if(!meta)continue;
+  for(const code0 of codes){
+   const code=code0.toUpperCase(),row=(leagues[league]||[]).find(x=>String(x.abbr||"").toUpperCase()===code);
+   if(!row)continue;
+   const key="custom-"+meta.source+"-"+code.toLowerCase().replace(/[^a-z0-9]/g,"");
+   next[key]={name:row.name||code,league:meta.league,sport:meta.sport,source:meta.source,abbr:code,logo:row.logo||""};
+  }
+ }
+ TEAMS=next;
+ CUSTOM_WPBL=wpbl.size?wpbl:new Set();
+ if(DEBUG)console.log("Custom teams",raw,TEAMS,[...CUSTOM_WPBL]);
+}
 const LIVE_PRIORITY={
  team:{
   lions:100,
@@ -702,6 +740,7 @@ function selectWpblGames(data,teamsData){
   const id=String(row.game_id);if(seen.has(id))continue;seen.add(id);
   const g=normalizeWpblGame(row,teams);
   if(!g.home.name||!g.away.name)continue;
+  if(CUSTOM_WPBL&&!CUSTOM_WPBL.has("ALL")&&!CUSTOM_WPBL.has(String(g.home.id))&&!CUSTOM_WPBL.has(String(g.away.id)))continue;
   if(day===today-1&&(g.state!=="post"||!finalStillVisible(g)))continue;
   out.push(g);
  }
@@ -1095,8 +1134,9 @@ async function fetchJSON(url){const sep=url.includes("?")?"&":"?";const r=await 
 async function refreshProduction(){
  if(STATE.refreshing||PREVIEW)return;STATE.refreshing=true;
  try{
-  const sources=["mlb","nfl","cfb","wnba"],requests=sources.map(s=>fetchSourceData(s));
-  requests.push(fetchJSON(WPBL.games),fetchJSON(WPBL.teams));
+  const sources=["mlb","nfl","cfb","wnba"].filter(s=>Object.values(TEAMS).some(t=>t.source===s)),requests=sources.map(s=>fetchSourceData(s));
+  const wantWpbl=CUSTOM_WPBL===null||CUSTOM_WPBL.size>0;
+  if(wantWpbl)requests.push(fetchJSON(WPBL.games),fetchJSON(WPBL.teams));
   const results=await Promise.allSettled(requests),enrich=[];
   results.slice(0,sources.length).forEach((r,i)=>{
    const source=sources[i];if(r.status!=="fulfilled"){console.error(source+" fetch failed:",r.reason);return}
@@ -1110,9 +1150,9 @@ async function refreshProduction(){
    });
   });
 
-  const wpblGamesResult=results[sources.length],wpblTeamsResult=results[sources.length+1];
-  if(wpblGamesResult.status==="fulfilled")STATE.lastGood.wpbl=wpblGamesResult.value;else console.error("wpbl games fetch failed:",wpblGamesResult.reason);
-  if(wpblTeamsResult.status==="fulfilled")STATE.lastGood.wpblTeams=wpblTeamsResult.value;else console.error("wpbl teams fetch failed:",wpblTeamsResult.reason);
+  const wpblGamesResult=wantWpbl?results[sources.length]:null,wpblTeamsResult=wantWpbl?results[sources.length+1]:null;
+  if(wpblGamesResult){if(wpblGamesResult.status==="fulfilled")STATE.lastGood.wpbl=wpblGamesResult.value;else console.error("wpbl games fetch failed:",wpblGamesResult.reason)}
+  if(wpblTeamsResult){if(wpblTeamsResult.status==="fulfilled")STATE.lastGood.wpblTeams=wpblTeamsResult.value;else console.error("wpbl teams fetch failed:",wpblTeamsResult.reason)}
   if(STATE.lastGood.wpbl&&STATE.lastGood.wpblTeams){
    removeWpblCards();
    Object.keys(STATE.games).filter(k=>k.startsWith("wpbl-")).forEach(k=>{delete STATE.games[k];delete STATE.gameMeta[k]});
@@ -1204,8 +1244,9 @@ function renderStickyPreview(){
  Object.entries(data).forEach(([k,v])=>{showCard(k);setText(k+"-game",v[0]+" @ "+v[1]);setStatus(k,"scheduled","Scheduled");setText(k+"-status-text",v[2])});
  updateStickyLayout();
 }
-function start(){
+async function start(){
  loadFinalSeen();pruneFinalSeen();
+ await applyCustomTeams();
  buildCards();hideAllCards();
  window.addEventListener("resize",()=>{if(!document.body.classList.contains("live-takeover"))updateStickyLayout()});
  if(PREVIEW){document.body.classList.add("preview");if(PREVIEW==="wpbl")return renderWpblPreview();if(PREVIEW==="baseball")return renderBaseballPreview();if(PREVIEW==="football")return renderFootballPreview();if(PREVIEW==="basketball")return renderBasketballPreview();if(PREVIEW==="dual"||PREVIEW==="dual-stadium-court"||PREVIEW==="dual-park-court"||PREVIEW==="dual-park-stadium")return renderDualPreview(PREVIEW);if(PREVIEW==="sticky")return renderStickyPreview()}
