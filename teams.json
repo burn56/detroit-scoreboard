@@ -1,0 +1,36 @@
+{
+  "generated": null,
+  "source": "ESPN",
+  "leagues": {
+    "MLB": [],
+    "NFL": [],
+    "WNBA": [],
+    "CFB": [],
+    "WPBL": [
+      {
+        "name": "Boston Hunters",
+        "abbr": "9f08or2mffx81409",
+        "id": "9f08or2mffx81409",
+        "logo": "logos/IMG_0725.png"
+      },
+      {
+        "name": "Los Angeles Queens",
+        "abbr": "v4gisr4rbgmn67b0",
+        "id": "v4gisr4rbgmn67b0",
+        "logo": "logos/IMG_0724.png"
+      },
+      {
+        "name": "New York Heights",
+        "abbr": "fttth861nft1j2s7",
+        "id": "fttth861nft1j2s7",
+        "logo": "logos/IMG_0727.png"
+      },
+      {
+        "name": "San Francisco Firebells",
+        "abbr": "vhubhz8li07tmgq8",
+        "id": "vhubhz8li07tmgq8",
+        "logo": "logos/IMG_0726.png"
+      }
+    ]
+  }
+}

@@ -1,90 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Lamplight Sports Board Builder</title>
-<style>
-:root{--panel:#17211d;--ink:#eee3c6;--muted:#aaa58f;--gold:#d6a04a;--line:#4e4738}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(#0d1311,#151d19);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-main{width:min(980px,calc(100% - 28px));margin:36px auto 70px}h1{margin:0;font:700 clamp(28px,5vw,48px) Georgia,serif;letter-spacing:.05em}.lead,.note{color:var(--muted)}
-.card{background:rgba(23,33,29,.95);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0;box-shadow:0 12px 35px #0005}h2{font-size:18px;margin:0 0 14px;color:var(--gold)}
-.grid{display:grid;grid-template-columns:1fr 2fr;gap:14px}label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px}
-select,textarea,button{font:inherit}select,textarea{width:100%;background:#0c1210;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:11px}textarea{min-height:68px;resize:vertical}
-button{border:1px solid #745a2d;background:var(--gold);color:#17120a;font-weight:750;border-radius:8px;padding:11px 15px;cursor:pointer}button.secondary{background:#24312b;color:var(--ink);border-color:var(--line)}button.danger{background:#38201c;color:#f1c2b9;border-color:#70433a}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.selected{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.chip{display:flex;align-items:center;gap:8px;background:#0c1210;border:1px solid var(--line);border-radius:999px;padding:6px 8px 6px 10px}.chip img{width:28px;height:28px;object-fit:contain}.chip button{padding:4px 8px;border-radius:999px}.loading{opacity:.65}.error{color:#f1a89c}.output{word-break:break-all}
-@media(max-width:650px){.grid{grid-template-columns:1fr}}
-</style></head>
-<body><main>
-<h1>LAMPLIGHT SPORTS BOARD</h1>
-<p class="lead">Choose the teams you want this scoreboard to monitor. Team information is loaded dynamically.</p>
-<section class="card"><h2>Choose Teams</h2>
-<div class="grid">
-<div><label for="league">League</label><select id="league"><option value="MLB">MLB</option><option value="NFL">NFL</option><option value="WNBA">WNBA</option><option value="CFB">College Football</option><option value="WPBL">WPBL</option></select></div>
-<div><label for="team">Team</label><select id="team"><option>Loading…</option></select></div>
-</div>
-<div class="actions"><button id="add">Add Team</button><button class="secondary" id="allwpbl" style="display:none">Add All WPBL Games</button><button class="danger" id="clear">Clear</button></div>
-<div id="message" class="note"></div><div id="selected" class="selected"></div>
-</section>
-<section class="card"><h2>Generated Configuration</h2>
-<label>Decoded configuration</label><textarea id="plain" readonly></textarea>
-<label style="margin-top:14px">Base64url</label><textarea id="encoded" readonly></textarea>
-<label style="margin-top:14px">Scoreboard URL</label><textarea id="url" class="output" readonly></textarea>
-<div class="actions"><button id="copy">Copy Scoreboard URL</button><button class="secondary" id="open">Open Scoreboard</button></div>
-<p id="status" class="note">The builder only stores the compact league/team configuration in the URL.</p>
-</section></main>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lamplight Sports Board Builder</title>
+<style>:root{--panel:#17211d;--ink:#eee3c6;--muted:#aaa58f;--gold:#d6a04a;--line:#4e4738}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(#0d1311,#151d19);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}main{width:min(980px,calc(100% - 28px));margin:36px auto 70px}h1{margin:0;font:700 clamp(28px,5vw,48px) Georgia,serif;letter-spacing:.05em}.lead,.note{color:var(--muted)}.card{background:rgba(23,33,29,.95);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0;box-shadow:0 12px 35px #0005}h2{font-size:18px;margin:0 0 14px;color:var(--gold)}.grid{display:grid;grid-template-columns:1fr 2fr;gap:14px}label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px}select,textarea,button{font:inherit}select,textarea{width:100%;background:#0c1210;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:11px}textarea{min-height:68px;resize:vertical}button{border:1px solid #745a2d;background:var(--gold);color:#17120a;font-weight:750;border-radius:8px;padding:11px 15px;cursor:pointer}button.secondary{background:#24312b;color:var(--ink);border-color:var(--line)}button.danger{background:#38201c;color:#f1c2b9;border-color:#70433a}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.selected{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.chip{display:flex;align-items:center;gap:8px;background:#0c1210;border:1px solid var(--line);border-radius:999px;padding:6px 8px 6px 10px}.chip img{width:28px;height:28px;object-fit:contain}.chip button{padding:4px 8px;border-radius:999px}.error{color:#f1a89c}.output{word-break:break-all}@media(max-width:650px){.grid{grid-template-columns:1fr}}</style></head>
+<body><main><h1>LAMPLIGHT SPORTS BOARD</h1><p class="lead">Choose the teams you want this scoreboard to monitor.</p>
+<section class="card"><h2>Choose Teams</h2><div class="grid"><div><label>League</label><select id="league"><option>MLB</option><option>NFL</option><option>WNBA</option><option value="CFB">College Football</option><option>WPBL</option></select></div><div><label>Team</label><select id="team"><option>Loading…</option></select></div></div>
+<div class="actions"><button id="add">Add Team</button><button class="secondary" id="allwpbl" style="display:none">Add All WPBL Games</button><button class="danger" id="clear">Clear</button></div><div id="message" class="note"></div><div id="selected" class="selected"></div></section>
+<section class="card"><h2>Generated Configuration</h2><label>Decoded configuration</label><textarea id="plain" readonly></textarea><label style="margin-top:14px">Base64url</label><textarea id="encoded" readonly></textarea><label style="margin-top:14px">Scoreboard URL</label><textarea id="url" class="output" readonly></textarea><div class="actions"><button id="copy">Copy Scoreboard URL</button><button class="secondary" id="open">Open Scoreboard</button></div><p id="status" class="note">Team catalog is loaded from this site's teams.json file.</p></section></main>
 <script>
-const BASE="https://burn56.github.io/detroit-scoreboard/";
-const ESPN={
- MLB:"https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams?limit=1000",
- NFL:"https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams?limit=1000",
- WNBA:"https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams?limit=1000",
- CFB:"https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams?limit=1000"
-};
-const WPBL="https://stats.womensprobaseballleague.com/v1/teams";
-const cache={},chosen=[],$=id=>document.getElementById(id);
+const BASE="https://burn56.github.io/detroit-scoreboard/",chosen=[],$=id=>document.getElementById(id);let catalog={};
 function b64url(text){const bytes=new TextEncoder().encode(text);let b="";bytes.forEach(x=>b+=String.fromCharCode(x));return btoa(b).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
-function normalizeEspn(data){
- const out=[],seen=new Set();
- function walk(x){
-  if(!x||typeof x!=="object")return;
-  const t=x.team&&typeof x.team==="object"?x.team:null;
-  if(t){
-   const abbr=String(t.abbreviation||"").trim().toUpperCase(),name=t.displayName||t.shortDisplayName||t.name;
-   if(abbr&&name&&!seen.has(abbr)){seen.add(abbr);out.push({code:abbr,name,logo:(t.logos&&t.logos[0]&&t.logos[0].href)||t.logo||""})}
-  }
-  Object.values(x).forEach(v=>{if(Array.isArray(v))v.forEach(walk);else if(v&&typeof v==="object")walk(v)})
- }
- walk(data);return out.sort((a,b)=>a.name.localeCompare(b.name));
-}
-function normalizeWpbl(data){
- const rows=Array.isArray(data)?data:(data.teams||[]);
- return rows.map(t=>({code:String(t.team_id||t.id||""),name:t.team_name||t.name||"WPBL Team",logo:t.logo_url||t.logo||""})).filter(t=>t.code).sort((a,b)=>a.name.localeCompare(b.name));
-}
-async function loadTeams(){
- const league=$("league").value,sel=$("team");$("message").textContent="";$("allwpbl").style.display=league==="WPBL"?"inline-block":"none";
- sel.disabled=true;sel.innerHTML="<option>Loading teams…</option>";
- try{
-  if(!cache[league]){const r=await fetch(league==="WPBL"?WPBL:ESPN[league],{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);const data=await r.json();cache[league]=league==="WPBL"?normalizeWpbl(data):normalizeEspn(data)}
-  const teams=cache[league];sel.innerHTML="";
-  teams.forEach(t=>{const o=document.createElement("option");o.value=t.code;o.textContent=t.name+" ("+t.code+")";o.dataset.name=t.name;o.dataset.logo=t.logo;sel.appendChild(o)});
-  if(!teams.length)throw new Error("No teams returned");
- }catch(e){sel.innerHTML="<option>Unable to load teams</option>";$("message").innerHTML='<span class="error">Could not load '+league+' teams. '+e.message+'</span>'}
- finally{sel.disabled=false}
-}
-function config(){
- const order=["MLB","NFL","WNBA","CFB","WPBL"],g={};chosen.forEach(x=>(g[x.league]??=[]).push(x.code));
- return order.filter(l=>g[l]?.length).map(l=>l+":"+[...new Set(g[l])].join(",")).join(";");
-}
-function render(){
- const box=$("selected");box.innerHTML="";
- chosen.forEach((x,i)=>{const c=document.createElement("div");c.className="chip";if(x.logo){const im=document.createElement("img");im.src=x.logo;im.alt="";c.appendChild(im)}const s=document.createElement("span");s.textContent=x.league+" · "+x.name;c.appendChild(s);const b=document.createElement("button");b.className="danger";b.textContent="×";b.onclick=()=>{chosen.splice(i,1);render()};c.appendChild(b);box.appendChild(c)});
- const raw=config(),enc=raw?b64url(raw):"";$("plain").value=raw;$("encoded").value=enc;$("url").value=enc?BASE+"?teams="+enc:BASE;
-}
-$("league").onchange=loadTeams;
-$("add").onclick=()=>{const league=$("league").value,sel=$("team"),o=sel.options[sel.selectedIndex];if(!o||!o.value)return;const x={league,code:o.value,name:o.dataset.name||o.textContent,logo:o.dataset.logo||""};if(!chosen.some(y=>y.league===x.league&&y.code===x.code))chosen.push(x);render()};
-$("allwpbl").onclick=()=>{if(!chosen.some(x=>x.league==="WPBL"&&x.code==="ALL"))chosen.push({league:"WPBL",code:"ALL",name:"All WPBL Games",logo:""});render()};
-$("clear").onclick=()=>{chosen.length=0;render()};
-$("copy").onclick=async()=>{try{await navigator.clipboard.writeText($("url").value);$("status").textContent="Scoreboard URL copied."}catch(e){$("url").select();$("status").textContent="Select and copy the URL above."}};
-$("open").onclick=()=>window.open($("url").value,"_blank","noopener");
-render();loadTeams();
+async function init(){try{const r=await fetch("./teams.json?v="+Date.now());if(!r.ok)throw Error("HTTP "+r.status);const j=await r.json();catalog=j.leagues||{};loadLeague()}catch(e){$("team").innerHTML="<option>Unable to load teams</option>";$("message").innerHTML='<span class="error">Could not load teams.json: '+e.message+"</span>"}}
+function loadLeague(){const l=$("league").value,t=$("team"),teams=catalog[l]||[];$("allwpbl").style.display=l==="WPBL"?"inline-block":"none";t.innerHTML="";teams.forEach(x=>{const o=document.createElement("option");o.value=x.abbr;o.textContent=x.name+(l==="WPBL"?"":" ("+x.abbr+")");o.dataset.name=x.name;o.dataset.logo=x.logo||"";t.appendChild(o)});$("message").textContent=teams.length?teams.length+" teams available.":"No teams available for this league."}
+function config(){const order=["MLB","NFL","WNBA","CFB","WPBL"],g={};chosen.forEach(x=>(g[x.league]??=[]).push(x.code));return order.filter(l=>g[l]?.length).map(l=>l+":"+[...new Set(g[l])].join(",")).join(";")}
+function render(){const box=$("selected");box.innerHTML="";chosen.forEach((x,i)=>{const c=document.createElement("div");c.className="chip";if(x.logo){const im=document.createElement("img");im.src=x.logo;im.alt="";c.appendChild(im)}const s=document.createElement("span");s.textContent=x.league+" · "+x.name;c.appendChild(s);const b=document.createElement("button");b.className="danger";b.textContent="×";b.onclick=()=>{chosen.splice(i,1);render()};c.appendChild(b);box.appendChild(c)});const raw=config(),enc=raw?b64url(raw):"";$("plain").value=raw;$("encoded").value=enc;$("url").value=enc?BASE+"?teams="+enc:BASE}
+$("league").onchange=loadLeague;$("add").onclick=()=>{const l=$("league").value,s=$("team"),o=s.options[s.selectedIndex];if(!o||!o.value)return;const x={league:l,code:o.value,name:o.dataset.name||o.textContent,logo:o.dataset.logo||""};if(!chosen.some(y=>y.league===x.league&&y.code===x.code))chosen.push(x);render()};$("allwpbl").onclick=()=>{if(!chosen.some(x=>x.league==="WPBL"&&x.code==="ALL"))chosen.push({league:"WPBL",code:"ALL",name:"All WPBL Games",logo:""});render()};$("clear").onclick=()=>{chosen.length=0;render()};$("copy").onclick=async()=>{try{await navigator.clipboard.writeText($("url").value);$("status").textContent="Scoreboard URL copied."}catch(e){$("url").select();$("status").textContent="Select and copy the URL above."}};$("open").onclick=()=>window.open($("url").value,"_blank","noopener");render();init();
 </script></body></html>
