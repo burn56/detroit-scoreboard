@@ -67,8 +67,7 @@ body.live-takeover #live-takeover-stage{display:flex}
 
 
 
-.ls-shell{position:relative;width:min(100vw,200vh);aspect-ratio:1774/887;overflow:hidden}
-.ls-art{position:absolute;inset:0;width:100%;height:100%;display:block}
+
 .ls-dynamic{position:absolute;display:flex;align-items:center;justify-content:center;color:#f3e7c7;font-family:Impact,"Arial Narrow",sans-serif;font-weight:900;line-height:1;text-shadow:0 2px 4px #000}
 
 /* Team logo windows */
@@ -465,17 +464,27 @@ body.live-takeover #live-takeover-stage{display:flex}
 }
 body.live-takeover .wrapper{display:none}
 
+#data-warning{
+ display:none;position:fixed;top:.75rem;left:50%;transform:translateX(-50%);
+ z-index:7000;max-width:calc(100vw - 1.5rem);padding:.55rem .85rem;
+ border:1px solid #f0b13b;border-radius:.5rem;background:#4b3100;color:#fff4d6;
+ box-shadow:0 2px 8px rgba(0,0,0,.45);font:600 14px/1.3 system-ui,sans-serif;
+ text-align:center;
+}
+body.data-stale #data-warning{display:block}
+
 </style>
 </head>
 <body>
 <div class="wrapper"><div class="scoreboard" id="scoreboard"></div></div>
 <div id="live-takeover-stage"><div class="live-boards" id="live-boards"></div></div>
 <div id="preview-indicator">PREVIEW</div>
+<div id="data-warning" role="status" aria-live="polite"></div>
 
 <script>
 "use strict";
 
-const CONFIG={timeZone:"America/Detroit",refresh:{normalMs:60000,liveMs:30000}};
+const CONFIG={timeZone:"America/Detroit",refresh:{normalMs:60000,liveMs:30000},staleAfterMs:120000};
 const ESPN={
  mlb:"https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard",
  nfl:"https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
@@ -564,7 +573,7 @@ const LIVE_PRIORITY={
  overtime:20,
  incumbent:8
 };
-const STATE={games:{},gameMeta:{},lastGood:{mlb:null,nfl:null,cfb:null,wnba:null,wpbl:null,wpblTeams:null},timer:null,refreshing:false,liveDisplayedIds:[],finalSeen:{}};
+const STATE={games:{},gameMeta:{},lastGood:{mlb:null,nfl:null,cfb:null,wnba:null,wpbl:null,wpblTeams:null},lastSuccessAt:{mlb:0,nfl:0,cfb:0,wnba:0,wpbl:0},timer:null,refreshing:false,liveDisplayedIds:[],finalSeen:{}};
 const PARAMS=new URLSearchParams(location.search);
 const PREVIEW=(PARAMS.get("preview")||"").toLowerCase();
 const DEBUG=PARAMS.get("debug")==="1";
@@ -1129,6 +1138,27 @@ async function enrichLiveBasketballGame(g){
  return g;
 }
 
+function updateFeedFreshness(){
+ const labels={mlb:"MLB",nfl:"NFL",cfb:"college football",wnba:"WNBA",wpbl:"WPBL"};
+ const activeSources=new Set(Object.keys(STATE.games).map(key=>{
+  if(key.startsWith("wpbl-"))return"wpbl";
+  return TEAMS[key]&&TEAMS[key].source;
+ }).filter(Boolean));
+ const stale=[...activeSources].filter(source=>{
+  const last=STATE.lastSuccessAt[source];
+  return last>0&&Date.now()-last>=CONFIG.staleAfterMs;
+ });
+ const warning=get("data-warning");
+ if(!warning)return;
+ if(stale.length){
+  warning.textContent="Score updates delayed for "+stale.map(source=>labels[source]||source).join(", ");
+  document.body.classList.add("data-stale");
+ }else{
+  warning.textContent="";
+  document.body.classList.remove("data-stale");
+ }
+}
+
 /* ---------- Fetch / production ---------- */
 async function fetchJSON(url){const sep=url.includes("?")?"&":"?";const r=await fetch(url+sep+"_="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status+" for "+url);return r.json()}
 async function refreshProduction(){
@@ -1141,6 +1171,7 @@ async function refreshProduction(){
   results.slice(0,sources.length).forEach((r,i)=>{
    const source=sources[i];if(r.status!=="fulfilled"){console.error(source+" fetch failed:",r.reason);return}
    STATE.lastGood[source]=r.value;
+   STATE.lastSuccessAt[source]=Date.now();
    Object.entries(TEAMS).forEach(([key,t])=>{
     if(t.source!==source)return;
     renderProductionTeam(key,t,selectTeamEvent(t,r.value));
@@ -1153,6 +1184,7 @@ async function refreshProduction(){
   const wpblGamesResult=wantWpbl?results[sources.length]:null,wpblTeamsResult=wantWpbl?results[sources.length+1]:null;
   if(wpblGamesResult){if(wpblGamesResult.status==="fulfilled")STATE.lastGood.wpbl=wpblGamesResult.value;else console.error("wpbl games fetch failed:",wpblGamesResult.reason)}
   if(wpblTeamsResult){if(wpblTeamsResult.status==="fulfilled")STATE.lastGood.wpblTeams=wpblTeamsResult.value;else console.error("wpbl teams fetch failed:",wpblTeamsResult.reason)}
+  if(wpblGamesResult?.status==="fulfilled"&&wpblTeamsResult?.status==="fulfilled")STATE.lastSuccessAt.wpbl=Date.now();
   if(STATE.lastGood.wpbl&&STATE.lastGood.wpblTeams){
    removeWpblCards();
    Object.keys(STATE.games).filter(k=>k.startsWith("wpbl-")).forEach(k=>{delete STATE.games[k];delete STATE.gameMeta[k]});
@@ -1163,6 +1195,7 @@ async function refreshProduction(){
    }
   }
   if(enrich.length)await Promise.allSettled(enrich);
+  updateFeedFreshness();
   refreshTakeover();
   if(DEBUG)console.log("Sports Board Debug",{date:getDateKey(new Date()),footballWindow:getFootballWindow(),games:STATE.games,lastGood:STATE.lastGood});
  }catch(e){console.error("Unexpected refresh error:",e)}
