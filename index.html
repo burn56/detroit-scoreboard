@@ -464,13 +464,7 @@ body.live-takeover #live-takeover-stage{display:flex}
 }
 body.live-takeover .wrapper{display:none}
 
-#data-warning{
- display:none;position:fixed;top:.75rem;left:50%;transform:translateX(-50%);
- z-index:7000;max-width:calc(100vw - 1.5rem);padding:.55rem .85rem;
- border:1px solid #f0b13b;border-radius:.5rem;background:#4b3100;color:#fff4d6;
- box-shadow:0 2px 8px rgba(0,0,0,.45);font:600 14px/1.3 system-ui,sans-serif;
- text-align:center;
-}
+#data-warning{display:none;position:fixed;top:.75rem;left:50%;transform:translateX(-50%);z-index:7000;max-width:calc(100vw - 1.5rem);padding:.55rem .85rem;border:1px solid #f0b13b;border-radius:.5rem;background:#4b3100;color:#fff4d6;box-shadow:0 2px 8px rgba(0,0,0,.45);font:600 14px/1.3 system-ui,sans-serif;text-align:center}
 body.data-stale #data-warning{display:block}
 
 </style>
@@ -1139,24 +1133,11 @@ async function enrichLiveBasketballGame(g){
 }
 
 function updateFeedFreshness(){
- const labels={mlb:"MLB",nfl:"NFL",cfb:"college football",wnba:"WNBA",wpbl:"WPBL"};
- const activeSources=new Set(Object.keys(STATE.games).map(key=>{
-  if(key.startsWith("wpbl-"))return"wpbl";
-  return TEAMS[key]&&TEAMS[key].source;
- }).filter(Boolean));
- const stale=[...activeSources].filter(source=>{
-  const last=STATE.lastSuccessAt[source];
-  return last>0&&Date.now()-last>=CONFIG.staleAfterMs;
- });
- const warning=get("data-warning");
+ const labels={mlb:"MLB",nfl:"NFL",cfb:"college football",wnba:"WNBA",wpbl:"WPBL"},activeSources=new Set(Object.keys(STATE.games).map(key=>key.startsWith("wpbl-")?"wpbl":TEAMS[key]&&TEAMS[key].source).filter(Boolean));
+ const stale=[...activeSources].filter(source=>STATE.lastSuccessAt[source]>0&&Date.now()-STATE.lastSuccessAt[source]>=CONFIG.staleAfterMs),warning=get("data-warning");
  if(!warning)return;
- if(stale.length){
-  warning.textContent="Score updates delayed for "+stale.map(source=>labels[source]||source).join(", ");
-  document.body.classList.add("data-stale");
- }else{
-  warning.textContent="";
-  document.body.classList.remove("data-stale");
- }
+ if(stale.length){warning.textContent="Score updates delayed for "+stale.map(source=>labels[source]||source).join(", ");document.body.classList.add("data-stale")}
+ else{warning.textContent="";document.body.classList.remove("data-stale")}
 }
 
 /* ---------- Fetch / production ---------- */
