@@ -556,6 +556,12 @@ body.live-takeover .wrapper{display:none}
    Keep the existing inning box and all approved mappings untouched. */
 .lp-half{left:77.25%;top:65.10%;width:3%;height:4.7%}
 .lp-half::after{display:block!important}
+
+/* v8: two artwork pixels lower at the 1672px reference width.
+   All approved horizontal positions and indicator mappings stay locked. */
+.lp-inning{top:calc(64.05% + .12cqw)}
+.lp-atbat,.lp-pitcher{transform:translate(.06cqw,.54cqw)}
+.lp-abbr{position:relative;top:.12cqw}
 </style>
 </head>
 <body>
