@@ -570,10 +570,10 @@ body.live-takeover .wrapper{display:none}
 /* v11: second-base lamp alone, nudged into the upper diamond. */
 .lp-base2{left:88.11%;top:64.65%}
 
-/* Dodgers rivalry graffiti; does not move any existing scoreboard field. */
+/* Dodgers-only spray-painted tag. Keep all scoreboard mappings untouched. */
 .lp-team{overflow:visible}
-.lp-beat-la{position:absolute;left:5%;top:10%;width:91%;height:80%;z-index:5;pointer-events:none;display:flex;align-items:center;justify-content:center;white-space:nowrap;color:#ef2533;font-family:Impact,"Arial Black",sans-serif;font-size:2.15cqw;font-weight:900;font-style:italic;letter-spacing:-.065em;line-height:1;transform:rotate(-8deg);text-shadow:-1px 1px 0 #9e101a,1px -1px 0 #fa4650,0 2px 3px #5b090c;filter:drop-shadow(0 0 1px #ef2533)}
-.lp-beat-la::after{content:"";position:absolute;left:3%;right:2%;bottom:10%;height:2px;background:#ee2936;transform:rotate(-4deg);opacity:.8}
+.lp-beat-la{position:absolute;left:-5%;top:-15%;width:116%;height:126%;z-index:5;pointer-events:none;transform:rotate(-2deg);filter:drop-shadow(0 1px 1px #42080c)}
+.lp-beat-la svg{display:block;width:100%;height:100%;overflow:visible}
 </style>
 </head>
 <body>
@@ -1283,7 +1283,41 @@ function makeLamplightBoard(g)
         const tag = document.createElement("span");
         tag.className = "lp-beat-la";
         tag.setAttribute("aria-label", "Beat LA");
-        tag.textContent = "BEAT LA";
+        // SVG brush strokes stay sharp at every scoreboard size.
+        tag.innerHTML = `
+            <svg viewBox="0 0 280 105" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                    <filter id="beat-la-rough" x="-15%" y="-30%" width="130%" height="170%">
+                        <feTurbulence type="fractalNoise" baseFrequency=".042" numOctaves="3" seed="12" result="grain"/>
+                        <feDisplacementMap in="SourceGraphic" in2="grain" scale="2.7"/>
+                    </filter>
+                </defs>
+                <g transform="rotate(-8 140 52)" fill="none" stroke="#f32230"
+                   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+                   filter="url(#beat-la-rough)">
+                    <!-- BEAT: hand-drawn letter strokes, not a font -->
+                    <path d="M13 73 L19 23 Q49 15 47 36 Q46 44 27 47 Q58 42 52 62 Q50 78 13 73 Z"/>
+                    <path d="M65 21 L60 73 M62 22 L91 18 M61 46 L85 43 M59 72 L91 69"/>
+                    <path d="M99 70 L121 17 L142 69 M108 51 L135 49"/>
+                    <path d="M143 19 L181 14 M161 17 L156 70"/>
+                    <!-- LA: deliberately oversized and overlapping -->
+                    <path d="M189 15 L183 73 L219 69"/>
+                    <path d="M222 71 L248 13 L271 72 M232 52 L261 50"/>
+                    <!-- Quick underline flick -->
+                    <path d="M22 86 Q131 79 260 82" stroke-width="4"/>
+                </g>
+                <g fill="#ee2632" opacity=".92">
+                    <circle cx="10" cy="17" r="2.6"/><circle cx="7" cy="32" r="1.3"/>
+                    <circle cx="36" cy="86" r="1.9"/><circle cx="72" cy="11" r="1.5"/>
+                    <circle cx="112" cy="88" r="2.4"/><circle cx="165" cy="8" r="1.7"/>
+                    <circle cx="203" cy="89" r="1.8"/><circle cx="276" cy="30" r="2.2"/>
+                    <circle cx="267" cy="91" r="1.4"/><circle cx="52" cy="8" r=".9"/>
+                </g>
+                <g stroke="#ed202e" stroke-width="2.4" stroke-linecap="round" opacity=".9">
+                    <path d="M42 70 L41 94"/><path d="M127 69 L126 98"/>
+                    <path d="M193 71 L192 102"/><path d="M253 71 L254 92"/>
+                </g>
+            </svg>`;
         spot.appendChild(tag);
     });
     const scores = q(".lp-scores");
