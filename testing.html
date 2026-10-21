@@ -569,6 +569,11 @@ body.live-takeover .wrapper{display:none}
 
 /* v11: second-base lamp alone, nudged into the upper diamond. */
 .lp-base2{left:88.11%;top:64.65%}
+
+/* Dodgers rivalry graffiti; does not move any existing scoreboard field. */
+.lp-team{overflow:visible}
+.lp-beat-la{position:absolute;left:-14%;top:-26%;width:128%;height:145%;z-index:5;pointer-events:none;transform:rotate(-3deg);filter:drop-shadow(0 1px 1px #390709)}
+.lp-beat-la svg{display:block;width:100%;height:100%;overflow:visible}
 </style>
 </head>
 <body>
@@ -1267,6 +1272,26 @@ function makeLamplightBoard(g)
     q(".lp-home-logo").src = g.home.logo || "";
     q(".lp-away-abbr").textContent = g.away.abbr;
     q(".lp-home-abbr").textContent = g.home.abbr;
+    // A little rivalry graffiti, only when the Dodgers are on the board.
+    ["away", "home"].forEach(side =>
+    {
+        const team = g[side];
+        if (!team || String(team.abbr).toUpperCase() !== "LAD")
+            return;
+
+        const spot = q(".lp-team." + side);
+        const tag = document.createElement("span");
+        tag.className = "lp-beat-la";
+        tag.setAttribute("aria-label", "Beat LA");
+        tag.innerHTML = '<svg viewBox="0 0 240 84" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+            '<defs><filter id="lp-spray"><feTurbulence type="fractalNoise" baseFrequency=".065" numOctaves="2" seed="7" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2.4"/></filter></defs>' +
+            '<g transform="rotate(-9 120 42)" fill="none" stroke="#f0282e" stroke-linecap="round" stroke-linejoin="round" filter="url(#lp-spray)">' +
+            '<path d="M14 60 L18 13 L39 15 Q54 23 34 34 Q59 38 39 59 Z M17 37 L39 37 M62 13 L57 59 L85 57 M59 38 L80 36 M102 61 L108 15 L133 14 M105 37 L129 36 M149 61 L155 13 L174 13 M151 36 L170 35 M186 60 L191 14 L217 12 M190 37 L210 36" stroke-width="6"/>' +
+            '<path d="M14 65 Q90 72 226 60 M8 12 L19 6 M180 8 L219 4" stroke-width="2.5" opacity=".85"/>' +
+            '<path d="M37 61 L36 78 M108 60 L110 75 M192 58 L191 79" stroke-width="3" opacity=".9"/>' +
+            '</g><g fill="#f0282e" opacity=".75"><circle cx="10" cy="48" r="1.7"/><circle cx="53" cy="72" r="1.5"/><circle cx="95" cy="9" r="1.6"/><circle cx="142" cy="76" r="2"/><circle cx="224" cy="23" r="1.4"/><circle cx="230" cy="67" r="2"/></g></svg>';
+        spot.appendChild(tag);
+    });
     const scores = q(".lp-scores");
     function cell(row, col, v, rhe)
 { const e = document.createElement("div"); e.className = "lp-cell lp-score " + row + " lp-c" + col + (rhe ? " " + rhe : "") + (v == null ? " empty" : ""); e.textContent = v == null ? "–" : v; scores.appendChild(e); }
