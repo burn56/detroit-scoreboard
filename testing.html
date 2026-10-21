@@ -1763,6 +1763,47 @@ function previewAlternateBaseballGame(kind)
         competitions: [{ competitors: [away, home], situation }]
     }, "baseball");
 }
+
+/* A separate fake Tigers vs Dodgers matchup for testing LA's logo and name. */
+function previewDodgersGame()
+{
+    const mk = (abbr, homeAway, score, innings, hits, errors) => ({
+        homeAway,
+        score: String(score),
+        team: {
+            abbreviation: abbr,
+            displayName: abbr,
+            logo: "https://a.espncdn.com/i/teamlogos/mlb/500/" + abbr.toLowerCase() + ".png"
+        },
+        linescores: innings.map(value => ({ value })),
+        statistics: [
+            { name: "hits", displayValue: String(hits) },
+            { name: "errors", displayValue: String(errors) }
+        ]
+    });
+
+    const away = mk("LAD", "away", 6, [0, 2, 0, 1, 0, 3, 0], 10, 0);
+    const home = mk("DET", "home", 7, [1, 0, 3, 0, 2, 0, 1], 12, 1);
+    return normalizeEvent({
+        id: "preview-baseball-la",
+        date: new Date().toISOString(),
+        status: { period: 7, type: { state: "in", shortDetail: "Bottom 7" } },
+        competitions: [{
+            competitors: [away, home],
+            situation: {
+                balls: 2, strikes: 2, outs: 1, inning: 7, isTopInning: false,
+                onFirst: true, onSecond: true, onThird: false,
+                batter: { jersey: "28" }, pitcher: { jersey: "22" },
+                lastPlay: { text: "RBI single to right field. Detroit takes the lead, 7-6." }
+            }
+        }]
+    }, "baseball");
+}
+function renderDodgersPreview()
+{
+    hideAllCards();
+    renderBaseballTakeover([previewDodgersGame()]);
+}
 function renderAlternateBaseballPreview(kind)
 {
     hideAllCards();
@@ -1857,6 +1898,8 @@ async function start()
             return renderWpblPreview();
         if (PREVIEW === "baseball")
             return renderBaseballPreview();
+        if (PREVIEW === "baseball-la")
+            return renderDodgersPreview();
         if (PREVIEW === "baseball-alt" || PREVIEW === "baseball-alt2")
             return renderAlternateBaseballPreview(PREVIEW);
         if (PREVIEW === "football")
