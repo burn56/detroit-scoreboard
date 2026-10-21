@@ -551,6 +551,11 @@ body.live-takeover .wrapper{display:none}
    Static Park artwork already contains the down arrow. */
 .lp-atbat,.lp-pitcher{transform:translate(.06cqw,.42cqw)}
 .lp-half::after{display:none!important}
+
+/* v7: arrow comes from HTML again, not the background.
+   Keep the existing inning box and all approved mappings untouched. */
+.lp-half{left:77.25%;top:65.10%;width:3%;height:4.7%}
+.lp-half::after{display:block!important}
 </style>
 </head>
 <body>
@@ -1233,7 +1238,7 @@ function makeLamplightBoard(g)
     const shell = document.createElement("div");
     shell.className = "lp-shell";
     shell.innerHTML =
-        '<img class="lp-art" src="lamplight-park-testing.png" alt="Lamplight Park">' +
+        '<img class="lp-art" src="lamplight-park-testing-no-arrow.png" alt="Lamplight Park">' +
             '<div class="lp-team away"><img class="lp-logo lp-away-logo" alt=""><span class="lp-abbr lp-away-abbr"></span></div>' +
             '<div class="lp-team home"><img class="lp-logo lp-home-logo" alt=""><span class="lp-abbr lp-home-abbr"></span></div>' +
             '<div class="lp-scores"></div>' +
