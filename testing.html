@@ -546,6 +546,11 @@ body.live-takeover .wrapper{display:none}
 .lp-score{transform:translateX(.12cqw)}
 .lp-atbat,.lp-pitcher{transform:translate(.06cqw,.21cqw)}
 .lp-logo{transform:translateY(.21cqw)}
+
+/* v6: player number vertical nudge; remove doubled inning arrow.
+   Static Park artwork already contains the down arrow. */
+.lp-atbat,.lp-pitcher{transform:translate(.06cqw,.42cqw)}
+.lp-half::after{display:none!important}
 </style>
 </head>
 <body>
