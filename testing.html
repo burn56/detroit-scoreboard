@@ -177,6 +177,24 @@ body.live-takeover #live-takeover-stage{display:flex}
 .ls-poss-lamp{display:none!important}
 
 
+/* New football artwork calibration v1 — 1448 x 1086 */
+.ls-shell{width:min(100vw,133.333vh);aspect-ratio:4/3}
+.ls-team{font-family:Impact,"Arial Narrow",sans-serif;font-size:clamp(9px,1.7vw,29px);letter-spacing:.015em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transform:none!important;margin:0!important}
+.ls-away-team{left:9.8%;top:21.0%;width:24.7%;height:5.0%}
+.ls-home-team{left:72.5%;top:29.3%;width:18.5%;height:5.0%}
+.ls-away-score{left:13.6%;top:29.2%;width:11.8%;height:11.5%;transform:none!important;margin:0!important}
+.ls-home-score{left:79.4%;top:38.0%;width:8.6%;height:10.6%;transform:none!important;margin:0!important}
+.ls-quarter{left:72.3%;top:54.8%;width:5.3%;height:9.3%;transform:none!important}
+.ls-clock{left:41.3%;top:27.2%;width:24.4%;height:11.9%;transform:none!important;font-size:clamp(15px,3.3vw,56px)}
+.ls-down{left:28.0%;top:53.1%;width:8.8%;height:9.8%;transform:none!important;margin:0!important}
+.ls-togo{left:42.8%;top:53.4%;width:10.7%;height:9.5%;transform:none!important;margin:0!important}
+.ls-ballon{left:58.7%;top:54.0%;width:9.6%;height:9.2%;transform:none!important;margin:0!important}
+.ls-possession{left:28.3%;top:34.1%;width:6.4%;height:6.8%;transform:none!important;margin:0!important;font-size:clamp(8px,1.2vw,18px)}
+.ls-timeout{top:54.0%;width:2.8%;margin:0!important;transform:none!important;box-shadow:0 0 .3vw .04vw #f0b13b}
+.ls-a1{left:11.0%}.ls-a2{left:15.0%}.ls-a3{left:19.0%}
+.ls-h1{left:82.0%}.ls-h2{left:85.0%}.ls-h3{left:88.0%}
+.ls-last-play{left:25.0%;top:68.5%;width:65.3%;height:10.3%;transform:none!important;margin:0!important;font-size:clamp(8px,1.3vw,20px)}
+
 /* v12 possession + page background */
 
 .ls-possession{transform:translate(9px,4px)}
@@ -1395,8 +1413,8 @@ function makeLamplightStadiumBoard(g)
     shell.className = "ls-shell";
     shell.innerHTML =
         '<img class="ls-art" src="lamplight-stadium-new.png" alt="Lamplight Stadium">' +
-            '<div class="ls-dynamic ls-team ls-away-team"><img class="ls-away-logo" alt=""></div>' +
-            '<div class="ls-dynamic ls-team ls-home-team"><img class="ls-home-logo" alt=""></div>' +
+            '<div class="ls-dynamic ls-team ls-away-team"></div>' +
+            '<div class="ls-dynamic ls-team ls-home-team"></div>' +
             '<div class="ls-dynamic ls-score ls-away-score"></div>' +
             '<div class="ls-dynamic ls-score ls-home-score"></div>' +
             '<div class="ls-dynamic ls-quarter"></div>' +
@@ -1409,8 +1427,8 @@ function makeLamplightStadiumBoard(g)
             '<i class="ls-timeout ls-h1"></i><i class="ls-timeout ls-h2"></i><i class="ls-timeout ls-h3"></i>' +
             '<div class="ls-dynamic ls-last-play"></div>';
     const q = s => shell.querySelector(s), qa = s => [...shell.querySelectorAll(s)], s = g.situation || {};
-    q(".ls-away-logo").src = g.away.logo || "";
-    q(".ls-home-logo").src = g.home.logo || "";
+    q(".ls-away-team").textContent = g.away.name || g.away.abbr || "";
+    q(".ls-home-team").textContent = g.home.name || g.home.abbr || "";
     q(".ls-away-score").textContent = g.away.score ?? "";
     q(".ls-home-score").textContent = g.home.score ?? "";
     q(".ls-quarter").textContent = g.period ?? "";
