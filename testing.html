@@ -623,6 +623,23 @@ body.live-takeover .wrapper{display:none}
 .ls-possession{font-family:Arial,sans-serif;font-size:clamp(15px,2.3vw,35px);transform:rotate(3deg)!important}
 
 
+/* Football v26: restrained dot-matrix lettering and fine mapping corrections */
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@700;800;900&display=swap');
+.ls-shell .ls-dynamic{font-family:"Doto","Courier New",monospace;font-weight:900;color:#f1dfad;text-shadow:0 0 2px #a98640;letter-spacing:0}
+.ls-away-team,.ls-home-team{font-family:"Doto","Courier New",monospace;font-weight:900;letter-spacing:-.035em}
+.ls-clock,.ls-score,.ls-quarter,.ls-down,.ls-togo,.ls-ballon{font-variant-numeric:tabular-nums}
+.ls-a2{left:calc(15.7% + 1px)}
+.ls-a3{left:calc(19.8% + 1px)}
+.ls-togo{transform:translate(5px,4px) rotate(2deg)!important}
+.ls-ballon{transform:translate(6px,5px) rotate(2deg)!important}
+.ls-quarter{transform:translate(10px,5px) rotate(2deg)!important}
+.ls-home-score{transform:translateX(9px) rotate(3deg)!important}
+.ls-last-play{top:69%;font-size:clamp(11px,1.55vw,25px);transform:rotate(-.35deg)!important;transform-origin:left center;white-space:nowrap;overflow:hidden;justify-content:flex-start;padding-left:1%}
+.ls-poss-team{display:block;width:39%;height:51%;border:2px solid #e7c67a;border-radius:55% 45% 55% 45%;transform:rotate(-33deg);position:relative;box-sizing:border-box;box-shadow:inset 0 0 4px #b28c45,0 0 2px #b28c45}
+.ls-poss-team:before{content:"";position:absolute;left:49%;top:15%;height:70%;border-left:2px solid #e7c67a;transform:rotate(8deg)}
+.ls-poss-team:after{content:"≡";position:absolute;left:33%;top:25%;font:900 12px/1 Arial,sans-serif;color:#e7c67a;transform:rotate(90deg)}
+
+
 </style>
 </head>
 <body>
@@ -1476,7 +1493,7 @@ function makeLamplightStadiumBoard(g)
     q(".ls-down").textContent = HasDown ? Down : "";
     q(".ls-togo").textContent = HasDown && Number.isFinite(Distance) && Distance >= 0 ? Distance : "";
     q(".ls-ballon").textContent = HasDown && Number.isFinite(YardLine) && YardLine >= 0 ? YardLine : "";
-    q(".ls-poss-team").textContent = footballPossession(g) ? "🏈" : "";
+    q(".ls-possession").style.visibility = footballPossession(g) ? "visible" : "hidden";
     q(".ls-last-play").textContent = footballLastPlay(g);
     const t = footballTimeouts(g);
     qa(".ls-a1,.ls-a2,.ls-a3").forEach((e, i) => e.classList.toggle("on", t.away != null && i < t.away));
