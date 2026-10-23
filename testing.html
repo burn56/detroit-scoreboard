@@ -607,6 +607,22 @@ body.live-takeover .wrapper{display:none}
 .ls-last-play{transform:rotate(1.5deg)!important;transform-origin:left center}
 
 
+/* Football calibration v25 — targeted corrections from screenshot */
+.ls-away-team{top:22.2%;font-size:clamp(12px,2.45vw,38px);transform:rotate(5deg)!important}
+.ls-home-team{top:30.5%;font-size:clamp(11px,2.05vw,34px);transform:rotate(5deg)!important}
+.ls-clock{left:40.5%;width:26%;top:27.5%;font-size:clamp(22px,4.5vw,76px);transform:rotate(4deg)!important}
+.ls-down{transform:translate(4px,2px) rotate(2deg)!important}
+.ls-togo{transform:translate(5px,1px) rotate(2deg)!important}
+.ls-ballon{transform:translate(6px,2px) rotate(2deg)!important}
+.ls-quarter{transform:translate(7px,2px) rotate(2deg)!important}
+.ls-home-score{transform:translateX(5px) rotate(3deg)!important}
+.ls-a1{left:11.6%;top:54.4%}
+.ls-a2{left:15.7%;top:54.6%}
+.ls-a3{left:19.8%;top:54.8%}
+.ls-last-play{top:69%;height:9.5%;font-size:clamp(12px,1.9vw,30px);transform:rotate(-1.5deg)!important;transform-origin:left center}
+.ls-possession{font-family:Arial,sans-serif;font-size:clamp(15px,2.3vw,35px);transform:rotate(3deg)!important}
+
+
 </style>
 </head>
 <body>
@@ -1460,7 +1476,7 @@ function makeLamplightStadiumBoard(g)
     q(".ls-down").textContent = HasDown ? Down : "";
     q(".ls-togo").textContent = HasDown && Number.isFinite(Distance) && Distance >= 0 ? Distance : "";
     q(".ls-ballon").textContent = HasDown && Number.isFinite(YardLine) && YardLine >= 0 ? YardLine : "";
-    q(".ls-poss-team").textContent = footballPossession(g);
+    q(".ls-poss-team").textContent = footballPossession(g) ? "🏈" : "";
     q(".ls-last-play").textContent = footballLastPlay(g);
     const t = footballTimeouts(g);
     qa(".ls-a1,.ls-a2,.ls-a3").forEach((e, i) => e.classList.toggle("on", t.away != null && i < t.away));
