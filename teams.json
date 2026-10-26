@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-19T15:43:47.704512+00:00",
+  "generated": "2026-10-26T15:17:04.572074+00:00",
   "source": "ESPN Core API",
   "leagues": {
     "MLB": [
@@ -574,8 +574,8 @@
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2019.png"
       },
       {
-        "name": "Alma College Scots",
-        "abbr": "ALM",
+        "name": "Alma Scots",
+        "abbr": "ALMA",
         "id": "2800",
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2800.png"
       },
