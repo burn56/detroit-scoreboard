@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-26T15:17:04.572074+00:00",
+  "generated": "2026-11-02T18:31:30.156669+00:00",
   "source": "ESPN Core API",
   "leagues": {
     "MLB": [
@@ -416,12 +416,6 @@
         "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/ind.png"
       },
       {
-        "name": "JAPAN",
-        "abbr": "JPN",
-        "id": "17475",
-        "logo": ""
-      },
-      {
         "name": "Las Vegas Aces",
         "abbr": "LV",
         "id": "17",
@@ -438,12 +432,6 @@
         "abbr": "MIN",
         "id": "8",
         "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/min.png"
-      },
-      {
-        "name": "NIGERIA",
-        "abbr": "NIGER",
-        "id": "17476",
-        "logo": ""
       },
       {
         "name": "New York Liberty",
