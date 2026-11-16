@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09T18:55:30.232452+00:00",
+  "generated": "2026-11-16T18:40:43.294978+00:00",
   "source": "ESPN Core API",
   "leagues": {
     "MLB": [
@@ -392,12 +392,6 @@
         "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/chi.png"
       },
       {
-        "name": "Connecticut Sun",
-        "abbr": "CON",
-        "id": "18",
-        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/con.png"
-      },
-      {
         "name": "Dallas Wings",
         "abbr": "DAL",
         "id": "3",
@@ -408,6 +402,12 @@
         "abbr": "GS",
         "id": "129689",
         "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/gs.png"
+      },
+      {
+        "name": "Houston Comets",
+        "abbr": "HOU",
+        "id": "4",
+        "logo": "https://a.espncdn.com/i/teamlogos/wnba/500/hou.png"
       },
       {
         "name": "Indiana Fever",
